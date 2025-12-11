@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEMA School - Registration Form 2026-2027</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 { font-size: 24px; margin-bottom: 5px; }
+        .header p { font-size: 12px; }
+        .nav-bar {
+            background: #f5f5f5;
+            padding: 15px 30px;
+            display: flex;
+            gap: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        .nav-bar a {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        .nav-bar a.active { background: #1e3c72; color: white; }
+        #registrationForm {
+            padding: 30px;
+            background: white;
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        .form-header h2 { font-size: 20px; margin-bottom: 5px; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .form-row.single { grid-template-columns: 1fr; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 11px;
+            margin-bottom: 3px;
+            color: #333;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #333;
+            font-size: 11px;
+            font-family: Arial;
+        }
+        .form-group input.uppercase {
+            text-transform: uppercase;
+        }
+        .gender-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        .gender-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+        }
+        .gender-group input {
+            width: auto;
+            margin-right: 5px;
+        }
+        .section-title {
+            background: #f0f0f0;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            margin: 15px 0 10px 0;
+            border-left: 4px solid #1e3c72;
+        }
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 11px;
+        }
+        .fee-table th, .fee-table td {
+            border: 1px solid #333;
+            padding: 6px;
+            text-align: left;
+        }
+        .fee-table th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+        .fee-table .total-row {
+            background: #e0e0e0;
+            font-weight: bold;
+        }
+        .declaration {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff9e6;
+            border: 1px solid #333;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+        .signature-section {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .signature-box {
+            border-top: 1px solid #333;
+            padding-top: 5px;
+            text-align: center;
+            font-size: 10px;
+            margin-top: 30px;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 20px;
+        }
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .btn-pdf { background: #4CAF50; color: white; }
+        .btn-submit { background: #667eea; color: white; }
+        .btn-reset { background: #f44336; color: white; }
+        @media print {
+            .nav-bar, .buttons { display: none; }
+            body { background: white; }
+        }
+        .doc-list {
+            font-size: 10px;
+            line-height: 1.6;
+        }
+        .doc-list h4 {
+            font-size: 11px;
+            margin: 10px 0 5px 0;
+            color: #1e3c72;
+        }
+        .doc-list ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .doc-list li {
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HEMA HIGHER SECONDARY SCHOOL</h1>
+            <p>Affiliated to CBSE New Delhi | D-Sector, Security Line, Govindpura, BHEL, Bhopal - 462023</p>
+        </div>
+
+        <div class="nav-bar" style="page-break-inside: avoid;">
+            <a href="index.html">📝 Enquiry</a>
+            <a href="registration.html" class="active">📋 Registration</a>
+            <a href="admission.html">✅ Admission</a>
+            <a href="data.html">📊 Records</a>
+        </div>
+
+        <form id="registrationForm">
+            <div class="form-header">
+                <h2>REGISTRATION FORM 2026-2027</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>DATE:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>S.NO.:</label>
+                        <input type="text" id="sno" name="sno" class="uppercase" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">STUDENT DETAILS</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>STUDENT NAME:</label>
+                    <input type="text" id="studentFirst" name="studentFirst" class="uppercase" required>
+                </div>
+                <div class="form-group">
+                    <label>MIDDLE:</label>
+                    <input type="text" id="studentMiddle" name="studentMiddle" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>SURNAME:</label>
+                    <input type="text" id="studentSurname" name="studentSurname" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>CLASS:</label>
+                    <input type="text" id="classApplied" name="classApplied" class="uppercase" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>GENDER:</label>
+                    <div class="gender-group">
+                        <label><input type="radio" name="gender" value="MALE" id="genderMale"> MALE</label>
+                        <label><input type="radio" name="gender" value="FEMALE" id="genderFemale"> FEMALE</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>D.O.B.:</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+            </div>
+
+            <div class="section-title">SIBLING INFORMATION</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>1. SIB. NAME:</label>
+                    <input type="text" id="sib1Name" name="sib1Name" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>SCHOOL:</label>
+                    <input type="text" id="sib1School" name="sib1School" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>CLS & SEC:</label>
+                    <input type="text" id="sib1ClassSec" name="sib1ClassSec" class="uppercase">
+                </div>
+                <div class="form-group"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>2. SIB. NAME:</label>
+                    <input type="text" id="sib2Name" name="sib2Name" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>SCHOOL:</label>
+                    <input type="text" id="sib2School" name="sib2School" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>CLS & SEC:</label>
+                    <input type="text" id="sib2ClassSec" name="sib2ClassSec" class="uppercase">
+                </div>
+                <div class="form-group"></div>
+            </div>
+
+            <div class="section-title">PARENT DETAILS</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>MOTHER NAME:</label>
+                    <input type="text" id="motherFirst" name="motherFirst" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>MIDDLE:</label>
+                    <input type="text" id="motherMiddle" name="motherMiddle" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>SURNAME:</label>
+                    <input type="text" id="motherSurname" name="motherSurname" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>M. MOB.:</label>
+                    <input type="tel" id="motherMobile" name="motherMobile">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>FATHER NAME:</label>
+                    <input type="text" id="fatherFirst" name="fatherFirst" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>MIDDLE:</label>
+                    <input type="text" id="fatherMiddle" name="fatherMiddle" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>SURNAME:</label>
+                    <input type="text" id="fatherSurname" name="fatherSurname" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>F. MOB.:</label>
+                    <input type="tel" id="fatherMobile" name="fatherMobile" required>
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>L. LINE:</label>
+                    <input type="tel" id="landline" name="landline">
+                </div>
+            </div>
+
+            <div class="section-title">CONTACT DETAILS</div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>ADDRESS:</label>
+                    <textarea id="address" name="address" rows="2" class="uppercase" required></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>AREA:</label>
+                    <input type="text" id="area" name="area" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>STATE:</label>
+                    <input type="text" id="state" name="state" class="uppercase" required>
+                </div>
+            </div>
+
+            <div class="section-title">FEE STRUCTURE</div>
+            <table class="fee-table">
+                <thead>
+                    <tr>
+                        <th>S.NO.</th>
+                        <th>PARTICULAR</th>
+                        <th>AMOUNT (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td>Admission Fee</td>
+                        <td><input type="number" id="feeAdmission" readonly style="border:none;background:transparent;"></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>Development Fund</td>
+                        <td><input type="number" id="feeDevelopment" readonly style="border:none;background:transparent;"></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>Caution Money Deposit</td>
+                        <td><input type="number" id="feeCaution" readonly style="border:none;background:transparent;"></td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2">TOTAL</td>
+                        <td><input type="number" id="totalFee" readonly style="border:none;background:transparent;font-weight:bold;"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="section-title">DOCUMENTS REQUIRED FOR ADMISSION</div>
+            <div class="doc-list">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <h4>Student Documents</h4>
+                        <ul>
+                            <li>Digital Birth Certificate (Municipal/Competent Authority) - copy</li>
+                            <li>Previous Class Report Card - copy</li>
+                            <li>Transfer Certificate (TC) duly countersigned (if applicable) - Original</li>
+                            <li>Aadhaar Card of Student - copy</li>
+                            <li>PAN Number (Udise Plus)/Apaar ID/Samagra ID & Family ID (if applicable) – Copy</li>
+                            <li>Passport-size Photo – Student (1) – Color Photo</li>
+                            <li>Digital Caste Certificate of Student (SC/ST/OBC) - Copy</li>
+                            <li>Special Category Documents (EWS / Single Parent / CWSN / Defence / Government Employee) - Copy</li>
+                            <li>Bank Account Details – Student's Passbook Copy – (if applicable)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Parent Documents</h4>
+                        <ul>
+                            <li>Aadhaar Card of Father - copy</li>
+                            <li>Aadhaar Card of Mother - copy</li>
+                            <li>Passport-size Photo – Father (1)</li>
+                            <li>Passport-size Photo – Mother (1)</li>
+                            <li>Address Proof (Electricity bill / Rent agreement / Passport, etc.) - copy</li>
+                            <li>Bank Account Details (if required) - copy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="declaration">
+                <strong>DECLARATION</strong><br>
+                I hereby declare that the information provided by me in the registration form is true, complete, and correct to the best of my knowledge. I have carefully checked all the details filled in. I further confirm that I have gone through the list of documents required for admission and will submit all the necessary documents at the time of admission along with the full payment of the Admission Fee within 07 working days.<br><br>
+                I understand that if I fail to submit the required documents and/or do not make the admission fee payment within the stipulated time, my registration will be considered cancelled, and I shall not be entitled to any refund of the registration fee. Furthermore, if I wish to continue with the admission after such cancellation due to non-submission of documents or delayed payment, a readmission charge of ₹5,000 will be applicable.
+            </div>
+
+            <div class="signature-section">
+                <div>
+                    <div class="signature-box">Signature of Father/Mother/Guardian</div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label>NAME OF SIGNATORY:</label>
+                        <input type="text" id="signatoryName" name="signatoryName" class="uppercase">
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="btn btn-pdf" onclick="generatePDF()">📥 DOWNLOAD PDF</button>
+                <button type="button" class="btn btn-pdf" onclick="window.print()">🖨️ PRINT</button>
+                <button type="submit" class="btn btn-submit">✓ SUBMIT & PROCEED TO ADMISSION</button>
+                <button type="reset" class="btn btn-reset">✕ CLEAR</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+
+        const feeData = {
+            "NURSERY": { admission: 27000, development: 5000, caution: 3000 },
+            "KG I": { admission: 27000, development: 5000, caution: 3000 },
+            "KG II": { admission: 27000, development: 5000, caution: 3000 },
+            "I": { admission: 30000, development: 5000, caution: 3000 },
+            "II": { admission: 30000, development: 5000, caution: 3000 },
+            "III": { admission: 30000, development: 5000, caution: 3000 },
+            "IV": { admission: 30000, development: 5000, caution: 3000 },
+            "V": { admission: 30000, development: 5000, caution: 3000 },
+            "VI": { admission: 41000, development: 5000, caution: 3000 },
+            "VII": { admission: 41000, development: 5000, caution: 3000 },
+            "VIII": { admission: 41000, development: 5000, caution: 3000 },
+            "IX": { admission: 55000, development: 5000, caution: 3000 },
+            "X": { admission: 55000, development: 5000, caution: 3000 },
+            "XI": { admission: 62000, development: 5000, caution: 3000 },
+            "XII": { admission: 62000, development: 5000, caution: 3000 }
+        };
+
+        window.addEventListener('load', function() {
+            const currentEnquiry = JSON.parse(localStorage.getItem('currentEnquiry') || '{}');
+
+            if (Object.keys(currentEnquiry).length > 0) {
+                document.getElementById('date').value = currentEnquiry.date || new Date().toISOString().split('T')[0];
+                document.getElementById('sno').value = currentEnquiry.sno || '';
+                document.getElementById('studentFirst').value = currentEnquiry.studentFirst || '';
+                document.getElementById('studentMiddle').value = currentEnquiry.studentMiddle || '';
+                document.getElementById('studentSurname').value = currentEnquiry.studentSurname || '';
+                document.getElementById('classApplied').value = currentEnquiry.classApplied || '';
+
+                if (currentEnquiry.gender === 'MALE') {
+                    document.getElementById('genderMale').checked = true;
+                } else if (currentEnquiry.gender === 'FEMALE') {
+                    document.getElementById('genderFemale').checked = true;
+                }
+
+                document.getElementById('dob').value = currentEnquiry.dob || '';
+                document.getElementById('sib1Name').value = currentEnquiry.sib1Name || '';
+                document.getElementById('sib1School').value = currentEnquiry.sib1School || '';
+                const sib1Cls = currentEnquiry.sib1Class || '';
+                const sib1Sec = currentEnquiry.sib1Section || '';
+                document.getElementById('sib1ClassSec').value = sib1Cls + (sib1Sec ? ' ' + sib1Sec : '');
+
+                document.getElementById('sib2Name').value = currentEnquiry.sib2Name || '';
+                document.getElementById('sib2School').value = currentEnquiry.sib2School || '';
+                const sib2Cls = currentEnquiry.sib2Class || '';
+                const sib2Sec = currentEnquiry.sib2Section || '';
+                document.getElementById('sib2ClassSec').value = sib2Cls + (sib2Sec ? ' ' + sib2Sec : '');
+
+                document.getElementById('motherFirst').value = currentEnquiry.motherFirst || '';
+                document.getElementById('motherMiddle').value = currentEnquiry.motherMiddle || '';
+                document.getElementById('motherSurname').value = currentEnquiry.motherSurname || '';
+                document.getElementById('motherMobile').value = currentEnquiry.motherMobile || '';
+
+                document.getElementById('fatherFirst').value = currentEnquiry.fatherFirst || '';
+                document.getElementById('fatherMiddle').value = currentEnquiry.fatherMiddle || '';
+                document.getElementById('fatherSurname').value = currentEnquiry.fatherSurname || '';
+                document.getElementById('fatherMobile').value = currentEnquiry.fatherMobile || '';
+                document.getElementById('landline').value = currentEnquiry.landline || '';
+
+                document.getElementById('address').value = currentEnquiry.address || '';
+                document.getElementById('area').value = currentEnquiry.area || '';
+                document.getElementById('state').value = currentEnquiry.state || '';
+
+                const classVal = currentEnquiry.classApplied || '';
+                const fees = feeData[classVal];
+                if (fees) {
+                    document.getElementById('feeAdmission').value = fees.admission;
+                    document.getElementById('feeDevelopment').value = fees.development;
+                    document.getElementById('feeCaution').value = fees.caution;
+                    document.getElementById('totalFee').value = fees.admission + fees.development + fees.caution;
+                }
+            } else {
+                document.getElementById('date').valueAsDate = new Date();
+            }
+        });
+
+        document.querySelectorAll('.uppercase').forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = this.value.toUpperCase();
+            });
+        });
+
+        function generatePDF() {
+            window.print();
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            data.timestamp = new Date().toISOString();
+
+            let regRecords = JSON.parse(localStorage.getItem('registrationRecords') || '[]');
+            regRecords.push(data);
+            localStorage.setItem('registrationRecords', JSON.stringify(regRecords));
+
+            localStorage.setItem('currentRegistration', JSON.stringify(data));
+
+            if (confirm('Registration saved successfully!\n\nClick OK to proceed to Admission Form\nClick Cancel to stay here')) {
+                window.location.href = 'admission.html';
+            }
+        });
+    </script>
+</body>
+</html>

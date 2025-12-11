@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEMA School - Admission Form 2026-2027</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 { font-size: 24px; }
+        .header p { font-size: 12px; }
+        .nav-bar {
+            background: #f5f5f5;
+            padding: 15px 30px;
+            display: flex;
+            gap: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        .nav-bar a {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        .nav-bar a.active { background: #1e3c72; color: white; }
+        #admissionForm {
+            padding: 30px;
+            background: white;
+        }
+        .form-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+        .page-indicator {
+            text-align: right;
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .form-row.single { grid-template-columns: 1fr; }
+        .form-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 10px;
+            margin-bottom: 2px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #000;
+            font-size: 10px;
+            font-family: Arial;
+        }
+        .form-group input.uppercase {
+            text-transform: uppercase;
+        }
+        .section-header {
+            background: #000;
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 11px;
+            margin: 15px 0 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 10px;
+        }
+        table th, table td {
+            border: 1px solid #000;
+            padding: 5px;
+        }
+        table th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+        .checkbox-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            font-size: 9px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-item input {
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+        }
+        .rules-box {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 9px;
+            line-height: 1.4;
+        }
+        .signature-area {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .signature-box {
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            text-align: center;
+            font-size: 10px;
+            margin-top: 40px;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 20px;
+        }
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .btn-pdf { background: #4CAF50; color: white; }
+        .btn-submit { background: #667eea; color: white; }
+        .btn-reset { background: #f44336; color: white; }
+        @media print {
+            .nav-bar, .buttons { display: none; }
+            body { background: white; }
+            .page-break { page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HEMA HIGHER SECONDARY SCHOOL</h1>
+            <p>Affiliated to CBSE New Delhi | D-Sector, Security Line, Govindpura, BHEL, Bhopal - 462023</p>
+        </div>
+
+        <div class="nav-bar">
+            <a href="index.html">📝 Enquiry</a>
+            <a href="registration.html">📋 Registration</a>
+            <a href="admission.html" class="active">✅ Admission</a>
+            <a href="data.html">📊 Records</a>
+        </div>
+
+        <form id="admissionForm">
+            <!-- PAGE 1 -->
+            <div class="page-indicator">(Page 1 of 4)</div>
+            <div class="form-title">ADMISSION FORM - (2026-2027)</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Scholar No.:</label>
+                    <input type="text" id="scholarNo" name="scholarNo" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>Admission Date:</label>
+                    <input type="date" id="admissionDate" name="admissionDate" required>
+                </div>
+            </div>
+
+            <div class="section-header">ADMISSION DETAILS</div>
+            <div class="form-row triple">
+                <div class="form-group">
+                    <label>Student Name:</label>
+                    <input type="text" id="studentName" name="studentName" class="uppercase" required>
+                </div>
+                <div class="form-group">
+                    <label>Class:</label>
+                    <input type="text" id="class" name="class" class="uppercase" required>
+                </div>
+                <div class="form-group">
+                    <label>Section:</label>
+                    <input type="text" id="section" name="section" class="uppercase">
+                </div>
+            </div>
+
+            <div class="section-header">PERSONAL DETAILS</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label>Current Age:</label>
+                    <input type="text" id="currentAge" name="currentAge" readonly>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <input type="text" id="gender" name="gender" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth (in words):</label>
+                    <input type="text" id="dobWords" name="dobWords" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>DOB Cert. No.:</label>
+                    <input type="text" id="dobCertNo" name="dobCertNo" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>Religion:</label>
+                    <input type="text" id="religion" name="religion" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nationality:</label>
+                    <input type="text" id="nationality" name="nationality" class="uppercase" value="INDIAN">
+                </div>
+                <div class="form-group">
+                    <label>Aadhaar No.:</label>
+                    <input type="text" id="aadhaarNo" name="aadhaarNo">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Category:</label>
+                    <select id="category" name="category">
+                        <option value="">-- SELECT --</option>
+                        <option value="GENERAL">GENERAL</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="OBC">OBC</option>
+                        <option value="EWS">EWS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Caste Cert. No.:</label>
+                    <input type="text" id="casteCertNo" name="casteCertNo" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row single">
+                <div class="form-group">
+                    <label>Address:</label>
+                    <textarea id="address" name="address" rows="2" class="uppercase" required></textarea>
+                </div>
+            </div>
+            <div class="form-row triple">
+                <div class="form-group">
+                    <label>PEN No.:</label>
+                    <input type="text" id="penNo" name="penNo" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>SSSM ID:</label>
+                    <input type="text" id="sssmId" name="sssmId" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>Family ID:</label>
+                    <input type="text" id="familyId" name="familyId" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row triple">
+                <div class="form-group">
+                    <label>APAAR ID No.:</label>
+                    <input type="text" id="apaarId" name="apaarId" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>House:</label>
+                    <input type="text" id="house" name="house" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>Admission Category:</label>
+                    <input type="text" id="admissionCategory" name="admissionCategory" class="uppercase">
+                </div>
+            </div>
+
+            <div class="section-header">PREVIOUS ACADEMIC DETAILS</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>School Attended:</label>
+                    <input type="text" id="prevSchool" name="prevSchool" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>Class Attended:</label>
+                    <input type="text" id="prevClass" name="prevClass" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Affiliated To:</label>
+                    <input type="text" id="prevAffiliated" name="prevAffiliated" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>Last Session:</label>
+                    <input type="text" id="lastSession" name="lastSession" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>TC No.:</label>
+                    <input type="text" id="tcNo" name="tcNo" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>TC Date:</label>
+                    <input type="date" id="tcDate" name="tcDate">
+                </div>
+            </div>
+
+            <div class="section-header">FAMILY DETAILS</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Qualification</th>
+                        <th>Occupation</th>
+                        <th>Mobile</th>
+                        <th>Aadhaar No.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mother</td>
+                        <td><input type="text" id="motherName" name="motherName" class="uppercase"></td>
+                        <td><input type="text" id="motherQual" name="motherQual" class="uppercase"></td>
+                        <td><input type="text" id="motherOcc" name="motherOcc" class="uppercase"></td>
+                        <td><input type="tel" id="motherMobile" name="motherMobile"></td>
+                        <td><input type="text" id="motherAadhaar" name="motherAadhaar"></td>
+                    </tr>
+                    <tr>
+                        <td>Father</td>
+                        <td><input type="text" id="fatherName" name="fatherName" class="uppercase"></td>
+                        <td><input type="text" id="fatherQual" name="fatherQual" class="uppercase"></td>
+                        <td><input type="text" id="fatherOcc" name="fatherOcc" class="uppercase"></td>
+                        <td><input type="tel" id="fatherMobile" name="fatherMobile" required></td>
+                        <td><input type="text" id="fatherAadhaar" name="fatherAadhaar"></td>
+                    </tr>
+                    <tr>
+                        <td>Guardian</td>
+                        <td><input type="text" id="guardianName" name="guardianName" class="uppercase"></td>
+                        <td><input type="text" id="guardianQual" name="guardianQual" class="uppercase"></td>
+                        <td><input type="text" id="guardianOcc" name="guardianOcc" class="uppercase"></td>
+                        <td><input type="tel" id="guardianMobile" name="guardianMobile"></td>
+                        <td><input type="text" id="guardianAadhaar" name="guardianAadhaar"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="section-header">SIBLING INFORMATION</div>
+            <div class="form-row triple">
+                <div class="form-group">
+                    <label>1. SIB. NAME:</label>
+                    <input type="text" id="sib1Name" name="sib1Name" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>SCHOOL:</label>
+                    <input type="text" id="sib1School" name="sib1School" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>CLS & SEC:</label>
+                    <input type="text" id="sib1ClassSec" name="sib1ClassSec" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row triple">
+                <div class="form-group">
+                    <label>2. SIB. NAME:</label>
+                    <input type="text" id="sib2Name" name="sib2Name" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>SCHOOL:</label>
+                    <input type="text" id="sib2School" name="sib2School" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>CLS & SEC:</label>
+                    <input type="text" id="sib2ClassSec" name="sib2ClassSec" class="uppercase">
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- PAGE 2 -->
+            <div class="page-indicator">(Page 2 of 4)</div>
+
+            <div class="section-header">BANK ACCOUNT DETAILS</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bank Account Holder Name:</label>
+                    <input type="text" id="bankHolderName" name="bankHolderName" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>Account Type:</label>
+                    <select id="accountType" name="accountType">
+                        <option value="">-- SELECT --</option>
+                        <option value="SAVINGS">SAVINGS</option>
+                        <option value="CURRENT">CURRENT</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bank Account No.:</label>
+                    <input type="text" id="bankAccountNo" name="bankAccountNo">
+                </div>
+                <div class="form-group">
+                    <label>Bank Name:</label>
+                    <input type="text" id="bankName" name="bankName" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bank Branch:</label>
+                    <input type="text" id="bankBranch" name="bankBranch" class="uppercase">
+                </div>
+                <div class="form-group">
+                    <label>IFSC Code:</label>
+                    <input type="text" id="ifscCode" name="ifscCode" class="uppercase">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Copy of Passbook received:</label>
+                    <select id="passbookReceived" name="passbookReceived">
+                        <option value="">-- SELECT --</option>
+                        <option value="Y">Y</option>
+                        <option value="N">N</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section-header">ADMISSION RULES AND REGULATIONS</div>
+            <div class="rules-box">
+                <p><strong>(a)</strong> I understand and accept that any violation of School's rules and regulations by my son/daughter may result in disciplinary action and the Principal is empowered to rusticate the student if necessary, and this decision will be final. I understand that no request for a refund of fees or for readmission will be entertained under any circumstances.</p><br>
+                <p><strong>(b)</strong> I will not participate in or support any strike, demonstration, political activity, or any form of indiscipline, including ragging. I fully understand the law prohibiting ragging and the directions of the Supreme Court. I also agree that if my son/daughter is found guilty of any form of ragging, he/she may be punished as per the provisions of the Educational Department/Board regulations and the law in force.</p><br>
+                <p><strong>(c)</strong> I hereby declare that my son/daughter will regularly attend classes and maintain decent and disciplined behaviour in the school. I also understand and accept that, as per CBSE guidelines, a minimum of 75% attendance is mandatory for promotion to the next class.</p>
+            </div>
+
+            <div class="section-header">FEES RULES AND REGULATIONS</div>
+            <div class="rules-box">
+                <p><strong>(a)</strong> Admission Fee, Caution Fee, and Development Fee must be paid in full at the time of admission. If the admission is cancelled due to non-payment of fees within the stipulated time, and the parents wish to continue with the admission thereafter, they will be required to pay a readmission charge of ₹5,000.</p><br>
+                <p><strong>(b)</strong> Other fee instalments must be paid by 15th of every month. Failing which, a fine of ₹10 will be charged per day.</p><br>
+                <p><strong>(c)</strong> In case of non-payment of fees for three consecutive months, the student will not be allowed to attend classes. However, such students may be considered for readmission as per the school's rules and regulations. The total school fee for each quarter must be deposited before every Periodic Test I & II, Half-Yearly Exam, and Annual Exam. A student will be permitted to appear in the Annual Examination only after obtaining a No Dues Certificate (NOC).</p><br>
+                <p><strong>(d)</strong> The caution money is refundable without interest at the time of issuing the Transfer Certificate, and it will not be adjusted with any other fees.</p><br>
+                <p><strong>(e)</strong> Information regarding fees shall be displayed on the website, HEMA School App, and the school notice board.</p><br>
+                <p><strong>(f)</strong> The fees can be paid through Swipe, Online (via the HEMA School App), or by Cheque in favour of "HEMA Education Society". In case a cheque is dishonoured or bounced, a penalty of ₹1000 will be charged under all circumstances. The school fee counter will no longer accept cash payments.</p><br>
+                <p><strong>(g)</strong> The fee is subject to revision each academic year as per policy of CBSE & State Government.</p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- PAGE 3 -->
+            <div class="page-indicator">(Page 3 of 4)</div>
+
+            <div class="section-header">DOCUMENTS REQUIRED FOR ADMISSION</div>
+
+            <p style="font-weight:bold; font-size:11px; margin:10px 0;">A. Student Documents:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Document Description</th>
+                        <th style="width:80px;">Submitted (✓)</th>
+                        <th style="width:80px;">Not Submitted (✗)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Digital Birth Certificate (Municipal/Competent Authority) – Copy</td>
+                        <td><input type="checkbox" name="doc_s1" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s1" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Previous Class Report Card – Copy</td>
+                        <td><input type="checkbox" name="doc_s2" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s2" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Transfer Certificate (TC) duly countersigned (if applicable) – Original</td>
+                        <td><input type="checkbox" name="doc_s3" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s3" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Aadhaar Card of Student – Copy</td>
+                        <td><input type="checkbox" name="doc_s4" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s4" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>PAN Number (Udise Plus) / Apaar ID / Samagra ID / Family ID – Copy</td>
+                        <td><input type="checkbox" name="doc_s5" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s5" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Passport-size Photograph – Student (1) – Colour</td>
+                        <td><input type="checkbox" name="doc_s6" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s6" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Digital Caste Certificate of Student (SC / ST / OBC) – Copy</td>
+                        <td><input type="checkbox" name="doc_s7" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s7" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Special Category Documents (EWS / Single Parent / CWSN / Defence / Govt. Employee) – Copy</td>
+                        <td><input type="checkbox" name="doc_s8" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s8" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Bank Account Details – Student's Passbook Copy (if applicable)</td>
+                        <td><input type="checkbox" name="doc_s9" value="yes"></td>
+                        <td><input type="checkbox" name="doc_s9" value="no"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="font-weight:bold; font-size:11px; margin:20px 0 10px 0;">B. Parent Documents:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Document Description</th>
+                        <th style="width:80px;">Submitted (✓)</th>
+                        <th style="width:80px;">Not Submitted (✗)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Aadhaar Card – Father – Copy</td>
+                        <td><input type="checkbox" name="doc_p1" value="yes"></td>
+                        <td><input type="checkbox" name="doc_p1" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Aadhaar Card – Mother – Copy</td>
+                        <td><input type="checkbox" name="doc_p2" value="yes"></td>
+                        <td><input type="checkbox" name="doc_p2" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Passport-size Photograph – Father (1)</td>
+                        <td><input type="checkbox" name="doc_p3" value="yes"></td>
+                        <td><input type="checkbox" name="doc_p3" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Passport-size Photograph – Mother (1)</td>
+                        <td><input type="checkbox" name="doc_p4" value="yes"></td>
+                        <td><input type="checkbox" name="doc_p4" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Address Proof (Electricity Bill / Rent Agreement / Passport etc.) – Copy</td>
+                        <td><input type="checkbox" name="doc_p5" value="yes"></td>
+                        <td><input type="checkbox" name="doc_p5" value="no"></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Bank Account Details (if required) – Copy</td>
+                        <td><input type="checkbox" name="doc_p6" value="yes"></td>
+                        <td><input type="checkbox" name="doc_p6" value="no"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="page-break"></div>
+
+            <!-- PAGE 4 -->
+            <div class="page-indicator">(Page 4 of 4)</div>
+
+            <div class="section-header">DECLARATION</div>
+            <div class="rules-box">
+                <p>I, <input type="text" id="declarationName" name="declarationName" class="uppercase" style="width:300px; display:inline-block; border-top:none; border-left:none; border-right:none;"> (Father/Mother/Guardian), hereby declare that I have read and understood all the provisions mentioned above, including the rules and regulations related to school discipline, fee rules, regular attendance, good character and behaviour, timely payment of fees, refunds, and withdrawals. I agree to abide by all these rules without exception. I further acknowledge that any violation on my part or on the part of my ward may result in disciplinary and/or legal action by the school. I also affirm that I shall be fully responsible for the timely payment of all applicable school fees and charges.</p>
+            </div>
+
+            <div class="signature-area">
+                <div>
+                    <div class="signature-box">Signature of Parent/Guardian</div>
+                    <div class="form-group" style="margin-top:15px;">
+                        <label>Name:</label>
+                        <input type="text" id="signatoryName" name="signatoryName" class="uppercase">
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="date" id="signatureDate" name="signatureDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Place:</label>
+                        <input type="text" id="signaturePlace" name="signaturePlace" class="uppercase" value="BHOPAL">
+                    </div>
+                </div>
+                <div>
+                    <!-- Empty space for actual signature -->
+                </div>
+            </div>
+
+            <div class="section-header">UNDERTAKING FOR PENDING DOCUMENTS</div>
+            <div class="rules-box">
+                <p>I, <input type="text" id="undertakingName" name="undertakingName" class="uppercase" style="width:300px; display:inline-block; border-top:none; border-left:none; border-right:none;"> (Father/Mother/Guardian), hereby declare that the documents not submitted at the time of admission will be provided to the school on or before:</p>
+                <p style="margin-top:10px;">Date of Submission (committed): <input type="date" id="pendingDocDate" name="pendingDocDate" style="width:200px; display:inline-block;"></p>
+                <p style="margin-top:10px;">I understand that failure to submit the required documents within the given time may lead to cancellation of admission or other disciplinary action as per school rules.</p>
+                <p style="margin-top:20px;">Signature of Parent/Guardian: <input type="text" style="width:250px; display:inline-block; border-top:none; border-left:none; border-right:none;"></p>
+                <p style="margin-top:10px;">Date: <input type="date" style="width:200px; display:inline-block;"></p>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="btn btn-pdf" onclick="window.print()">📥 DOWNLOAD PDF</button>
+                <button type="button" class="btn btn-pdf" onclick="window.print()">🖨️ PRINT</button>
+                <button type="submit" class="btn btn-submit">✓ SUBMIT ADMISSION</button>
+                <button type="reset" class="btn btn-reset">✕ CLEAR</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            const regData = JSON.parse(localStorage.getItem('currentRegistration') || '{}');
+
+            if (Object.keys(regData).length > 0) {
+                document.getElementById('admissionDate').value = new Date().toISOString().split('T')[0];
+                document.getElementById('studentName').value = (regData.studentFirst + ' ' + regData.studentMiddle + ' ' + regData.studentSurname).trim().toUpperCase();
+                document.getElementById('class').value = regData.classApplied || '';
+                document.getElementById('gender').value = regData.gender || '';
+                document.getElementById('dob').value = regData.dob || '';
+
+                const motherFullName = (regData.motherFirst + ' ' + regData.motherMiddle + ' ' + regData.motherSurname).trim().toUpperCase();
+                const fatherFullName = (regData.fatherFirst + ' ' + regData.fatherMiddle + ' ' + regData.fatherSurname).trim().toUpperCase();
+
+                document.getElementById('motherName').value = motherFullName;
+                document.getElementById('motherMobile').value = regData.motherMobile || '';
+                document.getElementById('fatherName').value = fatherFullName;
+                document.getElementById('fatherMobile').value = regData.fatherMobile || '';
+
+                document.getElementById('address').value = regData.address || '';
+
+                document.getElementById('sib1Name').value = regData.sib1Name || '';
+                document.getElementById('sib1School').value = regData.sib1School || '';
+                document.getElementById('sib1ClassSec').value = regData.sib1ClassSec || '';
+
+                document.getElementById('sib2Name').value = regData.sib2Name || '';
+                document.getElementById('sib2School').value = regData.sib2School || '';
+                document.getElementById('sib2ClassSec').value = regData.sib2ClassSec || '';
+
+                document.getElementById('signatureDate').value = new Date().toISOString().split('T')[0];
+
+                if (regData.dob) {
+                    const dob = new Date(regData.dob);
+                    const today = new Date();
+                    let years = today.getFullYear() - dob.getFullYear();
+                    let months = today.getMonth() - dob.getMonth();
+                    if (months < 0) {
+                        years--;
+                        months += 12;
+                    }
+                    document.getElementById('currentAge').value = years + ' YEARS ' + months + ' MONTHS';
+                }
+            } else {
+                document.getElementById('admissionDate').valueAsDate = new Date();
+                document.getElementById('signatureDate').valueAsDate = new Date();
+            }
+        });
+
+        document.querySelectorAll('.uppercase').forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = this.value.toUpperCase();
+            });
+        });
+
+        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            data.timestamp = new Date().toISOString();
+
+            let admRecords = JSON.parse(localStorage.getItem('admissionRecords') || '[]');
+            admRecords.push(data);
+            localStorage.setItem('admissionRecords', JSON.stringify(admRecords));
+
+            alert('✓ Admission form submitted successfully!\n\nAll records are saved.');
+
+            if (confirm('Do you want to:\n- Click OK to view all records\n- Click Cancel to add another enquiry')) {
+                window.location.href = 'data.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
