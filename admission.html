@@ -14,45 +14,111 @@
 
         /* LOGO HEADER */
         .logo-header {
-            text-align: center;
-            padding: 25px;
+            padding: 30px 20px;
             background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
             color: white;
             border-radius: 10px 10px 0 0;
         }
-        .logo-container { margin-bottom: 15px; }
-        .school-logo { 
-            height: 80px; 
-            width: auto; 
-            max-width: 150px; 
-            object-fit: contain;
-            display: block;
+
+        .header-container {
+            max-width: 100%;
             margin: 0 auto;
         }
-        .school-details h1 { 
-            font-size: 26px; 
-            margin: 10px 0 5px 0; 
-            font-weight: bold; 
-            letter-spacing: 1px; 
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
-        .affiliation-info { 
-            font-size: 12px; 
-            line-height: 1.6; 
-            opacity: 0.95; 
+
+        .logo-box {
+            flex: 0 0 120px;
+            display: flex;
+            align-items: center;
         }
-        .affiliation-info strong { 
-            color: #ffd700; 
-            font-size: 13px; 
+
+        .logo-left {
+            justify-content: flex-start;
         }
-        .session-badge {
-            display: inline-block;
-            background: #ffd700;
-            color: #2874A6;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
+
+        .logo-right {
+            justify-content: flex-end;
+        }
+
+        .logo-img {
+            height: 90px;
+            width: auto;
+            max-width: 120px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .school-info {
+            flex: 1;
+            text-align: center;
+            padding: 0 15px;
+            min-width: 0;
+        }
+
+        .school-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            letter-spacing: 1.5px;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .school-details {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .detail-line {
+            margin: 4px 0;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .detail-line strong {
+            color: #FFD700;
             font-size: 14px;
-            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .contact-line a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-line a:hover {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-flex {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .logo-box {
+                flex: 0 0 auto;
+            }
+
+            .school-name {
+                font-size: 22px;
+            }
+
+            .school-details {
+                font-size: 11px;
+            }
+
+            .logo-img {
+                height: 70px;
+            }
         }
 
         .container {
@@ -213,19 +279,37 @@
 <body>
     <div class="container">
             <!-- LOGO HEADER -->
-    <div class="logo-header">
-        <div class="logo-container">
-            <img src="school-logo.png" alt="HEMA School Logo" class="school-logo" onerror="this.style.display='none'">
-        </div>
-        <div class="school-details">
-            <h1>HEMA HIGHER SECONDARY SCHOOL</h1>
-            <div class="affiliation-info">
-                <strong>Affiliated to CBSE, New Delhi</strong><br>
-                D-Sector, Security Line, Govindpura, BHEL, Bhopal - 462023<br>
-                Phone: 0755-XXXXXXX | Email: info@hemaschool.edu.in
+        <div class="logo-header">
+            <div class="header-container">
+                <div class="header-flex">
+                    <!-- Left Logo - Empathy -->
+                    <div class="logo-box logo-left">
+                        <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
+                    </div>
+
+                    <!-- Center - School Details -->
+                    <div class="school-info">
+                        <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
+                        <div class="school-details">
+                            <div class="detail-line"><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></div>
+                            <div class="detail-line">School Code: 50383 | Affiliation No.: 1030417</div>
+                            <div class="detail-line">Govindpura, Bhopal, Madhya Pradesh, India - 462023</div>
+                            <div class="detail-line contact-line">
+                                📧 <a href="mailto:support@hemaschool.education">support@hemaschool.education</a> | 
+                                📞 0755-2457270
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Logo - School -->
+                    <div class="logo-box logo-right">
+                        <img src="school-logo.png" alt="School Logo" class="logo-img">
+                    </div>
+                </div>
             </div>
-            <div class="session-badge">Academic Session 2026-2027</div>
         </div>
+
+        
     </div>
 
         <div class="nav-bar">
