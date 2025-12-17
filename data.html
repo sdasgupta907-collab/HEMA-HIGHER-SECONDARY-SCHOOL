@@ -402,6 +402,7 @@
         <!-- LOGO HEADER -->
         <div class="logo-header">
             <div class="logo-container">
+                <img src="school-logo.png" alt="HEMA School Logo" class="school-logo" onerror="this.style.display='none'">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" 
                      alt="HEMA School Logo" class="school-logo" id="schoolLogo">
             </div>
@@ -1166,7 +1167,6 @@
                 return;
             }
 
-            // Store as currentEnquiry for registration page
             localStorage.setItem('currentEnquiry', JSON.stringify(enquiry));
 
             if (confirm(`Convert "${enquiry.studentFirst || ''} ${enquiry.studentSurname || ''}" to Registration?\n\nClick OK to proceed to Registration Form`)) {
@@ -1184,7 +1184,6 @@
                 return;
             }
 
-            // Store as currentRegistration for admission page
             localStorage.setItem('currentRegistration', JSON.stringify(registration));
 
             if (confirm(`Convert "${registration.studentFirst || ''} ${registration.studentSurname || ''}" to Admission?\n\nClick OK to proceed to Admission Form`)) {
