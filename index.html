@@ -295,7 +295,204 @@
             .row, .row.half, .row.four { grid-template-columns: 1fr; }
             .documents-grid { grid-template-columns: 1fr; }
         }
-    </style>
+    
+        /* FEE CALCULATOR SECTION */
+        .fee-calculator-section {
+            border: 2px solid #3498DB;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+        }
+
+        .fee-calculator-section legend {
+            color: #2874A6;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 0 10px;
+        }
+
+        .fee-input-group {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .fee-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2874A6;
+            font-size: 15px;
+        }
+
+        .fee-input-group select {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border: 2px solid #3498DB;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .sibling-checkbox label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .sibling-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .fee-table-container {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .fee-table-container h4 {
+            color: #2874A6;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #e8f4f8;
+            border-left: 4px solid #3498DB;
+        }
+
+        .fee-display-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fee-display-table thead {
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+            color: white;
+        }
+
+        .fee-display-table th,
+        .fee-display-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .fee-display-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .fee-display-table .total-row {
+            background: #D6EAF8 !important;
+            font-weight: 700;
+        }
+
+        .grand-total-display {
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .grand-total-display h3 {
+            margin: 0 0 15px 0;
+            text-align: center;
+        }
+
+        .grand-total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .grand-sum {
+            font-size: 18px;
+            border-top: 2px solid white !important;
+            padding-top: 12px !important;
+            margin-top: 8px;
+        }
+
+        .discount-display {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .discount-display h4 {
+            color: #27AE60;
+            margin-bottom: 15px;
+        }
+
+        .discount-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .discount-box {
+            flex: 1;
+            min-width: 200px;
+            background: #E8F8F5;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #27AE60;
+        }
+
+        .discount-box strong {
+            display: block;
+            color: #1E8449;
+            margin-bottom: 10px;
+        }
+
+        .discount-box p {
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .fee-notes-display {
+            background: #FFF9E6;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #F39C12;
+        }
+
+        .fee-notes-display h4 {
+            color: #D68910;
+            margin-bottom: 10px;
+        }
+
+        .fee-notes-display ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .fee-notes-display li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .fee-notes-display li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27AE60;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .discount-row {
+                flex-direction: column;
+            }
+        }
+
+        </style>
 </head>
 <body>
     <div class="container">
@@ -333,7 +530,7 @@
                     <div class="row half">
                         <div class="form-group">
                             <label for="sno">S.NO. (AUTO-GENERATED)</label>
-                            <input type="text" id="sno" name="sno" class="uppercase"  style="font-weight:bold; color:#1e3c72; font-size:15px;">
+                            <input type="text" id="sno" name="sno" class="uppercase" readonly style="font-weight:bold; color:#1e3c72; font-size:15px;">
                         </div>
                         <div class="form-group">
                             <label for="date">DATE</label>
@@ -496,47 +693,244 @@
                     </div>
                 </fieldset>
 
-                <!-- FEE STRUCTURE -->
-                <fieldset>
-                    <legend>💰 FEE STRUCTURE (One-Time Fees)</legend>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Particular</th>
-                                <th style="text-align: right;">Amount (₹)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Admission Fee</td>
-                                <td style="text-align: right;">
-                                    <input type="number" id="feeAdmission" name="feeAdmission" readonly style="border:none; background:transparent; text-align:right; font-weight:600;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Development Fund</td>
-                                <td style="text-align: right;">
-                                    <input type="number" id="feeDevelopment" name="feeDevelopment" readonly style="border:none; background:transparent; text-align:right; font-weight:600;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Caution Money Deposit (Refundable)</td>
-                                <td style="text-align: right;">
-                                    <input type="number" id="feeCaution" name="feeCaution" readonly style="border:none; background:transparent; text-align:right; font-weight:600;">
-                                </td>
-                            </tr>
-                            <tr style="background: #e8f0fe; font-weight: bold;">
-                                <td>TOTAL ONE-TIME FEES</td>
-                                <td style="text-align: right;">
-                                    <input type="number" id="totalFee" name="totalFee" readonly style="border:none; background:transparent; text-align:right; font-weight:bold; color:#1e3c72;">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p style="font-size: 11px; color: #666; margin-top: 10px;">
-                        * Monthly tuition fees will be communicated separately. Registration fee: ₹1,500/-
-                    </p>
+                <!-- FEE DETAILS SECTION -->
+                <fieldset class="fee-calculator-section">
+                    <legend>📋 FEE DETAILS - ACADEMIC SESSION 2026-2027</legend>
+
+                    <!-- Class Selection -->
+                    <div class="fee-input-group">
+                        <label for="feeClass"><strong>Select Class:</strong></label>
+                        <select id="feeClass" onchange="calculateFees()">
+                            <option value="">-- Select Class --</option>
+                            <option value="nursery">Nursery / KG-I / KG-II</option>
+                            <option value="1">Class I</option>
+                            <option value="2">Class II</option>
+                            <option value="3">Class III</option>
+                            <option value="4">Class IV-V</option>
+                            <option value="6">Class VI-VIII</option>
+                            <option value="9">Class IX-X</option>
+                            <option value="11sci">Class XI-XII (Science - PCM/PCB Optional)</option>
+                            <option value="11sci2">Class XI-XII (Science - Hindi/Psy)</option>
+                            <option value="11comm">Class XI-XII (Commerce - Optional)</option>
+                            <option value="11hum">Class XI-XII (Humanities)</option>
+                        </select>
+                    </div>
+
+                    <!-- Sibling Checkbox -->
+                    <div class="fee-input-group sibling-checkbox">
+                        <label>
+                            <input type="checkbox" id="siblingDiscount" onchange="calculateFees()">
+                            <span><strong>2nd Child Discount</strong> (50% off Admission Fee & Tuition Fee)</span>
+                        </label>
+                    </div>
+
+                    <!-- Fee Display Tables -->
+                    <div id="feeDisplay" style="display: none;">
+                        <!-- Admission Fees -->
+                        <div class="fee-table-container">
+                            <h4>ONE-TIME ADMISSION FEES</h4>
+                            <table class="fee-display-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.NO.</th>
+                                        <th>PARTICULAR</th>
+                                        <th style="text-align: right;">AMOUNT (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1.</td>
+                                        <td>ADMISSION FEE</td>
+                                        <td style="text-align: right;" id="admissionFee">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2.</td>
+                                        <td>DEVELOPMENT FUND</td>
+                                        <td style="text-align: right;" id="developmentFund">5,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3.</td>
+                                        <td>CAUTION MONEY DEPOSIT</td>
+                                        <td style="text-align: right;" id="cautionMoney">3,000</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td colspan="2"><strong>TOTAL ADMISSION FEES</strong></td>
+                                        <td style="text-align: right;"><strong id="totalAdmission">0</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Annual Fees -->
+                        <div class="fee-table-container">
+                            <h4>ANNUAL FEES (9 MONTHS: APRIL TO FEBRUARY)</h4>
+                            <table class="fee-display-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.NO.</th>
+                                        <th>PARTICULAR</th>
+                                        <th style="text-align: right;">AMOUNT (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>4.</td>
+                                        <td>TUITION FEE (9 Installments)</td>
+                                        <td style="text-align: right;" id="tuitionFee">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5.</td>
+                                        <td>ANNUAL CHARGES (9 Installments)</td>
+                                        <td style="text-align: right;" id="annualCharges">0</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td colspan="2"><strong>TOTAL ANNUAL FEES</strong></td>
+                                        <td style="text-align: right;"><strong id="totalAnnual">0</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Monthly Installment -->
+                        <div class="fee-table-container">
+                            <h4>MONTHLY INSTALLMENT</h4>
+                            <table class="fee-display-table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Monthly Payment (× 9 months)</strong></td>
+                                        <td style="text-align: right;"><strong id="monthlyInstallment">0</strong></td>
+                                    </tr>
+                                    <tr style="background: #fff9e6;">
+                                        <td colspan="2" style="text-align: center; font-style: italic; font-size: 13px;">
+                                            Payment Due: 5th to 15th of every month
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Grand Total -->
+                        <div class="grand-total-display">
+                            <h3>💰 TOTAL FEES FOR ACADEMIC YEAR 2026-2027</h3>
+                            <div class="grand-total-row">
+                                <span>One-Time Admission Fees:</span>
+                                <span id="grandAdmission">₹0</span>
+                            </div>
+                            <div class="grand-total-row">
+                                <span>Annual Fees (9 Months):</span>
+                                <span id="grandAnnual">₹0</span>
+                            </div>
+                            <div class="grand-total-row grand-sum">
+                                <span><strong>GRAND TOTAL:</strong></span>
+                                <span><strong id="grandTotal">₹0</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Discount Info -->
+                        <div class="discount-display">
+                            <h4>🎁 ONE-TIME PAYMENT DISCOUNTS (on Annual Fees only)</h4>
+                            <div class="discount-row">
+                                <div class="discount-box">
+                                    <strong>8% Discount (By 30th April 2026)</strong>
+                                    <p>Save: <span id="discount8">₹0</span></p>
+                                    <p>Pay: <span id="after8Discount">₹0</span></p>
+                                </div>
+                                <div class="discount-box">
+                                    <strong>5% Discount (By 30th June 2026)</strong>
+                                    <p>Save: <span id="discount5">₹0</span></p>
+                                    <p>Pay: <span id="after5Discount">₹0</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Important Notes -->
+                        <div class="fee-notes-display">
+                            <h4>📌 IMPORTANT NOTES:</h4>
+                            <ul>
+                                <li>Registration Fee: ₹1,500/- (Non-refundable)</li>
+                                <li>Sibling Discount: 50% on Admission & Tuition for 2nd child</li>
+                                <li>Late Payment: ₹10/day fine after due date</li>
+                                <li>Caution Money: Refundable at TC issuance</li>
+                            </ul>
+                        </div>
+                    </div>
                 </fieldset>
+
+                <script>
+                const feeData = {
+                    'nursery': { admission: 27000, development: 5000, caution: 3000, tuition: 14645, annual: 6955, monthly: 2400 },
+                    '1': { admission: 30000, development: 5000, caution: 3000, tuition: 21296, annual: 9754, monthly: 3450 },
+                    '2': { admission: 30000, development: 5000, caution: 3000, tuition: 22634, annual: 13906, monthly: 4060 },
+                    '3': { admission: 30000, development: 5000, caution: 3000, tuition: 23954, annual: 15304, monthly: 4362 },
+                    '4': { admission: 30000, development: 5000, caution: 3000, tuition: 26620, annual: 17390, monthly: 4890 },
+                    '6': { admission: 41000, development: 5000, caution: 3000, tuition: 29280, annual: 17385, monthly: 5185 },
+                    '9': { admission: 55000, development: 5000, caution: 3000, tuition: 29286, annual: 23634, monthly: 5880 },
+                    '11sci': { admission: 62000, development: 5000, caution: 3000, tuition: 29280, annual: 25044, monthly: 6036 },
+                    '11sci2': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 18090, monthly: 5264 },
+                    '11comm': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 23526, monthly: 5868 },
+                    '11hum': { admission: 62000, development: 5000, caution: 3000, tuition: 29290, annual: 16700, monthly: 5110 }
+                };
+
+                function formatCurrency(amount) {
+                    return amount.toLocaleString('en-IN');
+                }
+
+                function calculateFees() {
+                    const selectedClass = document.getElementById('feeClass').value;
+                    const isSibling = document.getElementById('siblingDiscount').checked;
+                    const feeDisplay = document.getElementById('feeDisplay');
+
+                    if (!selectedClass) {
+                        feeDisplay.style.display = 'none';
+                        return;
+                    }
+
+                    feeDisplay.style.display = 'block';
+                    const fees = feeData[selectedClass];
+
+                    let admissionFee = fees.admission;
+                    let tuitionFee = fees.tuition;
+
+                    if (isSibling) {
+                        admissionFee = Math.round(fees.admission * 0.5);
+                        tuitionFee = Math.round(fees.tuition * 0.5);
+                    }
+
+                    const developmentFund = fees.development;
+                    const cautionMoney = fees.caution;
+                    const annualCharges = fees.annual;
+                    const monthlyInstallment = fees.monthly;
+
+                    const totalAdmission = admissionFee + developmentFund + cautionMoney;
+                    const totalAnnual = tuitionFee + annualCharges;
+                    const grandTotal = totalAdmission + totalAnnual;
+
+                    const discount8Percent = Math.round(totalAnnual * 0.08);
+                    const discount5Percent = Math.round(totalAnnual * 0.05);
+                    const after8Discount = totalAdmission + (totalAnnual - discount8Percent);
+                    const after5Discount = totalAdmission + (totalAnnual - discount5Percent);
+
+                    document.getElementById('admissionFee').textContent = formatCurrency(admissionFee);
+                    document.getElementById('developmentFund').textContent = formatCurrency(developmentFund);
+                    document.getElementById('cautionMoney').textContent = formatCurrency(cautionMoney);
+                    document.getElementById('totalAdmission').textContent = formatCurrency(totalAdmission);
+
+                    document.getElementById('tuitionFee').textContent = formatCurrency(tuitionFee);
+                    document.getElementById('annualCharges').textContent = formatCurrency(annualCharges);
+                    document.getElementById('totalAnnual').textContent = formatCurrency(totalAnnual);
+
+                    document.getElementById('monthlyInstallment').textContent = formatCurrency(monthlyInstallment);
+
+                    document.getElementById('grandAdmission').textContent = '₹' + formatCurrency(totalAdmission);
+                    document.getElementById('grandAnnual').textContent = '₹' + formatCurrency(totalAnnual);
+                    document.getElementById('grandTotal').textContent = '₹' + formatCurrency(grandTotal);
+
+                    document.getElementById('discount8').textContent = '₹' + formatCurrency(discount8Percent);
+                    document.getElementById('after8Discount').textContent = '₹' + formatCurrency(after8Discount);
+                    document.getElementById('discount5').textContent = '₹' + formatCurrency(discount5Percent);
+                    document.getElementById('after5Discount').textContent = '₹' + formatCurrency(after5Discount);
+                }
+                </script>
 
                 <!-- REQUIRED DOCUMENTS -->
                 <fieldset>
@@ -600,7 +994,121 @@
     </div>
 
     <script>
-        // S.No - Manual Entry
+        // FEE DATA
+        const feeData = {
+            "NURSERY": { admission: 27000, development: 5000, caution: 3000 },
+            "KG I": { admission: 27000, development: 5000, caution: 3000 },
+            "KG II": { admission: 27000, development: 5000, caution: 3000 },
+            "I": { admission: 30000, development: 5000, caution: 3000 },
+            "II": { admission: 30000, development: 5000, caution: 3000 },
+            "III": { admission: 30000, development: 5000, caution: 3000 },
+            "IV": { admission: 30000, development: 5000, caution: 3000 },
+            "V": { admission: 30000, development: 5000, caution: 3000 },
+            "VI": { admission: 41000, development: 5000, caution: 3000 },
+            "VII": { admission: 41000, development: 5000, caution: 3000 },
+            "VIII": { admission: 41000, development: 5000, caution: 3000 },
+            "IX": { admission: 55000, development: 5000, caution: 3000 },
+            "X": { admission: 55000, development: 5000, caution: 3000 },
+            "XI": { admission: 62000, development: 5000, caution: 3000 },
+            "XII": { admission: 62000, development: 5000, caution: 3000 }
+        };
+
+        // AUTO-UPPERCASE
+        document.querySelectorAll('.uppercase').forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = this.value.toUpperCase();
+            });
+        });
+
+        // SET TODAY'S DATE
+        document.getElementById('date').valueAsDate = new Date();
+
+        // CALCULATE AGE
+        function calculateAge(dob, asOfDate) {
+            const dobDate = new Date(dob);
+            const refDate = asOfDate ? new Date(asOfDate) : new Date();
+
+            let years = refDate.getFullYear() - dobDate.getFullYear();
+            let months = refDate.getMonth() - dobDate.getMonth();
+            let days = refDate.getDate() - dobDate.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            return { years, months, days };
+        }
+
+        // AGE CALCULATION WITH SPECIFIC DATES
+        function updateAgeDisplays() {
+            const dob = document.getElementById('dob').value;
+            const selectedClass = document.getElementById('classApplied').value;
+
+            if (!dob) {
+                document.getElementById('ageDisplay').innerHTML = '-- Select DOB --';
+                document.getElementById('ageAsOnGroup').style.display = 'none';
+                return;
+            }
+
+            // Current age
+            const currentAge = calculateAge(dob);
+            document.getElementById('ageDisplay').innerHTML = 
+                `<strong>${currentAge.years}</strong> Years <strong>${currentAge.months}</strong> Months <strong>${currentAge.days}</strong> Days`;
+
+            // Age as on specific date based on class
+            const ageAsOnGroup = document.getElementById('ageAsOnGroup');
+            const ageAsOnLabel = document.getElementById('ageAsOnLabel');
+            const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
+            const ageAsOnInfo = document.getElementById('ageAsOnInfo');
+
+            if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
+                // Age as on 31 July 2026
+                const ageAsOn31July = calculateAge(dob, '2026-07-31');
+                ageAsOnGroup.style.display = 'block';
+                ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
+                ageAsOnDisplay.innerHTML = 
+                    `<strong>${ageAsOn31July.years}</strong> Y <strong>${ageAsOn31July.months}</strong> M <strong>${ageAsOn31July.days}</strong> D`;
+                ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
+            } else if (selectedClass === 'I') {
+                // Age as on 30 Sept 2026
+                const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
+                ageAsOnGroup.style.display = 'block';
+                ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
+                ageAsOnDisplay.innerHTML = 
+                    `<strong>${ageAsOn30Sept.years}</strong> Y <strong>${ageAsOn30Sept.months}</strong> M <strong>${ageAsOn30Sept.days}</strong> D`;
+                ageAsOnInfo.textContent = 'For Class I admission';
+            } else {
+                ageAsOnGroup.style.display = 'none';
+            }
+        }
+
+        document.getElementById('dob').addEventListener('change', updateAgeDisplays);
+        document.getElementById('classApplied').addEventListener('change', function() {
+            updateAgeDisplays();
+
+            // Fee calculation
+            const selectedClass = this.value;
+            const fees = feeData[selectedClass];
+
+            if (fees) {
+                document.getElementById('feeAdmission').value = fees.admission;
+                document.getElementById('feeDevelopment').value = fees.development;
+                document.getElementById('feeCaution').value = fees.caution;
+                document.getElementById('totalFee').value = fees.admission + fees.development + fees.caution;
+            }
+        });
+
+        // AUTO-GENERATE S.NO STARTING FROM 2026001
+        window.addEventListener('load', function() {
+            let records = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
+            const nextNum = 2026001 + records.length;
+            document.getElementById('sno').value = nextNum.toString();
         });
 
         // FORM SUBMISSION
