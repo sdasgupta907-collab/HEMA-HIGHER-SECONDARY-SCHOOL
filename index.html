@@ -333,7 +333,7 @@
                     <div class="row half">
                         <div class="form-group">
                             <label for="sno">S.NO. (AUTO-GENERATED)</label>
-                            <input type="text" id="sno" name="sno" class="uppercase" readonly style="font-weight:bold; color:#1e3c72; font-size:15px;">
+                            <input type="text" id="sno" name="sno" class="uppercase"  style="font-weight:bold; color:#1e3c72; font-size:15px;">
                         </div>
                         <div class="form-group">
                             <label for="date">DATE</label>
@@ -600,121 +600,7 @@
     </div>
 
     <script>
-        // FEE DATA
-        const feeData = {
-            "NURSERY": { admission: 27000, development: 5000, caution: 3000 },
-            "KG I": { admission: 27000, development: 5000, caution: 3000 },
-            "KG II": { admission: 27000, development: 5000, caution: 3000 },
-            "I": { admission: 30000, development: 5000, caution: 3000 },
-            "II": { admission: 30000, development: 5000, caution: 3000 },
-            "III": { admission: 30000, development: 5000, caution: 3000 },
-            "IV": { admission: 30000, development: 5000, caution: 3000 },
-            "V": { admission: 30000, development: 5000, caution: 3000 },
-            "VI": { admission: 41000, development: 5000, caution: 3000 },
-            "VII": { admission: 41000, development: 5000, caution: 3000 },
-            "VIII": { admission: 41000, development: 5000, caution: 3000 },
-            "IX": { admission: 55000, development: 5000, caution: 3000 },
-            "X": { admission: 55000, development: 5000, caution: 3000 },
-            "XI": { admission: 62000, development: 5000, caution: 3000 },
-            "XII": { admission: 62000, development: 5000, caution: 3000 }
-        };
-
-        // AUTO-UPPERCASE
-        document.querySelectorAll('.uppercase').forEach(input => {
-            input.addEventListener('input', function() {
-                this.value = this.value.toUpperCase();
-            });
-        });
-
-        // SET TODAY'S DATE
-        document.getElementById('date').valueAsDate = new Date();
-
-        // CALCULATE AGE
-        function calculateAge(dob, asOfDate) {
-            const dobDate = new Date(dob);
-            const refDate = asOfDate ? new Date(asOfDate) : new Date();
-
-            let years = refDate.getFullYear() - dobDate.getFullYear();
-            let months = refDate.getMonth() - dobDate.getMonth();
-            let days = refDate.getDate() - dobDate.getDate();
-
-            if (days < 0) {
-                months--;
-                days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
-            }
-
-            if (months < 0) {
-                years--;
-                months += 12;
-            }
-
-            return { years, months, days };
-        }
-
-        // AGE CALCULATION WITH SPECIFIC DATES
-        function updateAgeDisplays() {
-            const dob = document.getElementById('dob').value;
-            const selectedClass = document.getElementById('classApplied').value;
-
-            if (!dob) {
-                document.getElementById('ageDisplay').innerHTML = '-- Select DOB --';
-                document.getElementById('ageAsOnGroup').style.display = 'none';
-                return;
-            }
-
-            // Current age
-            const currentAge = calculateAge(dob);
-            document.getElementById('ageDisplay').innerHTML = 
-                `<strong>${currentAge.years}</strong> Years <strong>${currentAge.months}</strong> Months <strong>${currentAge.days}</strong> Days`;
-
-            // Age as on specific date based on class
-            const ageAsOnGroup = document.getElementById('ageAsOnGroup');
-            const ageAsOnLabel = document.getElementById('ageAsOnLabel');
-            const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
-            const ageAsOnInfo = document.getElementById('ageAsOnInfo');
-
-            if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
-                // Age as on 31 July 2026
-                const ageAsOn31July = calculateAge(dob, '2026-07-31');
-                ageAsOnGroup.style.display = 'block';
-                ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
-                ageAsOnDisplay.innerHTML = 
-                    `<strong>${ageAsOn31July.years}</strong> Y <strong>${ageAsOn31July.months}</strong> M <strong>${ageAsOn31July.days}</strong> D`;
-                ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
-            } else if (selectedClass === 'I') {
-                // Age as on 30 Sept 2026
-                const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
-                ageAsOnGroup.style.display = 'block';
-                ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
-                ageAsOnDisplay.innerHTML = 
-                    `<strong>${ageAsOn30Sept.years}</strong> Y <strong>${ageAsOn30Sept.months}</strong> M <strong>${ageAsOn30Sept.days}</strong> D`;
-                ageAsOnInfo.textContent = 'For Class I admission';
-            } else {
-                ageAsOnGroup.style.display = 'none';
-            }
-        }
-
-        document.getElementById('dob').addEventListener('change', updateAgeDisplays);
-        document.getElementById('classApplied').addEventListener('change', function() {
-            updateAgeDisplays();
-
-            // Fee calculation
-            const selectedClass = this.value;
-            const fees = feeData[selectedClass];
-
-            if (fees) {
-                document.getElementById('feeAdmission').value = fees.admission;
-                document.getElementById('feeDevelopment').value = fees.development;
-                document.getElementById('feeCaution').value = fees.caution;
-                document.getElementById('totalFee').value = fees.admission + fees.development + fees.caution;
-            }
-        });
-
-        // AUTO-GENERATE S.NO STARTING FROM 2026001
-        window.addEventListener('load', function() {
-            let records = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
-            const nextNum = 2026001 + records.length;
-            document.getElementById('sno').value = nextNum.toString();
+        // S.No - Manual Entry
         });
 
         // FORM SUBMISSION
