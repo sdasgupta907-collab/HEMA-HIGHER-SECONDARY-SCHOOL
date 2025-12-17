@@ -274,7 +274,295 @@
             body { background: white; }
             .page-break { page-break-after: always; }
         }
-    </style>
+    
+        /* ========== ATTRACTIVE HEADER STYLES ========== */
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            background-image: 
+                linear-gradient(135deg, rgba(30, 60, 114, 0.95) 0%, rgba(42, 82, 152, 0.95) 100%),
+                url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="rgba(255,255,255,0.03)" fill-rule="nonzero"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            padding: 0;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 5px solid #f39c12;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 30px;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 0 0 140px;
+        }
+
+        .logo-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            border: 4px solid #f39c12;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-circle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(243, 156, 18, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .logo-circle:hover::before {
+            left: 100%;
+        }
+
+        .header-logo {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .logo-label {
+            color: #f39c12;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .school-info-section {
+            flex: 1;
+            text-align: center;
+        }
+
+        .school-name {
+            font-size: 38px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(243, 156, 18, 0.3);
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .school-tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(243, 156, 18, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 2px solid #f39c12;
+        }
+
+        .tagline-icon {
+            font-size: 18px;
+        }
+
+        .tagline-text {
+            color: #ffd700;
+            font-size: 15px;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .header-middle {
+            margin-bottom: 15px;
+        }
+
+        .affiliation-badge {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 15px;
+        }
+
+        .badge-icon {
+            background: white;
+            color: #f39c12;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .affiliation-badge strong {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .info-icon {
+            font-size: 16px;
+        }
+
+        .info-text {
+            color: #e0e0e0;
+        }
+
+        .info-text strong {
+            color: #ffd700;
+        }
+
+        .info-divider {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(243, 156, 18, 0.2);
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(243, 156, 18, 0.4);
+        }
+
+        .contact-icon {
+            font-size: 14px;
+        }
+
+        .contact-text {
+            color: #ffd700;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .contact-link {
+            color: #ffd700;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .contact-divider {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 16px;
+        }
+
+        @media (max-width: 1024px) {
+            .header-wrapper { padding: 15px 25px; }
+            .school-name { font-size: 30px; }
+            .logo-circle { width: 90px; height: 90px; }
+            .header-logo { width: 70px; height: 70px; }
+        }
+
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; gap: 20px; }
+            .logo-section { flex: 0 0 auto; }
+            .school-name { font-size: 24px; letter-spacing: 2px; }
+            .logo-circle { width: 80px; height: 80px; }
+            .header-logo { width: 60px; height: 60px; }
+            .info-grid { flex-direction: column; gap: 10px; }
+            .info-divider { display: none; }
+            .affiliation-badge { font-size: 13px; padding: 10px 20px; }
+            .contact-grid { flex-direction: column; gap: 8px; }
+            .contact-divider { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .header-wrapper { padding: 15px; }
+            .school-name { font-size: 20px; letter-spacing: 1px; }
+            .logo-circle { width: 70px; height: 70px; }
+            .header-logo { width: 50px; height: 50px; }
+            .info-item, .contact-item { font-size: 12px; }
+        }
+
+</style>
 </head>
 <body>
     <div class="container">
@@ -875,5 +1163,23 @@
             }
         });
     </script>
+<script>
+function calculateAgeFromDOB(){
+    var dob=document.getElementById('dob');
+    var age=document.getElementById('age');
+    if(!dob||!age)return;
+    if(!dob.value){age.value='';return;}
+    var d=new Date(dob.value);
+    var t=new Date();
+    var y=t.getFullYear()-d.getFullYear();
+    var m=t.getMonth()-d.getMonth();
+    if(m<0||(m===0&&t.getDate()<d.getDate()))y--;
+    age.value=y+' years';
+}
+window.addEventListener('DOMContentLoaded',function(){
+    var dob=document.getElementById('dob');
+    if(dob&&dob.value)calculateAgeFromDOB();
+});
+</script>
 </body>
 </html>
