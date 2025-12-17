@@ -8,9 +8,34 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 100%);
             padding: 20px;
         }
+
+        /* LOGO HEADER */
+        .logo-header {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        .logo-container { margin-bottom: 15px; }
+        .school-logo { height: 80px; width: auto; max-width: 150px; object-fit: contain; }
+        .school-details h1 { font-size: 26px; margin: 10px 0 5px 0; font-weight: bold; letter-spacing: 1px; }
+        .affiliation-info { font-size: 12px; line-height: 1.6; opacity: 0.95; }
+        .affiliation-info strong { color: #ffd700; font-size: 13px; }
+        .session-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #2874A6;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -20,7 +45,7 @@
             overflow: hidden;
         }
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
             color: white;
             padding: 20px;
             text-align: center;
@@ -36,12 +61,12 @@
         }
         .nav-bar a {
             text-decoration: none;
-            color: #1e3c72;
+            color: #2874A6;
             font-weight: 600;
             padding: 8px 15px;
             border-radius: 5px;
         }
-        .nav-bar a.active { background: #1e3c72; color: white; }
+        .nav-bar a.active { background: #2874A6; color: white; }
         #admissionForm {
             padding: 30px;
             background: white;
@@ -157,7 +182,7 @@
             font-size: 14px;
         }
         .btn-pdf { background: #4CAF50; color: white; }
-        .btn-submit { background: #667eea; color: white; }
+        .btn-submit { background: #4A90E2; color: white; }
         .btn-reset { background: #f44336; color: white; }
         @media print {
             .nav-bar, .buttons { display: none; }
@@ -168,10 +193,21 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>HEMA HIGHER SECONDARY SCHOOL</h1>
-            <p>Affiliated to CBSE New Delhi | D-Sector, Security Line, Govindpura, BHEL, Bhopal - 462023</p>
+            <!-- LOGO HEADER -->
+    <div class="logo-header">
+        <div class="logo-container">
+            <img src="school-logo.png" alt="HEMA School Logo" class="school-logo" onerror="this.style.display='none'">
         </div>
+        <div class="school-details">
+            <h1>HEMA HIGHER SECONDARY SCHOOL</h1>
+            <div class="affiliation-info">
+                <strong>Affiliated to CBSE, New Delhi</strong><br>
+                D-Sector, Security Line, Govindpura, BHEL, Bhopal - 462023<br>
+                Phone: 0755-XXXXXXX | Email: info@hemaschool.edu.in
+            </div>
+            <div class="session-badge">Academic Session 2026-2027</div>
+        </div>
+    </div>
 
         <div class="nav-bar">
             <a href="index.html">📝 Enquiry</a>
