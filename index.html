@@ -786,28 +786,43 @@
     <div class="container">
         <!-- LOGO HEADER -->
         <div class="logo-header">
-            <div class="logo-container">
-                <img src="school-logo.png" alt="HEMA School Logo" class="school-logo" onerror="this.style.display='none'">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" 
-                     alt="HEMA School Logo" class="school-logo" id="schoolLogo">
-            </div>
-            <div class="school-details">
-                <h1>HEMA HIGHER SECONDARY SCHOOL</h1>
-                <div class="affiliation-info">
-                    <strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong><br>
-                    School Code: 50383 | Affiliation No.: 1030417<br>
-                    Govindpura, Bhopal, Madhya Pradesh, India - 462023<br>
-                    📧 support@hemaschool.education | 📞 0755-2457270
+            <div class="header-container">
+                <div class="header-flex">
+                    <!-- Left Logo - School -->
+                    <div class="logo-box logo-left">
+                        <img src="school-logo.png" alt="School Logo" class="logo-img">
+                    </div>
+
+                    <!-- Center - School Details -->
+                    <div class="school-info">
+                        <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
+                        <div class="school-details">
+                            <div class="detail-line"><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></div>
+                            <div class="detail-line">School Code: 50383 | Affiliation No.: 1030417</div>
+                            <div class="detail-line">Govindpura, Bhopal, Madhya Pradesh, India - 462023</div>
+                            <div class="detail-line contact-line">
+                                📧 <a href="mailto:support@hemaschool.education">support@hemaschool.education</a> | 
+                                📞 0755-2457270
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Logo - Empathy -->
+                    <div class="logo-box logo-right">
+                        <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
+                    </div>
                 </div>
-                <div class="session-badge">STUDENT ENQUIRY FORM - ACADEMIC SESSION 2026-2027</div>
             </div>
+        </div>
+
+        
         </div>
 
         <div class="nav-bar no-print">
             <a href="index.html" class="active">📝 Enquiry</a>
             <a href="registration.html">📋 Registration</a>
             <a href="admission.html">✅ Admission</a>
-            <a href="data.html">📊 Records</a>
+            <a href="data.html" >📊 Records</a>
         </div>
 
         <div class="form-container">
@@ -986,6 +1001,143 @@
                         </div>
                     </div>
                 </fieldset>
+
+                <fieldset>
+                    <legend>👨‍👩‍👧‍👦 SIBLING DETAILS (IF ANY)</legend>
+                    <div class="sibling-section">
+                        <h3 style="margin-bottom: 15px; color: #1e3c72;">SIBLING 1</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="sib1Name">NAME</label>
+                                <input type="text" id="sib1Name" name="sib1Name" class="uppercase">
+                            </div>
+                            <div class="form-group">
+                                <label for="sib1School">SCHOOL</label>
+                                <input type="text" id="sib1School" name="sib1School" class="uppercase">
+                            </div>
+                            <div class="form-group">
+                                <label for="sib1Class">CLASS</label>
+                                <select id="sib1Class" name="sib1Class">
+                                    <option value="">-- SELECT --</option>
+                                    <option value="NURSERY">NURSERY</option>
+                                    <option value="KG I">KG I</option>
+                                    <option value="KG II">KG II</option>
+                                    <option value="I">I</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                    <option value="V">V</option>
+                                    <option value="VI">VI</option>
+                                    <option value="VII">VII</option>
+                                    <option value="VIII">VIII</option>
+                                    <option value="IX">IX</option>
+                                    <option value="X">X</option>
+                                    <option value="XI">XI</option>
+                                    <option value="XII">XII</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="sib1Section">SECTION</label>
+                                <select id="sib1Section" name="sib1Section">
+                                    <option value="">--</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </div>
+                            <div class="form-group"></div>
+                            <div class="form-group"></div>
+                        </div>
+                    </div>
+
+                    <div class="sibling-section">
+                        <h3 style="margin-bottom: 15px; color: #1e3c72;">SIBLING 2</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="sib2Name">NAME</label>
+                                <input type="text" id="sib2Name" name="sib2Name" class="uppercase">
+                            </div>
+                            <div class="form-group">
+                                <label for="sib2School">SCHOOL</label>
+                                <input type="text" id="sib2School" name="sib2School" class="uppercase">
+                            </div>
+                            <div class="form-group">
+                                <label for="sib2Class">CLASS</label>
+                                <select id="sib2Class" name="sib2Class">
+                                    <option value="">-- SELECT --</option>
+                                    <option value="NURSERY">NURSERY</option>
+                                    <option value="KG I">KG I</option>
+                                    <option value="KG II">KG II</option>
+                                    <option value="I">I</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                    <option value="V">V</option>
+                                    <option value="VI">VI</option>
+                                    <option value="VII">VII</option>
+                                    <option value="VIII">VIII</option>
+                                    <option value="IX">IX</option>
+                                    <option value="X">X</option>
+                                    <option value="XI">XI</option>
+                                    <option value="XII">XII</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="sib2Section">SECTION</label>
+                                <select id="sib2Section" name="sib2Section">
+                                    <option value="">--</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </div>
+                            <div class="form-group"></div>
+                            <div class="form-group"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>📢 SOURCE OF INFORMATION</legend>
+                    <div class="form-group">
+                        <label>HOW DID YOU KNOW ABOUT US?</label>
+                        <div class="source-group">
+                            <label><input type="checkbox" name="source" value="NEWSPAPER"> NEWSPAPER</label>
+                            <label><input type="checkbox" name="source" value="SCHOOL WEBSITE"> SCHOOL WEBSITE</label>
+                            <label><input type="checkbox" name="source" value="FACEBOOK"> FACEBOOK</label>
+                            <label><input type="checkbox" name="source" value="INSTAGRAM"> INSTAGRAM</label>
+                            <label><input type="checkbox" name="source" value="BILLBOARD"> BILLBOARD</label>
+                            <label><input type="checkbox" name="source" value="WORD OF MOUTH"> WORD OF MOUTH</label>
+                        </div>
+                    </div>
+
+                    <div class="row full">
+                        <div class="form-group">
+                            <label>IF REFERRED</label>
+                            <div class="referred-group">
+                                <label><input type="radio" name="referredType" value="MEMBER"> MEMBER</label>
+                                <label><input type="radio" name="referredType" value="PARENT"> PARENT</label>
+                                <label><input type="radio" name="referredType" value="STAFF"> STAFF</label>
+                                <label><input type="radio" name="referredType" value="OTHER"> OTHER</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row full">
+                        <div class="form-group">
+                            <label for="referredName">REFERRED PERSON'S NAME</label>
+                            <input type="text" id="referredName" name="referredName" class="uppercase">
+                        </div>
+                    </div>
+                </fieldset>
+
+                
 
                 <!-- FEE DETAILS SECTION -->
                 <fieldset class="fee-calculator-section">
@@ -1224,7 +1376,77 @@
                     document.getElementById('discount5').textContent = '₹' + formatCurrency(discount5Percent);
                     document.getElementById('after5Discount').textContent = '₹' + formatCurrency(after5Discount);
                 }
-                </script>
+                
+
+        // DOB Automation Functions
+        function calculateAge(dob, asOfDate) {
+            const dobDate = new Date(dob);
+            const refDate = asOfDate ? new Date(asOfDate) : new Date();
+
+            let years = refDate.getFullYear() - dobDate.getFullYear();
+            let months = refDate.getMonth() - dobDate.getMonth();
+            let days = refDate.getDate() - dobDate.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            return { years, months, days };
+        }
+
+        function updateAgeDisplays() {
+            const dob = document.getElementById('dob').value;
+            const selectedClass = document.getElementById('classApplied').value;
+
+            if (!dob) {
+                document.getElementById('ageDisplay').innerHTML = '-- Select DOB --';
+                document.getElementById('ageAsOnGroup').style.display = 'none';
+                return;
+            }
+
+            // Current age
+            const currentAge = calculateAge(dob);
+            document.getElementById('ageDisplay').innerHTML = 
+                `<strong>${currentAge.years}</strong> Years <strong>${currentAge.months}</strong> Months <strong>${currentAge.days}</strong> Days`;
+
+            // Age as on specific date based on class
+            const ageAsOnGroup = document.getElementById('ageAsOnGroup');
+            const ageAsOnLabel = document.getElementById('ageAsOnLabel');
+            const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
+            const ageAsOnInfo = document.getElementById('ageAsOnInfo');
+
+            if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
+                // Age as on 31 July 2026
+                const ageAsOn31July = calculateAge(dob, '2026-07-31');
+                ageAsOnGroup.style.display = 'block';
+                ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
+                ageAsOnDisplay.innerHTML = 
+                    `<strong>${ageAsOn31July.years}</strong> Y <strong>${ageAsOn31July.months}</strong> M <strong>${ageAsOn31July.days}</strong> D`;
+                ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
+            } else if (selectedClass === 'I') {
+                // Age as on 30 Sept 2026
+                const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
+                ageAsOnGroup.style.display = 'block';
+                ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
+                ageAsOnDisplay.innerHTML = 
+                    `<strong>${ageAsOn30Sept.years}</strong> Y <strong>${ageAsOn30Sept.months}</strong> M <strong>${ageAsOn30Sept.days}</strong> D`;
+                ageAsOnInfo.textContent = 'For Class I admission';
+            } else {
+                ageAsOnGroup.style.display = 'none';
+            }
+        }
+
+        // Add event listeners for DOB automation
+        document.getElementById('dob').addEventListener('change', updateAgeDisplays);
+        document.getElementById('classApplied').addEventListener('change', updateAgeDisplays);
+
+    </script>
 
                 <!-- REQUIRED DOCUMENTS -->
                 <fieldset>
