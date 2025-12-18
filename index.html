@@ -1586,7 +1586,7 @@
                 <!-- BUTTONS -->
                 <div class="buttons no-print">
                     <button type="button" onclick="printForm()" class="btn-print">🖨️ PRINT / SAVE AS PDF</button>
-                    <button type="submit" class="btn-submit">✓ SAVE ENQUIRY</button>
+                    <button type="button" onclick="saveEnquiry()" class="btn-submit">✓ SAVE ENQUIRY</button>
                     <button type="button" onclick="proceedToRegistration()" class="btn-register">📋 PROCEED TO REGISTRATION</button>
                     <button type="reset" class="btn-reset">✕ CLEAR FORM</button>
                 </div>
@@ -1807,6 +1807,183 @@ window.addEventListener('DOMContentLoaded',function(){
     var auto=document.getElementById('autoSno');
     if(auto&&auto.checked)generateAutoSno();
 });
+
+
+// Save Enquiry Function
+function saveEnquiry() {
+    // Collect all form data
+    const formData = {
+        sno: document.getElementById('sno')?.value || '',
+        date: document.getElementById('date')?.value || '',
+        studentFirstName: document.getElementById('studentFirstName')?.value || '',
+        studentMiddleName: document.getElementById('studentMiddleName')?.value || '',
+        studentSurname: document.getElementById('studentSurname')?.value || '',
+        gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+        classApplying: document.getElementById('classApplying')?.value || '',
+        dob: document.getElementById('dob')?.value || '',
+        currentAge: document.getElementById('currentAge')?.value || '',
+        ageAsOn: document.getElementById('ageAsOn')?.value || '',
+        fatherFirstName: document.getElementById('fatherFirstName')?.value || '',
+        fatherMiddleName: document.getElementById('fatherMiddleName')?.value || '',
+        fatherSurname: document.getElementById('fatherSurname')?.value || '',
+        motherFirstName: document.getElementById('motherFirstName')?.value || '',
+        motherMiddleName: document.getElementById('motherMiddleName')?.value || '',
+        motherSurname: document.getElementById('motherSurname')?.value || '',
+        fatherMobile: document.getElementById('fatherMobile')?.value || '',
+        motherMobile: document.getElementById('motherMobile')?.value || '',
+        landline: document.getElementById('landline')?.value || '',
+        address: document.getElementById('address')?.value || '',
+        area: document.getElementById('area')?.value || '',
+        city: document.getElementById('city')?.value || '',
+        district: document.getElementById('district')?.value || '',
+        state: document.getElementById('state')?.value || '',
+        pincode: document.getElementById('pincode')?.value || '',
+        country: document.getElementById('country')?.value || '',
+        sibling1Name: document.getElementById('sibling1Name')?.value || '',
+        sibling1School: document.getElementById('sibling1School')?.value || '',
+        sibling1Class: document.getElementById('sibling1Class')?.value || '',
+        sibling1Section: document.getElementById('sibling1Section')?.value || '',
+        sibling2Name: document.getElementById('sibling2Name')?.value || '',
+        sibling2School: document.getElementById('sibling2School')?.value || '',
+        sibling2Class: document.getElementById('sibling2Class')?.value || '',
+        sibling2Section: document.getElementById('sibling2Section')?.value || '',
+        infoSource: document.querySelector('input[name="infoSource"]:checked')?.value || '',
+        referredType: document.querySelector('input[name="referredType"]:checked')?.value || '',
+        referredName: document.getElementById('referredName')?.value || ''
+    };
+
+    // Validate essential fields
+    if (!formData.studentFirstName || !formData.classApplying || !formData.fatherMobile) {
+        alert('❌ Please fill in all required fields:\n\n✓ Student First Name\n✓ Class Applying For\n✓ Father Mobile Number');
+        return false;
+    }
+
+    // Check if editing existing record
+    const editIndex = sessionStorage.getItem('editingEnquiryIndex');
+    let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+
+    if (editIndex !== null && editIndex !== '' && editIndex !== undefined) {
+        // Update existing record
+        enquiryRecords[parseInt(editIndex)] = formData;
+        sessionStorage.removeItem('editingEnquiryIndex');
+        localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
+        localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
+        alert('✅ Enquiry updated successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
+    } else {
+        // Add new record
+        enquiryRecords.push(formData);
+        localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
+        localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
+        alert('✅ Enquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
+    }
+
+    return true;
+}
+
+// Proceed to Registration
+function proceedToRegistration() {
+    // First save the enquiry
+    if (saveEnquiry()) {
+        alert('📋 Proceeding to Registration Form...');
+        window.location.href = 'COMPLETE-REGISTRATION-FORM.html';
+    }
+}
+
+// Load data for editing
+function loadForEdit() {
+    const editData = JSON.parse(localStorage.getItem('editEnquiryData'));
+    if (editData) {
+        console.log('Loading data for editing...');
+
+        if (document.getElementById('sno')) document.getElementById('sno').value = editData.sno || '';
+        if (document.getElementById('date')) document.getElementById('date').value = editData.date || '';
+        if (document.getElementById('studentFirstName')) document.getElementById('studentFirstName').value = editData.studentFirstName || '';
+        if (document.getElementById('studentMiddleName')) document.getElementById('studentMiddleName').value = editData.studentMiddleName || '';
+        if (document.getElementById('studentSurname')) document.getElementById('studentSurname').value = editData.studentSurname || '';
+
+        if (editData.gender) {
+            const genderRadios = document.querySelectorAll('input[name="gender"]');
+            genderRadios.forEach(radio => {
+                if (radio.value.toUpperCase() === editData.gender.toUpperCase()) {
+                    radio.checked = true;
+                }
+            });
+        }
+
+        if (document.getElementById('classApplying')) document.getElementById('classApplying').value = editData.classApplying || '';
+        if (document.getElementById('dob')) document.getElementById('dob').value = editData.dob || '';
+        if (document.getElementById('currentAge')) document.getElementById('currentAge').value = editData.currentAge || '';
+        if (document.getElementById('ageAsOn')) document.getElementById('ageAsOn').value = editData.ageAsOn || '';
+        if (document.getElementById('fatherFirstName')) document.getElementById('fatherFirstName').value = editData.fatherFirstName || '';
+        if (document.getElementById('fatherMiddleName')) document.getElementById('fatherMiddleName').value = editData.fatherMiddleName || '';
+        if (document.getElementById('fatherSurname')) document.getElementById('fatherSurname').value = editData.fatherSurname || '';
+        if (document.getElementById('motherFirstName')) document.getElementById('motherFirstName').value = editData.motherFirstName || '';
+        if (document.getElementById('motherMiddleName')) document.getElementById('motherMiddleName').value = editData.motherMiddleName || '';
+        if (document.getElementById('motherSurname')) document.getElementById('motherSurname').value = editData.motherSurname || '';
+        if (document.getElementById('fatherMobile')) document.getElementById('fatherMobile').value = editData.fatherMobile || '';
+        if (document.getElementById('motherMobile')) document.getElementById('motherMobile').value = editData.motherMobile || '';
+        if (document.getElementById('landline')) document.getElementById('landline').value = editData.landline || '';
+        if (document.getElementById('address')) document.getElementById('address').value = editData.address || '';
+        if (document.getElementById('area')) document.getElementById('area').value = editData.area || '';
+        if (document.getElementById('city')) document.getElementById('city').value = editData.city || '';
+        if (document.getElementById('district')) document.getElementById('district').value = editData.district || '';
+        if (document.getElementById('state')) document.getElementById('state').value = editData.state || '';
+        if (document.getElementById('pincode')) document.getElementById('pincode').value = editData.pincode || '';
+        if (document.getElementById('country')) document.getElementById('country').value = editData.country || '';
+        if (document.getElementById('sibling1Name')) document.getElementById('sibling1Name').value = editData.sibling1Name || '';
+        if (document.getElementById('sibling1School')) document.getElementById('sibling1School').value = editData.sibling1School || '';
+        if (document.getElementById('sibling1Class')) document.getElementById('sibling1Class').value = editData.sibling1Class || '';
+        if (document.getElementById('sibling1Section')) document.getElementById('sibling1Section').value = editData.sibling1Section || '';
+        if (document.getElementById('sibling2Name')) document.getElementById('sibling2Name').value = editData.sibling2Name || '';
+        if (document.getElementById('sibling2School')) document.getElementById('sibling2School').value = editData.sibling2School || '';
+        if (document.getElementById('sibling2Class')) document.getElementById('sibling2Class').value = editData.sibling2Class || '';
+        if (document.getElementById('sibling2Section')) document.getElementById('sibling2Section').value = editData.sibling2Section || '';
+
+        if (editData.infoSource) {
+            const infoRadios = document.querySelectorAll('input[name="infoSource"]');
+            infoRadios.forEach(radio => {
+                if (radio.value === editData.infoSource) {
+                    radio.checked = true;
+                }
+            });
+        }
+
+        if (editData.referredType) {
+            const refRadios = document.querySelectorAll('input[name="referredType"]');
+            refRadios.forEach(radio => {
+                if (radio.value === editData.referredType) {
+                    radio.checked = true;
+                }
+            });
+        }
+
+        if (document.getElementById('referredName')) document.getElementById('referredName').value = editData.referredName || '';
+
+        if (editData.editIndex !== undefined) {
+            sessionStorage.setItem('editingEnquiryIndex', editData.editIndex);
+        }
+
+        localStorage.removeItem('editEnquiryData');
+        alert('✅ Record loaded for editing!');
+    }
+}
+
+// Initialize on page load
+window.addEventListener('DOMContentLoaded', function() {
+    loadForEdit();
+
+    // Auto-set today's date
+    const dateInput = document.getElementById('date');
+    if (dateInput && !dateInput.value) {
+        dateInput.value = new Date().toISOString().split('T')[0];
+    }
+
+    // Check auto-generate on load
+    if(document.getElementById('autoSno') && document.getElementById('autoSno').checked){
+        generateAutoSno();
+    }
+});
+
 </script>
 </body>
 </html>
