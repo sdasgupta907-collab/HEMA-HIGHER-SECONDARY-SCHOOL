@@ -977,5 +977,87 @@
             }
         });
     </script>
+
+<script>
+// Auto-load enquiry data when page loads
+window.addEventListener('DOMContentLoaded', function() {
+    const enquiryData = JSON.parse(localStorage.getItem('currentEnquiryData'));
+    if (enquiryData) {
+        console.log('Loading enquiry data...');
+
+        if (document.getElementById('regDate')) document.getElementById('regDate').value = enquiryData.date || '';
+        if (document.getElementById('regSno')) document.getElementById('regSno').value = enquiryData.sno || '';
+        if (document.getElementById('studentName')) document.getElementById('studentName').value = enquiryData.studentFirstName || '';
+        if (document.getElementById('studentMiddle')) document.getElementById('studentMiddle').value = enquiryData.studentMiddleName || '';
+        if (document.getElementById('studentSurname')) document.getElementById('studentSurname').value = enquiryData.studentSurname || '';
+        if (document.getElementById('class')) document.getElementById('class').value = enquiryData.classApplying || '';
+
+        const genderRadios = document.querySelectorAll('input[name="gender"]');
+        genderRadios.forEach(radio => {
+            if (radio.value.toUpperCase() === (enquiryData.gender || '').toUpperCase()) {
+                radio.checked = true;
+            }
+        });
+
+        if (document.getElementById('dob')) document.getElementById('dob').value = enquiryData.dob || '';
+        if (document.getElementById('motherName')) document.getElementById('motherName').value = enquiryData.motherFirstName || '';
+        if (document.getElementById('motherMiddle')) document.getElementById('motherMiddle').value = enquiryData.motherMiddleName || '';
+        if (document.getElementById('motherSurname')) document.getElementById('motherSurname').value = enquiryData.motherSurname || '';
+        if (document.getElementById('motherMobile')) document.getElementById('motherMobile').value = enquiryData.motherMobile || '';
+        if (document.getElementById('fatherName')) document.getElementById('fatherName').value = enquiryData.fatherFirstName || '';
+        if (document.getElementById('fatherMiddle')) document.getElementById('fatherMiddle').value = enquiryData.fatherMiddleName || '';
+        if (document.getElementById('fatherSurname')) document.getElementById('fatherSurname').value = enquiryData.fatherSurname || '';
+        if (document.getElementById('fatherMobile')) document.getElementById('fatherMobile').value = enquiryData.fatherMobile || '';
+        if (document.getElementById('landline')) document.getElementById('landline').value = enquiryData.landline || '';
+        if (document.getElementById('address')) document.getElementById('address').value = enquiryData.address || '';
+        if (document.getElementById('area')) document.getElementById('area').value = enquiryData.area || '';
+        if (document.getElementById('state')) document.getElementById('state').value = enquiryData.state || '';
+
+        alert('✅ Registration form loaded with enquiry data!');
+    }
+});
+
+// Save and proceed to admission
+function proceedToAdmission() {
+    const regData = {
+        regDate: document.getElementById('regDate')?.value || '',
+        regSno: document.getElementById('regSno')?.value || '',
+        studentName: document.getElementById('studentName')?.value || '',
+        studentMiddle: document.getElementById('studentMiddle')?.value || '',
+        studentSurname: document.getElementById('studentSurname')?.value || '',
+        class: document.getElementById('class')?.value || '',
+        gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+        dob: document.getElementById('dob')?.value || '',
+        motherName: document.getElementById('motherName')?.value || '',
+        motherMiddle: document.getElementById('motherMiddle')?.value || '',
+        motherSurname: document.getElementById('motherSurname')?.value || '',
+        motherMobile: document.getElementById('motherMobile')?.value || '',
+        fatherName: document.getElementById('fatherName')?.value || '',
+        fatherMiddle: document.getElementById('fatherMiddle')?.value || '',
+        fatherSurname: document.getElementById('fatherSurname')?.value || '',
+        fatherMobile: document.getElementById('fatherMobile')?.value || '',
+        landline: document.getElementById('landline')?.value || '',
+        address: document.getElementById('address')?.value || '',
+        area: document.getElementById('area')?.value || '',
+        state: document.getElementById('state')?.value || '',
+        signatoryName: document.getElementById('signatoryName')?.value || ''
+    };
+
+    if (!regData.studentName || !regData.class || !regData.fatherMobile) {
+        alert('❌ Please fill required fields');
+        return;
+    }
+
+    localStorage.setItem('currentRegistrationData', JSON.stringify(regData));
+
+    let regRecords = JSON.parse(localStorage.getItem('registrationRecords')) || [];
+    regRecords.push(regData);
+    localStorage.setItem('registrationRecords', JSON.stringify(regRecords));
+
+    alert('✅ Registration saved! Proceeding to Admission...');
+    window.location.href = 'COMPLETE-ADMISSION-FORM.html';
+}
+</script>
+
 </body>
 </html>
