@@ -5,6 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEMA HIGHER SECONDARY SCHOOL - Enquiry Form 2026-2027</title>
     <style>
+        /* LOGO HEADER */
+        .logo-header {
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .header-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo-box {
+            flex: 0 0 120px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-left {
+            justify-content: flex-start;
+        }
+
+        .logo-right {
+            justify-content: flex-end;
+        }
+
+        .logo-img {
+            height: 90px;
+            width: auto;
+            max-width: 120px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .school-info {
+            flex: 1;
+            text-align: center;
+            padding: 0 15px;
+            min-width: 0;
+        }
+
+        .school-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            letter-spacing: 1.5px;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .school-details {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .detail-line {
+            margin: 4px 0;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .detail-line strong {
+            color: #FFD700;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .contact-line a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-line a:hover {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
