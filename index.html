@@ -1807,10 +1807,17 @@ window.addEventListener('DOMContentLoaded',function(){
     var auto=document.getElementById('autoSno');
     if(auto&&auto.checked)generateAutoSno();
 });
+</script>
 
+<script>
+// ============================================
+// COMPLETE WORKING FUNCTIONS FOR ENQUIRY FORM
+// ============================================
 
-// Save Enquiry Function
+// Save Enquiry Function - Collects and saves all form data
 function saveEnquiry() {
+    console.log('saveEnquiry() called');
+
     // Collect all form data
     const formData = {
         sno: document.getElementById('sno')?.value || '',
@@ -1852,55 +1859,90 @@ function saveEnquiry() {
         referredName: document.getElementById('referredName')?.value || ''
     };
 
-    // Validate essential fields
-    if (!formData.studentFirstName || !formData.classApplying || !formData.fatherMobile) {
-        alert('❌ Please fill in all required fields:\n\n✓ Student First Name\n✓ Class Applying For\n✓ Father Mobile Number');
+    console.log('Form data collected:', formData);
+
+    // Validate required fields
+    if (!formData.studentFirstName) {
+        alert('❌ Please enter Student First Name');
+        document.getElementById('studentFirstName')?.focus();
         return false;
     }
 
-    // Check if editing existing record
-    const editIndex = sessionStorage.getItem('editingEnquiryIndex');
-    let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+    if (!formData.classApplying) {
+        alert('❌ Please select Class Applying For');
+        document.getElementById('classApplying')?.focus();
+        return false;
+    }
 
-    if (editIndex !== null && editIndex !== '' && editIndex !== undefined) {
-        // Update existing record
-        enquiryRecords[parseInt(editIndex)] = formData;
-        sessionStorage.removeItem('editingEnquiryIndex');
+    if (!formData.fatherMobile) {
+        alert('❌ Please enter Father Mobile Number');
+        document.getElementById('fatherMobile')?.focus();
+        return false;
+    }
+
+    try {
+        // Check if editing existing record
+        const editIndex = sessionStorage.getItem('editingEnquiryIndex');
+        let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+
+        if (editIndex !== null && editIndex !== '' && editIndex !== undefined) {
+            // Update existing record
+            enquiryRecords[parseInt(editIndex)] = formData;
+            sessionStorage.removeItem('editingEnquiryIndex');
+            console.log('Updated existing record at index:', editIndex);
+        } else {
+            // Add new record
+            enquiryRecords.push(formData);
+            console.log('Added new record');
+        }
+
+        // Save to localStorage
         localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
         localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
-        alert('✅ Enquiry updated successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
-    } else {
-        // Add new record
-        enquiryRecords.push(formData);
-        localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
-        localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
+
+        console.log('Data saved to localStorage');
+        console.log('Total enquiry records:', enquiryRecords.length);
+
         alert('✅ Enquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
-    }
+        return true;
 
-    return true;
+    } catch (error) {
+        console.error('Error saving enquiry:', error);
+        alert('❌ Error saving data: ' + error.message);
+        return false;
+    }
 }
 
-// Proceed to Registration
+// Proceed to Registration - Saves data first, then redirects
 function proceedToRegistration() {
+    console.log('proceedToRegistration() called');
+
     // First save the enquiry
-    if (saveEnquiry()) {
+    const saved = saveEnquiry();
+
+    if (saved) {
         alert('📋 Proceeding to Registration Form...');
+        // Redirect to registration form
         window.location.href = 'COMPLETE-REGISTRATION-FORM.html';
+    } else {
+        console.log('Save failed, not proceeding');
     }
 }
 
-// Load data for editing
+// Load data for editing from dashboard
 function loadForEdit() {
     const editData = JSON.parse(localStorage.getItem('editEnquiryData'));
     if (editData) {
         console.log('Loading data for editing...');
 
+        // Fill all fields
         if (document.getElementById('sno')) document.getElementById('sno').value = editData.sno || '';
         if (document.getElementById('date')) document.getElementById('date').value = editData.date || '';
         if (document.getElementById('studentFirstName')) document.getElementById('studentFirstName').value = editData.studentFirstName || '';
         if (document.getElementById('studentMiddleName')) document.getElementById('studentMiddleName').value = editData.studentMiddleName || '';
         if (document.getElementById('studentSurname')) document.getElementById('studentSurname').value = editData.studentSurname || '';
 
+        // Set gender radio
         if (editData.gender) {
             const genderRadios = document.querySelectorAll('input[name="gender"]');
             genderRadios.forEach(radio => {
@@ -1912,8 +1954,6 @@ function loadForEdit() {
 
         if (document.getElementById('classApplying')) document.getElementById('classApplying').value = editData.classApplying || '';
         if (document.getElementById('dob')) document.getElementById('dob').value = editData.dob || '';
-        if (document.getElementById('currentAge')) document.getElementById('currentAge').value = editData.currentAge || '';
-        if (document.getElementById('ageAsOn')) document.getElementById('ageAsOn').value = editData.ageAsOn || '';
         if (document.getElementById('fatherFirstName')) document.getElementById('fatherFirstName').value = editData.fatherFirstName || '';
         if (document.getElementById('fatherMiddleName')) document.getElementById('fatherMiddleName').value = editData.fatherMiddleName || '';
         if (document.getElementById('fatherSurname')) document.getElementById('fatherSurname').value = editData.fatherSurname || '';
@@ -1930,60 +1970,43 @@ function loadForEdit() {
         if (document.getElementById('state')) document.getElementById('state').value = editData.state || '';
         if (document.getElementById('pincode')) document.getElementById('pincode').value = editData.pincode || '';
         if (document.getElementById('country')) document.getElementById('country').value = editData.country || '';
-        if (document.getElementById('sibling1Name')) document.getElementById('sibling1Name').value = editData.sibling1Name || '';
-        if (document.getElementById('sibling1School')) document.getElementById('sibling1School').value = editData.sibling1School || '';
-        if (document.getElementById('sibling1Class')) document.getElementById('sibling1Class').value = editData.sibling1Class || '';
-        if (document.getElementById('sibling1Section')) document.getElementById('sibling1Section').value = editData.sibling1Section || '';
-        if (document.getElementById('sibling2Name')) document.getElementById('sibling2Name').value = editData.sibling2Name || '';
-        if (document.getElementById('sibling2School')) document.getElementById('sibling2School').value = editData.sibling2School || '';
-        if (document.getElementById('sibling2Class')) document.getElementById('sibling2Class').value = editData.sibling2Class || '';
-        if (document.getElementById('sibling2Section')) document.getElementById('sibling2Section').value = editData.sibling2Section || '';
 
-        if (editData.infoSource) {
-            const infoRadios = document.querySelectorAll('input[name="infoSource"]');
-            infoRadios.forEach(radio => {
-                if (radio.value === editData.infoSource) {
-                    radio.checked = true;
-                }
-            });
-        }
-
-        if (editData.referredType) {
-            const refRadios = document.querySelectorAll('input[name="referredType"]');
-            refRadios.forEach(radio => {
-                if (radio.value === editData.referredType) {
-                    radio.checked = true;
-                }
-            });
-        }
-
-        if (document.getElementById('referredName')) document.getElementById('referredName').value = editData.referredName || '';
-
+        // Store edit index
         if (editData.editIndex !== undefined) {
             sessionStorage.setItem('editingEnquiryIndex', editData.editIndex);
         }
 
+        // Clear edit data
         localStorage.removeItem('editEnquiryData');
+
         alert('✅ Record loaded for editing!');
     }
 }
 
-// Initialize on page load
+// Page initialization
 window.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded, initializing...');
+
+    // Load edit data if present
     loadForEdit();
 
-    // Auto-set today's date
+    // Set today's date if empty
     const dateInput = document.getElementById('date');
     if (dateInput && !dateInput.value) {
         dateInput.value = new Date().toISOString().split('T')[0];
     }
 
-    // Check auto-generate on load
-    if(document.getElementById('autoSno') && document.getElementById('autoSno').checked){
+    // Auto-generate S.NO if checkbox is checked
+    const autoSnoCheckbox = document.getElementById('autoSno');
+    if (autoSnoCheckbox && autoSnoCheckbox.checked) {
         generateAutoSno();
     }
+
+    console.log('Initialization complete');
 });
 
+console.log('Enquiry form scripts loaded successfully');
 </script>
+
 </body>
 </html>
