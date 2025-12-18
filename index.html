@@ -1751,10 +1751,66 @@
 
         // PROCEED TO REGISTRATION
         function proceedToRegistration() {
-            if (!document.getElementById('enquiryForm').checkValidity()) {
-                alert('⚠️ Please fill all required fields marked with *');
-                return;
-            }
+        // Collect all form data
+        const formData = {
+            sno: document.getElementById('sno')?.value || '',
+            date: document.getElementById('date')?.value || '',
+            studentFirstName: document.getElementById('studentFirstName')?.value || '',
+            studentMiddleName: document.getElementById('studentMiddleName')?.value || '',
+            studentSurname: document.getElementById('studentSurname')?.value || '',
+            gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+            classApplying: document.getElementById('classApplying')?.value || '',
+            dob: document.getElementById('dob')?.value || '',
+            currentAge: document.getElementById('currentAge')?.value || '',
+            ageAsOn: document.getElementById('ageAsOn')?.value || '',
+            fatherFirstName: document.getElementById('fatherFirstName')?.value || '',
+            fatherMiddleName: document.getElementById('fatherMiddleName')?.value || '',
+            fatherSurname: document.getElementById('fatherSurname')?.value || '',
+            motherFirstName: document.getElementById('motherFirstName')?.value || '',
+            motherMiddleName: document.getElementById('motherMiddleName')?.value || '',
+            motherSurname: document.getElementById('motherSurname')?.value || '',
+            fatherMobile: document.getElementById('fatherMobile')?.value || '',
+            motherMobile: document.getElementById('motherMobile')?.value || '',
+            landline: document.getElementById('landline')?.value || '',
+            address: document.getElementById('address')?.value || '',
+            area: document.getElementById('area')?.value || '',
+            city: document.getElementById('city')?.value || '',
+            district: document.getElementById('district')?.value || '',
+            state: document.getElementById('state')?.value || '',
+            pincode: document.getElementById('pincode')?.value || '',
+            country: document.getElementById('country')?.value || '',
+            sibling1Name: document.getElementById('sibling1Name')?.value || '',
+            sibling1School: document.getElementById('sibling1School')?.value || '',
+            sibling1Class: document.getElementById('sibling1Class')?.value || '',
+            sibling1Section: document.getElementById('sibling1Section')?.value || '',
+            sibling2Name: document.getElementById('sibling2Name')?.value || '',
+            sibling2School: document.getElementById('sibling2School')?.value || '',
+            sibling2Class: document.getElementById('sibling2Class')?.value || '',
+            sibling2Section: document.getElementById('sibling2Section')?.value || '',
+            infoSource: document.querySelector('input[name="infoSource"]:checked')?.value || '',
+            referredType: document.querySelector('input[name="referredType"]:checked')?.value || '',
+            referredName: document.getElementById('referredName')?.value || ''
+        };
+
+        // Validate essential fields
+        if (!formData.studentFirstName || !formData.classApplying || !formData.fatherMobile) {
+            alert('Please fill in all required fields: Student Name, Class, and Father Mobile');
+            return;
+        }
+
+        // Save to localStorage for registration form to use
+        localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
+
+        // Also save to enquiry records array
+        let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+        enquiryRecords.push(formData);
+        localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
+
+        alert('Enquiry saved successfully! Proceeding to Registration Form...');
+
+        // Redirect to registration form
+        window.location.href = 'FINAL-REGISTRATION-FORM.html';
+    }
 
             document.getElementById('enquiryForm').dispatchEvent(new Event('submit'));
 
