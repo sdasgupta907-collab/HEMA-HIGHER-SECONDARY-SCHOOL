@@ -1069,8 +1069,8 @@
             </div>
 
             <div class="buttons">
-                <button type="button" class="btn btn-pdf" onclick="window.print()">📥 DOWNLOAD PDF</button>
-                <button type="button" class="btn btn-pdf" onclick="window.print()">🖨️ PRINT</button>
+                <button type="button" onclick="submitAdmission()" class="btn-submit"><span class="icon">✓</span> FINAL SUBMIT</button>
+                <button type="button" onclick="submitAdmission()" class="btn-submit"><span class="icon">✓</span> FINAL SUBMIT</button>
                 <button type="submit" class="btn btn-submit">✓ SUBMIT ADMISSION</button>
                 <button type="reset" class="btn btn-reset">✕ CLEAR</button>
             </div>
@@ -1181,5 +1181,88 @@ window.addEventListener('DOMContentLoaded',function(){
     if(dob&&dob.value)calculateAgeFromDOB();
 });
 </script>
+
+<script>
+// Auto-load registration data
+window.addEventListener('DOMContentLoaded', function() {
+    const regData = JSON.parse(localStorage.getItem('currentRegistrationData'));
+    if (regData) {
+        console.log('Loading registration data...');
+
+        if (document.getElementById('admDate')) document.getElementById('admDate').value = regData.regDate || new Date().toISOString().split('T')[0];
+        if (document.getElementById('admSno')) document.getElementById('admSno').value = regData.regSno || '';
+
+        // Generate scholar number
+        if (document.getElementById('scholarNo')) {
+            const year = new Date().getFullYear();
+            const random = String(Math.floor(Math.random() * 100000)).padStart(5, '0');
+            document.getElementById('scholarNo').value = 'SCH' + year + '-' + random;
+        }
+
+        if (document.getElementById('studentName')) document.getElementById('studentName').value = regData.studentName || '';
+        if (document.getElementById('studentMiddle')) document.getElementById('studentMiddle').value = regData.studentMiddle || '';
+        if (document.getElementById('studentSurname')) document.getElementById('studentSurname').value = regData.studentSurname || '';
+        if (document.getElementById('class')) document.getElementById('class').value = regData.class || '';
+
+        const genderRadios = document.querySelectorAll('input[name="gender"]');
+        genderRadios.forEach(radio => {
+            if (radio.value.toUpperCase() === (regData.gender || '').toUpperCase()) {
+                radio.checked = true;
+            }
+        });
+
+        if (document.getElementById('dob')) document.getElementById('dob').value = regData.dob || '';
+        if (document.getElementById('motherName')) document.getElementById('motherName').value = regData.motherName || '';
+        if (document.getElementById('motherMiddle')) document.getElementById('motherMiddle').value = regData.motherMiddle || '';
+        if (document.getElementById('motherSurname')) document.getElementById('motherSurname').value = regData.motherSurname || '';
+        if (document.getElementById('motherMobile')) document.getElementById('motherMobile').value = regData.motherMobile || '';
+        if (document.getElementById('fatherName')) document.getElementById('fatherName').value = regData.fatherName || '';
+        if (document.getElementById('fatherMiddle')) document.getElementById('fatherMiddle').value = regData.fatherMiddle || '';
+        if (document.getElementById('fatherSurname')) document.getElementById('fatherSurname').value = regData.fatherSurname || '';
+        if (document.getElementById('fatherMobile')) document.getElementById('fatherMobile').value = regData.fatherMobile || '';
+        if (document.getElementById('landline')) document.getElementById('landline').value = regData.landline || '';
+        if (document.getElementById('address')) document.getElementById('address').value = regData.address || '';
+        if (document.getElementById('area')) document.getElementById('area').value = regData.area || '';
+        if (document.getElementById('state')) document.getElementById('state').value = regData.state || '';
+        if (document.getElementById('signatoryName')) document.getElementById('signatoryName').value = regData.signatoryName || '';
+
+        alert('✅ Admission form loaded with registration data!');
+    }
+});
+
+// Submit admission
+function submitAdmission() {
+    const admData = {
+        admDate: document.getElementById('admDate')?.value || '',
+        admSno: document.getElementById('admSno')?.value || '',
+        scholarNo: document.getElementById('scholarNo')?.value || '',
+        studentName: document.getElementById('studentName')?.value || '',
+        studentMiddle: document.getElementById('studentMiddle')?.value || '',
+        studentSurname: document.getElementById('studentSurname')?.value || '',
+        class: document.getElementById('class')?.value || '',
+        section: document.getElementById('section')?.value || '',
+        gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+        dob: document.getElementById('dob')?.value || '',
+        motherName: document.getElementById('motherName')?.value || '',
+        fatherName: document.getElementById('fatherName')?.value || '',
+        fatherMobile: document.getElementById('fatherMobile')?.value || '',
+        state: document.getElementById('state')?.value || '',
+        signatoryName: document.getElementById('signatoryName')?.value || ''
+    };
+
+    if (!admData.studentName || !admData.scholarNo || !admData.class) {
+        alert('❌ Please fill required fields');
+        return;
+    }
+
+    let admRecords = JSON.parse(localStorage.getItem('admissionRecords')) || [];
+    admRecords.push(admData);
+    localStorage.setItem('admissionRecords', JSON.stringify(admRecords));
+
+    alert('✅ Admission completed! Redirecting to Records Dashboard...');
+    window.location.href = 'COMPLETE-RECORDS-DASHBOARD.html';
+}
+</script>
+
 </body>
 </html>
