@@ -1554,5 +1554,209 @@
             }
         }
     </script>
+
+<script>
+// Load all records on page load
+window.addEventListener('DOMContentLoaded', function() {
+    console.log('Loading all records...');
+    loadEnquiryRecords();
+    loadRegistrationRecords();
+    loadAdmissionRecords();
+});
+
+// Load Enquiry Records
+function loadEnquiryRecords() {
+    const records = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+    console.log('Enquiry records:', records.length);
+
+    const tables = document.querySelectorAll('table');
+    if (tables.length < 1) return;
+
+    const tbody = tables[0].querySelector('tbody');
+    if (!tbody) return;
+
+    if (records.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:20px;">No enquiry records found</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = '';
+    records.forEach((record, index) => {
+        const row = tbody.insertRow();
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${record.date || '-'}</td>
+            <td>${record.studentFirstName || ''} ${record.studentSurname || ''}</td>
+            <td>${record.classApplying || '-'}</td>
+            <td>${record.gender || '-'}</td>
+            <td>${record.fatherMobile || '-'}</td>
+            <td>${record.district || '-'}</td>
+            <td>${record.pincode || '-'}</td>
+            <td>
+                <button onclick="editEnquiry(${index})" style="padding:5px 10px;background:#2196F3;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Edit</button>
+                <button onclick="viewEnquiry(${index})" style="padding:5px 10px;background:#4CAF50;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">View</button>
+                <button onclick="deleteEnquiry(${index})" style="padding:5px 10px;background:#f44336;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Delete</button>
+            </td>
+        `;
+    });
+}
+
+// Load Registration Records
+function loadRegistrationRecords() {
+    const records = JSON.parse(localStorage.getItem('registrationRecords')) || [];
+    console.log('Registration records:', records.length);
+
+    const tables = document.querySelectorAll('table');
+    if (tables.length < 2) return;
+
+    const tbody = tables[1].querySelector('tbody');
+    if (!tbody) return;
+
+    if (records.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:20px;">No registration records found</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = '';
+    records.forEach((record, index) => {
+        const row = tbody.insertRow();
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${record.regDate || '-'}</td>
+            <td>${record.studentName || ''} ${record.studentSurname || ''}</td>
+            <td>${record.class || '-'}</td>
+            <td>${record.gender || '-'}</td>
+            <td>${record.fatherMobile || '-'}</td>
+            <td>${record.state || '-'}</td>
+            <td>
+                <button onclick="editRegistration(${index})" style="padding:5px 10px;background:#2196F3;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Edit</button>
+                <button onclick="viewRegistration(${index})" style="padding:5px 10px;background:#4CAF50;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">View</button>
+                <button onclick="deleteRegistration(${index})" style="padding:5px 10px;background:#f44336;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Delete</button>
+            </td>
+        `;
+    });
+}
+
+// Load Admission Records
+function loadAdmissionRecords() {
+    const records = JSON.parse(localStorage.getItem('admissionRecords')) || [];
+    console.log('Admission records:', records.length);
+
+    const tables = document.querySelectorAll('table');
+    if (tables.length < 3) return;
+
+    const tbody = tables[2].querySelector('tbody');
+    if (!tbody) return;
+
+    if (records.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:20px;">No admission records found</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = '';
+    records.forEach((record, index) => {
+        const row = tbody.insertRow();
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${record.admDate || '-'}</td>
+            <td>${record.studentName || ''} ${record.studentSurname || ''}</td>
+            <td>${record.class || '-'}</td>
+            <td>${record.section || '-'}</td>
+            <td>${record.scholarNo || '-'}</td>
+            <td>${record.state || '-'}</td>
+            <td>
+                <button onclick="editAdmission(${index})" style="padding:5px 10px;background:#2196F3;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Edit</button>
+                <button onclick="viewAdmission(${index})" style="padding:5px 10px;background:#FF9800;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">View</button>
+                <button onclick="deleteAdmission(${index})" style="padding:5px 10px;background:#f44336;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Delete</button>
+            </td>
+        `;
+    });
+}
+
+// Edit functions
+function editEnquiry(index) {
+    const records = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+    if (records[index]) {
+        const editData = {...records[index], editIndex: index};
+        localStorage.setItem('editEnquiryData', JSON.stringify(editData));
+        alert('📝 Opening enquiry form for editing...');
+        window.location.href = 'COMPLETE-ENQUIRY-FORM.html';
+    }
+}
+
+function editRegistration(index) {
+    const records = JSON.parse(localStorage.getItem('registrationRecords')) || [];
+    if (records[index]) {
+        const editData = {...records[index], editIndex: index};
+        localStorage.setItem('editRegistrationData', JSON.stringify(editData));
+        alert('📝 Opening registration form for editing...');
+        window.location.href = 'COMPLETE-REGISTRATION-FORM.html';
+    }
+}
+
+function editAdmission(index) {
+    const records = JSON.parse(localStorage.getItem('admissionRecords')) || [];
+    if (records[index]) {
+        const editData = {...records[index], editIndex: index};
+        localStorage.setItem('editAdmissionData', JSON.stringify(editData));
+        alert('📝 Opening admission form for editing...');
+        window.location.href = 'COMPLETE-ADMISSION-FORM.html';
+    }
+}
+
+// View functions
+function viewEnquiry(index) {
+    const records = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+    if (records[index]) {
+        alert('Enquiry Details:\n\n' + JSON.stringify(records[index], null, 2));
+    }
+}
+
+function viewRegistration(index) {
+    const records = JSON.parse(localStorage.getItem('registrationRecords')) || [];
+    if (records[index]) {
+        alert('Registration Details:\n\n' + JSON.stringify(records[index], null, 2));
+    }
+}
+
+function viewAdmission(index) {
+    const records = JSON.parse(localStorage.getItem('admissionRecords')) || [];
+    if (records[index]) {
+        alert('Admission Details:\n\n' + JSON.stringify(records[index], null, 2));
+    }
+}
+
+// Delete functions
+function deleteEnquiry(index) {
+    if (confirm('Delete this enquiry record?')) {
+        let records = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+        records.splice(index, 1);
+        localStorage.setItem('enquiryRecords', JSON.stringify(records));
+        loadEnquiryRecords();
+        alert('✅ Record deleted!');
+    }
+}
+
+function deleteRegistration(index) {
+    if (confirm('Delete this registration record?')) {
+        let records = JSON.parse(localStorage.getItem('registrationRecords')) || [];
+        records.splice(index, 1);
+        localStorage.setItem('registrationRecords', JSON.stringify(records));
+        loadRegistrationRecords();
+        alert('✅ Record deleted!');
+    }
+}
+
+function deleteAdmission(index) {
+    if (confirm('Delete this admission record?')) {
+        let records = JSON.parse(localStorage.getItem('admissionRecords')) || [];
+        records.splice(index, 1);
+        localStorage.setItem('admissionRecords', JSON.stringify(records));
+        loadAdmissionRecords();
+        alert('✅ Record deleted!');
+    }
+}
+</script>
+
 </body>
 </html>
