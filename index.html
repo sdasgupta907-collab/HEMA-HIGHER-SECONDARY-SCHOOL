@@ -1,6 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<style>
+/* ============================================ */
+/* RESPONSIVE LAYOUT & SCALING FIXES */
+/* ============================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Main container - ensure it fits screen */
+.container, .main-container, .wrapper {
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+}
+
+/* Header adjustments */
+.header, header {
+    width: 100% !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+}
+
+/* School logo and title */
+.school-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+/* Navigation tabs - make them responsive */
+.nav-tabs, .tabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 10px 0 !important;
+    justify-content: center !important;
+}
+
+.nav-tabs button, .tabs button {
+    flex: 1 1 auto !important;
+    min-width: 110px !important;
+    max-width: 200px !important;
+    font-size: 0.9rem !important;
+    padding: 10px 15px !important;
+}
+
+/* Form sections */
+.section, .form-section, .info-section {
+    width: 100% !important;
+    margin-bottom: 20px !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* Form rows - flexible layout */
+.form-row, .row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+.form-group, .col, .field {
+    flex: 1 1 auto !important;
+    min-width: 250px !important;
+    max-width: 100% !important;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* Input fields - ensure proper sizing */
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px !important;
+    font-size: 14px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    box-sizing: border-box !important;
+}
+
+/* Radio and checkbox groups */
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Button group */
+.button-group, .btn-group, .actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    justify-content: center !important;
+    margin: 20px 0 !important;
+    padding: 10px !important;
+}
+
+button, .btn {
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    min-width: 150px !important;
+}
+
+/* Tables - make responsive */
+table {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-collapse: collapse !important;
+    overflow-x: auto !important;
+    display: block !important;
+}
+
+table td, table th {
+    padding: 8px !important;
+    font-size: 13px !important;
+}
+
+/* Fee details section */
+.fee-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Document checklist */
+.doc-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+
+/* Large screens (1200px and up) */
+@media screen and (min-width: 1200px) {
+    .container, .main-container {
+        max-width: 1400px !important;
+    }
+}
+
+/* Medium screens (768px to 1199px) */
+@media screen and (max-width: 1199px) {
+    html {
+        font-size: 13px;
+    }
+
+    .container, .main-container {
+        padding: 12px !important;
+    }
+
+    .form-group, .col {
+        min-width: 200px !important;
+    }
+}
+
+/* Small screens (576px to 767px) */
+@media screen and (max-width: 767px) {
+    html {
+        font-size: 12px;
+    }
+
+    .container, .main-container {
+        padding: 10px !important;
+    }
+
+    .form-row, .row {
+        flex-direction: column !important;
+    }
+
+    .form-group, .col {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    .nav-tabs button, .tabs button {
+        min-width: 90px !important;
+        font-size: 0.85rem !important;
+        padding: 8px 12px !important;
+    }
+
+    button, .btn {
+        width: 100% !important;
+        min-width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+
+    .button-group, .btn-group {
+        flex-direction: column !important;
+    }
+
+    table {
+        font-size: 11px !important;
+    }
+}
+
+/* Extra small screens (up to 575px) */
+@media screen and (max-width: 575px) {
+    html {
+        font-size: 11px;
+    }
+
+    .container, .main-container {
+        padding: 8px !important;
+    }
+
+    .section, .form-section {
+        padding: 15px !important;
+    }
+
+    input, select, textarea {
+        padding: 8px !important;
+        font-size: 13px !important;
+    }
+
+    button, .btn {
+        padding: 10px 15px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        width: 210mm;
+        margin: 0;
+        overflow: visible;
+    }
+
+    .nav-tabs,
+    button,
+    .btn-group {
+        display: none !important;
+    }
+
+    .section, .form-section {
+        page-break-inside: avoid;
+        padding: 10mm !important;
+    }
+
+    input, select, textarea {
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+    }
+}
+
+/* Ensure no elements overflow horizontally */
+* {
+    max-width: 100%;
+}
+
+img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* Fix for specific elements that might cause overflow */
+.overflow-fix {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+}
+</style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEMA HIGHER SECONDARY SCHOOL - Enquiry Form 2026-2027</title>
@@ -1811,14 +2108,13 @@ window.addEventListener('DOMContentLoaded',function(){
 
 <script>
 // ============================================
-// COMPLETE WORKING FUNCTIONS FOR ENQUIRY FORM
+// COMPLETE WORKING FUNCTIONS
 // ============================================
 
-// Save Enquiry Function - Collects and saves all form data
+// Save Enquiry Function
 function saveEnquiry() {
     console.log('saveEnquiry() called');
 
-    // Collect all form data
     const formData = {
         sno: document.getElementById('sno')?.value || '',
         date: document.getElementById('date')?.value || '',
@@ -1859,90 +2155,59 @@ function saveEnquiry() {
         referredName: document.getElementById('referredName')?.value || ''
     };
 
-    console.log('Form data collected:', formData);
-
-    // Validate required fields
     if (!formData.studentFirstName) {
         alert('❌ Please enter Student First Name');
-        document.getElementById('studentFirstName')?.focus();
         return false;
     }
-
     if (!formData.classApplying) {
         alert('❌ Please select Class Applying For');
-        document.getElementById('classApplying')?.focus();
         return false;
     }
-
     if (!formData.fatherMobile) {
         alert('❌ Please enter Father Mobile Number');
-        document.getElementById('fatherMobile')?.focus();
         return false;
     }
 
     try {
-        // Check if editing existing record
         const editIndex = sessionStorage.getItem('editingEnquiryIndex');
         let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
 
         if (editIndex !== null && editIndex !== '' && editIndex !== undefined) {
-            // Update existing record
             enquiryRecords[parseInt(editIndex)] = formData;
             sessionStorage.removeItem('editingEnquiryIndex');
-            console.log('Updated existing record at index:', editIndex);
         } else {
-            // Add new record
             enquiryRecords.push(formData);
-            console.log('Added new record');
         }
 
-        // Save to localStorage
         localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
         localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
 
-        console.log('Data saved to localStorage');
-        console.log('Total enquiry records:', enquiryRecords.length);
-
         alert('✅ Enquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
         return true;
-
     } catch (error) {
-        console.error('Error saving enquiry:', error);
         alert('❌ Error saving data: ' + error.message);
         return false;
     }
 }
 
-// Proceed to Registration - Saves data first, then redirects
+// Proceed to Registration
 function proceedToRegistration() {
-    console.log('proceedToRegistration() called');
-
-    // First save the enquiry
-    const saved = saveEnquiry();
-
-    if (saved) {
+    if (saveEnquiry()) {
         alert('📋 Proceeding to Registration Form...');
-        // Redirect to registration form
-        window.location.href = 'COMPLETE-REGISTRATION-FORM.html';
-    } else {
-        console.log('Save failed, not proceeding');
+        window.location.href = 'SCALED-REGISTRATION-FORM.html';
     }
 }
 
-// Load data for editing from dashboard
+// Load for editing
 function loadForEdit() {
     const editData = JSON.parse(localStorage.getItem('editEnquiryData'));
     if (editData) {
-        console.log('Loading data for editing...');
-
-        // Fill all fields
         if (document.getElementById('sno')) document.getElementById('sno').value = editData.sno || '';
         if (document.getElementById('date')) document.getElementById('date').value = editData.date || '';
         if (document.getElementById('studentFirstName')) document.getElementById('studentFirstName').value = editData.studentFirstName || '';
         if (document.getElementById('studentMiddleName')) document.getElementById('studentMiddleName').value = editData.studentMiddleName || '';
         if (document.getElementById('studentSurname')) document.getElementById('studentSurname').value = editData.studentSurname || '';
 
-        // Set gender radio
         if (editData.gender) {
             const genderRadios = document.querySelectorAll('input[name="gender"]');
             genderRadios.forEach(radio => {
@@ -1953,59 +2218,30 @@ function loadForEdit() {
         }
 
         if (document.getElementById('classApplying')) document.getElementById('classApplying').value = editData.classApplying || '';
-        if (document.getElementById('dob')) document.getElementById('dob').value = editData.dob || '';
-        if (document.getElementById('fatherFirstName')) document.getElementById('fatherFirstName').value = editData.fatherFirstName || '';
-        if (document.getElementById('fatherMiddleName')) document.getElementById('fatherMiddleName').value = editData.fatherMiddleName || '';
-        if (document.getElementById('fatherSurname')) document.getElementById('fatherSurname').value = editData.fatherSurname || '';
-        if (document.getElementById('motherFirstName')) document.getElementById('motherFirstName').value = editData.motherFirstName || '';
-        if (document.getElementById('motherMiddleName')) document.getElementById('motherMiddleName').value = editData.motherMiddleName || '';
-        if (document.getElementById('motherSurname')) document.getElementById('motherSurname').value = editData.motherSurname || '';
         if (document.getElementById('fatherMobile')) document.getElementById('fatherMobile').value = editData.fatherMobile || '';
-        if (document.getElementById('motherMobile')) document.getElementById('motherMobile').value = editData.motherMobile || '';
-        if (document.getElementById('landline')) document.getElementById('landline').value = editData.landline || '';
-        if (document.getElementById('address')) document.getElementById('address').value = editData.address || '';
-        if (document.getElementById('area')) document.getElementById('area').value = editData.area || '';
-        if (document.getElementById('city')) document.getElementById('city').value = editData.city || '';
-        if (document.getElementById('district')) document.getElementById('district').value = editData.district || '';
-        if (document.getElementById('state')) document.getElementById('state').value = editData.state || '';
-        if (document.getElementById('pincode')) document.getElementById('pincode').value = editData.pincode || '';
-        if (document.getElementById('country')) document.getElementById('country').value = editData.country || '';
 
-        // Store edit index
         if (editData.editIndex !== undefined) {
             sessionStorage.setItem('editingEnquiryIndex', editData.editIndex);
         }
 
-        // Clear edit data
         localStorage.removeItem('editEnquiryData');
-
         alert('✅ Record loaded for editing!');
     }
 }
 
 // Page initialization
 window.addEventListener('DOMContentLoaded', function() {
-    console.log('Page loaded, initializing...');
-
-    // Load edit data if present
     loadForEdit();
 
-    // Set today's date if empty
     const dateInput = document.getElementById('date');
     if (dateInput && !dateInput.value) {
         dateInput.value = new Date().toISOString().split('T')[0];
     }
 
-    // Auto-generate S.NO if checkbox is checked
-    const autoSnoCheckbox = document.getElementById('autoSno');
-    if (autoSnoCheckbox && autoSnoCheckbox.checked) {
+    if(document.getElementById('autoSno') && document.getElementById('autoSno').checked){
         generateAutoSno();
     }
-
-    console.log('Initialization complete');
 });
-
-console.log('Enquiry form scripts loaded successfully');
 </script>
 
 </body>
