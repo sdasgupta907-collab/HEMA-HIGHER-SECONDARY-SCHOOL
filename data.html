@@ -1,37 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-* { box-sizing: border-box; }
-html { font-size: 14px; overflow-x: hidden; width: 100%; }
-body { margin: 0; padding: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
-.container, .main-container, .wrapper { width: 100% !important; max-width: 1400px !important; margin: 0 auto !important; padding: 15px !important; }
-.header { width: 100% !important; padding: 10px !important; }
-.nav-tabs { display: flex !important; flex-wrap: wrap !important; gap: 8px !important; padding: 10px 0 !important; justify-content: center !important; }
-.nav-tabs button { flex: 1 1 auto !important; min-width: 110px !important; font-size: 0.9rem !important; padding: 10px 15px !important; }
-.section, .form-section { width: 100% !important; margin-bottom: 20px !important; padding: 20px !important; }
-.form-row { display: flex !important; flex-wrap: wrap !important; gap: 15px !important; }
-.form-group { flex: 1 1 auto !important; min-width: 250px !important; }
-input, select, textarea { width: 100% !important; padding: 10px !important; font-size: 14px !important; }
-.button-group { display: flex !important; flex-wrap: wrap !important; gap: 10px !important; justify-content: center !important; margin: 20px 0 !important; }
-button { padding: 12px 24px !important; font-size: 14px !important; min-width: 150px !important; }
-table { width: 100% !important; overflow-x: auto !important; display: block !important; }
-@media (max-width: 767px) { .form-row { flex-direction: column !important; } .form-group { min-width: 100% !important; } button { width: 100% !important; } }
-@media print { .nav-tabs, button { display: none !important; } }
-
-.records-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.records-table table { min-width: 800px; }
-@media (max-width: 767px) { .records-table table { font-size: 12px; } }
-</style>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEMA HIGHER SECONDARY SCHOOL - Records Dashboard</title>
+    <title>📊 HEMA SCHOOL - RECORDS DASHBOARD</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Calibri', 'Segoe UI', 'Arial', sans-serif;
-            background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -39,1746 +21,668 @@ table { width: 100% !important; overflow-x: auto !important; display: block !imp
         .container {
             max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .header {
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-
-        /* LOGO HEADER */
-        .logo-header {
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
-            color: white;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .header-container {
-            max-width: 100%;
-            margin: 0 auto;
-        }
-
-        .header-flex {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .logo-box {
-            flex: 0 0 120px;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-left {
-            justify-content: flex-start;
-        }
-
-        .logo-right {
-            justify-content: flex-end;
-        }
-
-        .logo-img {
-            height: 90px;
-            width: auto;
-            max-width: 120px;
-            object-fit: contain;
-            display: block;
-        }
-
-        .school-info {
-            flex: 1;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
             text-align: center;
-            padding: 0 15px;
-            min-width: 0;
         }
 
-        .school-name {
-            font-size: 28px;
-            font-weight: 700;
-            margin: 0 0 12px 0;
-            letter-spacing: 1.5px;
-            line-height: 1.2;
-            color: white;
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
 
-        .school-details {
-            font-size: 13px;
-            line-height: 1.6;
+        .header p {
+            color: #666;
+            font-size: 1.1em;
         }
 
-        .detail-line {
-            margin: 4px 0;
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .detail-line strong {
-            color: #FFD700;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .contact-line a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-line a:hover {
-            color: #FFD700;
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-flex {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .logo-box {
-                flex: 0 0 auto;
-            }
-
-            .school-name {
-                font-size: 22px;
-            }
-
-            .school-details {
-                font-size: 11px;
-            }
-
-            .logo-img {
-                height: 70px;
-            }
-        }
-
-        .nav-bar {
-            background: #f5f5f5;
-            padding: 15px 30px;
+        .download-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
             display: flex;
-            gap: 20px;
-            border-bottom: 2px solid #ddd;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .nav-bar a {
-            text-decoration: none;
-            color: #2874A6;
-            font-weight: 600;
-            padding: 8px 15px;
-            border-radius: 5px;
+        .download-section h2 {
+            color: #667eea;
+            font-size: 1.5em;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
         }
 
-        .nav-bar a:hover { background: #e0e0e0; }
-        .nav-bar a.active { background: #2874A6; color: white; }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
 
-        .dashboard-container { padding: 30px; }
-
-        /* STATISTICS CARDS */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        .section-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             margin-bottom: 30px;
         }
 
-        .stat-card {
-            background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .stat-card h3 {
-            font-size: 14px;
-            margin-bottom: 10px;
-            opacity: 0.9;
-        }
-
-        .stat-card .number {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-card .details {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        /* FILTER PANEL */
-        .filter-panel {
-            background: #f9f9f9;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .filter-panel h3 {
-            color: #2874A6;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        .filter-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .filter-group {
+        .section-header {
             display: flex;
-            flex-direction: column;
-        }
-
-        .filter-group label {
-            font-weight: 600;
-            margin-bottom: 5px;
-            font-size: 13px;
-            color: #333;
-        }
-
-        .filter-group input,
-        .filter-group select {
-            padding: 8px;
-            border: 1.5px solid #ddd;
-            border-radius: 5px;
-            font-size: 13px;
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .filter-buttons button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-apply { background: #4CAF50; color: white; }
-        .btn-clear { background: #f44336; color: white; }
-        .btn-export-excel { background: #217346; color: white; }
-        .btn-export-csv { background: #0066cc; color: white; }
-
-        /* TABS */
-        .tabs {
-            display: flex;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-            flex-wrap: wrap;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
         }
 
-        .tab {
-            padding: 12px 25px;
-            background: #f5f5f5;
-            border: none;
-            border-radius: 5px 5px 0 0;
-            cursor: pointer;
-            font-weight: 600;
-            color: #666;
-            transition: all 0.3s;
+        .section-header h2 {
+            color: #667eea;
+            font-size: 1.8em;
         }
 
-        .tab:hover { background: #e0e0e0; }
-        .tab.active {
-            background: #2874A6;
+        .record-count {
+            background: #667eea;
             color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
         }
 
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* TABLE */
-        .table-container {
+        .table-wrapper {
             overflow-x: auto;
+            margin-top: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            min-width: 800px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
 
         th {
-            background: #2874A6;
-            color: white;
-            padding: 12px 8px;
+            padding: 15px;
             text-align: left;
             font-weight: 600;
-            position: sticky;
-            top: 0;
+            font-size: 0.9em;
+            white-space: nowrap;
         }
 
         td {
-            padding: 10px 8px;
+            padding: 12px 15px;
             border-bottom: 1px solid #e0e0e0;
+            font-size: 0.9em;
         }
 
-        tr:hover {
-            background: #f5f5f5;
+        tbody tr:hover {
+            background: #f5f5ff;
         }
 
-        /* ACTION BUTTONS */
-        .action-buttons {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-view { background: #2196F3; color: white; }
-        .btn-edit { background: #FF9800; color: white; }
-        .btn-download { background: #4CAF50; color: white; }
-        .btn-delete { background: #f44336; color: white; }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-        }
-
-        .no-records {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-            font-size: 16px;
-        }
-
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 9999;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 10px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-header {
-            background: #2874A6;
-            color: white;
-            padding: 20px;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-close {
-            background: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .modal-body {
-            padding: 30px;
-        }
-
-        .view-section {
-            margin-bottom: 20px;
-            padding: 15px;
+        tbody tr:nth-child(even) {
             background: #f9f9f9;
-            border-radius: 5px;
         }
 
-        .view-section h4 {
-            color: #2874A6;
-            margin-bottom: 10px;
-            font-size: 14px;
-            border-bottom: 2px solid #1e3c72;
-            padding-bottom: 5px;
+        .empty-message {
+            text-align: center;
+            padding: 50px;
+            color: #999;
+            font-size: 1.2em;
         }
 
-        .view-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .view-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .view-item label {
-            font-weight: 600;
-            font-size: 11px;
-            color: #666;
-            margin-bottom: 3px;
-        }
-
-        .view-item span {
-            font-size: 13px;
-            color: #333;
-        }
-
-        @media print {
-            body { background: white; }
-            .nav-bar, .filter-panel, .tabs, .action-buttons, .modal-close, .no-print { display: none !important; }
-            .container { box-shadow: none; }
-            .modal { display: block !important; position: relative; background: white; }
-            .modal-content { max-width: 100%; box-shadow: none; }
-        }
-
-        @media screen and (max-width: 768px) {
-            .stats-grid { grid-template-columns: 1fr; }
-            .filter-row { grid-template-columns: 1fr; }
-            .action-buttons { flex-direction: column; }
-            .action-btn { width: 100%; }
-        }
-    
-        /* ========== ATTRACTIVE HEADER STYLES ========== */
-        header {
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            background-image: 
-                linear-gradient(135deg, rgba(30, 60, 114, 0.95) 0%, rgba(42, 82, 152, 0.95) 100%),
-                url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="rgba(255,255,255,0.03)" fill-rule="nonzero"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-            padding: 0;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 5px solid #f39c12;
-            animation: fadeInDown 0.6s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .header-wrapper {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 40px;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .filter-section {
+            background: #f5f5ff;
+            padding: 20px;
+            border-radius: 10px;
             margin-bottom: 20px;
-            gap: 30px;
-        }
-
-        .logo-section {
             display: flex;
-            flex-direction: column;
+            gap: 15px;
+            flex-wrap: wrap;
             align-items: center;
-            gap: 8px;
-            flex: 0 0 140px;
         }
 
-        .logo-circle {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.5);
-            border: 4px solid #f39c12;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            overflow: hidden;
+        .filter-section input,
+        .filter-section select {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s;
         }
 
-        .logo-circle::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
+        .filter-section input:focus,
+        .filter-section select:focus {
+            border-color: #764ba2;
         }
 
-        .logo-circle:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 30px rgba(243, 156, 18, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8);
-        }
-
-        .logo-circle:hover::before {
-            left: 100%;
-        }
-
-        .header-logo {
-            width: 85px;
-            height: 85px;
-            object-fit: contain;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .logo-label {
-            color: #f39c12;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-        }
-
-        .school-info-section {
-            flex: 1;
-            text-align: center;
-        }
-
-        .school-name {
-            font-size: 38px;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(243, 156, 18, 0.3);
-            line-height: 1.2;
-            text-transform: uppercase;
-        }
-
-        .school-tagline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(243, 156, 18, 0.2);
-            padding: 8px 20px;
-            border-radius: 25px;
-            border: 2px solid #f39c12;
-        }
-
-        .tagline-icon {
-            font-size: 18px;
-        }
-
-        .tagline-text {
-            color: #ffd700;
-            font-size: 15px;
-            font-weight: 600;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        .header-middle {
-            margin-bottom: 15px;
-        }
-
-        .affiliation-badge {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        .filter-btn {
+            background: #667eea;
             color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 15px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
         }
 
-        .badge-icon {
-            background: white;
-            color: #f39c12;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .affiliation-badge strong {
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .header-bottom {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .info-grid {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px 25px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #ffffff;
-            font-size: 14px;
-        }
-
-        .info-icon {
-            font-size: 16px;
-        }
-
-        .info-text {
-            color: #e0e0e0;
-        }
-
-        .info-text strong {
-            color: #ffd700;
-        }
-
-        .info-divider {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 18px;
-        }
-
-        .contact-grid {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(243, 156, 18, 0.2);
-            padding: 8px 18px;
-            border-radius: 20px;
-            border: 1px solid rgba(243, 156, 18, 0.4);
-        }
-
-        .contact-icon {
-            font-size: 14px;
-        }
-
-        .contact-text {
-            color: #ffd700;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .contact-link {
-            color: #ffd700;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-link:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .contact-divider {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 16px;
-        }
-
-        @media (max-width: 1024px) {
-            .header-wrapper { padding: 15px 25px; }
-            .school-name { font-size: 30px; }
-            .logo-circle { width: 90px; height: 90px; }
-            .header-logo { width: 70px; height: 70px; }
+        .filter-btn:hover {
+            background: #764ba2;
         }
 
         @media (max-width: 768px) {
-            .header-top { flex-direction: column; gap: 20px; }
-            .logo-section { flex: 0 0 auto; }
-            .school-name { font-size: 24px; letter-spacing: 2px; }
-            .logo-circle { width: 80px; height: 80px; }
-            .header-logo { width: 60px; height: 60px; }
-            .info-grid { flex-direction: column; gap: 10px; }
-            .info-divider { display: none; }
-            .affiliation-badge { font-size: 13px; padding: 10px 20px; }
-            .contact-grid { flex-direction: column; gap: 8px; }
-            .contact-divider { display: none; }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .download-section {
+                flex-direction: column;
+                text-align: center;
+            }
         }
-
-        @media (max-width: 480px) {
-            .header-wrapper { padding: 15px; }
-            .school-name { font-size: 20px; letter-spacing: 1px; }
-            .logo-circle { width: 70px; height: 70px; }
-            .header-logo { width: 50px; height: 50px; }
-            .info-item, .contact-item { font-size: 12px; }
-        }
-
-</style>
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- LOGO HEADER -->
-        <div class="logo-header">
-            <div class="header-container">
-                <div class="header-flex">
-                    <!-- Left Logo - School -->
-                    <div class="logo-box logo-left">
-                        <img src="school-logo.png" alt="School Logo" class="logo-img">
-                    </div>
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 HEMA SCHOOL - RECORDS DASHBOARD</h1>
+            <p><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
+            <p>School Code: 50383 | Affiliation No.: 1030417</p>
+            <p>Govindpura, Bhopal, Madhya Pradesh, India - 462023</p>
+            <p>📧 support@hemaschool.education | 📞 0755-2457270</p>
+        </div>
 
-                    <!-- Center - School Details -->
-                    <div class="school-info">
-                        <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
-                        <div class="school-details">
-                            <div class="detail-line"><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></div>
-                            <div class="detail-line">School Code: 50383 | Affiliation No.: 1030417</div>
-                            <div class="detail-line">Govindpura, Bhopal, Madhya Pradesh, India - 462023</div>
-                            <div class="detail-line contact-line">
-                                📧 <a href="mailto:support@hemaschool.education">support@hemaschool.education</a> | 
-                                📞 0755-2457270
-                            </div>
-                        </div>
-                    </div>
+        <!-- Download Section -->
+        <div class="download-section">
+            <div>
+                <h2>📥 DOWNLOAD ALL DATA (EXCEL FILE)</h2>
+                <p style="color: #666; margin-top: 5px;">Export all enquiries, registrations, and admissions to Excel/CSV format</p>
+            </div>
+            <button class="download-btn" onclick="downloadAllDataExcel()">
+                📥 Download Complete Data
+            </button>
+        </div>
 
-                    <!-- Right Logo - Empathy -->
-                    <div class="logo-box logo-right">
-                        <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
-                    </div>
-                </div>
+        <!-- Enquiry Records -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>📝 ENQUIRY RECORDS</h2>
+                <span class="record-count" id="enquiryCount">0 Records</span>
+            </div>
+            <div class="table-wrapper">
+                <table id="enquiryTable">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Date</th>
+                            <th>Student Name</th>
+                            <th>DOB</th>
+                            <th>Gender</th>
+                            <th>Class</th>
+                            <th>Father Name</th>
+                            <th>Father Mobile</th>
+                            <th>Mother Name</th>
+                            <th>Mother Mobile</th>
+                            <th>Address</th>
+                            <th>Area</th>
+                            <th>City</th>
+                            <th>District</th>
+                            <th>State</th>
+                            <th>Pincode</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enquiryTableBody">
+                        <tr><td colspan="17" class="empty-message">No enquiry records found</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        
-        </div>
-
-        <div class="nav-bar no-print">
-            <a href="index.html">📝 Enquiry</a>
-            <a href="registration.html">📋 Registration</a>
-            <a href="admission.html">✅ Admission</a>
-            <a href="data.html" class="active" >📊 Records</a>
-        </div>
-
-        <div class="dashboard-container">
-            <!-- STATISTICS -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>📝 ENQUIRIES</h3>
-                    <div class="number" id="totalEnquiries">0</div>
-                    <div class="details">
-                        Today: <span id="todayEnquiries">0</span> | 
-                        This Month: <span id="monthEnquiries">0</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <h3>📋 REGISTRATIONS</h3>
-                    <div class="number" id="totalRegistrations">0</div>
-                    <div class="details">
-                        Today: <span id="todayRegistrations">0</span> | 
-                        This Month: <span id="monthRegistrations">0</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <h3>✅ ADMISSIONS</h3>
-                    <div class="number" id="totalAdmissions">0</div>
-                    <div class="details">
-                        Today: <span id="todayAdmissions">0</span> | 
-                        This Month: <span id="monthAdmissions">0</span>
-                    </div>
-                </div>
+        <!-- Registration Records -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>📋 REGISTRATION RECORDS</h2>
+                <span class="record-count" id="registrationCount">0 Records</span>
             </div>
-
-            <!-- FILTER PANEL -->
-            <div class="filter-panel no-print">
-                <h3>🔍 ADVANCED FILTERS</h3>
-                <div class="filter-row">
-                    <div class="filter-group">
-                        <label>From Date</label>
-                        <input type="date" id="filterFromDate">
-                    </div>
-                    <div class="filter-group">
-                        <label>To Date</label>
-                        <input type="date" id="filterToDate">
-                    </div>
-                    <div class="filter-group">
-                        <label>Class</label>
-                        <select id="filterClass">
-                            <option value="">All Classes</option>
-                            <option value="NURSERY">NURSERY</option>
-                            <option value="KG I">KG I</option>
-                            <option value="KG II">KG II</option>
-                            <option value="I">CLASS I</option>
-                            <option value="II">CLASS II</option>
-                            <option value="III">CLASS III</option>
-                            <option value="IV">CLASS IV</option>
-                            <option value="V">CLASS V</option>
-                            <option value="VI">CLASS VI</option>
-                            <option value="VII">CLASS VII</option>
-                            <option value="VIII">CLASS VIII</option>
-                            <option value="IX">CLASS IX</option>
-                            <option value="X">CLASS X</option>
-                            <option value="XI">CLASS XI</option>
-                            <option value="XII">CLASS XII</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Gender</label>
-                        <select id="filterGender">
-                            <option value="">All</option>
-                            <option value="MALE">Male</option>
-                            <option value="FEMALE">Female</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="filter-row">
-                    <div class="filter-group">
-                        <label>Search (S.No / Name / Mobile)</label>
-                        <input type="text" id="filterSearch" placeholder="Type to search...">
-                    </div>
-                </div>
-                <div class="filter-buttons">
-                    <button class="btn-apply" onclick="applyFilters()">✓ Apply Filter</button>
-                    <button class="btn-clear" onclick="clearFilters()">✕ Clear All</button>
-                    <button class="btn-export-excel" onclick="exportToExcel()">📊 Export Excel</button>
-                    <button class="btn-export-csv" onclick="exportToCSV()">📄 Export CSV</button>
-                </div>
-            </div>
-
-            <!-- TABS -->
-            <div class="tabs no-print">
-                <button class="tab active" onclick="switchTab('enquiry')">
-                    📝 Enquiries (<span id="enquiryCount">0</span>)
-                </button>
-                <button class="tab" onclick="switchTab('registration')">
-                    📋 Registrations (<span id="registrationCount">0</span>)
-                </button>
-                <button class="tab" onclick="switchTab('admission')">
-                    ✅ Admissions (<span id="admissionCount">0</span>)
-                </button>
-            </div>
-
-            <!-- ENQUIRY TAB -->
-            <div id="enquiryTab" class="tab-content active">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Date</th>
-                                <th>Student Name</th>
-                                <th>Class</th>
-                                <th>Gender</th>
-                                <th>Father Mobile</th>
-                                <th>District</th>
-                                <th>Pincode</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="enquiryTableBody">
-                            <tr>
-                                <td colspan="9" class="no-records">No enquiry records found</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- REGISTRATION TAB -->
-            <div id="registrationTab" class="tab-content">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Reg Date</th>
-                                <th>Student Name</th>
-                                <th>Class</th>
-                                <th>Gender</th>
-                                <th>Father Mobile</th>
-                                <th>District</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="registrationTableBody">
-                            <tr>
-                                <td colspan="8" class="no-records">No registration records found</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ADMISSION TAB -->
-            <div id="admissionTab" class="tab-content">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Adm Date</th>
-                                <th>Student Name</th>
-                                <th>Class</th>
-                                <th>Section</th>
-                                <th>Scholar No</th>
-                                <th>District</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admissionTableBody">
-                            <tr>
-                                <td colspan="8" class="no-records">No admission records found</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-wrapper">
+                <table id="registrationTable">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Date</th>
+                            <th>Student Name</th>
+                            <th>DOB</th>
+                            <th>Gender</th>
+                            <th>Class</th>
+                            <th>Father Name</th>
+                            <th>Father Mobile</th>
+                            <th>Mother Name</th>
+                            <th>Mother Mobile</th>
+                            <th>Address</th>
+                            <th>Area</th>
+                            <th>State</th>
+                            <th>Admission Fee</th>
+                            <th>Total Fee</th>
+                            <th>Signatory</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registrationTableBody">
+                        <tr><td colspan="16" class="empty-message">No registration records found</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
 
-    <!-- VIEW MODAL -->
-    <div id="viewModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📄 View Complete Form</h2>
-                <button class="modal-close no-print" onclick="closeModal()">✕ Close</button>
+        <!-- Admission Records -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>🎓 ADMISSION RECORDS</h2>
+                <span class="record-count" id="admissionCount">0 Records</span>
             </div>
-            <div class="modal-body" id="viewModalBody">
-                <!-- Content loaded dynamically -->
-            </div>
-            <div style="padding: 20px; text-align: center;" class="no-print">
-                <button onclick="window.print()" style="background:#4CAF50; color:white; padding:12px 30px; border:none; border-radius:5px; font-weight:600; cursor:pointer;">
-                    🖨️ Print / Save as PDF
-                </button>
+            <div class="table-wrapper">
+                <table id="admissionTable">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Admission Date</th>
+                            <th>Scholar No</th>
+                            <th>Student Name</th>
+                            <th>DOB</th>
+                            <th>Gender</th>
+                            <th>Class</th>
+                            <th>Section</th>
+                            <th>House</th>
+                            <th>Aadhaar</th>
+                            <th>Father Name</th>
+                            <th>Father Mobile</th>
+                            <th>Mother Name</th>
+                            <th>Mother Mobile</th>
+                            <th>Address</th>
+                            <th>Previous School</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admissionTableBody">
+                        <tr><td colspan="17" class="empty-message">No admission records found</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <script>
-        let allEnquiries = [];
-        let allRegistrations = [];
-        let allAdmissions = [];
-        let filteredEnquiries = [];
-        let filteredRegistrations = [];
-        let filteredAdmissions = [];
-
-        // LOAD DATA
-        function loadData() {
-            allEnquiries = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
-            allRegistrations = JSON.parse(localStorage.getItem('registrationRecords') || '[]');
-            allAdmissions = JSON.parse(localStorage.getItem('admissionRecords') || '[]');
-
-            filteredEnquiries = [...allEnquiries];
-            filteredRegistrations = [...allRegistrations];
-            filteredAdmissions = [...allAdmissions];
-
-            updateStatistics();
-            renderTables();
-        }
-
-        // UPDATE STATISTICS
-        function updateStatistics() {
-            const today = new Date().toLocaleDateString('en-IN');
-            const thisMonth = new Date().getMonth();
-            const thisYear = new Date().getFullYear();
-
-            // Enquiries
-            document.getElementById('totalEnquiries').textContent = allEnquiries.length;
-            document.getElementById('enquiryCount').textContent = allEnquiries.length;
-            document.getElementById('todayEnquiries').textContent = allEnquiries.filter(e => 
-                e.submittedDate === today).length;
-            document.getElementById('monthEnquiries').textContent = allEnquiries.filter(e => {
-                const date = new Date(e.timestamp);
-                return date.getMonth() === thisMonth && date.getFullYear() === thisYear;
-            }).length;
-
-            // Registrations
-            document.getElementById('totalRegistrations').textContent = allRegistrations.length;
-            document.getElementById('registrationCount').textContent = allRegistrations.length;
-            document.getElementById('todayRegistrations').textContent = allRegistrations.filter(r => 
-                r.submittedDate === today).length;
-            document.getElementById('monthRegistrations').textContent = allRegistrations.filter(r => {
-                const date = new Date(r.timestamp);
-                return date.getMonth() === thisMonth && date.getFullYear() === thisYear;
-            }).length;
-
-            // Admissions
-            document.getElementById('totalAdmissions').textContent = allAdmissions.length;
-            document.getElementById('admissionCount').textContent = allAdmissions.length;
-            document.getElementById('todayAdmissions').textContent = allAdmissions.filter(a => 
-                a.submittedDate === today).length;
-            document.getElementById('monthAdmissions').textContent = allAdmissions.filter(a => {
-                const date = new Date(a.timestamp);
-                return date.getMonth() === thisMonth && date.getFullYear() === thisYear;
-            }).length;
-        }
-
-        // RENDER TABLES
-        function renderTables() {
-            renderEnquiryTable();
-            renderRegistrationTable();
-            renderAdmissionTable();
-        }
-
-        function renderEnquiryTable() {
-            const tbody = document.getElementById('enquiryTableBody');
-
-            if (filteredEnquiries.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" class="no-records">No enquiry records found</td></tr>';
-                return;
-            }
-
-            tbody.innerHTML = filteredEnquiries.map((record, index) => `
-                <tr>
-                    <td><strong>${record.sno || 'N/A'}</strong></td>
-                    <td>${record.date || 'N/A'}</td>
-                    <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentSurname || ''}</td>
-                    <td>${record.classApplied || 'N/A'}</td>
-                    <td>${record.gender || 'N/A'}</td>
-                    <td>${record.fatherMobile || 'N/A'}</td>
-                    <td>${record.district || 'N/A'}</td>
-                    <td>${record.pincode || 'N/A'}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn btn-view" onclick="viewRecord('enquiry', ${index})">👁️ VIEW</button>
-                            <button class="action-btn btn-edit" onclick="editRecord('enquiry', ${index})">✏️ EDIT</button>
-                            <button class="action-btn btn-download" onclick="downloadRecord('enquiry', ${index})">📥 PDF</button>
-                            <button class="action-btn btn-delete" onclick="deleteRecord('enquiry', ${index})">🗑️ DEL</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function renderRegistrationTable() {
-            const tbody = document.getElementById('registrationTableBody');
-
-            if (filteredRegistrations.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" class="no-records">No registration records found</td></tr>';
-                return;
-            }
-
-            tbody.innerHTML = filteredRegistrations.map((record, index) => `
-                <tr>
-                    <td><strong>${record.sno || 'N/A'}</strong></td>
-                    <td>${record.regDate || record.date || 'N/A'}</td>
-                    <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentSurname || ''}</td>
-                    <td>${record.classApplied || 'N/A'}</td>
-                    <td>${record.gender || 'N/A'}</td>
-                    <td>${record.fatherMobile || 'N/A'}</td>
-                    <td>${record.district || 'N/A'}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn btn-view" onclick="viewRecord('registration', ${index})">👁️ VIEW</button>
-                            <button class="action-btn btn-edit" onclick="editRecord('registration', ${index})">✏️ EDIT</button>
-                            <button class="action-btn btn-download" onclick="downloadRecord('registration', ${index})">📥 PDF</button>
-                            <button class="action-btn btn-delete" onclick="deleteRecord('registration', ${index})">🗑️ DEL</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function renderAdmissionTable() {
-            const tbody = document.getElementById('admissionTableBody');
-
-            if (filteredAdmissions.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" class="no-records">No admission records found</td></tr>';
-                return;
-            }
-
-            tbody.innerHTML = filteredAdmissions.map((record, index) => `
-                <tr>
-                    <td><strong>${record.sno || 'N/A'}</strong></td>
-                    <td>${record.admissionDate || record.date || 'N/A'}</td>
-                    <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentSurname || ''}</td>
-                    <td>${record.classApplied || 'N/A'}</td>
-                    <td>${record.section || 'N/A'}</td>
-                    <td>${record.scholarNo || 'N/A'}</td>
-                    <td>${record.district || 'N/A'}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn btn-view" onclick="viewRecord('admission', ${index})">👁️ VIEW</button>
-                            <button class="action-btn btn-edit" onclick="editRecord('admission', ${index})">✏️ EDIT</button>
-                            <button class="action-btn btn-download" onclick="downloadRecord('admission', ${index})">📥 PDF</button>
-                            <button class="action-btn btn-delete" onclick="deleteRecord('admission', ${index})">🗑️ DEL</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // SWITCH TAB
-        function switchTab(tab) {
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-            // Add active class to selected tab
-            if (tab === 'enquiry') {
-                document.querySelectorAll('.tab')[0].classList.add('active');
-                document.getElementById('enquiryTab').classList.add('active');
-            } else if (tab === 'registration') {
-                document.querySelectorAll('.tab')[1].classList.add('active');
-                document.getElementById('registrationTab').classList.add('active');
-            } else if (tab === 'admission') {
-                document.querySelectorAll('.tab')[2].classList.add('active');
-                document.getElementById('admissionTab').classList.add('active');
-            }
-        }
-
-        // APPLY FILTERS
-        function applyFilters() {
-            const fromDate = document.getElementById('filterFromDate').value;
-            const toDate = document.getElementById('filterToDate').value;
-            const filterClass = document.getElementById('filterClass').value;
-            const filterGender = document.getElementById('filterGender').value;
-            const searchText = document.getElementById('filterSearch').value.toLowerCase();
-
-            // Filter Enquiries
-            filteredEnquiries = allEnquiries.filter(record => {
-                let match = true;
-
-                if (fromDate && record.date < fromDate) match = false;
-                if (toDate && record.date > toDate) match = false;
-                if (filterClass && record.classApplied !== filterClass) match = false;
-                if (filterGender && record.gender !== filterGender) match = false;
-
-                if (searchText) {
-                    const fullName = `${record.studentFirst} ${record.studentMiddle} ${record.studentSurname}`.toLowerCase();
-                    const sno = (record.sno || '').toLowerCase();
-                    const mobile = (record.fatherMobile || '').toLowerCase();
-
-                    if (!fullName.includes(searchText) && !sno.includes(searchText) && !mobile.includes(searchText)) {
-                        match = false;
-                    }
-                }
-
-                return match;
-            });
-
-            // Filter Registrations
-            filteredRegistrations = allRegistrations.filter(record => {
-                let match = true;
-
-                const recordDate = record.regDate || record.date;
-                if (fromDate && recordDate < fromDate) match = false;
-                if (toDate && recordDate > toDate) match = false;
-                if (filterClass && record.classApplied !== filterClass) match = false;
-                if (filterGender && record.gender !== filterGender) match = false;
-
-                if (searchText) {
-                    const fullName = `${record.studentFirst} ${record.studentMiddle} ${record.studentSurname}`.toLowerCase();
-                    const sno = (record.sno || '').toLowerCase();
-                    const mobile = (record.fatherMobile || '').toLowerCase();
-
-                    if (!fullName.includes(searchText) && !sno.includes(searchText) && !mobile.includes(searchText)) {
-                        match = false;
-                    }
-                }
-
-                return match;
-            });
-
-            // Filter Admissions
-            filteredAdmissions = allAdmissions.filter(record => {
-                let match = true;
-
-                const recordDate = record.admissionDate || record.date;
-                if (fromDate && recordDate < fromDate) match = false;
-                if (toDate && recordDate > toDate) match = false;
-                if (filterClass && record.classApplied !== filterClass) match = false;
-                if (filterGender && record.gender !== filterGender) match = false;
-
-                if (searchText) {
-                    const fullName = `${record.studentFirst} ${record.studentMiddle} ${record.studentSurname}`.toLowerCase();
-                    const sno = (record.sno || '').toLowerCase();
-                    const scholarNo = (record.scholarNo || '').toLowerCase();
-
-                    if (!fullName.includes(searchText) && !sno.includes(searchText) && !scholarNo.includes(searchText)) {
-                        match = false;
-                    }
-                }
-
-                return match;
-            });
-
-            renderTables();
-            alert(`✅ Filter applied! Found ${filteredEnquiries.length} enquiries, ${filteredRegistrations.length} registrations, ${filteredAdmissions.length} admissions`);
-        }
-
-        // CLEAR FILTERS
-        function clearFilters() {
-            document.getElementById('filterFromDate').value = '';
-            document.getElementById('filterToDate').value = '';
-            document.getElementById('filterClass').value = '';
-            document.getElementById('filterGender').value = '';
-            document.getElementById('filterSearch').value = '';
-
-            filteredEnquiries = [...allEnquiries];
-            filteredRegistrations = [...allRegistrations];
-            filteredAdmissions = [...allAdmissions];
-
-            renderTables();
-        }
-
-        // VIEW RECORD
-        function viewRecord(type, index) {
-            let record;
-
-            if (type === 'enquiry') {
-                record = filteredEnquiries[index];
-            } else if (type === 'registration') {
-                record = filteredRegistrations[index];
-            } else {
-                record = filteredAdmissions[index];
-            }
-
-            const modalBody = document.getElementById('viewModalBody');
-            modalBody.innerHTML = `
-                <div class="view-section">
-                    <h4>📋 BASIC INFORMATION</h4>
-                    <div class="view-grid">
-                        <div class="view-item">
-                            <label>S.No</label>
-                            <span>${record.sno || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Date</label>
-                            <span>${record.date || record.regDate || record.admissionDate || 'N/A'}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="view-section">
-                    <h4>👤 STUDENT DETAILS</h4>
-                    <div class="view-grid">
-                        <div class="view-item">
-                            <label>First Name</label>
-                            <span>${record.studentFirst || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Middle Name</label>
-                            <span>${record.studentMiddle || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Surname</label>
-                            <span>${record.studentSurname || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Gender</label>
-                            <span>${record.gender || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Date of Birth</label>
-                            <span>${record.dob || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Current Age</label>
-                            <span>${record.currentAge || 'N/A'}</span>
-                        </div>
-                        ${record.ageAsOn ? `
-                        <div class="view-item">
-                            <label>${record.ageAsOnLabel || 'Age As On'}</label>
-                            <span>${record.ageAsOn}</span>
-                        </div>
-                        ` : ''}
-                        <div class="view-item">
-                            <label>Class Applied</label>
-                            <span>${record.classApplied || 'N/A'}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="view-section">
-                    <h4>👨‍👩 PARENT DETAILS</h4>
-                    <div class="view-grid">
-                        <div class="view-item">
-                            <label>Father Name</label>
-                            <span>${record.fatherFirst || ''} ${record.fatherMiddle || ''} ${record.fatherSurname || ''}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Father Mobile</label>
-                            <span>${record.fatherMobile || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Mother Name</label>
-                            <span>${record.motherFirst || ''} ${record.motherMiddle || ''} ${record.motherSurname || ''}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Mother Mobile</label>
-                            <span>${record.motherMobile || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Landline</label>
-                            <span>${record.landline || 'N/A'}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="view-section">
-                    <h4>📍 CONTACT DETAILS</h4>
-                    <div class="view-grid">
-                        <div class="view-item" style="grid-column: 1/-1;">
-                            <label>Address</label>
-                            <span>${record.address || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Area / Locality</label>
-                            <span>${record.area || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>City</label>
-                            <span>${record.city || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>District</label>
-                            <span>${record.district || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>State</label>
-                            <span>${record.state || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Pincode</label>
-                            <span>${record.pincode || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Country</label>
-                            <span>${record.country || 'INDIA'}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="view-section">
-                    <h4>💰 FEE DETAILS</h4>
-                    <div class="view-grid">
-                        <div class="view-item">
-                            <label>Admission Fee</label>
-                            <span>₹ ${record.feeAdmission || '0'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Development Fund</label>
-                            <span>₹ ${record.feeDevelopment || '0'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Caution Money</label>
-                            <span>₹ ${record.feeCaution || '0'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Total Fee</label>
-                            <span><strong>₹ ${record.totalFee || '0'}</strong></span>
-                        </div>
-                    </div>
-                </div>
-
-                ${type === 'admission' ? `
-                <div class="view-section">
-                    <h4>✅ ADMISSION DETAILS</h4>
-                    <div class="view-grid">
-                        <div class="view-item">
-                            <label>Scholar Number</label>
-                            <span>${record.scholarNo || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Section</label>
-                            <span>${record.section || 'N/A'}</span>
-                        </div>
-                        <div class="view-item">
-                            <label>Admission Date</label>
-                            <span>${record.admissionDate || 'N/A'}</span>
-                        </div>
-                    </div>
-                </div>
-                ` : ''}
-            `;
-
-            document.getElementById('viewModal').classList.add('active');
-        }
-
-        // EDIT RECORD
-        function editRecord(type, index) {
-            let record;
-
-            if (type === 'enquiry') {
-                record = filteredEnquiries[index];
-                localStorage.setItem('editEnquiry', JSON.stringify(record));
-                localStorage.setItem('editIndex', allEnquiries.indexOf(record));
-                window.location.href = 'index.html?edit=true';
-            } else if (type === 'registration') {
-                record = filteredRegistrations[index];
-                localStorage.setItem('editRegistration', JSON.stringify(record));
-                localStorage.setItem('editIndex', allRegistrations.indexOf(record));
-                window.location.href = 'registration.html?edit=true';
-            } else {
-                record = filteredAdmissions[index];
-                localStorage.setItem('editAdmission', JSON.stringify(record));
-                localStorage.setItem('editIndex', allAdmissions.indexOf(record));
-                window.location.href = 'admission.html?edit=true';
-            }
-        }
-
-        // DOWNLOAD RECORD
-        function downloadRecord(type, index) {
-            viewRecord(type, index);
-            setTimeout(() => {
-                window.print();
-            }, 500);
-        }
-
-        // DELETE RECORD
-        function deleteRecord(type, index) {
-            if (!confirm('⚠️ Are you sure you want to delete this record? This action cannot be undone!')) {
-                return;
-            }
-
-            if (type === 'enquiry') {
-                const record = filteredEnquiries[index];
-                const actualIndex = allEnquiries.indexOf(record);
-                allEnquiries.splice(actualIndex, 1);
-                localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
-            } else if (type === 'registration') {
-                const record = filteredRegistrations[index];
-                const actualIndex = allRegistrations.indexOf(record);
-                allRegistrations.splice(actualIndex, 1);
-                localStorage.setItem('registrationRecords', JSON.stringify(allRegistrations));
-            } else {
-                const record = filteredAdmissions[index];
-                const actualIndex = allAdmissions.indexOf(record);
-                allAdmissions.splice(actualIndex, 1);
-                localStorage.setItem('admissionRecords', JSON.stringify(allAdmissions));
-            }
-
-            loadData();
-            applyFilters();
-            alert('✅ Record deleted successfully!');
-        }
-
-        // CLOSE MODAL
-        function closeModal() {
-            document.getElementById('viewModal').classList.remove('active');
-        }
-
-        // EXPORT TO EXCEL
-        function exportToExcel() {
-            let csv = 'HEMA HIGHER SECONDARY SCHOOL - ENQUIRY RECORDS\n\n';
-            csv += 'S.No,Date,Student Name,Class,Gender,DOB,Age,Father Mobile,District,Pincode,Total Fee\n';
-
-            filteredEnquiries.forEach(record => {
-                const name = `${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentSurname || ''}`.trim();
-                csv += `${record.sno},${record.date},"${name}",${record.classApplied},${record.gender},${record.dob},"${record.currentAge}",${record.fatherMobile},${record.district},${record.pincode},${record.totalFee}\n`;
-            });
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `HEMA_Enquiries_${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
-        }
-
-        // EXPORT TO CSV
-        function exportToCSV() {
-            exportToExcel(); // Same functionality
-        }
-
-        // LOAD DATA ON PAGE LOAD
-        window.addEventListener('load', loadData);
-
-        // Close modal on outside click
-        document.getElementById('viewModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+        // Load all data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEnquiryData();
+            loadRegistrationData();
+            loadAdmissionData();
         });
 
-        // Convert Enquiry to Registration
-        function convertToRegistration(idx) {
-            const records = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
-            const enquiry = records[idx];
-
-            if (!enquiry) {
-                alert('Enquiry record not found!');
-                return;
-            }
-
-            localStorage.setItem('currentEnquiry', JSON.stringify(enquiry));
-
-            if (confirm(`Convert "${enquiry.studentFirst || ''} ${enquiry.studentSurname || ''}" to Registration?\n\nClick OK to proceed to Registration Form`)) {
-                window.location.href = 'registration.html';
-            }
+        // Utility function to get data from localStorage
+        function getLocalStorageData(keys) {
+            let allData = [];
+            keys.forEach(key => {
+                try {
+                    const data = localStorage.getItem(key);
+                    if (data) {
+                        const parsed = JSON.parse(data);
+                        if (Array.isArray(parsed)) {
+                            allData = allData.concat(parsed);
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error parsing ' + key, e);
+                }
+            });
+            return allData;
         }
 
-        // Convert Registration to Admission
-        function convertToAdmission(idx) {
-            const records = JSON.parse(localStorage.getItem('registrationRecords') || '[]');
-            const registration = records[idx];
-
-            if (!registration) {
-                alert('Registration record not found!');
+        // Load Enquiry Data
+        function loadEnquiryData() {
+            const data = getLocalStorageData(['enquiryRecords', 'enquiries']);
+            const tbody = document.getElementById('enquiryTableBody');
+            const countSpan = document.getElementById('enquiryCount');
+            
+            tbody.innerHTML = '';
+            countSpan.textContent = data.length + ' Records';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="17" class="empty-message">No enquiry records found</td></tr>';
                 return;
             }
+            
+            data.forEach((record, index) => {
+                const row = tbody.insertRow();
+                const studentName = [record.studentFirst, record.studentMiddle, record.studentSurname].filter(Boolean).join(' ');
+                const fatherName = [record.fatherFirst, record.fatherMiddle, record.fatherSurname].filter(Boolean).join(' ');
+                const motherName = [record.motherFirst, record.motherMiddle, record.motherSurname].filter(Boolean).join(' ');
+                
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${record.date || ''}</td>
+                    <td>${studentName || ''}</td>
+                    <td>${record.dob || ''}</td>
+                    <td>${record.gender || ''}</td>
+                    <td>${record.classApplied || ''}</td>
+                    <td>${fatherName || ''}</td>
+                    <td>${record.fatherMobile || ''}</td>
+                    <td>${motherName || ''}</td>
+                    <td>${record.motherMobile || ''}</td>
+                    <td>${record.address || ''}</td>
+                    <td>${record.area || ''}</td>
+                    <td>${record.city || ''}</td>
+                    <td>${record.district || ''}</td>
+                    <td>${record.state || ''}</td>
+                    <td>${record.pincode || ''}</td>
+                    <td>${record.source || ''}</td>
+                `;
+            });
+        }
 
-            localStorage.setItem('currentRegistration', JSON.stringify(registration));
-
-            if (confirm(`Convert "${registration.studentFirst || ''} ${registration.studentSurname || ''}" to Admission?\n\nClick OK to proceed to Admission Form`)) {
-                window.location.href = 'admission.html';
+        // Load Registration Data
+        function loadRegistrationData() {
+            const data = getLocalStorageData(['registrationRecords', 'registrations']);
+            const tbody = document.getElementById('registrationTableBody');
+            const countSpan = document.getElementById('registrationCount');
+            
+            tbody.innerHTML = '';
+            countSpan.textContent = data.length + ' Records';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="16" class="empty-message">No registration records found</td></tr>';
+                return;
             }
+            
+            data.forEach((record, index) => {
+                const row = tbody.insertRow();
+                const studentName = [record.studentFirst, record.studentMiddle, record.studentSurname].filter(Boolean).join(' ');
+                const fatherName = [record.fatherFirst, record.fatherMiddle, record.fatherSurname].filter(Boolean).join(' ');
+                const motherName = [record.motherFirst, record.motherMiddle, record.motherSurname].filter(Boolean).join(' ');
+                const gender = record.genderMale ? 'Male' : (record.genderFemale ? 'Female' : '');
+                
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${record.date || ''}</td>
+                    <td>${studentName || ''}</td>
+                    <td>${record.dob || ''}</td>
+                    <td>${gender}</td>
+                    <td>${record.classApplied || ''}</td>
+                    <td>${fatherName || ''}</td>
+                    <td>${record.fatherMobile || ''}</td>
+                    <td>${motherName || ''}</td>
+                    <td>${record.motherMobile || ''}</td>
+                    <td>${record.address || ''}</td>
+                    <td>${record.area || ''}</td>
+                    <td>${record.state || ''}</td>
+                    <td>${record.feeAdmission || ''}</td>
+                    <td>${record.totalFee || ''}</td>
+                    <td>${record.signatoryName || ''}</td>
+                `;
+            });
+        }
+
+        // Load Admission Data
+        function loadAdmissionData() {
+            const data = getLocalStorageData(['admissionRecords', 'admissions']);
+            const tbody = document.getElementById('admissionTableBody');
+            const countSpan = document.getElementById('admissionCount');
+            
+            tbody.innerHTML = '';
+            countSpan.textContent = data.length + ' Records';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="17" class="empty-message">No admission records found</td></tr>';
+                return;
+            }
+            
+            data.forEach((record, index) => {
+                const row = tbody.insertRow();
+                
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${record.admissionDate || ''}</td>
+                    <td>${record.scholarNo || ''}</td>
+                    <td>${record.studentName || ''}</td>
+                    <td>${record.dob || ''}</td>
+                    <td>${record.gender || ''}</td>
+                    <td>${record.class || ''}</td>
+                    <td>${record.section || ''}</td>
+                    <td>${record.house || ''}</td>
+                    <td>${record.aadhaarNo || ''}</td>
+                    <td>${record.fatherName || ''}</td>
+                    <td>${record.fatherMobile || ''}</td>
+                    <td>${record.motherName || ''}</td>
+                    <td>${record.motherMobile || ''}</td>
+                    <td>${record.address || ''}</td>
+                    <td>${record.prevSchool || ''}</td>
+                    <td>${record.category || ''}</td>
+                `;
+            });
+        }
+
+        // Download All Data to Excel/CSV
+        function downloadAllDataExcel() {
+            const enquiryData = getLocalStorageData(['enquiryRecords', 'enquiries']);
+            const registrationData = getLocalStorageData(['registrationRecords', 'registrations']);
+            const admissionData = getLocalStorageData(['admissionRecords', 'admissions']);
+            
+            let csv = '';
+            
+            // Enquiry Records - ALL FIELDS
+            if (enquiryData.length > 0) {
+                csv += '"ENQUIRY RECORDS"\n';
+                csv += '"S.No","Date","Student First","Student Middle","Student Surname","DOB","Gender","Class Applied","Father First","Father Middle","Father Surname","Father Mobile","Mother First","Mother Middle","Mother Surname","Mother Mobile","Landline","Address","Area","City","District","State","Country","Pincode","Source","Referred Type","Referred Name","Sibling Discount","Sib1 Name","Sib1 Class","Sib1 Section","Sib1 School","Sib2 Name","Sib2 Class","Sib2 Section","Sib2 School"\n';
+                
+                enquiryData.forEach((record, index) => {
+                    const row = [
+                        index + 1,
+                        record.date || '',
+                        record.studentFirst || '',
+                        record.studentMiddle || '',
+                        record.studentSurname || '',
+                        record.dob || '',
+                        record.gender || '',
+                        record.classApplied || '',
+                        record.fatherFirst || '',
+                        record.fatherMiddle || '',
+                        record.fatherSurname || '',
+                        record.fatherMobile || '',
+                        record.motherFirst || '',
+                        record.motherMiddle || '',
+                        record.motherSurname || '',
+                        record.motherMobile || '',
+                        record.landline || '',
+                        record.address || '',
+                        record.area || '',
+                        record.city || '',
+                        record.district || '',
+                        record.state || '',
+                        record.country || '',
+                        record.pincode || '',
+                        record.source || '',
+                        record.referredType || '',
+                        record.referredName || '',
+                        record.siblingDiscount || '',
+                        record.sib1Name || '',
+                        record.sib1Class || '',
+                        record.sib1Section || '',
+                        record.sib1School || '',
+                        record.sib2Name || '',
+                        record.sib2Class || '',
+                        record.sib2Section || '',
+                        record.sib2School || ''
+                    ].map(field => `"${String(field).replace(/"/g, '""')}"`);
+                    
+                    csv += row.join(',') + '\n';
+                });
+                csv += '\n\n';
+            }
+            
+            // Registration Records - ALL FIELDS
+            if (registrationData.length > 0) {
+                csv += '"REGISTRATION RECORDS"\n';
+                csv += '"S.No","Date","Student First","Student Middle","Student Surname","DOB","Gender","Class Applied","Father First","Father Middle","Father Surname","Father Mobile","Mother First","Mother Middle","Mother Surname","Mother Mobile","Landline","Address","Area","State","Admission Fee","Caution Fee","Development Fee","Total Fee","Signatory Name","Sib1 Name","Sib1 Class/Sec","Sib1 School","Sib2 Name","Sib2 Class/Sec","Sib2 School"\n';
+                
+                registrationData.forEach((record, index) => {
+                    const gender = record.genderMale ? 'Male' : (record.genderFemale ? 'Female' : '');
+                    const row = [
+                        index + 1,
+                        record.date || '',
+                        record.studentFirst || '',
+                        record.studentMiddle || '',
+                        record.studentSurname || '',
+                        record.dob || '',
+                        gender,
+                        record.classApplied || '',
+                        record.fatherFirst || '',
+                        record.fatherMiddle || '',
+                        record.fatherSurname || '',
+                        record.fatherMobile || '',
+                        record.motherFirst || '',
+                        record.motherMiddle || '',
+                        record.motherSurname || '',
+                        record.motherMobile || '',
+                        record.landline || '',
+                        record.address || '',
+                        record.area || '',
+                        record.state || '',
+                        record.feeAdmission || '',
+                        record.feeCaution || '',
+                        record.feeDevelopment || '',
+                        record.totalFee || '',
+                        record.signatoryName || '',
+                        record.sib1Name || '',
+                        record.sib1ClassSec || '',
+                        record.sib1School || '',
+                        record.sib2Name || '',
+                        record.sib2ClassSec || '',
+                        record.sib2School || ''
+                    ].map(field => `"${String(field).replace(/"/g, '""')}"`);
+                    
+                    csv += row.join(',') + '\n';
+                });
+                csv += '\n\n';
+            }
+            
+            // Admission Records - ALL FIELDS
+            if (admissionData.length > 0) {
+                csv += '"ADMISSION RECORDS"\n';
+                csv += '"S.No","Admission Date","Scholar No","Student Name","DOB","DOB in Words","Current Age","Gender","Class","Section","House","Nationality","Religion","Category","Aadhaar No","APAAR ID","SSSM ID","PEN No","Family ID","Father Name","Father Mobile","Father Aadhaar","Father Qualification","Father Occupation","Mother Name","Mother Mobile","Mother Aadhaar","Mother Qualification","Mother Occupation","Guardian Name","Guardian Mobile","Guardian Aadhaar","Guardian Qualification","Guardian Occupation","Address","Previous School","Previous Class","Previous Affiliation","Last Session","TC No","TC Date","DOB Cert No","Caste Cert No","Admission Category","Bank Name","Bank Branch","Bank Account No","IFSC Code","Account Type","Account Holder","Sib1 Name","Sib1 Class/Sec","Sib1 School","Sib2 Name","Sib2 Class/Sec","Sib2 School","Declaration Name","Signatory Name","Signature Date","Signature Place"\n';
+                
+                admissionData.forEach((record, index) => {
+                    const row = [
+                        index + 1,
+                        record.admissionDate || '',
+                        record.scholarNo || '',
+                        record.studentName || '',
+                        record.dob || '',
+                        record.dobWords || '',
+                        record.currentAge || '',
+                        record.gender || '',
+                        record.class || '',
+                        record.section || '',
+                        record.house || '',
+                        record.nationality || '',
+                        record.religion || '',
+                        record.category || '',
+                        record.aadhaarNo || '',
+                        record.apaarId || '',
+                        record.sssmId || '',
+                        record.penNo || '',
+                        record.familyId || '',
+                        record.fatherName || '',
+                        record.fatherMobile || '',
+                        record.fatherAadhaar || '',
+                        record.fatherQual || '',
+                        record.fatherOcc || '',
+                        record.motherName || '',
+                        record.motherMobile || '',
+                        record.motherAadhaar || '',
+                        record.motherQual || '',
+                        record.motherOcc || '',
+                        record.guardianName || '',
+                        record.guardianMobile || '',
+                        record.guardianAadhaar || '',
+                        record.guardianQual || '',
+                        record.guardianOcc || '',
+                        record.address || '',
+                        record.prevSchool || '',
+                        record.prevClass || '',
+                        record.prevAffiliated || '',
+                        record.lastSession || '',
+                        record.tcNo || '',
+                        record.tcDate || '',
+                        record.dobCertNo || '',
+                        record.casteCertNo || '',
+                        record.admissionCategory || '',
+                        record.bankName || '',
+                        record.bankBranch || '',
+                        record.bankAccountNo || '',
+                        record.ifscCode || '',
+                        record.accountType || '',
+                        record.bankHolderName || '',
+                        record.sib1Name || '',
+                        record.sib1ClassSec || '',
+                        record.sib1School || '',
+                        record.sib2Name || '',
+                        record.sib2ClassSec || '',
+                        record.sib2School || '',
+                        record.declarationName || '',
+                        record.signatoryName || '',
+                        record.signatureDate || '',
+                        record.signaturePlace || ''
+                    ].map(field => `"${String(field).replace(/"/g, '""')}"`);
+                    
+                    csv += row.join(',') + '\n';
+                });
+            }
+            
+            if (!csv.trim()) {
+                alert('No data available to download!');
+                return;
+            }
+            
+            // Create download link
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'HEMA_School_Complete_Records_' + new Date().toISOString().split('T')[0] + '.csv');
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            alert('Data exported successfully!');
         }
     </script>
-
-<script>
-// Load all records on page load
-window.addEventListener('DOMContentLoaded', function() {
-    console.log('Loading all records...');
-    loadEnquiryRecords();
-    loadRegistrationRecords();
-    loadAdmissionRecords();
-});
-
-// Load Enquiry Records
-function loadEnquiryRecords() {
-    const records = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
-    console.log('Enquiry records:', records.length);
-
-    const tables = document.querySelectorAll('table');
-    if (tables.length < 1) return;
-
-    const tbody = tables[0].querySelector('tbody');
-    if (!tbody) return;
-
-    if (records.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:20px;">No enquiry records found</td></tr>';
-        return;
-    }
-
-    tbody.innerHTML = '';
-    records.forEach((record, index) => {
-        const row = tbody.insertRow();
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${record.date || '-'}</td>
-            <td>${record.studentFirstName || ''} ${record.studentSurname || ''}</td>
-            <td>${record.classApplying || '-'}</td>
-            <td>${record.gender || '-'}</td>
-            <td>${record.fatherMobile || '-'}</td>
-            <td>${record.district || '-'}</td>
-            <td>${record.pincode || '-'}</td>
-            <td>
-                <button onclick="editEnquiry(${index})" style="padding:5px 10px;background:#2196F3;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Edit</button>
-                <button onclick="viewEnquiry(${index})" style="padding:5px 10px;background:#4CAF50;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">View</button>
-                <button onclick="deleteEnquiry(${index})" style="padding:5px 10px;background:#f44336;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Delete</button>
-            </td>
-        `;
-    });
-}
-
-// Load Registration Records
-function loadRegistrationRecords() {
-    const records = JSON.parse(localStorage.getItem('registrationRecords')) || [];
-    console.log('Registration records:', records.length);
-
-    const tables = document.querySelectorAll('table');
-    if (tables.length < 2) return;
-
-    const tbody = tables[1].querySelector('tbody');
-    if (!tbody) return;
-
-    if (records.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:20px;">No registration records found</td></tr>';
-        return;
-    }
-
-    tbody.innerHTML = '';
-    records.forEach((record, index) => {
-        const row = tbody.insertRow();
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${record.regDate || '-'}</td>
-            <td>${record.studentName || ''} ${record.studentSurname || ''}</td>
-            <td>${record.class || '-'}</td>
-            <td>${record.gender || '-'}</td>
-            <td>${record.fatherMobile || '-'}</td>
-            <td>${record.state || '-'}</td>
-            <td>
-                <button onclick="editRegistration(${index})" style="padding:5px 10px;background:#2196F3;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Edit</button>
-                <button onclick="viewRegistration(${index})" style="padding:5px 10px;background:#4CAF50;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">View</button>
-                <button onclick="deleteRegistration(${index})" style="padding:5px 10px;background:#f44336;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Delete</button>
-            </td>
-        `;
-    });
-}
-
-// Load Admission Records
-function loadAdmissionRecords() {
-    const records = JSON.parse(localStorage.getItem('admissionRecords')) || [];
-    console.log('Admission records:', records.length);
-
-    const tables = document.querySelectorAll('table');
-    if (tables.length < 3) return;
-
-    const tbody = tables[2].querySelector('tbody');
-    if (!tbody) return;
-
-    if (records.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:20px;">No admission records found</td></tr>';
-        return;
-    }
-
-    tbody.innerHTML = '';
-    records.forEach((record, index) => {
-        const row = tbody.insertRow();
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${record.admDate || '-'}</td>
-            <td>${record.studentName || ''} ${record.studentSurname || ''}</td>
-            <td>${record.class || '-'}</td>
-            <td>${record.section || '-'}</td>
-            <td>${record.scholarNo || '-'}</td>
-            <td>${record.state || '-'}</td>
-            <td>
-                <button onclick="editAdmission(${index})" style="padding:5px 10px;background:#2196F3;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Edit</button>
-                <button onclick="viewAdmission(${index})" style="padding:5px 10px;background:#FF9800;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">View</button>
-                <button onclick="deleteAdmission(${index})" style="padding:5px 10px;background:#f44336;color:white;border:none;border-radius:4px;cursor:pointer;margin:2px;">Delete</button>
-            </td>
-        `;
-    });
-}
-
-// Edit functions
-function editEnquiry(index) {
-    const records = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
-    if (records[index]) {
-        const editData = {...records[index], editIndex: index};
-        localStorage.setItem('editEnquiryData', JSON.stringify(editData));
-        alert('📝 Opening enquiry form for editing...');
-        window.location.href = 'COMPLETE-ENQUIRY-FORM.html';
-    }
-}
-
-function editRegistration(index) {
-    const records = JSON.parse(localStorage.getItem('registrationRecords')) || [];
-    if (records[index]) {
-        const editData = {...records[index], editIndex: index};
-        localStorage.setItem('editRegistrationData', JSON.stringify(editData));
-        alert('📝 Opening registration form for editing...');
-        window.location.href = 'COMPLETE-REGISTRATION-FORM.html';
-    }
-}
-
-function editAdmission(index) {
-    const records = JSON.parse(localStorage.getItem('admissionRecords')) || [];
-    if (records[index]) {
-        const editData = {...records[index], editIndex: index};
-        localStorage.setItem('editAdmissionData', JSON.stringify(editData));
-        alert('📝 Opening admission form for editing...');
-        window.location.href = 'COMPLETE-ADMISSION-FORM.html';
-    }
-}
-
-// View functions
-function viewEnquiry(index) {
-    const records = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
-    if (records[index]) {
-        alert('Enquiry Details:\n\n' + JSON.stringify(records[index], null, 2));
-    }
-}
-
-function viewRegistration(index) {
-    const records = JSON.parse(localStorage.getItem('registrationRecords')) || [];
-    if (records[index]) {
-        alert('Registration Details:\n\n' + JSON.stringify(records[index], null, 2));
-    }
-}
-
-function viewAdmission(index) {
-    const records = JSON.parse(localStorage.getItem('admissionRecords')) || [];
-    if (records[index]) {
-        alert('Admission Details:\n\n' + JSON.stringify(records[index], null, 2));
-    }
-}
-
-// Delete functions
-function deleteEnquiry(index) {
-    if (confirm('Delete this enquiry record?')) {
-        let records = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
-        records.splice(index, 1);
-        localStorage.setItem('enquiryRecords', JSON.stringify(records));
-        loadEnquiryRecords();
-        alert('✅ Record deleted!');
-    }
-}
-
-function deleteRegistration(index) {
-    if (confirm('Delete this registration record?')) {
-        let records = JSON.parse(localStorage.getItem('registrationRecords')) || [];
-        records.splice(index, 1);
-        localStorage.setItem('registrationRecords', JSON.stringify(records));
-        loadRegistrationRecords();
-        alert('✅ Record deleted!');
-    }
-}
-
-function deleteAdmission(index) {
-    if (confirm('Delete this admission record?')) {
-        let records = JSON.parse(localStorage.getItem('admissionRecords')) || [];
-        records.splice(index, 1);
-        localStorage.setItem('admissionRecords', JSON.stringify(records));
-        loadAdmissionRecords();
-        alert('✅ Record deleted!');
-    }
-}
-</script>
-
 </body>
 </html>
