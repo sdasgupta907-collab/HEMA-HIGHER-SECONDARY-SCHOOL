@@ -2179,88 +2179,57 @@ function printForm() {
 // ============================================================================
 // 2. SAVE ENQUIRY FUNCTION - COMPLETE WITH ALL FIELDS
 // ============================================================================
-
 function saveEnquiry() {
-    // Get all form data
-    const formData = {};
-    const form = document.querySelector('form');
-    const inputs = form.querySelectorAll('input, select, textarea');
-
-    inputs.forEach(input => {
-        if (input.name) {
-            formData[input.name] = input.value.trim();
-        }
-    });
-
-    // Add timestamp
-    formData.date = new Date().toISOString().split('T')[0];
-
-    // Validate required fields
-    if (!formData.studentFirst || !formData.fatherMobile || !formData.class) {
-        alert('Please fill Student Name, Father Mobile, and Class before saving.');
-        return;
-    }
-
-    // Get existing enquiries
-    let enquiries = JSON.parse(localStorage.getItem('enquiries') || '[]');
-
-    // Add new enquiry
-    enquiries.unshift(formData);
-
-    // Save to localStorage
-    localStorage.setItem('enquiries', JSON.stringify(enquiries));
-
-    // Show success message
-    alert('Enquiry saved successfully! Proceeding to Registration...');
-
-    // Proceed to registration page
-    window.location.href = 'registration.html';
-}
-;
-
-    console.log('📋 Form data collected:', formData);
-
-    // VALIDATION - Check required fields
-    if (!formData.studentFirstName || formData.studentFirstName.trim() === '') {
-        alert('❌ ERROR: Please enter Student First Name');
-        document.getElementById('studentFirstName')?.focus();
-        return false;
-    }
-
-    if (!formData.classApplying || formData.classApplying === '') {
-        alert('❌ ERROR: Please select Class Applying For');
-        document.getElementById('classApplying')?.focus();
-        return false;
-    }
-
-    if (!formData.fatherMobile || formData.fatherMobile.trim() === '') {
-        alert('❌ ERROR: Please enter Father Mobile Number');
-        document.getElementById('fatherMobile')?.focus();
-        return false;
-    }
+    console.log('💾 saveEnquiry() called');
 
     try {
-        // Check if editing existing record
-        const editIndex = sessionStorage.getItem('editingEnquiryIndex');
-        let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+        // Get form and ALL data automatically using FormData
+        const form = document.getElementById('enquiryForm');
+        const formData = new FormData(form);
 
-        if (editIndex !== null && editIndex !== '' && editIndex !== 'null') {
-            // Update existing record
-            enquiryRecords[parseInt(editIndex)] = formData;
-            sessionStorage.removeItem('editingEnquiryIndex');
-            console.log('✏️ Updated existing record at index:', editIndex);
-        } else {
-            // Add new record
-            enquiryRecords.push(formData);
-            console.log('➕ Added new record');
+        // Convert FormData to object
+        const enquiryData = {};
+        for (let [key, value] of formData.entries()) {
+            enquiryData[key] = value;
         }
 
-        // Save to localStorage - BOTH places for compatibility
-        localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
-        localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
+        // Add metadata
+        enquiryData.submittedDate = new Date().toLocaleDateString('en-IN');
+        enquiryData.submittedTime = new Date().toLocaleTimeString('en-IN');
 
-        console.log('✅ Saved to localStorage');
-        console.log('📊 Total enquiry records:', enquiryRecords.length);
+        // Validate minimum required fields
+        if (!enquiryData.studentFirst || enquiryData.studentFirst.trim() === '') {
+            alert('❌ ERROR: Please enter Student First Name');
+            document.getElementById('studentFirst').focus();
+            return false;
+        }
+
+        if (!enquiryData.fatherMobile || enquiryData.fatherMobile.trim() === '') {
+            alert('❌ ERROR: Please enter Father Mobile Number');
+            document.getElementById('fatherMobile').focus();
+            return false;
+        }
+
+        if (!enquiryData.class || enquiryData.class.trim() === '') {
+            alert('❌ ERROR: Please select Class');
+            document.getElementById('class').focus();
+            return false;
+        }
+
+        // Get existing enquiries from localStorage
+        let enquiryRecords = JSON.parse(localStorage.getItem('enquiries') || '[]');
+
+        // Add new enquiry to the beginning
+        enquiryRecords.unshift(enquiryData);
+
+        // Save to localStorage
+        localStorage.setItem('enquiries', JSON.stringify(enquiryRecords));
+
+        // Also save as current enquiry for auto-fill in registration
+        localStorage.setItem('currentEnquiry', JSON.stringify(enquiryData));
+
+        console.log('✅ Enquiry saved successfully!', enquiryData);
+        console.log('📊 Total enquiries:', enquiryRecords.length);
 
         alert('✅ SUCCESS!\n\nEnquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
 
