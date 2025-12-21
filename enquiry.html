@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+/* ============================================================================ */
+/* HEMA SCHOOL HEADER - EXACT MATCH FROM IMAGE */
+/* ============================================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background: #f5f5f5;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Header with blue gradient background - matches image */
+.hema-school-header {
+    background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+    padding: 20px 15px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.header-left-logo,
+.header-right-logo {
+    flex-shrink: 0;
+}
+
+.logo-img {
+    width: 90px;
+    height: 90px;
+    display: block;
+}
+
+.header-center {
+    flex: 1;
+    text-align: center;
+    color: white;
+}
+
+.school-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.affiliation {
+    font-size: 14px;
+    color: #FFD700;
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.school-info {
+    font-size: 13px;
+    color: white;
+    margin: 3px 0;
+}
+
+/* Container */
+.container, .main-container, form {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Sections */
+.section {
+    width: 100%;
+    margin: 15px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid #4682B4;
+}
+
+.section h2, .section h3 {
+    font-size: 16px;
+    color: #1E3A5F;
+    margin-bottom: 12px;
+    font-weight: bold;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #E3F2FD;
+}
+
+/* Form rows */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-group.full-width {
+    flex-basis: 100%;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #4682B4;
+    box-shadow: 0 0 0 2px rgba(70,130,180,0.1);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+table th, table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background: #E3F2FD;
+    font-weight: bold;
+    color: #1E3A5F;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+button, .btn {
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    min-width: 170px;
+    transition: all 0.3s;
+}
+
+.btn-print {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-submit {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-register {
+    background: #FF9800;
+    color: white;
+}
+
+.btn-reset {
+    background: #9E9E9E;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Navigation tabs */
+.nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.nav-tabs a, .nav-tabs button {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .school-name {
+        font-size: 24px;
+    }
+
+    .logo-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .form-group {
+        min-width: 100%;
+        flex-basis: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* ============================================================================ */
+/* PRINT STYLES - A4 WITH COLORED HEADER */
+/* ============================================================================ */
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm 8mm;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Keep colored header in print */
+    .hema-school-header {
+        background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
+        padding: 15px !important;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    .hema-school-header * {
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .affiliation {
+        color: #FFD700 !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    .school-name {
+        font-size: 24pt !important;
+    }
+
+    .school-info, .affiliation {
+        font-size: 10pt !important;
+    }
+
+    .logo-img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    /* Hide buttons and navigation */
+    button, .btn, .btn-group, .button-group, .nav-tabs, .no-print {
+        display: none !important;
+    }
+
+    /* Optimize sections */
+    .section {
+        margin: 8px 0 !important;
+        padding: 10px !important;
+        box-shadow: none !important;
+        border: 1px solid #999 !important;
+        page-break-inside: avoid !important;
+    }
+
+    .section h2, .section h3 {
+        font-size: 13pt !important;
+        color: #1E3A5F !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    .form-row {
+        margin-bottom: 5px !important;
+    }
+
+    input, select, textarea {
+        border: none !important;
+        border-bottom: 1px solid #333 !important;
+        padding: 2px 4px !important;
+        font-size: 11pt !important;
+    }
+
+    label {
+        font-size: 10pt !important;
+        font-weight: bold !important;
+    }
+
+    table {
+        font-size: 10pt !important;
+    }
+
+    table th {
+        background: #E3F2FD !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+}
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEMA HIGHER SECONDARY SCHOOL - Enquiry Form 2026-2027</title>
+    <style>
+        /* LOGO HEADER */
+        .logo-header {
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .header-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo-box {
+            flex: 0 0 120px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-left {
+            justify-content: flex-start;
+        }
+
+        .logo-right {
+            justify-content: flex-end;
+        }
+
+        .logo-img {
+            height: 90px;
+            width: auto;
+            max-width: 120px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .school-info {
+            flex: 1;
+            text-align: center;
+            padding: 0 15px;
+            min-width: 0;
+        }
+
+        .school-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            letter-spacing: 1.5px;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .school-details {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .detail-line {
+            margin: 4px 0;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .detail-line strong {
+            color: #FFD700;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .contact-line a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-line a:hover {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Calibri', 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        /* LOGO HEADER */
+        .logo-header {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .logo-container {
+            margin-bottom: 15px;
+        }
+
+        .school-logo {
+            height: 80px;
+            width: auto;
+            max-width: 150px;
+            object-fit: contain;
+        }
+
+        .school-details h1 {
+            font-size: 26px;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .affiliation-info {
+            font-size: 12px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .affiliation-info strong {
+            color: #ffd700;
+            font-size: 13px;
+        }
+
+        .session-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #2874A6;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .nav-bar {
+            background: #f5f5f5;
+            padding: 15px 30px;
+            display: flex;
+            gap: 20px;
+            border-bottom: 2px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #2874A6;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-bar a:hover { background: #e0e0e0; }
+        .nav-bar a.active { background: #2874A6; color: white; }
+
+        .form-container { padding: 30px; }
+
+        fieldset {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        legend {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2874A6;
+            padding: 0 10px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .row.full { grid-template-columns: 1fr; }
+        .row.half { grid-template-columns: 1fr 1fr; }
+        .row.four { grid-template-columns: repeat(4, 1fr); }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .form-group.required label::after {
+            content: ' *';
+            color: red;
+        }
+
+        input, select, textarea {
+            padding: 10px;
+            border: 1.5px solid #ddd;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+        }
+
+        input.uppercase { text-transform: uppercase; }
+        input[readonly] { background: #f5f5f5; cursor: not-allowed; }
+
+        .gender-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .gender-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+
+        .gender-group input[type="radio"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .age-display {
+            padding: 10px;
+            background: #e8f0fe;
+            border-radius: 5px;
+            font-weight: 600;
+            color: #2874A6;
+            text-align: center;
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .age-info {
+            font-size: 11px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+            color: #2874A6;
+        }
+
+        .documents-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .doc-item:hover {
+            background: #e8f0fe;
+            border-color: #667eea;
+        }
+
+        .doc-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .doc-item label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+        .btn-print { background: #4CAF50; color: white; }
+        .btn-submit { background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 100%); color: white; }
+        .btn-register { background: #FF9800; color: white; }
+        .btn-reset { background: #f44336; color: white; }
+
+        /* PRINT STYLES */
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .nav-bar, .buttons, .no-print { display: none !important; }
+            .form-container { padding: 20px; }
+            .logo-header {
+                background: white !important;
+                color: #1e3c72 !important;
+                border-bottom: 3px solid #1e3c72;
+                page-break-after: avoid;
+            }
+            fieldset { page-break-inside: avoid; border: 1px solid #999; }
+            input, select, textarea { border: 1px solid #999; }
+        }
+
+        @media screen and (max-width: 768px) {
+            .row, .row.half, .row.four { grid-template-columns: 1fr; }
+            .documents-grid { grid-template-columns: 1fr; }
+        }
+    
+        /* FEE CALCULATOR SECTION */
+        .fee-calculator-section {
+            border: 2px solid #3498DB;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+        }
+
+        .fee-calculator-section legend {
+            color: #2874A6;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 0 10px;
+        }
+
+        .fee-input-group {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .fee-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2874A6;
+            font-size: 15px;
+        }
+
+        .fee-input-group select {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border: 2px solid #3498DB;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .sibling-checkbox label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .sibling-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .fee-table-container {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .fee-table-container h4 {
+            color: #2874A6;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #e8f4f8;
+            border-left: 4px solid #3498DB;
+        }
+
+        .fee-display-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fee-display-table thead {
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+            color: white;
+        }
+
+        .fee-display-table th,
+        .fee-display-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .fee-display-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .fee-display-table .total-row {
+            background: #D6EAF8 !important;
+            font-weight: 700;
+        }
+
+        .grand-total-display {
+            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .grand-total-display h3 {
+            margin: 0 0 15px 0;
+            text-align: center;
+        }
+
+        .grand-total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .grand-sum {
+            font-size: 18px;
+            border-top: 2px solid white !important;
+            padding-top: 12px !important;
+            margin-top: 8px;
+        }
+
+        .discount-display {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .discount-display h4 {
+            color: #27AE60;
+            margin-bottom: 15px;
+        }
+
+        .discount-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .discount-box {
+            flex: 1;
+            min-width: 200px;
+            background: #E8F8F5;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #27AE60;
+        }
+
+        .discount-box strong {
+            display: block;
+            color: #1E8449;
+            margin-bottom: 10px;
+        }
+
+        .discount-box p {
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .fee-notes-display {
+            background: #FFF9E6;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #F39C12;
+        }
+
+        .fee-notes-display h4 {
+            color: #D68910;
+            margin-bottom: 10px;
+        }
+
+        .fee-notes-display ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .fee-notes-display li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .fee-notes-display li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27AE60;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .discount-row {
+                flex-direction: column;
+            }
+        }
+
+        
+        /* ========== ATTRACTIVE HEADER STYLES ========== */
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            background-image: 
+                linear-gradient(135deg, rgba(30, 60, 114, 0.95) 0%, rgba(42, 82, 152, 0.95) 100%),
+                url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="rgba(255,255,255,0.03)" fill-rule="nonzero"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            padding: 0;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 5px solid #f39c12;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 30px;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 0 0 140px;
+        }
+
+        .logo-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            border: 4px solid #f39c12;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-circle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(243, 156, 18, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .logo-circle:hover::before {
+            left: 100%;
+        }
+
+        .header-logo {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .logo-label {
+            color: #f39c12;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .school-info-section {
+            flex: 1;
+            text-align: center;
+        }
+
+        .school-name {
+            font-size: 38px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(243, 156, 18, 0.3);
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .school-tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(243, 156, 18, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 2px solid #f39c12;
+        }
+
+        .tagline-icon {
+            font-size: 18px;
+        }
+
+        .tagline-text {
+            color: #ffd700;
+            font-size: 15px;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .header-middle {
+            margin-bottom: 15px;
+        }
+
+        .affiliation-badge {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 15px;
+        }
+
+        .badge-icon {
+            background: white;
+            color: #f39c12;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .affiliation-badge strong {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .info-icon {
+            font-size: 16px;
+        }
+
+        .info-text {
+            color: #e0e0e0;
+        }
+
+        .info-text strong {
+            color: #ffd700;
+        }
+
+        .info-divider {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 18px;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(243, 156, 18, 0.2);
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(243, 156, 18, 0.4);
+        }
+
+        .contact-icon {
+            font-size: 14px;
+        }
+
+        .contact-text {
+            color: #ffd700;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .contact-link {
+            color: #ffd700;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .contact-divider {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 16px;
+        }
+
+        @media (max-width: 1024px) {
+            .header-wrapper { padding: 15px 25px; }
+            .school-name { font-size: 30px; }
+            .logo-circle { width: 90px; height: 90px; }
+            .header-logo { width: 70px; height: 70px; }
+        }
+
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; gap: 20px; }
+            .logo-section { flex: 0 0 auto; }
+            .school-name { font-size: 24px; letter-spacing: 2px; }
+            .logo-circle { width: 80px; height: 80px; }
+            .header-logo { width: 60px; height: 60px; }
+            .info-grid { flex-direction: column; gap: 10px; }
+            .info-divider { display: none; }
+            .affiliation-badge { font-size: 13px; padding: 10px 20px; }
+            .contact-grid { flex-direction: column; gap: 8px; }
+            .contact-divider { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .header-wrapper { padding: 15px; }
+            .school-name { font-size: 20px; letter-spacing: 1px; }
+            .logo-circle { width: 70px; height: 70px; }
+            .header-logo { width: 50px; height: 50px; }
+            .info-item, .contact-item { font-size: 12px; }
+        }
+
+</style>
+</head>
+<body>
+
+<!-- HEMA School Header with Blue Background -->
+<div class="hema-school-header">
+    <div class="header-content">
+        <div class="header-left-logo">
+            <img src="school-logo.png" alt="HEMA Logo" class="logo-img">
+        </div>
+        <div class="header-center">
+            <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
+            <p class="affiliation"><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
+            <p class="school-info">School Code: 50383 | Affiliation No.: 1030417</p>
+            <p class="school-info">Govindpura, Bhopal, Madhya Pradesh, India - 462023</p>
+            <p class="school-info">📧 support@hemaschool.education | 📞 0755-2457270</p>
+        </div>
+        <div class="header-right-logo">
+            <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
+        </div>
+    </div>
+</div>
+
+
+        <div class="container">
+
+        <div class="nav-bar no-print">
+            <a href="enquiry.html" class="active">📝 Enquiry</a>
+            <a href="registration.html">📋 Registration</a>
+            <a href="admission.html">✅ Admission</a>
+            <a href="data.html" >📊 Records</a>
+        </div>
+
+        <div class="form-container">
+            <form id="enquiryForm">
+                <!-- BASIC INFORMATION -->
+                <fieldset>
+                    <legend>📋 BASIC INFORMATION</legend>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sno">S.NO.:</label>
+                            <input type="text" id="sno" name="sno" value="2026001" readonly style="background:#f0f0f0;font-weight:bold;color:#1e3c72;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">DATE</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <!-- STUDENT DETAILS -->
+                <fieldset>
+                    <legend>👤 STUDENT DETAILS</legend>
+                    <div class="row">
+                        <div class="form-group required">
+                            <label for="studentFirst">FIRST NAME</label>
+                            <input type="text" id="studentFirst" name="studentFirst" class="uppercase" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentMiddle">MIDDLE NAME</label>
+                            <input type="text" id="studentMiddle" name="studentMiddle" class="uppercase">
+                        </div>
+                        <div class="form-group">
+                            <label for="studentSurname">SURNAME</label>
+                            <input type="text" id="studentSurname" name="studentSurname" class="uppercase">
+                        </div>
+                    </div>
+
+                    <div class="row half">
+                        <div class="form-group">
+                            <label>GENDER</label>
+                            <div class="gender-group">
+                                <label><input type="radio" name="gender" value="MALE" required> MALE</label>
+                                <label><input type="radio" name="gender" value="FEMALE" required> FEMALE</label>
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="classApplied">CLASS APPLYING FOR</label>
+                            <select id="classApplied" name="classApplied" required>
+                                <option value="">-- SELECT CLASS --</option>
+                                <option value="NURSERY">NURSERY</option>
+                                <option value="KG I">KG I</option>
+                                <option value="KG II">KG II</option>
+                                <option value="I">CLASS I</option>
+                                <option value="II">CLASS II</option>
+                                <option value="III">CLASS III</option>
+                                <option value="IV">CLASS IV</option>
+                                <option value="V">CLASS V</option>
+                                <option value="VI">CLASS VI</option>
+                                <option value="VII">CLASS VII</option>
+                                <option value="VIII">CLASS VIII</option>
+                                <option value="IX">CLASS IX</option>
+                                <option value="X">CLASS X</option>
+                                <option value="XI">CLASS XI</option>
+                                <option value="XII">CLASS XII</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group required">
+                            <label for="dob">DATE OF BIRTH</label>
+                            <input type="date" id="dob" name="dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CURRENT AGE</label>
+                            <div id="ageDisplay" class="age-display">-- Select DOB --</div>
+                        </div>
+                        <div class="form-group" id="ageAsOnGroup" style="display:none;">
+                            <label id="ageAsOnLabel">AGE AS ON</label>
+                            <div id="ageAsOnDisplay" class="age-display">--</div>
+                            <div class="age-info" id="ageAsOnInfo"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- PARENT DETAILS -->
+                <fieldset>
+                    <legend>👨‍👩 PARENT DETAILS</legend>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="fatherFirst">FATHER FIRST NAME</label>
+                            <input type="text" id="fatherFirst" name="fatherFirst" class="uppercase">
+                        </div>
+                        <div class="form-group">
+                            <label for="fatherMiddle">MIDDLE NAME</label>
+                            <input type="text" id="fatherMiddle" name="fatherMiddle" class="uppercase">
+                        </div>
+                        <div class="form-group">
+                            <label for="fatherSurname">SURNAME</label>
+                            <input type="text" id="fatherSurname" name="fatherSurname" class="uppercase">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="motherFirst">MOTHER FIRST NAME</label>
+                            <input type="text" id="motherFirst" name="motherFirst" class="uppercase">
+                        </div>
+                        <div class="form-group">
+                            <label for="motherMiddle">MIDDLE NAME</label>
+                            <input type="text" id="motherMiddle" name="motherMiddle" class="uppercase">
+                        </div>
+                        <div class="form-group">
+                            <label for="motherSurname">SURNAME</label>
+                            <input type="text" id="motherSurname" name="motherSurname" class="uppercase">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group required">
+                            <label for="fatherMobile">FATHER MOBILE</label>
+                            <input type="tel" id="fatherMobile" name="fatherMobile" pattern="[0-9]{10}" placeholder="10 digit mobile" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="motherMobile">MOTHER MOBILE</label>
+                            <input type="tel" id="motherMobile" name="motherMobile" pattern="[0-9]{10}" placeholder="10 digit mobile">
+                        </div>
+                        <div class="form-group">
+                            <label for="landline">LANDLINE (Optional)</label>
+                            <input type="tel" id="landline" name="landline">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- CONTACT DETAILS - UPDATED WITH DISTRICT & PINCODE -->
+                <fieldset>
+                    <legend>📍 CONTACT DETAILS</legend>
+                    <div class="row full">
+                        <div class="form-group required">
+                            <label for="address">COMPLETE ADDRESS</label>
+                            <textarea id="address" name="address" rows="2" class="uppercase" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row four">
+                        <div class="form-group">
+                            <label for="area">AREA / LOCALITY</label>
+                            <input type="text" id="area" name="area" class="uppercase">
+                        </div>
+                        <div class="form-group required">
+                            <label for="city">CITY</label>
+                            <input type="text" id="city" name="city" class="uppercase" value="BHOPAL" required>
+                        </div>
+                        <div class="form-group required">
+                            <label for="district">DISTRICT</label>
+                            <input type="text" id="district" name="district" class="uppercase" value="BHOPAL" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">STATE</label>
+                            <input type="text" id="state" name="state" class="uppercase" value="MADHYA PRADESH">
+                        </div>
+                    </div>
+                    <div class="row half">
+                        <div class="form-group required">
+                            <label for="pincode">PIN CODE</label>
+                            <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" placeholder="6 digit PIN" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">COUNTRY</label>
+                            <input type="text" id="country" name="country" class="uppercase" value="INDIA" readonly>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>👨‍👩‍👧‍👦 SIBLING DETAILS (IF ANY)</legend>
+                    <div class="sibling-section">
+                        <h3 style="margin-bottom: 15px; color: #1e3c72;">SIBLING 1</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="sib1Name">NAME</label>
+                                <input type="text" id="sib1Name" name="sib1Name" class="uppercase">
+                            </div>
+                            <div class="form-group">
+                                <label for="sib1School">SCHOOL</label>
+                                <input type="text" id="sib1School" name="sib1School" class="uppercase">
+                            </div>
+                            <div class="form-group">
+                                <label for="sib1Class">CLASS</label>
+                                <select id="sib1Class" name="sib1Class">
+                                    <option value="">-- SELECT --</option>
+                                    <option value="NURSERY">NURSERY</option>
+                                    <option value="KG I">KG I</option>
+                                    <option value="KG II">KG II</option>
+                                    <option value="I">I</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                    <option value="V">V</option>
+                                    <option value="VI">VI</option>
+                                    <option value="VII">VII</option>
+                                    <option value="VIII">VIII</option>
+                                    <option value="IX">IX</option>
+                                    <option value="X">X</option>
+                                    <option value="XI">XI</option>
+                                    <option value="XII">XII</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="sib1Section">SECTION</label>
+                                <select id="sib1Section" name="sib1Section">
+                                    <option value="">--</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </div>
+                            <div class="form-group"></div>
+                            <div class="form-group"></div>
+                        </div>
+                    </div>
+
+                    <div class="sibling-section">
+                        <h3 style="margin-bottom: 15px; color: #1e3c72;">SIBLING 2</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="sib2Name">NAME</label>
+                                <input type="text" id="sib2Name" name="sib2Name" class="uppercase">
+                            </div>
+                            <div class="form-group">
+                                <label for="sib2School">SCHOOL</label>
+                                <input type="text" id="sib2School" name="sib2School" class="uppercase">
+                            </div>
+                            <div class="form-group">
+                                <label for="sib2Class">CLASS</label>
+                                <select id="sib2Class" name="sib2Class">
+                                    <option value="">-- SELECT --</option>
+                                    <option value="NURSERY">NURSERY</option>
+                                    <option value="KG I">KG I</option>
+                                    <option value="KG II">KG II</option>
+                                    <option value="I">I</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                    <option value="V">V</option>
+                                    <option value="VI">VI</option>
+                                    <option value="VII">VII</option>
+                                    <option value="VIII">VIII</option>
+                                    <option value="IX">IX</option>
+                                    <option value="X">X</option>
+                                    <option value="XI">XI</option>
+                                    <option value="XII">XII</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="sib2Section">SECTION</label>
+                                <select id="sib2Section" name="sib2Section">
+                                    <option value="">--</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </div>
+                            <div class="form-group"></div>
+                            <div class="form-group"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>📢 SOURCE OF INFORMATION</legend>
+                    <div class="form-group">
+                        <label>HOW DID YOU KNOW ABOUT US?</label>
+                        <div class="source-group">
+                            <label><input type="checkbox" name="source" value="NEWSPAPER"> NEWSPAPER</label>
+                            <label><input type="checkbox" name="source" value="SCHOOL WEBSITE"> SCHOOL WEBSITE</label>
+                            <label><input type="checkbox" name="source" value="FACEBOOK"> FACEBOOK</label>
+                            <label><input type="checkbox" name="source" value="INSTAGRAM"> INSTAGRAM</label>
+                            <label><input type="checkbox" name="source" value="BILLBOARD"> BILLBOARD</label>
+                            <label><input type="checkbox" name="source" value="WORD OF MOUTH"> WORD OF MOUTH</label>
+                        </div>
+                    </div>
+
+                    <div class="row full">
+                        <div class="form-group">
+                            <label>IF REFERRED</label>
+                            <div class="referred-group">
+                                <label><input type="radio" name="referredType" value="MEMBER"> MEMBER</label>
+                                <label><input type="radio" name="referredType" value="PARENT"> PARENT</label>
+                                <label><input type="radio" name="referredType" value="STAFF"> STAFF</label>
+                                <label><input type="radio" name="referredType" value="OTHER"> OTHER</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row full">
+                        <div class="form-group">
+                            <label for="referredName">REFERRED PERSON'S NAME</label>
+                            <input type="text" id="referredName" name="referredName" class="uppercase">
+                        </div>
+                    </div>
+                </fieldset>
+
+                
+
+                <!-- FEE DETAILS SECTION -->
+                <fieldset class="fee-calculator-section">
+                    <legend>📋 FEE DETAILS - ACADEMIC SESSION 2026-2027</legend>
+
+                    <!-- Class Selection -->
+                    <div class="fee-input-group">
+                        <label for="feeClass"><strong>Select Class:</strong></label>
+                        <select id="feeClass" onchange="calculateFees()">
+                            <option value="">-- Select Class --</option>
+                            <option value="nursery">Nursery / KG-I / KG-II</option>
+                            <option value="1">Class I</option>
+                            <option value="2">Class II</option>
+                            <option value="3">Class III</option>
+                            <option value="4">Class IV-V</option>
+                            <option value="6">Class VI-VIII</option>
+                            <option value="9">Class IX-X</option>
+                            <option value="11sci">Class XI-XII (Science - PCM/PCB Optional)</option>
+                            <option value="11sci2">Class XI-XII (Science - Hindi/Psy)</option>
+                            <option value="11comm">Class XI-XII (Commerce - Optional)</option>
+                            <option value="11hum">Class XI-XII (Humanities)</option>
+                        </select>
+                    </div>
+
+                    <!-- Sibling Checkbox -->
+                    <div class="fee-input-group sibling-checkbox">
+                        <label>
+                            <input type="checkbox" id="siblingDiscount" onchange="calculateFees()">
+                            <span><strong>2nd Child Discount</strong> (50% off Admission Fee & Tuition Fee)</span>
+                        </label>
+                    </div>
+
+                    <!-- Fee Display Tables -->
+                    <div id="feeDisplay" style="display: none;">
+                        <!-- Admission Fees -->
+                        <div class="fee-table-container">
+                            <h4>ONE-TIME ADMISSION FEES</h4>
+                            <table class="fee-display-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.NO.</th>
+                                        <th>PARTICULAR</th>
+                                        <th style="text-align: right;">AMOUNT (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1.</td>
+                                        <td>ADMISSION FEE</td>
+                                        <td style="text-align: right;" id="admissionFee">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2.</td>
+                                        <td>DEVELOPMENT FUND</td>
+                                        <td style="text-align: right;" id="developmentFund">5,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3.</td>
+                                        <td>CAUTION MONEY DEPOSIT</td>
+                                        <td style="text-align: right;" id="cautionMoney">3,000</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td colspan="2"><strong>TOTAL ADMISSION FEES</strong></td>
+                                        <td style="text-align: right;"><strong id="totalAdmission">0</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Annual Fees -->
+                        <div class="fee-table-container">
+                            <h4>ANNUAL FEES (9 MONTHS: APRIL TO FEBRUARY)</h4>
+                            <table class="fee-display-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.NO.</th>
+                                        <th>PARTICULAR</th>
+                                        <th style="text-align: right;">AMOUNT (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>4.</td>
+                                        <td>TUITION FEE (9 Installments)</td>
+                                        <td style="text-align: right;" id="tuitionFee">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5.</td>
+                                        <td>ANNUAL CHARGES (9 Installments)</td>
+                                        <td style="text-align: right;" id="annualCharges">0</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td colspan="2"><strong>TOTAL ANNUAL FEES</strong></td>
+                                        <td style="text-align: right;"><strong id="totalAnnual">0</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Monthly Installment -->
+                        <div class="fee-table-container">
+                            <h4>MONTHLY INSTALLMENT</h4>
+                            <table class="fee-display-table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Monthly Payment (× 9 months)</strong></td>
+                                        <td style="text-align: right;"><strong id="monthlyInstallment">0</strong></td>
+                                    </tr>
+                                    <tr style="background: #fff9e6;">
+                                        <td colspan="2" style="text-align: center; font-style: italic; font-size: 13px;">
+                                            Payment Due: 5th to 15th of every month
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Grand Total -->
+                        <div class="grand-total-display">
+                            <h3>💰 TOTAL FEES FOR ACADEMIC YEAR 2026-2027</h3>
+                            <div class="grand-total-row">
+                                <span>One-Time Admission Fees:</span>
+                                <span id="grandAdmission">₹0</span>
+                            </div>
+                            <div class="grand-total-row">
+                                <span>Annual Fees (9 Months):</span>
+                                <span id="grandAnnual">₹0</span>
+                            </div>
+                            <div class="grand-total-row grand-sum">
+                                <span><strong>GRAND TOTAL:</strong></span>
+                                <span><strong id="grandTotal">₹0</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Discount Info -->
+                        <div class="discount-display">
+                            <h4>🎁 ONE-TIME PAYMENT DISCOUNTS (on Annual Fees only)</h4>
+                            <div class="discount-row">
+                                <div class="discount-box">
+                                    <strong>8% Discount (By 30th April 2026)</strong>
+                                    <p>Save: <span id="discount8">₹0</span></p>
+                                    <p>Pay: <span id="after8Discount">₹0</span></p>
+                                </div>
+                                <div class="discount-box">
+                                    <strong>5% Discount (By 30th June 2026)</strong>
+                                    <p>Save: <span id="discount5">₹0</span></p>
+                                    <p>Pay: <span id="after5Discount">₹0</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Important Notes -->
+                        <div class="fee-notes-display">
+                            <h4>📌 IMPORTANT NOTES:</h4>
+                            <ul>
+                                <li>Registration Fee: ₹1,500/- (Non-refundable)</li>
+                                <li>Sibling Discount: 50% on Admission & Tuition for 2nd child</li>
+                                <li>Late Payment: ₹10/day fine after due date</li>
+                                <li>Caution Money: Refundable at TC issuance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <script>
+                const feeData = {
+                    'nursery': { admission: 27000, development: 5000, caution: 3000, tuition: 14645, annual: 6955, monthly: 2400 },
+                    '1': { admission: 30000, development: 5000, caution: 3000, tuition: 21296, annual: 9754, monthly: 3450 },
+                    '2': { admission: 30000, development: 5000, caution: 3000, tuition: 22634, annual: 13906, monthly: 4060 },
+                    '3': { admission: 30000, development: 5000, caution: 3000, tuition: 23954, annual: 15304, monthly: 4362 },
+                    '4': { admission: 30000, development: 5000, caution: 3000, tuition: 26620, annual: 17390, monthly: 4890 },
+                    '6': { admission: 41000, development: 5000, caution: 3000, tuition: 29280, annual: 17385, monthly: 5185 },
+                    '9': { admission: 55000, development: 5000, caution: 3000, tuition: 29286, annual: 23634, monthly: 5880 },
+                    '11sci': { admission: 62000, development: 5000, caution: 3000, tuition: 29280, annual: 25044, monthly: 6036 },
+                    '11sci2': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 18090, monthly: 5264 },
+                    '11comm': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 23526, monthly: 5868 },
+                    '11hum': { admission: 62000, development: 5000, caution: 3000, tuition: 29290, annual: 16700, monthly: 5110 }
+                };
+
+                function formatCurrency(amount) {
+                    return amount.toLocaleString('en-IN');
+                }
+
+                function calculateFees() {
+                    const selectedClass = document.getElementById('feeClass').value;
+                    const isSibling = document.getElementById('siblingDiscount').checked;
+                    const feeDisplay = document.getElementById('feeDisplay');
+
+                    if (!selectedClass) {
+                        feeDisplay.style.display = 'none';
+                        return;
+                    }
+
+                    feeDisplay.style.display = 'block';
+                    const fees = feeData[selectedClass];
+
+                    let admissionFee = fees.admission;
+                    let tuitionFee = fees.tuition;
+
+                    if (isSibling) {
+                        admissionFee = Math.round(fees.admission * 0.5);
+                        tuitionFee = Math.round(fees.tuition * 0.5);
+                    }
+
+                    const developmentFund = fees.development;
+                    const cautionMoney = fees.caution;
+                    const annualCharges = fees.annual;
+                    const monthlyInstallment = fees.monthly;
+
+                    const totalAdmission = admissionFee + developmentFund + cautionMoney;
+                    const totalAnnual = tuitionFee + annualCharges;
+                    const grandTotal = totalAdmission + totalAnnual;
+
+                    const discount8Percent = Math.round(totalAnnual * 0.08);
+                    const discount5Percent = Math.round(totalAnnual * 0.05);
+                    const after8Discount = totalAdmission + (totalAnnual - discount8Percent);
+                    const after5Discount = totalAdmission + (totalAnnual - discount5Percent);
+
+                    document.getElementById('admissionFee').textContent = formatCurrency(admissionFee);
+                    document.getElementById('developmentFund').textContent = formatCurrency(developmentFund);
+                    document.getElementById('cautionMoney').textContent = formatCurrency(cautionMoney);
+                    document.getElementById('totalAdmission').textContent = formatCurrency(totalAdmission);
+
+                    document.getElementById('tuitionFee').textContent = formatCurrency(tuitionFee);
+                    document.getElementById('annualCharges').textContent = formatCurrency(annualCharges);
+                    document.getElementById('totalAnnual').textContent = formatCurrency(totalAnnual);
+
+                    document.getElementById('monthlyInstallment').textContent = formatCurrency(monthlyInstallment);
+
+                    document.getElementById('grandAdmission').textContent = '₹' + formatCurrency(totalAdmission);
+                    document.getElementById('grandAnnual').textContent = '₹' + formatCurrency(totalAnnual);
+                    document.getElementById('grandTotal').textContent = '₹' + formatCurrency(grandTotal);
+
+                    document.getElementById('discount8').textContent = '₹' + formatCurrency(discount8Percent);
+                    document.getElementById('after8Discount').textContent = '₹' + formatCurrency(after8Discount);
+                    document.getElementById('discount5').textContent = '₹' + formatCurrency(discount5Percent);
+                    document.getElementById('after5Discount').textContent = '₹' + formatCurrency(after5Discount);
+                }
+                
+
+        // DOB Automation Functions
+        function calculateAge(dob, asOfDate) {
+            const dobDate = new Date(dob);
+            const refDate = asOfDate ? new Date(asOfDate) : new Date();
+
+            let years = refDate.getFullYear() - dobDate.getFullYear();
+            let months = refDate.getMonth() - dobDate.getMonth();
+            let days = refDate.getDate() - dobDate.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            return { years, months, days };
+        }
+
+        function updateAgeDisplays() {
+            const dob = document.getElementById('dob').value;
+            const selectedClass = document.getElementById('classApplied').value;
+
+            if (!dob) {
+                document.getElementById('ageDisplay').innerHTML = '-- Select DOB --';
+                document.getElementById('ageAsOnGroup').style.display = 'none';
+                return;
+            }
+
+            // Current age
+            const currentAge = calculateAge(dob);
+            document.getElementById('ageDisplay').innerHTML = 
+                `<strong>${currentAge.years}</strong> Years <strong>${currentAge.months}</strong> Months <strong>${currentAge.days}</strong> Days`;
+
+            // Age as on specific date based on class
+            const ageAsOnGroup = document.getElementById('ageAsOnGroup');
+            const ageAsOnLabel = document.getElementById('ageAsOnLabel');
+            const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
+            const ageAsOnInfo = document.getElementById('ageAsOnInfo');
+
+            if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
+                // Age as on 31 July 2026
+                const ageAsOn31July = calculateAge(dob, '2026-07-31');
+                ageAsOnGroup.style.display = 'block';
+                ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
+                ageAsOnDisplay.innerHTML = 
+                    `<strong>${ageAsOn31July.years}</strong> Y <strong>${ageAsOn31July.months}</strong> M <strong>${ageAsOn31July.days}</strong> D`;
+                ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
+            } else if (selectedClass === 'I') {
+                // Age as on 30 Sept 2026
+                const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
+                ageAsOnGroup.style.display = 'block';
+                ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
+                ageAsOnDisplay.innerHTML = 
+                    `<strong>${ageAsOn30Sept.years}</strong> Y <strong>${ageAsOn30Sept.months}</strong> M <strong>${ageAsOn30Sept.days}</strong> D`;
+                ageAsOnInfo.textContent = 'For Class I admission';
+            } else {
+                ageAsOnGroup.style.display = 'none';
+            }
+        }
+
+        // Add event listeners for DOB automation
+        document.getElementById('dob').addEventListener('change', updateAgeDisplays);
+        document.getElementById('classApplied').addEventListener('change', updateAgeDisplays);
+
+    </script>
+
+                <!-- REQUIRED DOCUMENTS -->
+                <fieldset>
+                    <legend>📄 REQUIRED DOCUMENTS CHECKLIST</legend>
+                    <p style="font-size: 12px; color: #666; margin-bottom: 15px;">
+                        Please check the documents that will be provided at the time of admission:
+                    </p>
+                    <div class="documents-grid">
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc1" name="doc1" value="Birth Certificate">
+                            <label for="doc1">Birth Certificate (Original + Copy)</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc2" name="doc2" value="Aadhaar Card">
+                            <label for="doc2">Aadhaar Card / Passport</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc3" name="doc3" value="Transfer Certificate">
+                            <label for="doc3">Transfer Certificate (TC)</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc4" name="doc4" value="Mark Sheet">
+                            <label for="doc4">Mark Sheet (Previous Class)</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc5" name="doc5" value="Character Certificate">
+                            <label for="doc5">Character Certificate</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc6" name="doc6" value="Vaccination Certificate">
+                            <label for="doc6">Vaccination Certificate</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc7" name="doc7" value="Photographs">
+                            <label for="doc7">Passport Photos (4 copies 4x6)</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc8" name="doc8" value="Parent ID">
+                            <label for="doc8">Parent ID Proof (Both)</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc9" name="doc9" value="Address Proof">
+                            <label for="doc9">Address Proof (Electricity/Rent)</label>
+                        </div>
+                        <div class="doc-item">
+                            <input type="checkbox" id="doc10" name="doc10" value="Medical Certificate">
+                            <label for="doc10">Medical Certificate (Optional)</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- BUTTONS -->
+                <div class="buttons no-print">
+                    <button type="button" onclick="printForm()" class="btn-print">🖨️ PRINT / SAVE AS PDF</button>
+                    <button type="button" onclick="saveEnquiry()" class="btn-submit">✓ SAVE ENQUIRY</button>
+                    <button type="button" onclick="proceedToRegistration()" class="btn-register">📋 PROCEED TO REGISTRATION</button>
+                    <button type="reset" class="btn-reset">✕ CLEAR FORM</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // FEE DATA
+        const feeData = {
+            "NURSERY": { admission: 27000, development: 5000, caution: 3000 },
+            "KG I": { admission: 27000, development: 5000, caution: 3000 },
+            "KG II": { admission: 27000, development: 5000, caution: 3000 },
+            "I": { admission: 30000, development: 5000, caution: 3000 },
+            "II": { admission: 30000, development: 5000, caution: 3000 },
+            "III": { admission: 30000, development: 5000, caution: 3000 },
+            "IV": { admission: 30000, development: 5000, caution: 3000 },
+            "V": { admission: 30000, development: 5000, caution: 3000 },
+            "VI": { admission: 41000, development: 5000, caution: 3000 },
+            "VII": { admission: 41000, development: 5000, caution: 3000 },
+            "VIII": { admission: 41000, development: 5000, caution: 3000 },
+            "IX": { admission: 55000, development: 5000, caution: 3000 },
+            "X": { admission: 55000, development: 5000, caution: 3000 },
+            "XI": { admission: 62000, development: 5000, caution: 3000 },
+            "XII": { admission: 62000, development: 5000, caution: 3000 }
+        };
+
+        // AUTO-UPPERCASE
+        document.querySelectorAll('.uppercase').forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = this.value.toUpperCase();
+            });
+        });
+
+        // SET TODAY'S DATE
+        document.getElementById('date').valueAsDate = new Date();
+
+        // CALCULATE AGE
+        function calculateAge(dob, asOfDate) {
+            const dobDate = new Date(dob);
+            const refDate = asOfDate ? new Date(asOfDate) : new Date();
+
+            let years = refDate.getFullYear() - dobDate.getFullYear();
+            let months = refDate.getMonth() - dobDate.getMonth();
+            let days = refDate.getDate() - dobDate.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            return { years, months, days };
+        }
+
+        // AGE CALCULATION WITH SPECIFIC DATES
+        function updateAgeDisplays() {
+            const dob = document.getElementById('dob').value;
+            const selectedClass = document.getElementById('classApplied').value;
+
+            if (!dob) {
+                document.getElementById('ageDisplay').innerHTML = '-- Select DOB --';
+                document.getElementById('ageAsOnGroup').style.display = 'none';
+                return;
+            }
+
+            // Current age
+            const currentAge = calculateAge(dob);
+            document.getElementById('ageDisplay').innerHTML = 
+                `<strong>${currentAge.years}</strong> Years <strong>${currentAge.months}</strong> Months <strong>${currentAge.days}</strong> Days`;
+
+            // Age as on specific date based on class
+            const ageAsOnGroup = document.getElementById('ageAsOnGroup');
+            const ageAsOnLabel = document.getElementById('ageAsOnLabel');
+            const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
+            const ageAsOnInfo = document.getElementById('ageAsOnInfo');
+
+            if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
+                // Age as on 31 July 2026
+                const ageAsOn31July = calculateAge(dob, '2026-07-31');
+                ageAsOnGroup.style.display = 'block';
+                ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
+                ageAsOnDisplay.innerHTML = 
+                    `<strong>${ageAsOn31July.years}</strong> Y <strong>${ageAsOn31July.months}</strong> M <strong>${ageAsOn31July.days}</strong> D`;
+                ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
+            } else if (selectedClass === 'I') {
+                // Age as on 30 Sept 2026
+                const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
+                ageAsOnGroup.style.display = 'block';
+                ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
+                ageAsOnDisplay.innerHTML = 
+                    `<strong>${ageAsOn30Sept.years}</strong> Y <strong>${ageAsOn30Sept.months}</strong> M <strong>${ageAsOn30Sept.days}</strong> D`;
+                ageAsOnInfo.textContent = 'For Class I admission';
+            } else {
+                ageAsOnGroup.style.display = 'none';
+            }
+        }
+
+        document.getElementById('dob').addEventListener('change', updateAgeDisplays);
+        document.getElementById('classApplied').addEventListener('change', function() {
+            updateAgeDisplays();
+
+            // Fee calculation
+            const selectedClass = this.value;
+            const fees = feeData[selectedClass];
+
+            if (fees) {
+                document.getElementById('feeAdmission').value = fees.admission;
+                document.getElementById('feeDevelopment').value = fees.development;
+                document.getElementById('feeCaution').value = fees.caution;
+                document.getElementById('totalFee').value = fees.admission + fees.development + fees.caution;
+            }
+        });
+
+        // AUTO-GENERATE S.NO STARTING FROM 2026001
+        window.addEventListener('load', function() {
+            let records = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
+            const nextNum = 2026001 + records.length;
+            document.getElementById('sno').value = nextNum.toString();
+        });
+
+        // FORM SUBMISSION
+        document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Add calculated values
+            data.currentAge = document.getElementById('ageDisplay').innerText;
+            data.ageAsOn = document.getElementById('ageAsOnDisplay').innerText;
+            data.ageAsOnLabel = document.getElementById('ageAsOnLabel').innerText;
+            data.totalFee = document.getElementById('totalFee').value;
+            data.timestamp = new Date().toISOString();
+            data.submittedDate = new Date().toLocaleDateString('en-IN');
+
+            // Get existing records
+            let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
+
+            // Add new record
+            enquiryRecords.push(data);
+
+            // Save to localStorage
+            localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
+            localStorage.setItem('currentEnquiry', JSON.stringify(data));
+
+            alert('✅ Enquiry saved successfully! S.No: ' + data.sno);
+        });
+
+        // PRINT
+        function printForm() {
+            window.print();
+        }
+
+        // PROCEED TO REGISTRATION
+        function proceedToRegistration() {
+            if (!document.getElementById('enquiryForm').checkValidity()) {
+                alert('⚠️ Please fill all required fields marked with *');
+                return;
+            }
+
+            document.getElementById('enquiryForm').dispatchEvent(new Event('submit'));
+
+            setTimeout(() => {
+                window.location.href = 'registration.html';
+            }, 500);
+        }
+
+        // LOAD LOGO IF AVAILABLE
+        window.addEventListener('load', function() {
+            const savedLogo = localStorage.getItem('schoolLogo');
+            if (savedLogo) {
+                document.getElementById('schoolLogo').src = savedLogo;
+            }
+        });
+    </script>
+<script>
+function toggleSnoMode(){
+    var sno=document.getElementById('sno');
+    var auto=document.getElementById('autoSno');
+    if(!sno||!auto)return;
+    if(auto.checked){
+        sno.readOnly=true;
+        sno.style.background='#f0f0f0';
+        generateAutoSno();
+    }else{
+        sno.readOnly=false;
+        sno.style.background='white';
+        sno.value='';
+        sno.focus();
+    }
+}
+function generateAutoSno(){
+    var sno=document.getElementById('sno');
+    if(!sno)return;
+
+    // Get all records from localStorage
+    var enquiryRecords=JSON.parse(localStorage.getItem('enquiryRecords')||'[]');
+    var registrationRecords=JSON.parse(localStorage.getItem('registrationRecords')||'[]');
+    var admissionRecords=JSON.parse(localStorage.getItem('admissionRecords')||'[]');
+
+    // Calculate total records
+    var totalRecords=enquiryRecords.length+registrationRecords.length+admissionRecords.length;
+
+    // Generate S.NO starting from 2026044
+    var nextSno=2026044+totalRecords;
+    sno.value=nextSno;
+}
+window.addEventListener('DOMContentLoaded',function(){
+    var auto=document.getElementById('autoSno');
+    if(auto&&auto.checked)generateAutoSno();
+});
+</script>
+
+
+<script>
+console.log('🟢 ENQUIRY FORM: Loading complete working scripts...');
+
+// ============================================================================
+// 1. PRINT FUNCTION
+// ============================================================================
+function printForm() {
+    console.log('🖨️ printForm() called');
+    window.print();
+}
+
+// ============================================================================
+// 2. SAVE ENQUIRY FUNCTION - COMPLETE WITH ALL FIELDS
+// ============================================================================
+function saveEnquiry() {
+    console.log('💾 saveEnquiry() called');
+
+    // Collect ALL form data
+    const formData = {
+        // Basic Information
+        sno: document.getElementById('sno')?.value || '',
+        date: document.getElementById('date')?.value || '',
+
+        // Student Details
+        studentFirstName: document.getElementById('studentFirstName')?.value || '',
+        studentMiddleName: document.getElementById('studentMiddleName')?.value || '',
+        studentSurname: document.getElementById('studentSurname')?.value || '',
+        gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+        classApplying: document.getElementById('classApplying')?.value || '',
+        dob: document.getElementById('dob')?.value || '',
+        currentAge: document.getElementById('currentAge')?.value || '',
+        ageAsOn: document.getElementById('ageAsOn')?.value || '',
+
+        // Parent Details
+        fatherFirstName: document.getElementById('fatherFirstName')?.value || '',
+        fatherMiddleName: document.getElementById('fatherMiddleName')?.value || '',
+        fatherSurname: document.getElementById('fatherSurname')?.value || '',
+        motherFirstName: document.getElementById('motherFirstName')?.value || '',
+        motherMiddleName: document.getElementById('motherMiddleName')?.value || '',
+        motherSurname: document.getElementById('motherSurname')?.value || '',
+        fatherMobile: document.getElementById('fatherMobile')?.value || '',
+        motherMobile: document.getElementById('motherMobile')?.value || '',
+        landline: document.getElementById('landline')?.value || '',
+
+        // Address Details
+        address: document.getElementById('address')?.value || '',
+        area: document.getElementById('area')?.value || '',
+        city: document.getElementById('city')?.value || '',
+        district: document.getElementById('district')?.value || '',
+        state: document.getElementById('state')?.value || '',
+        pincode: document.getElementById('pincode')?.value || '',
+        country: document.getElementById('country')?.value || '',
+
+        // Sibling Information
+        sibling1Name: document.getElementById('sibling1Name')?.value || '',
+        sibling1School: document.getElementById('sibling1School')?.value || '',
+        sibling1Class: document.getElementById('sibling1Class')?.value || '',
+        sibling1Section: document.getElementById('sibling1Section')?.value || '',
+        sibling2Name: document.getElementById('sibling2Name')?.value || '',
+        sibling2School: document.getElementById('sibling2School')?.value || '',
+        sibling2Class: document.getElementById('sibling2Class')?.value || '',
+        sibling2Section: document.getElementById('sibling2Section')?.value || '',
+
+        // Information Source
+        infoSource: document.querySelector('input[name="infoSource"]:checked')?.value || '',
+        referredType: document.querySelector('input[name="referredType"]:checked')?.value || '',
+        referredName: document.getElementById('referredName')?.value || '',
+
+        // Timestamp
+        timestamp: new Date().toISOString()
+    };
+
+    console.log('📋 Form data collected:', formData);
+
+    // VALIDATION - Check required fields
+    if (!formData.studentFirstName || formData.studentFirstName.trim() === '') {
+        alert('❌ ERROR: Please enter Student First Name');
+        document.getElementById('studentFirstName')?.focus();
+        return false;
+    }
+
+    if (!formData.classApplying || formData.classApplying === '') {
+        alert('❌ ERROR: Please select Class Applying For');
+        document.getElementById('classApplying')?.focus();
+        return false;
+    }
+
+    if (!formData.fatherMobile || formData.fatherMobile.trim() === '') {
+        alert('❌ ERROR: Please enter Father Mobile Number');
+        document.getElementById('fatherMobile')?.focus();
+        return false;
+    }
+
+    try {
+        // Check if editing existing record
+        const editIndex = sessionStorage.getItem('editingEnquiryIndex');
+        let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+
+        if (editIndex !== null && editIndex !== '' && editIndex !== 'null') {
+            // Update existing record
+            enquiryRecords[parseInt(editIndex)] = formData;
+            sessionStorage.removeItem('editingEnquiryIndex');
+            console.log('✏️ Updated existing record at index:', editIndex);
+        } else {
+            // Add new record
+            enquiryRecords.push(formData);
+            console.log('➕ Added new record');
+        }
+
+        // Save to localStorage - BOTH places for compatibility
+        localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
+        localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
+
+        console.log('✅ Saved to localStorage');
+        console.log('📊 Total enquiry records:', enquiryRecords.length);
+
+        alert('✅ SUCCESS!\n\nEnquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
+
+        return true;
+
+    } catch (error) {
+        console.error('❌ Error saving enquiry:', error);
+        alert('❌ ERROR: Failed to save data\n\nError: ' + error.message);
+        return false;
+    }
+}
+
+// ============================================================================
+// 3. PROCEED TO REGISTRATION - SAVES FIRST THEN REDIRECTS
+// ============================================================================
+function proceedToRegistration() {
+    console.log('➡️ proceedToRegistration() called');
+
+    // IMPORTANT: First save the enquiry data
+    const saved = saveEnquiry();
+
+    if (saved === true) {
+        console.log('✅ Data saved successfully, proceeding to registration...');
+        alert('📋 Proceeding to Registration Form...\n\nYour enquiry data will be automatically filled!');
+
+        // Small delay to ensure data is saved, then redirect
+        setTimeout(function() {
+            window.location.href = 'WORKING-REGISTRATION-FORM.html';
+        }, 500);
+    } else {
+        console.log('❌ Save failed, not proceeding to registration');
+    }
+}
+
+// ============================================================================
+// 4. LOAD DATA FOR EDITING
+// ============================================================================
+function loadForEdit() {
+    const editData = JSON.parse(localStorage.getItem('editEnquiryData'));
+
+    if (editData) {
+        console.log('📂 Loading data for editing...');
+
+        // Fill all fields with existing data
+        Object.keys(editData).forEach(function(key) {
+            const field = document.getElementById(key);
+            if (field) {
+                if (field.type === 'radio') {
+                    const radio = document.querySelector('input[name="' + key + '"][value="' + editData[key] + '"]');
+                    if (radio) radio.checked = true;
+                } else if (field.type === 'checkbox') {
+                    field.checked = editData[key] === true || editData[key] === 'true';
+                } else {
+                    field.value = editData[key] || '';
+                }
+            }
+        });
+
+        // Handle gender radio buttons specifically
+        if (editData.gender) {
+            const genderRadios = document.querySelectorAll('input[name="gender"]');
+            genderRadios.forEach(function(radio) {
+                if (radio.value.toUpperCase() === editData.gender.toUpperCase()) {
+                    radio.checked = true;
+                }
+            });
+        }
+
+        // Store edit index for later update
+        if (editData.editIndex !== undefined) {
+            sessionStorage.setItem('editingEnquiryIndex', editData.editIndex);
+        }
+
+        // Clear edit data from localStorage
+        localStorage.removeItem('editEnquiryData');
+
+        alert('✅ Record loaded for editing!\n\nMake your changes and click Save Enquiry.');
+        console.log('✅ Edit data loaded successfully');
+    }
+}
+
+// ============================================================================
+// 5. PAGE INITIALIZATION
+// ============================================================================
+window.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 Page loaded - Initializing enquiry form...');
+
+    // Load data if editing
+    loadForEdit();
+
+    // Set today's date if date field is empty
+    const dateField = document.getElementById('date');
+    if (dateField && !dateField.value) {
+        const today = new Date().toISOString().split('T')[0];
+        dateField.value = today;
+        console.log('📅 Set date to today:', today);
+    }
+
+    // Auto-generate S.NO if checkbox exists and is checked
+    const autoSnoCheckbox = document.getElementById('autoSno');
+    if (autoSnoCheckbox && autoSnoCheckbox.checked) {
+        if (typeof generateAutoSno === 'function') {
+            generateAutoSno();
+        }
+    }
+
+    console.log('✅ Enquiry form initialization complete');
+    console.log('📌 Available functions: printForm(), saveEnquiry(), proceedToRegistration()');
+});
+
+console.log('✅ ALL ENQUIRY FORM SCRIPTS LOADED SUCCESSFULLY!');
+</script>
+
+</body>
+</html>
