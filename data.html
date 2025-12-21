@@ -1,688 +1,1656 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 HEMA SCHOOL - RECORDS DASHBOARD</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEMA School - View All Records</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- SheetJS library for Excel export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+/* ============================================================================ */
+/* HEMA SCHOOL HEADER - EXACT MATCH */
+/* ============================================================================ */
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
 
-        .header {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-            text-align: center;
-        }
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background: #f5f5f5;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
 
-        .header h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+/* Header with blue gradient background */
+.hema-school-header {
+    background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+    padding: 20px 15px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+}
 
-        .header p {
-            color: #666;
-            font-size: 1.1em;
-        }
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
 
-        .download-section {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+.header-left-logo,
+.header-right-logo {
+    flex-shrink: 0;
+}
 
-        .download-section h2 {
-            color: #667eea;
-            font-size: 1.5em;
-        }
+.logo-img {
+    width: 90px;
+    height: 90px;
+    display: block;
+}
 
-        .download-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-weight: bold;
-        }
+.header-center {
+    flex: 1;
+    text-align: center;
+    color: white;
+}
 
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
+.school-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
 
-        .section-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-        }
+.affiliation {
+    font-size: 14px;
+    color: #FFD700;
+    margin: 5px 0;
+    font-weight: 600;
+}
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #667eea;
-        }
+.school-info {
+    font-size: 13px;
+    color: white;
+    margin: 3px 0;
+}
 
-        .section-header h2 {
-            color: #667eea;
-            font-size: 1.8em;
-        }
+/* Navigation */
+.navigation {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
 
-        .record-count {
-            background: #667eea;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
+.nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+}
 
-        .table-wrapper {
-            overflow-x: auto;
-            margin-top: 20px;
-        }
+.nav-content a {
+    padding: 15px 25px;
+    text-decoration: none;
+    color: #1E3A5F;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-        }
+.nav-content a:hover,
+.nav-content a.active {
+    background: #E3F2FD;
+    border-bottom-color: #4682B4;
+}
 
-        thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-        th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.9em;
-            white-space: nowrap;
-        }
+/* Section Headers */
+.section-header {
+    background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
 
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e0e0e0;
-            font-size: 0.9em;
-        }
+.section-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
 
-        tbody tr:hover {
-            background: #f5f5ff;
-        }
+/* Tables */
+.table-container {
+    background: white;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
 
-        tbody tr:nth-child(even) {
-            background: #f9f9f9;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-        .empty-message {
-            text-align: center;
-            padding: 50px;
-            color: #999;
-            font-size: 1.2em;
-        }
+thead {
+    background: #E3F2FD;
+}
 
-        .filter-section {
-            background: #f5f5ff;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
+th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #1E3A5F;
+    border-bottom: 2px solid #4682B4;
+    white-space: nowrap;
+}
 
-        .filter-section input,
-        .filter-section select {
-            padding: 10px 15px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 1em;
-            outline: none;
-            transition: border-color 0.3s;
-        }
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
 
-        .filter-section input:focus,
-        .filter-section select:focus {
-            border-color: #764ba2;
-        }
+tr:hover {
+    background: #f5f5f5;
+}
 
-        .filter-btn {
-            background: #667eea;
-            color: white;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background 0.3s;
-        }
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
 
-        .filter-btn:hover {
-            background: #764ba2;
-        }
+.btn-primary {
+    background: #4682B4;
+    color: white;
+}
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .download-section {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+.btn-primary:hover {
+    background: #1E3A5F;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background: #138496;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+    margin: 2px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 2% auto;
+    padding: 0;
+    border-radius: 8px;
+    width: 95%;
+    max-width: 1200px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.close {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.close:hover {
+    transform: scale(1.2);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.modal-footer {
+    padding: 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Detail View */
+.detail-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #4682B4;
+    border-radius: 4px;
+}
+
+.detail-section h3 {
+    color: #1E3A5F;
+    margin-bottom: 15px;
+    font-size: 18px;
+    border-bottom: 2px solid #E3F2FD;
+    padding-bottom: 8px;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.detail-item {
+    background: white;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.detail-value {
+    color: #333;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navigation,
+    .modal-footer,
+    .btn,
+    .close,
+    .no-print {
+        display: none !important;
+    }
+
+    .modal {
+        display: block !important;
+        position: relative;
+        background: white;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+
+    .modal-content {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        max-height: none;
+        overflow: visible;
+        page-break-inside: avoid;
+    }
+
+    .modal-header {
+        display: none !important;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .hema-school-header {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
+    }
+
+    .detail-section {
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+}
+
+/* Export Buttons */
+.export-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+</style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>📊 HEMA SCHOOL - RECORDS DASHBOARD</h1>
-            <p><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
-            <p>School Code: 50383 | Affiliation No.: 1030417</p>
-            <p>Govindpura, Bhopal, Madhya Pradesh, India - 462023</p>
-            <p>📧 support@hemaschool.education | 📞 0755-2457270</p>
-        </div>
 
-        <!-- Download Section -->
-        <div class="download-section">
-            <div>
-                <h2>📥 DOWNLOAD ALL DATA (EXCEL FILE)</h2>
-                <p style="color: #666; margin-top: 5px;">Export all enquiries, registrations, and admissions to Excel/CSV format</p>
-            </div>
-            <button class="download-btn" onclick="downloadAllDataExcel()">
-                📥 Download Complete Data
-            </button>
+<!-- Header -->
+<div class="hema-school-header">
+    <div class="header-content">
+        <div class="header-left-logo">
+            <img src="https://via.placeholder.com/90" alt="CBSE Logo" class="logo-img">
         </div>
-
-        <!-- Enquiry Records -->
-        <div class="section-card">
-            <div class="section-header">
-                <h2>📝 ENQUIRY RECORDS</h2>
-                <span class="record-count" id="enquiryCount">0 Records</span>
-            </div>
-            <div class="table-wrapper">
-                <table id="enquiryTable">
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>Date</th>
-                            <th>Student Name</th>
-                            <th>DOB</th>
-                            <th>Gender</th>
-                            <th>Class</th>
-                            <th>Father Name</th>
-                            <th>Father Mobile</th>
-                            <th>Mother Name</th>
-                            <th>Mother Mobile</th>
-                            <th>Address</th>
-                            <th>Area</th>
-                            <th>City</th>
-                            <th>District</th>
-                            <th>State</th>
-                            <th>Pincode</th>
-                            <th>Source</th>
-                        </tr>
-                    </thead>
-                    <tbody id="enquiryTableBody">
-                        <tr><td colspan="17" class="empty-message">No enquiry records found</td></tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="header-center">
+            <div class="school-name">HEMA HIGHER SECONDARY SCHOOL</div>
+            <div class="affiliation">Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</div>
+            <div class="school-info">School Code: 50383 | Affiliation No.: 1030417</div>
+            <div class="school-info">Govindpura, Bhopal, Madhya Pradesh, India - 462023</div>
+            <div class="school-info">📧 support@hemaschool.education | 📞 0755-2457270</div>
         </div>
-
-        <!-- Registration Records -->
-        <div class="section-card">
-            <div class="section-header">
-                <h2>📋 REGISTRATION RECORDS</h2>
-                <span class="record-count" id="registrationCount">0 Records</span>
-            </div>
-            <div class="table-wrapper">
-                <table id="registrationTable">
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>Date</th>
-                            <th>Student Name</th>
-                            <th>DOB</th>
-                            <th>Gender</th>
-                            <th>Class</th>
-                            <th>Father Name</th>
-                            <th>Father Mobile</th>
-                            <th>Mother Name</th>
-                            <th>Mother Mobile</th>
-                            <th>Address</th>
-                            <th>Area</th>
-                            <th>State</th>
-                            <th>Admission Fee</th>
-                            <th>Total Fee</th>
-                            <th>Signatory</th>
-                        </tr>
-                    </thead>
-                    <tbody id="registrationTableBody">
-                        <tr><td colspan="16" class="empty-message">No registration records found</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Admission Records -->
-        <div class="section-card">
-            <div class="section-header">
-                <h2>🎓 ADMISSION RECORDS</h2>
-                <span class="record-count" id="admissionCount">0 Records</span>
-            </div>
-            <div class="table-wrapper">
-                <table id="admissionTable">
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>Admission Date</th>
-                            <th>Scholar No</th>
-                            <th>Student Name</th>
-                            <th>DOB</th>
-                            <th>Gender</th>
-                            <th>Class</th>
-                            <th>Section</th>
-                            <th>House</th>
-                            <th>Aadhaar</th>
-                            <th>Father Name</th>
-                            <th>Father Mobile</th>
-                            <th>Mother Name</th>
-                            <th>Mother Mobile</th>
-                            <th>Address</th>
-                            <th>Previous School</th>
-                            <th>Category</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admissionTableBody">
-                        <tr><td colspan="17" class="empty-message">No admission records found</td></tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="header-right-logo">
+            <img src="https://via.placeholder.com/90" alt="School Logo" class="logo-img">
         </div>
     </div>
+</div>
 
-    <script>
-        // Load all data when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadEnquiryData();
-            loadRegistrationData();
-            loadAdmissionData();
+<!-- Navigation -->
+<div class="navigation no-print">
+    <div class="nav-content">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="enquiry.html"><i class="fas fa-question-circle"></i> Enquiry</a>
+        <a href="registration.html"><i class="fas fa-user-plus"></i> Registration</a>
+        <a href="admission.html"><i class="fas fa-graduation-cap"></i> Admission</a>
+        <a href="data.html" class="active"><i class="fas fa-database"></i> View Data</a>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+
+    <!-- Enquiry Records -->
+    <div class="section-header">
+        <h2><i class="fas fa-question-circle"></i> Enquiry Records</h2>
+        <div class="export-buttons no-print">
+            <button class="btn btn-success btn-sm" onclick="exportToCSV('enquiry')">
+                <i class="fas fa-file-csv"></i> Export CSV
+            </button>
+            <button class="btn btn-info btn-sm" onclick="exportToExcel('enquiry')">
+                <i class="fas fa-file-excel"></i> Export Excel
+            </button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table id="enquiryTable">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Student Name</th>
+                    <th>Class</th>
+                    <th>Gender</th>
+                    <th>Father Mobile</th>
+                    <th>District</th>
+                    <th>Pincode</th>
+                    <th class="no-print">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="enquiryTableBody">
+                <tr>
+                    <td colspan="9" style="text-align: center; color: #999;">No enquiry records found</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Registration Records -->
+    <div class="section-header">
+        <h2><i class="fas fa-user-plus"></i> Registration Records</h2>
+        <div class="export-buttons no-print">
+            <button class="btn btn-success btn-sm" onclick="exportToCSV('registration')">
+                <i class="fas fa-file-csv"></i> Export CSV
+            </button>
+            <button class="btn btn-info btn-sm" onclick="exportToExcel('registration')">
+                <i class="fas fa-file-excel"></i> Export Excel
+            </button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table id="registrationTable">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Reg Date</th>
+                    <th>Student Name</th>
+                    <th>Class</th>
+                    <th>Gender</th>
+                    <th>Father Mobile</th>
+                    <th>District</th>
+                    <th class="no-print">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="registrationTableBody">
+                <tr>
+                    <td colspan="8" style="text-align: center; color: #999;">No registration records found</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Admission Records -->
+    <div class="section-header">
+        <h2><i class="fas fa-graduation-cap"></i> Admission Records</h2>
+        <div class="export-buttons no-print">
+            <button class="btn btn-success btn-sm" onclick="exportToCSV('admission')">
+                <i class="fas fa-file-csv"></i> Export CSV
+            </button>
+            <button class="btn btn-info btn-sm" onclick="exportToExcel('admission')">
+                <i class="fas fa-file-excel"></i> Export Excel
+            </button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table id="admissionTable">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Adm Date</th>
+                    <th>Student Name</th>
+                    <th>Class</th>
+                    <th>Section</th>
+                    <th>Scholar No</th>
+                    <th>District</th>
+                    <th class="no-print">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="admissionTableBody">
+                <tr>
+                    <td colspan="8" style="text-align: center; color: #999;">No admission records found</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- View Modal -->
+<div id="viewModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header no-print">
+            <h2 id="modalTitle">Record Details</h2>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <!-- Print Header (Only visible in print) -->
+            <div style="display: none;" class="print-only">
+                <div class="hema-school-header" style="display: block;">
+                    <div class="header-content">
+                        <div class="header-left-logo">
+                            <img src="https://via.placeholder.com/90" alt="CBSE Logo" class="logo-img">
+                        </div>
+                        <div class="header-center">
+                            <div class="school-name">HEMA HIGHER SECONDARY SCHOOL</div>
+                            <div class="affiliation">Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</div>
+                            <div class="school-info">School Code: 50383 | Affiliation No.: 1030417</div>
+                            <div class="school-info">Govindpura, Bhopal, Madhya Pradesh, India - 462023</div>
+                            <div class="school-info">📧 support@hemaschool.education | 📞 0755-2457270</div>
+                        </div>
+                        <div class="header-right-logo">
+                            <img src="https://via.placeholder.com/90" alt="School Logo" class="logo-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalContent"></div>
+        </div>
+        <div class="modal-footer no-print">
+            <button class="btn btn-primary" onclick="printRecord()">
+                <i class="fas fa-print"></i> Print / PDF
+            </button>
+            <button class="btn btn-success" onclick="exportCurrentRecord()">
+                <i class="fas fa-file-excel"></i> Export Excel
+            </button>
+            <button class="btn btn-danger" onclick="closeModal()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Global variable to store current record
+let currentRecord = null;
+let currentRecordType = null;
+
+// Load all records on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadEnquiries();
+    loadRegistrations();
+    loadAdmissions();
+});
+
+// Load Enquiry Records
+function loadEnquiries() {
+    const enquiries = JSON.parse(localStorage.getItem('enquiries') || '[]');
+    const tbody = document.getElementById('enquiryTableBody');
+
+    if (enquiries.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; color: #999;">No enquiry records found</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = '';
+    enquiries.forEach((record, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${record.date || 'N/A'}</td>
+            <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentLast || ''}</td>
+            <td>${record.class || 'N/A'}</td>
+            <td>${record.gender || 'N/A'}</td>
+            <td>${record.fatherMobile || 'N/A'}</td>
+            <td>${record.district || 'N/A'}</td>
+            <td>${record.pincode || 'N/A'}</td>
+            <td class="no-print">
+                <button class="btn btn-info btn-sm" onclick="viewRecord('enquiry', ${index})">
+                    <i class="fas fa-eye"></i> View
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="deleteRecord('enquiry', ${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Load Registration Records
+function loadRegistrations() {
+    const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+    const tbody = document.getElementById('registrationTableBody');
+
+    if (registrations.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #999;">No registration records found</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = '';
+    registrations.forEach((record, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${record.date || 'N/A'}</td>
+            <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentLast || ''}</td>
+            <td>${record.class || 'N/A'}</td>
+            <td>${record.gender || 'N/A'}</td>
+            <td>${record.fatherMobile || 'N/A'}</td>
+            <td>${record.district || 'N/A'}</td>
+            <td class="no-print">
+                <button class="btn btn-info btn-sm" onclick="viewRecord('registration', ${index})">
+                    <i class="fas fa-eye"></i> View
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="deleteRecord('registration', ${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Load Admission Records
+function loadAdmissions() {
+    const admissions = JSON.parse(localStorage.getItem('admissions') || '[]');
+    const tbody = document.getElementById('admissionTableBody');
+
+    if (admissions.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #999;">No admission records found</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = '';
+    admissions.forEach((record, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${record.admissionDate || 'N/A'}</td>
+            <td>${record.studentName || 'N/A'}</td>
+            <td>${record.class || 'N/A'}</td>
+            <td>${record.section || 'N/A'}</td>
+            <td>${record.scholarNo || 'N/A'}</td>
+            <td>${record.district || 'N/A'}</td>
+            <td class="no-print">
+                <button class="btn btn-info btn-sm" onclick="viewRecord('admission', ${index})">
+                    <i class="fas fa-eye"></i> View
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="deleteRecord('admission', ${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// View Record Function
+function viewRecord(type, index) {
+    const records = JSON.parse(localStorage.getItem(type === 'enquiry' ? 'enquiries' : type === 'registration' ? 'registrations' : 'admissions') || '[]');
+    const record = records[index];
+
+    if (!record) {
+        alert('Record not found!');
+        return;
+    }
+
+    currentRecord = record;
+    currentRecordType = type;
+
+    const modal = document.getElementById('viewModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+
+    // Set title
+    modalTitle.innerHTML = `<i class="fas fa-${type === 'enquiry' ? 'question-circle' : type === 'registration' ? 'user-plus' : 'graduation-cap'}"></i> ${type.charAt(0).toUpperCase() + type.slice(1)} Details`;
+
+    // Generate content based on type
+    let content = '';
+
+    if (type === 'enquiry') {
+        content = generateEnquiryView(record);
+    } else if (type === 'registration') {
+        content = generateRegistrationView(record);
+    } else if (type === 'admission') {
+        content = generateAdmissionView(record);
+    }
+
+    modalContent.innerHTML = content;
+    modal.style.display = 'block';
+}
+
+// Generate Enquiry View with ALL fields
+function generateEnquiryView(record) {
+    return `
+        <div class="detail-section">
+            <h3>Student Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Date of Enquiry</div>
+                    <div class="detail-value">${record.date || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Student First Name</div>
+                    <div class="detail-value">${record.studentFirst || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Student Middle Name</div>
+                    <div class="detail-value">${record.studentMiddle || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Student Last Name</div>
+                    <div class="detail-value">${record.studentLast || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Date of Birth</div>
+                    <div class="detail-value">${record.dob || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Gender</div>
+                    <div class="detail-value">${record.gender || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Class Applying For</div>
+                    <div class="detail-value">${record.class || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Aadhaar Number</div>
+                    <div class="detail-value">${record.aadhaar || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Father's Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Father's First Name</div>
+                    <div class="detail-value">${record.fatherFirst || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Middle Name</div>
+                    <div class="detail-value">${record.fatherMiddle || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Surname</div>
+                    <div class="detail-value">${record.fatherSurname || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Mobile</div>
+                    <div class="detail-value">${record.fatherMobile || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Email</div>
+                    <div class="detail-value">${record.fatherEmail || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Occupation</div>
+                    <div class="detail-value">${record.fatherOcc || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Qualification</div>
+                    <div class="detail-value">${record.fatherQual || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Mother's Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Mother's First Name</div>
+                    <div class="detail-value">${record.motherFirst || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Middle Name</div>
+                    <div class="detail-value">${record.motherMiddle || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Surname</div>
+                    <div class="detail-value">${record.motherSurname || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Mobile</div>
+                    <div class="detail-value">${record.motherMobile || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Email</div>
+                    <div class="detail-value">${record.motherEmail || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Occupation</div>
+                    <div class="detail-value">${record.motherOcc || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Qualification</div>
+                    <div class="detail-value">${record.motherQual || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Address Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Address</div>
+                    <div class="detail-value">${record.address || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Area/Locality</div>
+                    <div class="detail-value">${record.area || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">District</div>
+                    <div class="detail-value">${record.district || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">State</div>
+                    <div class="detail-value">${record.state || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Pincode</div>
+                    <div class="detail-value">${record.pincode || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Sibling Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 1 Name</div>
+                    <div class="detail-value">${record.sib1Name || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 1 Class</div>
+                    <div class="detail-value">${record.sib1Class || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 2 Name</div>
+                    <div class="detail-value">${record.sib2Name || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 2 Class</div>
+                    <div class="detail-value">${record.sib2Class || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Additional Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Source of Information</div>
+                    <div class="detail-value">${record.source || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Referred By</div>
+                    <div class="detail-value">${record.referredName || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Remarks</div>
+                    <div class="detail-value">${record.remarks || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Documents Required</h3>
+            <div class="detail-grid">
+                ${generateDocumentsList(record)}
+            </div>
+        </div>
+    `;
+}
+
+// Generate Registration View with ALL fields
+function generateRegistrationView(record) {
+    return `
+        <div class="detail-section">
+            <h3>Registration Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Registration Date</div>
+                    <div class="detail-value">${record.date || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Serial Number</div>
+                    <div class="detail-value">${record.sno || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Student Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Student First Name</div>
+                    <div class="detail-value">${record.studentFirst || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Student Middle Name</div>
+                    <div class="detail-value">${record.studentMiddle || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Student Last Name</div>
+                    <div class="detail-value">${record.studentLast || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Date of Birth</div>
+                    <div class="detail-value">${record.dob || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Gender</div>
+                    <div class="detail-value">${record.gender || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Class</div>
+                    <div class="detail-value">${record.class || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Aadhaar Number</div>
+                    <div class="detail-value">${record.aadhaar || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Nationality</div>
+                    <div class="detail-value">${record.nationality || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Religion</div>
+                    <div class="detail-value">${record.religion || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Category</div>
+                    <div class="detail-value">${record.category || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Father's Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Father's First Name</div>
+                    <div class="detail-value">${record.fatherFirst || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Middle Name</div>
+                    <div class="detail-value">${record.fatherMiddle || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Surname</div>
+                    <div class="detail-value">${record.fatherSurname || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Mobile</div>
+                    <div class="detail-value">${record.fatherMobile || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Email</div>
+                    <div class="detail-value">${record.fatherEmail || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Occupation</div>
+                    <div class="detail-value">${record.fatherOcc || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Qualification</div>
+                    <div class="detail-value">${record.fatherQual || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Mother's Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Mother's First Name</div>
+                    <div class="detail-value">${record.motherFirst || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Middle Name</div>
+                    <div class="detail-value">${record.motherMiddle || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Surname</div>
+                    <div class="detail-value">${record.motherSurname || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Mobile</div>
+                    <div class="detail-value">${record.motherMobile || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Email</div>
+                    <div class="detail-value">${record.motherEmail || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Occupation</div>
+                    <div class="detail-value">${record.motherOcc || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Qualification</div>
+                    <div class="detail-value">${record.motherQual || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Address Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Address</div>
+                    <div class="detail-value">${record.address || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Area/Locality</div>
+                    <div class="detail-value">${record.area || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">District</div>
+                    <div class="detail-value">${record.district || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">State</div>
+                    <div class="detail-value">${record.state || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Pincode</div>
+                    <div class="detail-value">${record.pincode || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Sibling Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 1 Name</div>
+                    <div class="detail-value">${record.sib1Name || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 1 Class & Section</div>
+                    <div class="detail-value">${record.sib1ClassSec || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 1 School</div>
+                    <div class="detail-value">${record.sib1School || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 2 Name</div>
+                    <div class="detail-value">${record.sib2Name || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 2 Class & Section</div>
+                    <div class="detail-value">${record.sib2ClassSec || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 2 School</div>
+                    <div class="detail-value">${record.sib2School || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Declaration</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Signatory Name</div>
+                    <div class="detail-value">${record.signatoryName || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Relationship</div>
+                    <div class="detail-value">${record.relationship || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Generate Admission View with ALL fields
+function generateAdmissionView(record) {
+    return `
+        <div class="detail-section">
+            <h3>Admission Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Admission Date</div>
+                    <div class="detail-value">${record.admissionDate || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Scholar Number</div>
+                    <div class="detail-value">${record.scholarNo || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Session</div>
+                    <div class="detail-value">${record.session || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Class</div>
+                    <div class="detail-value">${record.class || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Section</div>
+                    <div class="detail-value">${record.section || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Admission Category</div>
+                    <div class="detail-value">${record.admissionCategory || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">SSSM ID</div>
+                    <div class="detail-value">${record.sssmId || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Student Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Student Name</div>
+                    <div class="detail-value">${record.studentName || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Date of Birth</div>
+                    <div class="detail-value">${record.dob || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Current Age</div>
+                    <div class="detail-value">${record.currentAge || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Gender</div>
+                    <div class="detail-value">${record.gender || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Aadhaar Number</div>
+                    <div class="detail-value">${record.studentAadhaar || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mobile Number</div>
+                    <div class="detail-value">${record.studentMobile || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Email</div>
+                    <div class="detail-value">${record.studentEmail || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Nationality</div>
+                    <div class="detail-value">${record.nationality || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Religion</div>
+                    <div class="detail-value">${record.religion || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Category</div>
+                    <div class="detail-value">${record.category || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Blood Group</div>
+                    <div class="detail-value">${record.bloodGroup || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Father's Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Father's Name</div>
+                    <div class="detail-value">${record.fatherName || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Aadhaar</div>
+                    <div class="detail-value">${record.fatherAadhaar || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Mobile</div>
+                    <div class="detail-value">${record.fatherMobile || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Email</div>
+                    <div class="detail-value">${record.fatherEmail || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Occupation</div>
+                    <div class="detail-value">${record.fatherOcc || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Father's Qualification</div>
+                    <div class="detail-value">${record.fatherQual || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Annual Income</div>
+                    <div class="detail-value">${record.annualIncome || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Mother's Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Name</div>
+                    <div class="detail-value">${record.motherName || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Aadhaar</div>
+                    <div class="detail-value">${record.motherAadhaar || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Mobile</div>
+                    <div class="detail-value">${record.motherMobile || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Email</div>
+                    <div class="detail-value">${record.motherEmail || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Occupation</div>
+                    <div class="detail-value">${record.motherOcc || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Mother's Qualification</div>
+                    <div class="detail-value">${record.motherQual || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Address Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Address</div>
+                    <div class="detail-value">${record.address || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Area/Locality</div>
+                    <div class="detail-value">${record.area || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">District</div>
+                    <div class="detail-value">${record.district || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">State</div>
+                    <div class="detail-value">${record.state || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Pincode</div>
+                    <div class="detail-value">${record.pincode || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Previous School Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Previous School Name</div>
+                    <div class="detail-value">${record.prevSchool || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Previous Class</div>
+                    <div class="detail-value">${record.prevClass || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">TC Number</div>
+                    <div class="detail-value">${record.tcNo || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">TC Date</div>
+                    <div class="detail-value">${record.tcDate || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Bank Details</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Bank Name</div>
+                    <div class="detail-value">${record.bankName || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Branch</div>
+                    <div class="detail-value">${record.bankBranch || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Account Number</div>
+                    <div class="detail-value">${record.accountNo || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">IFSC Code</div>
+                    <div class="detail-value">${record.ifscCode || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Account Type</div>
+                    <div class="detail-value">${record.accountType || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Fee Details</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Admission Fee</div>
+                    <div class="detail-value">₹${record.admissionFee || '0'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Caution Fee</div>
+                    <div class="detail-value">₹${record.cautionFee || '0'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Development Fee</div>
+                    <div class="detail-value">₹${record.developmentFee || '0'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Tuition Fee</div>
+                    <div class="detail-value">₹${record.tuitionFee || '0'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Fees</div>
+                    <div class="detail-value">₹${record.totalFees || '0'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Discount</div>
+                    <div class="detail-value">₹${record.discount || '0'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Net Payable</div>
+                    <div class="detail-value">₹${record.netPayable || '0'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Sibling Information</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 1 Name</div>
+                    <div class="detail-value">${record.sib1Name || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 1 Class</div>
+                    <div class="detail-value">${record.sib1Class || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 2 Name</div>
+                    <div class="detail-value">${record.sib2Name || 'N/A'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Sibling 2 Class</div>
+                    <div class="detail-value">${record.sib2Class || 'N/A'}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Documents Submitted</h3>
+            <div class="detail-grid">
+                ${generateAdmissionDocuments(record)}
+            </div>
+        </div>
+    `;
+}
+
+// Generate documents list for enquiry
+function generateDocumentsList(record) {
+    const docs = [
+        { key: 'doc1', label: 'Student Photo' },
+        { key: 'doc2', label: 'Birth Certificate' },
+        { key: 'doc3', label: 'Aadhaar Card' },
+        { key: 'doc4', label: 'Previous Report Card' },
+        { key: 'doc5', label: 'Transfer Certificate' },
+        { key: 'doc6', label: 'Migration Certificate' },
+        { key: 'doc7', label: 'Caste Certificate' },
+        { key: 'doc8', label: 'Income Certificate' },
+        { key: 'doc9', label: 'Domicile Certificate' },
+        { key: 'doc10', label: 'Medical Certificate' }
+    ];
+
+    let html = '';
+    docs.forEach(doc => {
+        if (record[doc.key]) {
+            html += `
+                <div class="detail-item">
+                    <div class="detail-label">${doc.label}</div>
+                    <div class="detail-value">✓ Required</div>
+                </div>
+            `;
+        }
+    });
+
+    return html || '<div class="detail-item"><div class="detail-value">No documents selected</div></div>';
+}
+
+// Generate admission documents
+function generateAdmissionDocuments(record) {
+    const studentDocs = [
+        { key: 'doc_s1', label: 'Student Photo' },
+        { key: 'doc_s2', label: 'Birth Certificate' },
+        { key: 'doc_s3', label: 'Aadhaar Card' },
+        { key: 'doc_s4', label: 'Previous Report Card' },
+        { key: 'doc_s5', label: 'Transfer Certificate' },
+        { key: 'doc_s6', label: 'Migration Certificate' },
+        { key: 'doc_s7', label: 'Medical Certificate' }
+    ];
+
+    const parentDocs = [
+        { key: 'doc_p1', label: 'Father's Aadhaar' },
+        { key: 'doc_p2', label: 'Mother's Aadhaar' },
+        { key: 'doc_p3', label: 'Income Certificate' },
+        { key: 'doc_p4', label: 'Caste Certificate' },
+        { key: 'doc_p5', label: 'Domicile Certificate' }
+    ];
+
+    let html = '';
+    [...studentDocs, ...parentDocs].forEach(doc => {
+        if (record[doc.key]) {
+            html += `
+                <div class="detail-item">
+                    <div class="detail-label">${doc.label}</div>
+                    <div class="detail-value">✓ Submitted</div>
+                </div>
+            `;
+        }
+    });
+
+    return html || '<div class="detail-item"><div class="detail-value">No documents submitted</div></div>';
+}
+
+// Print Record Function
+function printRecord() {
+    // Show print header
+    const printHeader = document.querySelector('.print-only');
+    if (printHeader) {
+        printHeader.style.display = 'block';
+    }
+
+    window.print();
+
+    // Hide print header after printing
+    setTimeout(() => {
+        if (printHeader) {
+            printHeader.style.display = 'none';
+        }
+    }, 1000);
+}
+
+// Export current record to Excel
+function exportCurrentRecord() {
+    if (!currentRecord || !currentRecordType) {
+        alert('No record selected!');
+        return;
+    }
+
+    // Convert record to array format
+    const data = [];
+    for (let key in currentRecord) {
+        data.push({
+            'Field': key,
+            'Value': currentRecord[key] || 'N/A'
         });
+    }
 
-        // Utility function to get data from localStorage
-        function getLocalStorageData(keys) {
-            let allData = [];
-            keys.forEach(key => {
-                try {
-                    const data = localStorage.getItem(key);
-                    if (data) {
-                        const parsed = JSON.parse(data);
-                        if (Array.isArray(parsed)) {
-                            allData = allData.concat(parsed);
-                        }
-                    }
-                } catch (e) {
-                    console.error('Error parsing ' + key, e);
-                }
-            });
-            return allData;
-        }
+    // Create worksheet
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, currentRecordType.charAt(0).toUpperCase() + currentRecordType.slice(1));
 
-        // Load Enquiry Data
-        function loadEnquiryData() {
-            const data = getLocalStorageData(['enquiryRecords', 'enquiries']);
-            const tbody = document.getElementById('enquiryTableBody');
-            const countSpan = document.getElementById('enquiryCount');
-            
-            tbody.innerHTML = '';
-            countSpan.textContent = data.length + ' Records';
-            
-            if (data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="17" class="empty-message">No enquiry records found</td></tr>';
-                return;
-            }
-            
-            data.forEach((record, index) => {
-                const row = tbody.insertRow();
-                const studentName = [record.studentFirst, record.studentMiddle, record.studentSurname].filter(Boolean).join(' ');
-                const fatherName = [record.fatherFirst, record.fatherMiddle, record.fatherSurname].filter(Boolean).join(' ');
-                const motherName = [record.motherFirst, record.motherMiddle, record.motherSurname].filter(Boolean).join(' ');
-                
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${record.date || ''}</td>
-                    <td>${studentName || ''}</td>
-                    <td>${record.dob || ''}</td>
-                    <td>${record.gender || ''}</td>
-                    <td>${record.classApplied || ''}</td>
-                    <td>${fatherName || ''}</td>
-                    <td>${record.fatherMobile || ''}</td>
-                    <td>${motherName || ''}</td>
-                    <td>${record.motherMobile || ''}</td>
-                    <td>${record.address || ''}</td>
-                    <td>${record.area || ''}</td>
-                    <td>${record.city || ''}</td>
-                    <td>${record.district || ''}</td>
-                    <td>${record.state || ''}</td>
-                    <td>${record.pincode || ''}</td>
-                    <td>${record.source || ''}</td>
-                `;
-            });
-        }
+    // Download
+    const filename = `${currentRecordType}_${currentRecord.studentFirst || currentRecord.studentName || 'record'}_${new Date().getTime()}.xlsx`;
+    XLSX.writeFile(wb, filename);
+}
 
-        // Load Registration Data
-        function loadRegistrationData() {
-            const data = getLocalStorageData(['registrationRecords', 'registrations']);
-            const tbody = document.getElementById('registrationTableBody');
-            const countSpan = document.getElementById('registrationCount');
-            
-            tbody.innerHTML = '';
-            countSpan.textContent = data.length + ' Records';
-            
-            if (data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="16" class="empty-message">No registration records found</td></tr>';
-                return;
-            }
-            
-            data.forEach((record, index) => {
-                const row = tbody.insertRow();
-                const studentName = [record.studentFirst, record.studentMiddle, record.studentSurname].filter(Boolean).join(' ');
-                const fatherName = [record.fatherFirst, record.fatherMiddle, record.fatherSurname].filter(Boolean).join(' ');
-                const motherName = [record.motherFirst, record.motherMiddle, record.motherSurname].filter(Boolean).join(' ');
-                const gender = record.genderMale ? 'Male' : (record.genderFemale ? 'Female' : '');
-                
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${record.date || ''}</td>
-                    <td>${studentName || ''}</td>
-                    <td>${record.dob || ''}</td>
-                    <td>${gender}</td>
-                    <td>${record.classApplied || ''}</td>
-                    <td>${fatherName || ''}</td>
-                    <td>${record.fatherMobile || ''}</td>
-                    <td>${motherName || ''}</td>
-                    <td>${record.motherMobile || ''}</td>
-                    <td>${record.address || ''}</td>
-                    <td>${record.area || ''}</td>
-                    <td>${record.state || ''}</td>
-                    <td>${record.feeAdmission || ''}</td>
-                    <td>${record.totalFee || ''}</td>
-                    <td>${record.signatoryName || ''}</td>
-                `;
-            });
-        }
+// Export to CSV
+function exportToCSV(type) {
+    const records = JSON.parse(localStorage.getItem(type === 'enquiry' ? 'enquiries' : type === 'registration' ? 'registrations' : 'admissions') || '[]');
 
-        // Load Admission Data
-        function loadAdmissionData() {
-            const data = getLocalStorageData(['admissionRecords', 'admissions']);
-            const tbody = document.getElementById('admissionTableBody');
-            const countSpan = document.getElementById('admissionCount');
-            
-            tbody.innerHTML = '';
-            countSpan.textContent = data.length + ' Records';
-            
-            if (data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="17" class="empty-message">No admission records found</td></tr>';
-                return;
-            }
-            
-            data.forEach((record, index) => {
-                const row = tbody.insertRow();
-                
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${record.admissionDate || ''}</td>
-                    <td>${record.scholarNo || ''}</td>
-                    <td>${record.studentName || ''}</td>
-                    <td>${record.dob || ''}</td>
-                    <td>${record.gender || ''}</td>
-                    <td>${record.class || ''}</td>
-                    <td>${record.section || ''}</td>
-                    <td>${record.house || ''}</td>
-                    <td>${record.aadhaarNo || ''}</td>
-                    <td>${record.fatherName || ''}</td>
-                    <td>${record.fatherMobile || ''}</td>
-                    <td>${record.motherName || ''}</td>
-                    <td>${record.motherMobile || ''}</td>
-                    <td>${record.address || ''}</td>
-                    <td>${record.prevSchool || ''}</td>
-                    <td>${record.category || ''}</td>
-                `;
-            });
-        }
+    if (records.length === 0) {
+        alert('No records to export!');
+        return;
+    }
 
-        // Download All Data to Excel/CSV
-        function downloadAllDataExcel() {
-            const enquiryData = getLocalStorageData(['enquiryRecords', 'enquiries']);
-            const registrationData = getLocalStorageData(['registrationRecords', 'registrations']);
-            const admissionData = getLocalStorageData(['admissionRecords', 'admissions']);
-            
-            let csv = '';
-            
-            // Enquiry Records - ALL FIELDS
-            if (enquiryData.length > 0) {
-                csv += '"ENQUIRY RECORDS"\n';
-                csv += '"S.No","Date","Student First","Student Middle","Student Surname","DOB","Gender","Class Applied","Father First","Father Middle","Father Surname","Father Mobile","Mother First","Mother Middle","Mother Surname","Mother Mobile","Landline","Address","Area","City","District","State","Country","Pincode","Source","Referred Type","Referred Name","Sibling Discount","Sib1 Name","Sib1 Class","Sib1 Section","Sib1 School","Sib2 Name","Sib2 Class","Sib2 Section","Sib2 School"\n';
-                
-                enquiryData.forEach((record, index) => {
-                    const row = [
-                        index + 1,
-                        record.date || '',
-                        record.studentFirst || '',
-                        record.studentMiddle || '',
-                        record.studentSurname || '',
-                        record.dob || '',
-                        record.gender || '',
-                        record.classApplied || '',
-                        record.fatherFirst || '',
-                        record.fatherMiddle || '',
-                        record.fatherSurname || '',
-                        record.fatherMobile || '',
-                        record.motherFirst || '',
-                        record.motherMiddle || '',
-                        record.motherSurname || '',
-                        record.motherMobile || '',
-                        record.landline || '',
-                        record.address || '',
-                        record.area || '',
-                        record.city || '',
-                        record.district || '',
-                        record.state || '',
-                        record.country || '',
-                        record.pincode || '',
-                        record.source || '',
-                        record.referredType || '',
-                        record.referredName || '',
-                        record.siblingDiscount || '',
-                        record.sib1Name || '',
-                        record.sib1Class || '',
-                        record.sib1Section || '',
-                        record.sib1School || '',
-                        record.sib2Name || '',
-                        record.sib2Class || '',
-                        record.sib2Section || '',
-                        record.sib2School || ''
-                    ].map(field => `"${String(field).replace(/"/g, '""')}"`);
-                    
-                    csv += row.join(',') + '\n';
-                });
-                csv += '\n\n';
-            }
-            
-            // Registration Records - ALL FIELDS
-            if (registrationData.length > 0) {
-                csv += '"REGISTRATION RECORDS"\n';
-                csv += '"S.No","Date","Student First","Student Middle","Student Surname","DOB","Gender","Class Applied","Father First","Father Middle","Father Surname","Father Mobile","Mother First","Mother Middle","Mother Surname","Mother Mobile","Landline","Address","Area","State","Admission Fee","Caution Fee","Development Fee","Total Fee","Signatory Name","Sib1 Name","Sib1 Class/Sec","Sib1 School","Sib2 Name","Sib2 Class/Sec","Sib2 School"\n';
-                
-                registrationData.forEach((record, index) => {
-                    const gender = record.genderMale ? 'Male' : (record.genderFemale ? 'Female' : '');
-                    const row = [
-                        index + 1,
-                        record.date || '',
-                        record.studentFirst || '',
-                        record.studentMiddle || '',
-                        record.studentSurname || '',
-                        record.dob || '',
-                        gender,
-                        record.classApplied || '',
-                        record.fatherFirst || '',
-                        record.fatherMiddle || '',
-                        record.fatherSurname || '',
-                        record.fatherMobile || '',
-                        record.motherFirst || '',
-                        record.motherMiddle || '',
-                        record.motherSurname || '',
-                        record.motherMobile || '',
-                        record.landline || '',
-                        record.address || '',
-                        record.area || '',
-                        record.state || '',
-                        record.feeAdmission || '',
-                        record.feeCaution || '',
-                        record.feeDevelopment || '',
-                        record.totalFee || '',
-                        record.signatoryName || '',
-                        record.sib1Name || '',
-                        record.sib1ClassSec || '',
-                        record.sib1School || '',
-                        record.sib2Name || '',
-                        record.sib2ClassSec || '',
-                        record.sib2School || ''
-                    ].map(field => `"${String(field).replace(/"/g, '""')}"`);
-                    
-                    csv += row.join(',') + '\n';
-                });
-                csv += '\n\n';
-            }
-            
-            // Admission Records - ALL FIELDS
-            if (admissionData.length > 0) {
-                csv += '"ADMISSION RECORDS"\n';
-                csv += '"S.No","Admission Date","Scholar No","Student Name","DOB","DOB in Words","Current Age","Gender","Class","Section","House","Nationality","Religion","Category","Aadhaar No","APAAR ID","SSSM ID","PEN No","Family ID","Father Name","Father Mobile","Father Aadhaar","Father Qualification","Father Occupation","Mother Name","Mother Mobile","Mother Aadhaar","Mother Qualification","Mother Occupation","Guardian Name","Guardian Mobile","Guardian Aadhaar","Guardian Qualification","Guardian Occupation","Address","Previous School","Previous Class","Previous Affiliation","Last Session","TC No","TC Date","DOB Cert No","Caste Cert No","Admission Category","Bank Name","Bank Branch","Bank Account No","IFSC Code","Account Type","Account Holder","Sib1 Name","Sib1 Class/Sec","Sib1 School","Sib2 Name","Sib2 Class/Sec","Sib2 School","Declaration Name","Signatory Name","Signature Date","Signature Place"\n';
-                
-                admissionData.forEach((record, index) => {
-                    const row = [
-                        index + 1,
-                        record.admissionDate || '',
-                        record.scholarNo || '',
-                        record.studentName || '',
-                        record.dob || '',
-                        record.dobWords || '',
-                        record.currentAge || '',
-                        record.gender || '',
-                        record.class || '',
-                        record.section || '',
-                        record.house || '',
-                        record.nationality || '',
-                        record.religion || '',
-                        record.category || '',
-                        record.aadhaarNo || '',
-                        record.apaarId || '',
-                        record.sssmId || '',
-                        record.penNo || '',
-                        record.familyId || '',
-                        record.fatherName || '',
-                        record.fatherMobile || '',
-                        record.fatherAadhaar || '',
-                        record.fatherQual || '',
-                        record.fatherOcc || '',
-                        record.motherName || '',
-                        record.motherMobile || '',
-                        record.motherAadhaar || '',
-                        record.motherQual || '',
-                        record.motherOcc || '',
-                        record.guardianName || '',
-                        record.guardianMobile || '',
-                        record.guardianAadhaar || '',
-                        record.guardianQual || '',
-                        record.guardianOcc || '',
-                        record.address || '',
-                        record.prevSchool || '',
-                        record.prevClass || '',
-                        record.prevAffiliated || '',
-                        record.lastSession || '',
-                        record.tcNo || '',
-                        record.tcDate || '',
-                        record.dobCertNo || '',
-                        record.casteCertNo || '',
-                        record.admissionCategory || '',
-                        record.bankName || '',
-                        record.bankBranch || '',
-                        record.bankAccountNo || '',
-                        record.ifscCode || '',
-                        record.accountType || '',
-                        record.bankHolderName || '',
-                        record.sib1Name || '',
-                        record.sib1ClassSec || '',
-                        record.sib1School || '',
-                        record.sib2Name || '',
-                        record.sib2ClassSec || '',
-                        record.sib2School || '',
-                        record.declarationName || '',
-                        record.signatoryName || '',
-                        record.signatureDate || '',
-                        record.signaturePlace || ''
-                    ].map(field => `"${String(field).replace(/"/g, '""')}"`);
-                    
-                    csv += row.join(',') + '\n';
-                });
-            }
-            
-            if (!csv.trim()) {
-                alert('No data available to download!');
-                return;
-            }
-            
-            // Create download link
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            
-            link.setAttribute('href', url);
-            link.setAttribute('download', 'HEMA_School_Complete_Records_' + new Date().toISOString().split('T')[0] + '.csv');
-            link.style.visibility = 'hidden';
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            alert('Data exported successfully!');
+    // Get all unique keys
+    const keys = new Set();
+    records.forEach(record => {
+        Object.keys(record).forEach(key => keys.add(key));
+    });
+
+    // Create CSV header
+    let csv = Array.from(keys).join(',') + '
+';
+
+    // Create CSV rows
+    records.forEach(record => {
+        const row = Array.from(keys).map(key => {
+            const value = record[key] || '';
+            return `"${String(value).replace(/"/g, '""')}"`;
+        });
+        csv += row.join(',') + '
+';
+    });
+
+    // Download
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${type}_records_${new Date().getTime()}.csv`;
+    link.click();
+}
+
+// Export to Excel
+function exportToExcel(type) {
+    const records = JSON.parse(localStorage.getItem(type === 'enquiry' ? 'enquiries' : type === 'registration' ? 'registrations' : 'admissions') || '[]');
+
+    if (records.length === 0) {
+        alert('No records to export!');
+        return;
+    }
+
+    const ws = XLSX.utils.json_to_sheet(records);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, type.charAt(0).toUpperCase() + type.slice(1));
+
+    XLSX.writeFile(wb, `${type}_records_${new Date().getTime()}.xlsx`);
+}
+
+// Delete Record
+function deleteRecord(type, index) {
+    if (!confirm('Are you sure you want to delete this record?')) {
+        return;
+    }
+
+    const storageKey = type === 'enquiry' ? 'enquiries' : type === 'registration' ? 'registrations' : 'admissions';
+    const records = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+    records.splice(index, 1);
+    localStorage.setItem(storageKey, JSON.stringify(records));
+
+    // Reload the appropriate table
+    if (type === 'enquiry') {
+        loadEnquiries();
+    } else if (type === 'registration') {
+        loadRegistrations();
+    } else {
+        loadAdmissions();
+    }
+
+    alert('Record deleted successfully!');
+}
+
+// Close Modal
+function closeModal() {
+    document.getElementById('viewModal').style.display = 'none';
+    currentRecord = null;
+    currentRecordType = null;
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('viewModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// Add print-only style dynamically
+const style = document.createElement('style');
+style.textContent = `
+    @media print {
+        .print-only {
+            display: block !important;
         }
-    </script>
+    }
+    @media screen {
+        .print-only {
+            display: none !important;
+        }
+    }
+`;
+document.head.appendChild(style);
+</script>
+
 </body>
 </html>
