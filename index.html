@@ -1,103 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<head>
 <style>
-/* ============================================ */
-/* RESPONSIVE LAYOUT & SCALING FIXES */
-/* ============================================ */
+/* ============================================================================ */
+/* HEMA SCHOOL HEADER - EXACT MATCH FROM IMAGE */
+/* ============================================================================ */
 
 * {
     box-sizing: border-box;
-}
-
-html {
-    font-size: 14px;
-    overflow-x: hidden;
-    width: 100%;
-}
-
-body {
     margin: 0;
     padding: 0;
+}
+
+html, body {
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
-    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Main container - ensure it fits screen */
-.container, .main-container, .wrapper {
-    width: 100% !important;
-    max-width: 1400px !important;
-    margin: 0 auto !important;
-    padding: 15px !important;
-    box-sizing: border-box !important;
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background: #f5f5f5;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-/* Header adjustments */
-.header, header {
-    width: 100% !important;
-    padding: 10px !important;
-    box-sizing: border-box !important;
+/* Header with blue gradient background - matches image */
+.hema-school-header {
+    background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+    padding: 20px 15px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
 }
 
-/* School logo and title */
-.school-header {
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.header-left-logo,
+.header-right-logo {
+    flex-shrink: 0;
+}
+
+.logo-img {
+    width: 90px;
+    height: 90px;
+    display: block;
+}
+
+.header-center {
+    flex: 1;
+    text-align: center;
+    color: white;
+}
+
+.school-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.affiliation {
+    font-size: 14px;
+    color: #FFD700;
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.school-info {
+    font-size: 13px;
+    color: white;
+    margin: 3px 0;
+}
+
+/* Container */
+.container, .main-container, form {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Sections */
+.section {
+    width: 100%;
+    margin: 15px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid #4682B4;
+}
+
+.section h2, .section h3 {
+    font-size: 16px;
+    color: #1E3A5F;
+    margin-bottom: 12px;
+    font-weight: bold;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #E3F2FD;
+}
+
+/* Form rows */
+.form-row {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    padding: 10px;
+    gap: 12px;
+    margin-bottom: 10px;
 }
 
-/* Navigation tabs - make them responsive */
-.nav-tabs, .tabs {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    padding: 10px 0 !important;
-    justify-content: center !important;
+.form-group {
+    flex: 1;
+    min-width: 200px;
 }
 
-.nav-tabs button, .tabs button {
-    flex: 1 1 auto !important;
-    min-width: 110px !important;
-    max-width: 200px !important;
-    font-size: 0.9rem !important;
-    padding: 10px 15px !important;
-}
-
-/* Form sections */
-.section, .form-section, .info-section {
-    width: 100% !important;
-    margin-bottom: 20px !important;
-    padding: 20px !important;
-    box-sizing: border-box !important;
-}
-
-/* Form rows - flexible layout */
-.form-row, .row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 15px !important;
-    margin-bottom: 15px !important;
-}
-
-.form-group, .col, .field {
-    flex: 1 1 auto !important;
-    min-width: 250px !important;
-    max-width: 100% !important;
+.form-group.full-width {
+    flex-basis: 100%;
 }
 
 /* Labels */
 label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
 }
 
-/* Input fields - ensure proper sizing */
+/* Inputs */
 input[type="text"],
 input[type="date"],
 input[type="tel"],
@@ -105,196 +150,224 @@ input[type="email"],
 input[type="number"],
 select,
 textarea {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 10px !important;
-    font-size: 14px !important;
-    border: 1px solid #ccc !important;
-    border-radius: 4px !important;
-    box-sizing: border-box !important;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: border-color 0.3s;
 }
 
-/* Radio and checkbox groups */
-.radio-group, .checkbox-group {
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #4682B4;
+    box-shadow: 0 0 0 2px rgba(70,130,180,0.1);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+table th, table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background: #E3F2FD;
+    font-weight: bold;
+    color: #1E3A5F;
+}
+
+/* Buttons */
+.button-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-}
-
-/* Button group */
-.button-group, .btn-group, .actions {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-    justify-content: center !important;
-    margin: 20px 0 !important;
-    padding: 10px !important;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px 0;
 }
 
 button, .btn {
-    padding: 12px 24px !important;
-    font-size: 14px !important;
-    white-space: nowrap !important;
-    border-radius: 5px !important;
-    cursor: pointer !important;
-    min-width: 150px !important;
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    min-width: 170px;
+    transition: all 0.3s;
 }
 
-/* Tables - make responsive */
-table {
-    width: 100% !important;
-    max-width: 100% !important;
-    border-collapse: collapse !important;
-    overflow-x: auto !important;
-    display: block !important;
+.btn-print {
+    background: #2196F3;
+    color: white;
 }
 
-table td, table th {
-    padding: 8px !important;
-    font-size: 13px !important;
+.btn-submit {
+    background: #4CAF50;
+    color: white;
 }
 
-/* Fee details section */
-.fee-table {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+.btn-register {
+    background: #FF9800;
+    color: white;
 }
 
-/* Document checklist */
-.doc-checklist {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 10px;
+.btn-reset {
+    background: #9E9E9E;
+    color: white;
 }
 
-/* RESPONSIVE BREAKPOINTS */
-
-/* Large screens (1200px and up) */
-@media screen and (min-width: 1200px) {
-    .container, .main-container {
-        max-width: 1400px !important;
-    }
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Medium screens (768px to 1199px) */
-@media screen and (max-width: 1199px) {
-    html {
-        font-size: 13px;
-    }
-
-    .container, .main-container {
-        padding: 12px !important;
-    }
-
-    .form-group, .col {
-        min-width: 200px !important;
-    }
+/* Navigation tabs */
+.nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
 }
 
-/* Small screens (576px to 767px) */
-@media screen and (max-width: 767px) {
-    html {
-        font-size: 12px;
+.nav-tabs a, .nav-tabs button {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
     }
 
-    .container, .main-container {
-        padding: 10px !important;
+    .school-name {
+        font-size: 24px;
     }
 
-    .form-row, .row {
-        flex-direction: column !important;
+    .logo-img {
+        width: 70px;
+        height: 70px;
     }
 
-    .form-group, .col {
-        width: 100% !important;
-        min-width: 100% !important;
+    .form-group {
+        min-width: 100%;
+        flex-basis: 100%;
     }
 
-    .nav-tabs button, .tabs button {
-        min-width: 90px !important;
-        font-size: 0.85rem !important;
-        padding: 8px 12px !important;
-    }
-
-    button, .btn {
-        width: 100% !important;
-        min-width: 100% !important;
-        margin-bottom: 10px !important;
-    }
-
-    .button-group, .btn-group {
-        flex-direction: column !important;
-    }
-
-    table {
-        font-size: 11px !important;
+    button {
+        width: 100%;
     }
 }
 
-/* Extra small screens (up to 575px) */
-@media screen and (max-width: 575px) {
-    html {
-        font-size: 11px;
-    }
-
-    .container, .main-container {
-        padding: 8px !important;
-    }
-
-    .section, .form-section {
-        padding: 15px !important;
-    }
-
-    input, select, textarea {
-        padding: 8px !important;
-        font-size: 13px !important;
-    }
-
-    button, .btn {
-        padding: 10px 15px !important;
-        font-size: 13px !important;
-    }
-}
-
-/* Print styles */
+/* ============================================================================ */
+/* PRINT STYLES - A4 WITH COLORED HEADER */
+/* ============================================================================ */
 @media print {
-    body {
-        width: 210mm;
-        margin: 0;
-        overflow: visible;
+    @page {
+        size: A4;
+        margin: 10mm 8mm;
     }
 
-    .nav-tabs,
-    button,
-    .btn-group {
+    body {
+        background: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Keep colored header in print */
+    .hema-school-header {
+        background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
+        padding: 15px !important;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    .hema-school-header * {
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .affiliation {
+        color: #FFD700 !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    .school-name {
+        font-size: 24pt !important;
+    }
+
+    .school-info, .affiliation {
+        font-size: 10pt !important;
+    }
+
+    .logo-img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    /* Hide buttons and navigation */
+    button, .btn, .btn-group, .button-group, .nav-tabs, .no-print {
         display: none !important;
     }
 
-    .section, .form-section {
-        page-break-inside: avoid;
-        padding: 10mm !important;
+    /* Optimize sections */
+    .section {
+        margin: 8px 0 !important;
+        padding: 10px !important;
+        box-shadow: none !important;
+        border: 1px solid #999 !important;
+        page-break-inside: avoid !important;
+    }
+
+    .section h2, .section h3 {
+        font-size: 13pt !important;
+        color: #1E3A5F !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    .form-row {
+        margin-bottom: 5px !important;
     }
 
     input, select, textarea {
         border: none !important;
-        border-bottom: 1px solid #000 !important;
+        border-bottom: 1px solid #333 !important;
+        padding: 2px 4px !important;
+        font-size: 11pt !important;
     }
-}
 
-/* Ensure no elements overflow horizontally */
-* {
-    max-width: 100%;
-}
+    label {
+        font-size: 10pt !important;
+        font-weight: bold !important;
+    }
 
-img {
-    max-width: 100% !important;
-    height: auto !important;
-}
+    table {
+        font-size: 10pt !important;
+    }
 
-/* Fix for specific elements that might cause overflow */
-.overflow-fix {
-    overflow-x: hidden !important;
-    max-width: 100% !important;
+    table th {
+        background: #E3F2FD !important;
+        -webkit-print-color-adjust: exact !important;
+    }
 }
 </style>
 
@@ -1165,43 +1238,31 @@ img {
 </style>
 </head>
 <body>
-    <div class="container">
-        <!-- LOGO HEADER -->
-        <div class="logo-header">
-            <div class="header-container">
-                <div class="header-flex">
-                    <!-- Left Logo - School -->
-                    <div class="logo-box logo-left">
-                        <img src="school-logo.png" alt="School Logo" class="logo-img">
-                    </div>
 
-                    <!-- Center - School Details -->
-                    <div class="school-info">
-                        <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
-                        <div class="school-details">
-                            <div class="detail-line"><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></div>
-                            <div class="detail-line">School Code: 50383 | Affiliation No.: 1030417</div>
-                            <div class="detail-line">Govindpura, Bhopal, Madhya Pradesh, India - 462023</div>
-                            <div class="detail-line contact-line">
-                                📧 <a href="mailto:support@hemaschool.education">support@hemaschool.education</a> | 
-                                📞 0755-2457270
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Logo - Empathy -->
-                    <div class="logo-box logo-right">
-                        <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
-                    </div>
-                </div>
-            </div>
+<!-- HEMA School Header with Blue Background -->
+<div class="hema-school-header">
+    <div class="header-content">
+        <div class="header-left-logo">
+            <img src="school-logo.png" alt="HEMA Logo" class="logo-img">
         </div>
-
-        
+        <div class="header-center">
+            <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
+            <p class="affiliation"><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
+            <p class="school-info">School Code: 50383 | Affiliation No.: 1030417</p>
+            <p class="school-info">Govindpura, Bhopal, Madhya Pradesh, India - 462023</p>
+            <p class="school-info">📧 support@hemaschool.education | 📞 0755-2457270</p>
         </div>
+        <div class="header-right-logo">
+            <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
+        </div>
+    </div>
+</div>
+
+
+        <div class="container">
 
         <div class="nav-bar no-print">
-            <a href="index.html" class="active">📝 Enquiry</a>
+            <a href="enquiry.html" class="active">📝 Enquiry</a>
             <a href="registration.html">📋 Registration</a>
             <a href="admission.html">✅ Admission</a>
             <a href="data.html" >📊 Records</a>
@@ -1212,22 +1273,19 @@ img {
                 <!-- BASIC INFORMATION -->
                 <fieldset>
                     <legend>📋 BASIC INFORMATION</legend>
-                    <div class="row half">
+
+                    <div class="form-row">
                         <div class="form-group">
                             <label for="sno">S.NO.:</label>
-                            <div style="display:flex;flex-direction:column;gap:10px;">
-                                <input type="text" id="sno" name="sno" readonly style="background:#f0f0f0;font-weight:bold;color:#1e3c72;">
-                                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#555;">
-                                    <input type="checkbox" id="autoSno" checked onchange="toggleSnoMode()" style="width:18px;height:18px;cursor:pointer;">
-                                    <span>✓ Auto-generate S.NO.</span>
-                                </label>
-                            </div>
+                            <input type="text" id="sno" name="sno" value="2026001" readonly style="background:#f0f0f0;font-weight:bold;color:#1e3c72;">
                         </div>
+
                         <div class="form-group">
                             <label for="date">DATE</label>
-                            <input type="date" id="date" name="date">
+                            <input type="date" id="date" name="date" required>
                         </div>
                     </div>
+
                 </fieldset>
 
                 <!-- STUDENT DETAILS -->
@@ -2106,18 +2164,31 @@ window.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 
+
 <script>
-// ============================================
-// COMPLETE WORKING FUNCTIONS
-// ============================================
+console.log('🟢 ENQUIRY FORM: Loading complete working scripts...');
 
-// Save Enquiry Function
+// ============================================================================
+// 1. PRINT FUNCTION
+// ============================================================================
+function printForm() {
+    console.log('🖨️ printForm() called');
+    window.print();
+}
+
+// ============================================================================
+// 2. SAVE ENQUIRY FUNCTION - COMPLETE WITH ALL FIELDS
+// ============================================================================
 function saveEnquiry() {
-    console.log('saveEnquiry() called');
+    console.log('💾 saveEnquiry() called');
 
+    // Collect ALL form data
     const formData = {
+        // Basic Information
         sno: document.getElementById('sno')?.value || '',
         date: document.getElementById('date')?.value || '',
+
+        // Student Details
         studentFirstName: document.getElementById('studentFirstName')?.value || '',
         studentMiddleName: document.getElementById('studentMiddleName')?.value || '',
         studentSurname: document.getElementById('studentSurname')?.value || '',
@@ -2126,6 +2197,8 @@ function saveEnquiry() {
         dob: document.getElementById('dob')?.value || '',
         currentAge: document.getElementById('currentAge')?.value || '',
         ageAsOn: document.getElementById('ageAsOn')?.value || '',
+
+        // Parent Details
         fatherFirstName: document.getElementById('fatherFirstName')?.value || '',
         fatherMiddleName: document.getElementById('fatherMiddleName')?.value || '',
         fatherSurname: document.getElementById('fatherSurname')?.value || '',
@@ -2135,6 +2208,8 @@ function saveEnquiry() {
         fatherMobile: document.getElementById('fatherMobile')?.value || '',
         motherMobile: document.getElementById('motherMobile')?.value || '',
         landline: document.getElementById('landline')?.value || '',
+
+        // Address Details
         address: document.getElementById('address')?.value || '',
         area: document.getElementById('area')?.value || '',
         city: document.getElementById('city')?.value || '',
@@ -2142,6 +2217,8 @@ function saveEnquiry() {
         state: document.getElementById('state')?.value || '',
         pincode: document.getElementById('pincode')?.value || '',
         country: document.getElementById('country')?.value || '',
+
+        // Sibling Information
         sibling1Name: document.getElementById('sibling1Name')?.value || '',
         sibling1School: document.getElementById('sibling1School')?.value || '',
         sibling1Class: document.getElementById('sibling1Class')?.value || '',
@@ -2150,98 +2227,170 @@ function saveEnquiry() {
         sibling2School: document.getElementById('sibling2School')?.value || '',
         sibling2Class: document.getElementById('sibling2Class')?.value || '',
         sibling2Section: document.getElementById('sibling2Section')?.value || '',
+
+        // Information Source
         infoSource: document.querySelector('input[name="infoSource"]:checked')?.value || '',
         referredType: document.querySelector('input[name="referredType"]:checked')?.value || '',
-        referredName: document.getElementById('referredName')?.value || ''
+        referredName: document.getElementById('referredName')?.value || '',
+
+        // Timestamp
+        timestamp: new Date().toISOString()
     };
 
-    if (!formData.studentFirstName) {
-        alert('❌ Please enter Student First Name');
+    console.log('📋 Form data collected:', formData);
+
+    // VALIDATION - Check required fields
+    if (!formData.studentFirstName || formData.studentFirstName.trim() === '') {
+        alert('❌ ERROR: Please enter Student First Name');
+        document.getElementById('studentFirstName')?.focus();
         return false;
     }
-    if (!formData.classApplying) {
-        alert('❌ Please select Class Applying For');
+
+    if (!formData.classApplying || formData.classApplying === '') {
+        alert('❌ ERROR: Please select Class Applying For');
+        document.getElementById('classApplying')?.focus();
         return false;
     }
-    if (!formData.fatherMobile) {
-        alert('❌ Please enter Father Mobile Number');
+
+    if (!formData.fatherMobile || formData.fatherMobile.trim() === '') {
+        alert('❌ ERROR: Please enter Father Mobile Number');
+        document.getElementById('fatherMobile')?.focus();
         return false;
     }
 
     try {
+        // Check if editing existing record
         const editIndex = sessionStorage.getItem('editingEnquiryIndex');
         let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
 
-        if (editIndex !== null && editIndex !== '' && editIndex !== undefined) {
+        if (editIndex !== null && editIndex !== '' && editIndex !== 'null') {
+            // Update existing record
             enquiryRecords[parseInt(editIndex)] = formData;
             sessionStorage.removeItem('editingEnquiryIndex');
+            console.log('✏️ Updated existing record at index:', editIndex);
         } else {
+            // Add new record
             enquiryRecords.push(formData);
+            console.log('➕ Added new record');
         }
 
+        // Save to localStorage - BOTH places for compatibility
         localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
         localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
 
-        alert('✅ Enquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
+        console.log('✅ Saved to localStorage');
+        console.log('📊 Total enquiry records:', enquiryRecords.length);
+
+        alert('✅ SUCCESS!\n\nEnquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
+
         return true;
+
     } catch (error) {
-        alert('❌ Error saving data: ' + error.message);
+        console.error('❌ Error saving enquiry:', error);
+        alert('❌ ERROR: Failed to save data\n\nError: ' + error.message);
         return false;
     }
 }
 
-// Proceed to Registration
+// ============================================================================
+// 3. PROCEED TO REGISTRATION - SAVES FIRST THEN REDIRECTS
+// ============================================================================
 function proceedToRegistration() {
-    if (saveEnquiry()) {
-        alert('📋 Proceeding to Registration Form...');
-        window.location.href = 'SCALED-REGISTRATION-FORM.html';
+    console.log('➡️ proceedToRegistration() called');
+
+    // IMPORTANT: First save the enquiry data
+    const saved = saveEnquiry();
+
+    if (saved === true) {
+        console.log('✅ Data saved successfully, proceeding to registration...');
+        alert('📋 Proceeding to Registration Form...\n\nYour enquiry data will be automatically filled!');
+
+        // Small delay to ensure data is saved, then redirect
+        setTimeout(function() {
+            window.location.href = 'WORKING-REGISTRATION-FORM.html';
+        }, 500);
+    } else {
+        console.log('❌ Save failed, not proceeding to registration');
     }
 }
 
-// Load for editing
+// ============================================================================
+// 4. LOAD DATA FOR EDITING
+// ============================================================================
 function loadForEdit() {
     const editData = JSON.parse(localStorage.getItem('editEnquiryData'));
-    if (editData) {
-        if (document.getElementById('sno')) document.getElementById('sno').value = editData.sno || '';
-        if (document.getElementById('date')) document.getElementById('date').value = editData.date || '';
-        if (document.getElementById('studentFirstName')) document.getElementById('studentFirstName').value = editData.studentFirstName || '';
-        if (document.getElementById('studentMiddleName')) document.getElementById('studentMiddleName').value = editData.studentMiddleName || '';
-        if (document.getElementById('studentSurname')) document.getElementById('studentSurname').value = editData.studentSurname || '';
 
+    if (editData) {
+        console.log('📂 Loading data for editing...');
+
+        // Fill all fields with existing data
+        Object.keys(editData).forEach(function(key) {
+            const field = document.getElementById(key);
+            if (field) {
+                if (field.type === 'radio') {
+                    const radio = document.querySelector('input[name="' + key + '"][value="' + editData[key] + '"]');
+                    if (radio) radio.checked = true;
+                } else if (field.type === 'checkbox') {
+                    field.checked = editData[key] === true || editData[key] === 'true';
+                } else {
+                    field.value = editData[key] || '';
+                }
+            }
+        });
+
+        // Handle gender radio buttons specifically
         if (editData.gender) {
             const genderRadios = document.querySelectorAll('input[name="gender"]');
-            genderRadios.forEach(radio => {
+            genderRadios.forEach(function(radio) {
                 if (radio.value.toUpperCase() === editData.gender.toUpperCase()) {
                     radio.checked = true;
                 }
             });
         }
 
-        if (document.getElementById('classApplying')) document.getElementById('classApplying').value = editData.classApplying || '';
-        if (document.getElementById('fatherMobile')) document.getElementById('fatherMobile').value = editData.fatherMobile || '';
-
+        // Store edit index for later update
         if (editData.editIndex !== undefined) {
             sessionStorage.setItem('editingEnquiryIndex', editData.editIndex);
         }
 
+        // Clear edit data from localStorage
         localStorage.removeItem('editEnquiryData');
-        alert('✅ Record loaded for editing!');
+
+        alert('✅ Record loaded for editing!\n\nMake your changes and click Save Enquiry.');
+        console.log('✅ Edit data loaded successfully');
     }
 }
 
-// Page initialization
+// ============================================================================
+// 5. PAGE INITIALIZATION
+// ============================================================================
 window.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 Page loaded - Initializing enquiry form...');
+
+    // Load data if editing
     loadForEdit();
 
-    const dateInput = document.getElementById('date');
-    if (dateInput && !dateInput.value) {
-        dateInput.value = new Date().toISOString().split('T')[0];
+    // Set today's date if date field is empty
+    const dateField = document.getElementById('date');
+    if (dateField && !dateField.value) {
+        const today = new Date().toISOString().split('T')[0];
+        dateField.value = today;
+        console.log('📅 Set date to today:', today);
     }
 
-    if(document.getElementById('autoSno') && document.getElementById('autoSno').checked){
-        generateAutoSno();
+    // Auto-generate S.NO if checkbox exists and is checked
+    const autoSnoCheckbox = document.getElementById('autoSno');
+    if (autoSnoCheckbox && autoSnoCheckbox.checked) {
+        if (typeof generateAutoSno === 'function') {
+            generateAutoSno();
+        }
     }
+
+    console.log('✅ Enquiry form initialization complete');
+    console.log('📌 Available functions: printForm(), saveEnquiry(), proceedToRegistration()');
 });
+
+console.log('✅ ALL ENQUIRY FORM SCRIPTS LOADED SUCCESSFULLY!');
 </script>
 
 </body>
