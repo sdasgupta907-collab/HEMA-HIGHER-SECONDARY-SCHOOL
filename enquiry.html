@@ -2183,8 +2183,17 @@ function saveEnquiry() {
     console.log('💾 saveEnquiry() called');
 
     try {
-        // Get form and ALL data automatically using FormData
+        // Get form
         const form = document.getElementById('enquiryForm');
+
+        // Validate form using HTML5 validation (checks all required fields)
+        if (!form.checkValidity()) {
+            form.reportValidity(); // Shows browser validation messages
+            console.log('❌ Form validation failed');
+            return false;
+        }
+
+        // Get ALL form data automatically using FormData
         const formData = new FormData(form);
 
         // Convert FormData to object
@@ -2196,25 +2205,7 @@ function saveEnquiry() {
         // Add metadata
         enquiryData.submittedDate = new Date().toLocaleDateString('en-IN');
         enquiryData.submittedTime = new Date().toLocaleTimeString('en-IN');
-
-        // Validate minimum required fields
-        if (!enquiryData.studentFirst || enquiryData.studentFirst.trim() === '') {
-            alert('❌ ERROR: Please enter Student First Name');
-            document.getElementById('studentFirst').focus();
-            return false;
-        }
-
-        if (!enquiryData.fatherMobile || enquiryData.fatherMobile.trim() === '') {
-            alert('❌ ERROR: Please enter Father Mobile Number');
-            document.getElementById('fatherMobile').focus();
-            return false;
-        }
-
-        if (!enquiryData.class || enquiryData.class.trim() === '') {
-            alert('❌ ERROR: Please select Class');
-            document.getElementById('class').focus();
-            return false;
-        }
+        enquiryData.recordId = 'ENQ' + Date.now();
 
         // Get existing enquiries from localStorage
         let enquiryRecords = JSON.parse(localStorage.getItem('enquiries') || '[]');
@@ -2231,7 +2222,7 @@ function saveEnquiry() {
         console.log('✅ Enquiry saved successfully!', enquiryData);
         console.log('📊 Total enquiries:', enquiryRecords.length);
 
-        alert('✅ SUCCESS!\n\nEnquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
+        alert('✅ SUCCESS!\n\nEnquiry saved successfully!\n\nRecord ID: ' + enquiryData.recordId + '\nTotal enquiries: ' + enquiryRecords.length);
 
         return true;
 
