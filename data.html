@@ -636,7 +636,7 @@ function loadEnquiries() {
             <td>${index + 1}</td>
             <td>${record.date || 'N/A'}</td>
             <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentSurname || ''}</td>
-            <td>${record.classApplied || record.class || 'N/A'}</td>
+            <td>${(record.classApplied || record.class || 'N/A')}</td>
             <td>${record.gender || 'N/A'}</td>
             <td>${record.fatherMobile || 'N/A'}</td>
             <td>${record.district || 'N/A'}</td>
@@ -670,8 +670,8 @@ function loadRegistrations() {
         row.innerHTML = `
             <td>${index + 1}</td>
             <td>${record.date || 'N/A'}</td>
-            <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentLast || ''}</td>
-            <td>${record.class || 'N/A'}</td>
+            <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentSurname || ''}</td>
+            <td>${(record.classApplied || record.class || 'N/A')}</td>
             <td>${record.gender || 'N/A'}</td>
             <td>${record.fatherMobile || 'N/A'}</td>
             <td>${record.district || 'N/A'}</td>
@@ -705,7 +705,7 @@ function loadAdmissions() {
             <td>${index + 1}</td>
             <td>${record.admissionDate || 'N/A'}</td>
             <td>${record.studentName || 'N/A'}</td>
-            <td>${record.class || 'N/A'}</td>
+            <td>${(record.classApplied || record.class || 'N/A')}</td>
             <td>${record.section || 'N/A'}</td>
             <td>${record.scholarNo || 'N/A'}</td>
             <td>${record.district || 'N/A'}</td>
@@ -777,7 +777,7 @@ function generateEnquiryView(record) {
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Student Last Name</div>
-                    <div class="detail-value">${record.studentLast || 'N/A'}</div>
+                    <div class="detail-value">${record.studentSurname || 'N/A'}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Date of Birth</div>
@@ -789,7 +789,7 @@ function generateEnquiryView(record) {
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Class Applying For</div>
-                    <div class="detail-value">${record.class || 'N/A'}</div>
+                    <div class="detail-value">${(record.classApplied || record.class || 'N/A')}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Aadhaar Number</div>
@@ -971,7 +971,7 @@ function generateRegistrationView(record) {
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Student Last Name</div>
-                    <div class="detail-value">${record.studentLast || 'N/A'}</div>
+                    <div class="detail-value">${record.studentSurname || 'N/A'}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Date of Birth</div>
@@ -983,7 +983,7 @@ function generateRegistrationView(record) {
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Class</div>
-                    <div class="detail-value">${record.class || 'N/A'}</div>
+                    <div class="detail-value">${(record.classApplied || record.class || 'N/A')}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Aadhaar Number</div>
@@ -1164,7 +1164,7 @@ function generateAdmissionView(record) {
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Class</div>
-                    <div class="detail-value">${record.class || 'N/A'}</div>
+                    <div class="detail-value">${(record.classApplied || record.class || 'N/A')}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-label">Section</div>
