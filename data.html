@@ -635,8 +635,8 @@ function loadEnquiries() {
         row.innerHTML = `
             <td>${index + 1}</td>
             <td>${record.date || 'N/A'}</td>
-            <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentLast || ''}</td>
-            <td>${record.class || 'N/A'}</td>
+            <td>${record.studentFirst || ''} ${record.studentMiddle || ''} ${record.studentSurname || ''}</td>
+            <td>${record.classApplied || record.class || 'N/A'}</td>
             <td>${record.gender || 'N/A'}</td>
             <td>${record.fatherMobile || 'N/A'}</td>
             <td>${record.district || 'N/A'}</td>
