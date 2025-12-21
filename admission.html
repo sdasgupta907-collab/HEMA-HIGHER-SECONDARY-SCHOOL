@@ -1,24 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
 <style>
-* { box-sizing: border-box; }
-html { font-size: 14px; overflow-x: hidden; width: 100%; }
-body { margin: 0; padding: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
-.container, .main-container, .wrapper { width: 100% !important; max-width: 1400px !important; margin: 0 auto !important; padding: 15px !important; }
-.header { width: 100% !important; padding: 10px !important; }
-.nav-tabs { display: flex !important; flex-wrap: wrap !important; gap: 8px !important; padding: 10px 0 !important; justify-content: center !important; }
-.nav-tabs button { flex: 1 1 auto !important; min-width: 110px !important; font-size: 0.9rem !important; padding: 10px 15px !important; }
-.section, .form-section { width: 100% !important; margin-bottom: 20px !important; padding: 20px !important; }
-.form-row { display: flex !important; flex-wrap: wrap !important; gap: 15px !important; }
-.form-group { flex: 1 1 auto !important; min-width: 250px !important; }
-input, select, textarea { width: 100% !important; padding: 10px !important; font-size: 14px !important; }
-.button-group { display: flex !important; flex-wrap: wrap !important; gap: 10px !important; justify-content: center !important; margin: 20px 0 !important; }
-button { padding: 12px 24px !important; font-size: 14px !important; min-width: 150px !important; }
-table { width: 100% !important; overflow-x: auto !important; display: block !important; }
-@media (max-width: 767px) { .form-row { flex-direction: column !important; } .form-group { min-width: 100% !important; } button { width: 100% !important; } }
-@media print { .nav-tabs, button { display: none !important; } }
+/* ============================================================================ */
+/* HEMA SCHOOL HEADER - EXACT MATCH FROM IMAGE */
+/* ============================================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background: #f5f5f5;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Header with blue gradient background - matches image */
+.hema-school-header {
+    background: linear-gradient(135deg, #4A8FCA 0%, #1E3A5F 100%);
+    padding: 20px 15px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.header-left-logo,
+.header-right-logo {
+    flex-shrink: 0;
+}
+
+.logo-img {
+    width: 90px;
+    height: 90px;
+    display: block;
+}
+
+.header-center {
+    flex: 1;
+    text-align: center;
+    color: white;
+}
+
+.school-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.affiliation {
+    font-size: 14px;
+    color: #FFD700;
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.school-info {
+    font-size: 13px;
+    color: white;
+    margin: 3px 0;
+}
+
+/* Container */
+.container, .main-container, form {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Sections */
+.section {
+    width: 100%;
+    margin: 15px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid #FF9800;
+}
+
+.section h2, .section h3 {
+    font-size: 16px;
+    color: #F57C00;
+    margin-bottom: 12px;
+    font-weight: bold;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #E3F2FD;
+}
+
+/* Form rows */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-group.full-width {
+    flex-basis: 100%;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #FF9800;
+    box-shadow: 0 0 0 2px rgba(70,130,180,0.1);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+table th, table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background: #E3F2FD;
+    font-weight: bold;
+    color: #F57C00;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+button, .btn {
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    min-width: 170px;
+    transition: all 0.3s;
+}
+
+.btn-print {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-submit {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-register {
+    background: #FF9800;
+    color: white;
+}
+
+.btn-reset {
+    background: #9E9E9E;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Navigation tabs */
+.nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.nav-tabs a, .nav-tabs button {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .school-name {
+        font-size: 24px;
+    }
+
+    .logo-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .form-group {
+        min-width: 100%;
+        flex-basis: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* ============================================================================ */
+/* PRINT STYLES - A4 WITH COLORED HEADER */
+/* ============================================================================ */
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm 8mm;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Keep colored header in print */
+    .hema-school-header {
+    background: linear-gradient(135deg, #4A8FCA 0%, #1E3A5F 100%);
+        padding: 15px !important;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    .hema-school-header * {
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .affiliation {
+        color: #FFD700;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    .school-name {
+        font-size: 24pt !important;
+    }
+
+    .school-info, .affiliation {
+        font-size: 10pt !important;
+    }
+
+    .logo-img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    /* Hide buttons and navigation */
+    button, .btn, .btn-group, .button-group, .nav-tabs, .no-print {
+        display: none !important;
+    }
+
+    /* Optimize sections */
+    .section {
+        margin: 8px 0 !important;
+        padding: 10px !important;
+        box-shadow: none !important;
+        border: 1px solid #999 !important;
+        page-break-inside: avoid !important;
+    }
+
+    .section h2, .section h3 {
+        font-size: 13pt !important;
+        color: #F57C00 !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    .form-row {
+        margin-bottom: 5px !important;
+    }
+
+    input, select, textarea {
+        border: none !important;
+        border-bottom: 1px solid #333 !important;
+        padding: 2px 4px !important;
+        font-size: 11pt !important;
+    }
+
+    label {
+        font-size: 10pt !important;
+        font-weight: bold !important;
+    }
+
+    table {
+        font-size: 10pt !important;
+    }
+
+    table th {
+        background: #E3F2FD !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+}
 </style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEMA School - Admission Form 2026-2027</title>
@@ -583,43 +935,31 @@ table { width: 100% !important; overflow-x: auto !important; display: block !imp
 </style>
 </head>
 <body>
-    <div class="container">
-        <!-- LOGO HEADER -->
-        <div class="logo-header">
-            <div class="header-container">
-                <div class="header-flex">
-                    <!-- Left Logo - School -->
-                    <div class="logo-box logo-left">
-                        <img src="school-logo.png" alt="School Logo" class="logo-img">
-                    </div>
 
-                    <!-- Center - School Details -->
-                    <div class="school-info">
-                        <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
-                        <div class="school-details">
-                            <div class="detail-line"><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></div>
-                            <div class="detail-line">School Code: 50383 | Affiliation No.: 1030417</div>
-                            <div class="detail-line">Govindpura, Bhopal, Madhya Pradesh, India - 462023</div>
-                            <div class="detail-line contact-line">
-                                📧 <a href="mailto:support@hemaschool.education">support@hemaschool.education</a> | 
-                                📞 0755-2457270
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Logo - Empathy -->
-                    <div class="logo-box logo-right">
-                        <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
-                    </div>
-                </div>
-            </div>
+<!-- HEMA School Header with Blue Background -->
+<div class="hema-school-header">
+    <div class="header-content">
+        <div class="header-left-logo">
+            <img src="school-logo.png" alt="HEMA Logo" class="logo-img">
         </div>
-
-        
+        <div class="header-center">
+            <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
+            <p class="affiliation"><strong>Affiliated to: CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
+            <p class="school-info">School Code: 50383 | Affiliation No.: 1030417</p>
+            <p class="school-info">Govindpura, Bhopal, Madhya Pradesh, India - 462023</p>
+            <p class="school-info">📧 support@hemaschool.education | 📞 0755-2457270</p>
         </div>
+        <div class="header-right-logo">
+            <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
+        </div>
+    </div>
+</div>
+
+
+        <div class="container">
 
         <div class="nav-bar no-print">
-            <a href="index.html">📝 Enquiry</a>
+            <a href="enquiry.html">📝 Enquiry</a>
             <a href="registration.html">📋 Registration</a>
             <a href="admission.html" class="active">✅ Admission</a>
             <a href="data.html" >📊 Records</a>
@@ -1087,8 +1427,8 @@ table { width: 100% !important; overflow-x: auto !important; display: block !imp
             </div>
 
             <div class="buttons">
-                <button type="button" onclick="submitAdmission()" class="btn-submit"><span class="icon">✓</span> FINAL SUBMIT</button>
-                <button type="button" onclick="submitAdmission()" class="btn-submit"><span class="icon">✓</span> FINAL SUBMIT</button>
+                <button type="button" onclick="saveAdmission()" class="btn-submit"><span class="icon">✓</span> FINAL SUBMIT</button>
+                <button type="button" onclick="saveAdmission()" class="btn-submit"><span class="icon">✓</span> FINAL SUBMIT</button>
                 <button type="submit" class="btn btn-submit">✓ SUBMIT ADMISSION</button>
                 <button type="reset" class="btn btn-reset">✕ CLEAR</button>
             </div>
@@ -1180,7 +1520,51 @@ table { width: 100% !important; overflow-x: auto !important; display: block !imp
                 window.location.href = 'index.html';
             }
         });
-    </script>
+    
+
+// Save Admission Data
+function saveAdmission() {
+    const form = document.getElementById('admissionForm');
+    if (!form.checkValidity()) {
+        alert('Please fill all required fields before saving.');
+        form.reportValidity();
+        return;
+    }
+
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+        if (data[key]) {
+            if (Array.isArray(data[key])) {
+                data[key].push(value);
+            } else {
+                data[key] = [data[key], value];
+            }
+        } else {
+            data[key] = value;
+        }
+    });
+
+    // Add timestamp
+    data.timestamp = new Date().toISOString();
+    data.saved_date = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+    // Save to localStorage
+    const admissions = JSON.parse(localStorage.getItem('admissions') || '[]');
+    admissions.push(data);
+    localStorage.setItem('admissions', JSON.stringify(admissions));
+
+    alert('✓ Admission saved successfully!\n\nYou can view all records in the Records Dashboard.');
+    console.log('Saved admission:', data);
+
+    // Optionally redirect to data page
+    const goToRecords = confirm('Would you like to view the Records Dashboard?');
+    if (goToRecords) {
+        window.location.href = 'data.html';
+    }
+}
+
+</script>
 <script>
 function calculateAgeFromDOB(){
     var dob=document.getElementById('dob');
@@ -1280,6 +1664,145 @@ function submitAdmission() {
     alert('✅ Admission completed! Redirecting to Records Dashboard...');
     window.location.href = 'COMPLETE-RECORDS-DASHBOARD.html';
 }
+</script>
+
+
+
+<script>
+console.log('🟢 ADMISSION FORM: Loading scripts...');
+
+// ============================================================================
+// AUTO-LOAD REGISTRATION DATA ON PAGE LOAD
+// ============================================================================
+window.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 Admission form loaded');
+
+    // Get registration data from localStorage
+    const registrationData = JSON.parse(localStorage.getItem('currentRegistrationData'));
+
+    if (registrationData) {
+        console.log('📂 Found registration data, auto-filling form...');
+
+        // Fill all matching fields
+        Object.keys(registrationData).forEach(function(key) {
+            const field = document.getElementById(key);
+            if (field) {
+                if (field.type === 'radio') {
+                    const radio = document.querySelector('input[name="' + key + '"][value="' + registrationData[key] + '"]');
+                    if (radio) {
+                        radio.checked = true;
+                    }
+                } else if (field.type === 'checkbox') {
+                    field.checked = registrationData[key] === true || registrationData[key] === 'true';
+                } else {
+                    field.value = registrationData[key] || '';
+                }
+            }
+        });
+
+        // Handle gender
+        if (registrationData.gender) {
+            const genderRadios = document.querySelectorAll('input[name="gender"]');
+            genderRadios.forEach(function(radio) {
+                if (radio.value.toUpperCase() === registrationData.gender.toUpperCase()) {
+                    radio.checked = true;
+                }
+            });
+        }
+
+        // Auto-generate scholar number if field exists
+        const scholarField = document.getElementById('scholarNumber');
+        if (scholarField && !scholarField.value) {
+            const year = new Date().getFullYear();
+            const random = Math.floor(Math.random() * 90000) + 10000;
+            scholarField.value = 'SCH' + year + '-' + random;
+            console.log('🎓 Generated scholar number:', scholarField.value);
+        }
+
+        alert('✅ SUCCESS!\n\nAdmission form loaded with your registration data!\n\nScholar Number: ' + (scholarField?.value || 'N/A'));
+        console.log('✅ All fields auto-filled from registration data');
+    } else {
+        console.log('⚠️ No registration data found');
+    }
+});
+
+// ============================================================================
+// FINAL SUBMIT - SAVES ADMISSION AND GOES TO DASHBOARD
+// ============================================================================
+function finalSubmit() {
+    console.log('✅ finalSubmit() called');
+
+    // Collect admission data
+    const admissionData = {
+        scholarNumber: document.getElementById('scholarNumber')?.value || '',
+        sno: document.getElementById('sno')?.value || '',
+        date: document.getElementById('date')?.value || '',
+        admissionDate: document.getElementById('admissionDate')?.value || new Date().toISOString().split('T')[0],
+        studentFirstName: document.getElementById('studentFirstName')?.value || '',
+        studentMiddleName: document.getElementById('studentMiddleName')?.value || '',
+        studentSurname: document.getElementById('studentSurname')?.value || '',
+        gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+        classApplying: document.getElementById('classApplying')?.value || '',
+        dob: document.getElementById('dob')?.value || '',
+        currentAge: document.getElementById('currentAge')?.value || '',
+        fatherFirstName: document.getElementById('fatherFirstName')?.value || '',
+        fatherMiddleName: document.getElementById('fatherMiddleName')?.value || '',
+        fatherSurname: document.getElementById('fatherSurname')?.value || '',
+        motherFirstName: document.getElementById('motherFirstName')?.value || '',
+        motherMiddleName: document.getElementById('motherMiddleName')?.value || '',
+        motherSurname: document.getElementById('motherSurname')?.value || '',
+        fatherMobile: document.getElementById('fatherMobile')?.value || '',
+        motherMobile: document.getElementById('motherMobile')?.value || '',
+        landline: document.getElementById('landline')?.value || '',
+        address: document.getElementById('address')?.value || '',
+        area: document.getElementById('area')?.value || '',
+        city: document.getElementById('city')?.value || '',
+        district: document.getElementById('district')?.value || '',
+        state: document.getElementById('state')?.value || '',
+        pincode: document.getElementById('pincode')?.value || '',
+        country: document.getElementById('country')?.value || '',
+        timestamp: new Date().toISOString()
+    };
+
+    console.log('📋 Admission data collected');
+
+    // Validation
+    if (!admissionData.studentFirstName || admissionData.studentFirstName.trim() === '') {
+        alert('❌ ERROR: Please enter Student First Name');
+        return false;
+    }
+
+    if (!admissionData.scholarNumber || admissionData.scholarNumber.trim() === '') {
+        alert('❌ ERROR: Scholar Number is required');
+        return false;
+    }
+
+    try {
+        // Save to admissionRecords array
+        let admissionRecords = JSON.parse(localStorage.getItem('admissionRecords')) || [];
+        admissionRecords.push(admissionData);
+        localStorage.setItem('admissionRecords', JSON.stringify(admissionRecords));
+
+        console.log('💾 Admission saved');
+        console.log('📊 Total admissions:', admissionRecords.length);
+
+        alert('🎉 SUCCESS!\n\nAdmission completed successfully!\n\nScholar Number: ' + admissionData.scholarNumber + '\n\nRedirecting to Records Dashboard...');
+
+        // Redirect to dashboard
+        setTimeout(function() {
+            window.location.href = 'WORKING-RECORDS-DASHBOARD.html';
+        }, 1000);
+
+        return true;
+
+    } catch (error) {
+        console.error('❌ Error:', error);
+        alert('❌ ERROR: Failed to save admission\n\nError: ' + error.message);
+        return false;
+    }
+}
+
+console.log('✅ Admission form scripts loaded successfully');
 </script>
 
 </body>
