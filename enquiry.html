@@ -2179,63 +2179,44 @@ function printForm() {
 // ============================================================================
 // 2. SAVE ENQUIRY FUNCTION - COMPLETE WITH ALL FIELDS
 // ============================================================================
+
 function saveEnquiry() {
-    console.log('💾 saveEnquiry() called');
+    // Get all form data
+    const formData = {};
+    const form = document.querySelector('form');
+    const inputs = form.querySelectorAll('input, select, textarea');
 
-    // Collect ALL form data
-    const formData = {
-        // Basic Information
-        sno: document.getElementById('sno')?.value || '',
-        date: document.getElementById('date')?.value || '',
+    inputs.forEach(input => {
+        if (input.name) {
+            formData[input.name] = input.value.trim();
+        }
+    });
 
-        // Student Details
-        studentFirstName: document.getElementById('studentFirstName')?.value || '',
-        studentMiddleName: document.getElementById('studentMiddleName')?.value || '',
-        studentSurname: document.getElementById('studentSurname')?.value || '',
-        gender: document.querySelector('input[name="gender"]:checked')?.value || '',
-        classApplying: document.getElementById('classApplying')?.value || '',
-        dob: document.getElementById('dob')?.value || '',
-        currentAge: document.getElementById('currentAge')?.value || '',
-        ageAsOn: document.getElementById('ageAsOn')?.value || '',
+    // Add timestamp
+    formData.date = new Date().toISOString().split('T')[0];
 
-        // Parent Details
-        fatherFirstName: document.getElementById('fatherFirstName')?.value || '',
-        fatherMiddleName: document.getElementById('fatherMiddleName')?.value || '',
-        fatherSurname: document.getElementById('fatherSurname')?.value || '',
-        motherFirstName: document.getElementById('motherFirstName')?.value || '',
-        motherMiddleName: document.getElementById('motherMiddleName')?.value || '',
-        motherSurname: document.getElementById('motherSurname')?.value || '',
-        fatherMobile: document.getElementById('fatherMobile')?.value || '',
-        motherMobile: document.getElementById('motherMobile')?.value || '',
-        landline: document.getElementById('landline')?.value || '',
+    // Validate required fields
+    if (!formData.studentFirst || !formData.fatherMobile || !formData.class) {
+        alert('Please fill Student Name, Father Mobile, and Class before saving.');
+        return;
+    }
 
-        // Address Details
-        address: document.getElementById('address')?.value || '',
-        area: document.getElementById('area')?.value || '',
-        city: document.getElementById('city')?.value || '',
-        district: document.getElementById('district')?.value || '',
-        state: document.getElementById('state')?.value || '',
-        pincode: document.getElementById('pincode')?.value || '',
-        country: document.getElementById('country')?.value || '',
+    // Get existing enquiries
+    let enquiries = JSON.parse(localStorage.getItem('enquiries') || '[]');
 
-        // Sibling Information
-        sibling1Name: document.getElementById('sibling1Name')?.value || '',
-        sibling1School: document.getElementById('sibling1School')?.value || '',
-        sibling1Class: document.getElementById('sibling1Class')?.value || '',
-        sibling1Section: document.getElementById('sibling1Section')?.value || '',
-        sibling2Name: document.getElementById('sibling2Name')?.value || '',
-        sibling2School: document.getElementById('sibling2School')?.value || '',
-        sibling2Class: document.getElementById('sibling2Class')?.value || '',
-        sibling2Section: document.getElementById('sibling2Section')?.value || '',
+    // Add new enquiry
+    enquiries.unshift(formData);
 
-        // Information Source
-        infoSource: document.querySelector('input[name="infoSource"]:checked')?.value || '',
-        referredType: document.querySelector('input[name="referredType"]:checked')?.value || '',
-        referredName: document.getElementById('referredName')?.value || '',
+    // Save to localStorage
+    localStorage.setItem('enquiries', JSON.stringify(enquiries));
 
-        // Timestamp
-        timestamp: new Date().toISOString()
-    };
+    // Show success message
+    alert('Enquiry saved successfully! Proceeding to Registration...');
+
+    // Proceed to registration page
+    window.location.href = 'registration.html';
+}
+;
 
     console.log('📋 Form data collected:', formData);
 
