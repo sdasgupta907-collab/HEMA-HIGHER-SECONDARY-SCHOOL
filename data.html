@@ -5,7 +5,7 @@
     <title>HEMA School - Records Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ICONS -->
+    <!-- ICONS (optional) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -681,6 +681,7 @@
                 margin: 0;
             }
 
+            /* Hide everything except modal content when printing from modal */
             .hema-school-header,
             .container,
             .filter-bar,
@@ -692,6 +693,7 @@
                 display: none !important;
             }
 
+            /* Show only modal backdrop when printing */
             .modal-backdrop {
                 position: static !important;
                 display: block !important;
@@ -706,6 +708,7 @@
                 width: 100% !important;
             }
 
+            /* Keep colored header in print */
             .modal-hema-header {
                 background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
                 padding: 15px !important;
@@ -738,14 +741,17 @@
                 height: 50px !important;
             }
 
+            /* Hide close button in print */
             .modal-close-btn {
                 display: none !important;
             }
 
+            /* Hide footer buttons */
             .modal-footer {
                 display: none !important;
             }
 
+            /* Optimize modal body for print */
             .modal-body {
                 max-height: none !important;
                 overflow: visible !important;
@@ -986,6 +992,7 @@
 
 <div id="modalBackdrop" class="modal-backdrop">
     <div class="modal" id="recordModal">
+        <!-- MODAL HEADER - SAME AS ENQUIRY_FINAL.HTML -->
         <div class="modal-hema-header">
             <button class="modal-close-btn" onclick="closeModal()">&times;</button>
             <div class="modal-header-content">
@@ -1058,8 +1065,8 @@
         const fallbackName = safeGet(record, 'studentName');
         if (fallbackName) return fallbackName;
 
-        const fnKeys = ['studentFirst','studentFirstName'];
-        const mnKeys = ['studentMiddle','studentMiddleName'];
+        const fnKeys = ['studentFirstName','studentFirst','studentFirstName'.toLowerCase()];
+        const mnKeys = ['studentMiddleName','studentMiddle'];
         const snKeys = ['studentSurname','studentLastName'];
 
         let f = '', m = '', s = '';
@@ -1115,13 +1122,12 @@
     }
 
     function grandTotalFromEnquiry(enq) {
-        // Check all possible field names
-        const keys = ['grandTotal', 'grandTotalFee', 'totalFee', 'feeGrandTotal'];
+        const keys = ['grandTotal', 'grandTotalFee', 'totalFee'];
         for (const k of keys) {
             const v = safeGet(enq, k);
             if (v) return v;
         }
-        return '';
+        return safeGet(enq, 'grandTotal');
     }
 
     function countDocsEnquiry(enq) {
@@ -1282,10 +1288,10 @@
             const fatherName = fatherNameFromAny(reg);
             const fatherMobile = safeGet(reg, 'fatherMobile');
             const address = safeGet(reg, 'address');
-            const feeAd = safeGet(reg, 'feeAdmission') || safeGet(reg, 'admissionFee');
-            const feeDev = safeGet(reg, 'feeDevelopment') || safeGet(reg, 'developmentFund');
-            const feeCau = safeGet(reg, 'feeCaution') || safeGet(reg, 'cautionMoney');
-            let totalFee = safeGet(reg, 'totalFee') || safeGet(reg, 'feeTotal');
+            const feeAd = safeGet(reg, 'feeAdmission');
+            const feeDev = safeGet(reg, 'feeDevelopment');
+            const feeCau = safeGet(reg, 'feeCaution');
+            let totalFee = safeGet(reg, 'totalFee');
             if (!totalFee) {
                 const a = parseFloat(feeAd || '0') || 0;
                 const d = parseFloat(feeDev || '0') || 0;
@@ -1416,30 +1422,20 @@
     }
 
     function reloadData() {
-        // FIXED: Load from EXACT localStorage keys used by WORKING_enquiry.html
-        // Priority 1: 'enquiries' (used by WORKING_enquiry.html saveEnquiry)
-        allEnquiries = getArrayFromLocalStorage('enquiries');
-        
-        // Priority 2: Fallback to 'enquiryRecords' for legacy support
+        allEnquiries = getArrayFromLocalStorage('enquiryRecords');
         if (!allEnquiries.length) {
-            allEnquiries = getArrayFromLocalStorage('enquiryRecords');
+            allEnquiries = getArrayFromLocalStorage('enquiries');
         }
-        
-        console.log('✅ Loaded enquiries:', allEnquiries.length, 'records');
 
-        // Load registrations
         allRegistrations = getArrayFromLocalStorage('registrationRecords');
         if (!allRegistrations.length) {
             allRegistrations = getArrayFromLocalStorage('registrations');
         }
-        console.log('✅ Loaded registrations:', allRegistrations.length, 'records');
 
-        // Load admissions
         allAdmissions = getArrayFromLocalStorage('admissionRecords');
         if (!allAdmissions.length) {
             allAdmissions = getArrayFromLocalStorage('admissions');
         }
-        console.log('✅ Loaded admissions:', allAdmissions.length, 'records');
 
         updateSummaryCards();
         applyFilters();
@@ -1504,30 +1500,28 @@
         const sib2Section = safeGet(enq, 'sib2Section');
 
         const feeClass = feeClassFromAny(enq);
-        
-        // FIXED: Get fee calculator data with ALL possible field names
-        const admissionFee = safeGet(enq, 'admissionFee') || safeGet(enq, 'feeAdmission') || '';
-        const developmentFund = safeGet(enq, 'developmentFund') || safeGet(enq, 'feeDevelopment') || '5,000';
-        const cautionMoney = safeGet(enq, 'cautionMoney') || safeGet(enq, 'feeCaution') || '3,000';
-        const totalAdmission = safeGet(enq, 'totalAdmission') || safeGet(enq, 'feeTotal') || '';
-        const tuitionFee = safeGet(enq, 'tuitionFee') || '';
-        const annualCharges = safeGet(enq, 'annualCharges') || '';
-        const totalAnnual = safeGet(enq, 'totalAnnual') || '';
-        const monthlyInstallment = safeGet(enq, 'monthlyInstallment') || '';
-        const grandAdmission = safeGet(enq, 'grandAdmission') || totalAdmission;
-        const grandAnnual = safeGet(enq, 'grandAnnual') || totalAnnual;
+        const admissionFee = safeGet(enq, 'admissionFee');
+        const developmentFund = safeGet(enq, 'developmentFund');
+        const cautionMoney = safeGet(enq, 'cautionMoney');
+        const totalAdmission = safeGet(enq, 'totalAdmission');
+        const tuitionFee = safeGet(enq, 'tuitionFee');
+        const annualCharges = safeGet(enq, 'annualCharges');
+        const totalAnnual = safeGet(enq, 'totalAnnual');
+        const monthlyInstallment = safeGet(enq, 'monthlyInstallment');
+        const grandAdmission = safeGet(enq, 'grandAdmission');
+        const grandAnnual = safeGet(enq, 'grandAnnual');
         const grandTotal = grandTotalFromEnquiry(enq);
 
-        const discount8 = safeGet(enq, 'discount8') || '';
-        const after8Discount = safeGet(enq, 'after8Discount') || '';
-        const discount5 = safeGet(enq, 'discount5') || '';
-        const after5Discount = safeGet(enq, 'after5Discount') || '';
+        const discount8 = safeGet(enq, 'discount8');
+        const after8Discount = safeGet(enq, 'after8Discount');
+        const discount5 = safeGet(enq, 'discount5');
+        const after5Discount = safeGet(enq, 'after5Discount');
         const siblingDiscountFlag = safeGet(enq, 'siblingDiscount') || safeGet(enq, 'siblingDiscountApplied');
 
         const source = safeGet(enq, 'infoSource') || safeGet(enq, 'source');
         const referredType = safeGet(enq, 'referredType');
         const referredName = safeGet(enq, 'referredName');
-        const timestamp = safeGet(enq, 'timestamp') || safeGet(enq, 'submittedDate');
+        const timestamp = safeGet(enq, 'timestamp');
 
         const docList = [];
         for (let i = 1; i <= 10; i++) {
@@ -1809,16 +1803,15 @@
         const area = safeGet(reg, 'area');
         const state = safeGet(reg, 'state');
 
-        // FIXED: Get fee data with ALL possible field names
-        const feeAdmission = safeGet(reg, 'feeAdmission') || safeGet(reg, 'admissionFee') || '';
-        const feeDevelopment = safeGet(reg, 'feeDevelopment') || safeGet(reg, 'developmentFund') || '';
-        const feeCaution = safeGet(reg, 'feeCaution') || safeGet(reg, 'cautionMoney') || '';
-        let totalFee = safeGet(reg, 'totalFee') || safeGet(reg, 'feeTotal');
-        if (!totalFee && (feeAdmission || feeDevelopment || feeCaution)) {
-            const a = parseFloat(feeAdmission.replace(/,/g, '') || '0') || 0;
-            const d = parseFloat(feeDevelopment.replace(/,/g, '') || '0') || 0;
-            const c = parseFloat(feeCaution.replace(/,/g, '') || '0') || 0;
-            totalFee = (a + d + c).toLocaleString('en-IN');
+        const feeAdmission = safeGet(reg, 'feeAdmission');
+        const feeDevelopment = safeGet(reg, 'feeDevelopment');
+        const feeCaution = safeGet(reg, 'feeCaution');
+        let totalFee = safeGet(reg, 'totalFee');
+        if (!totalFee) {
+            const a = parseFloat(feeAdmission || '0') || 0;
+            const d = parseFloat(feeDevelopment || '0') || 0;
+            const c = parseFloat(feeCaution || '0') || 0;
+            totalFee = (a + d + c).toString();
         }
 
         const signatoryName = safeGet(reg, 'signatoryName');
@@ -2452,29 +2445,25 @@
     function editEnquiry(index) {
         const record = allEnquiries[index];
         if (!record) return;
-        
-        const editData = {...record, editIndex: index};
-        localStorage.setItem('editEnquiryData', JSON.stringify(editData));
-        
-        alert('Enquiry loaded for editing. Redirecting to form...');
-        window.location.href = 'WORKING_enquiry.html';
+        localStorage.setItem('editEnquiryData', JSON.stringify(record));
+        sessionStorage.setItem('editingEnquiryIndex', String(index));
+        alert('Enquiry loaded for editing. The form will open now.');
+        window.location.href = 'enquiry.html';
     }
 
     function deleteEnquiry(index) {
         if (!confirm('Delete this enquiry record permanently?')) return;
         allEnquiries.splice(index, 1);
-        // Save to BOTH keys for compatibility
-        localStorage.setItem('enquiries', JSON.stringify(allEnquiries));
         localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
+        localStorage.setItem('enquiries', JSON.stringify(allEnquiries));
         reloadData();
     }
 
     function editRegistration(index) {
         const record = allRegistrations[index];
         if (!record) return;
-        const editData = {...record, editIndex: index};
-        localStorage.setItem('editRegistrationData', JSON.stringify(editData));
-        alert('Registration loaded for editing. Redirecting to form...');
+        localStorage.setItem('currentRegistrationData', JSON.stringify(record));
+        alert('Registration loaded for editing. The form will open now.');
         window.location.href = 'registration.html';
     }
 
@@ -2489,9 +2478,8 @@
     function editAdmission(index) {
         const record = allAdmissions[index];
         if (!record) return;
-        const editData = {...record, editIndex: index};
-        localStorage.setItem('editAdmissionData', JSON.stringify(editData));
-        alert('Admission loaded for editing. Redirecting to form...');
+        localStorage.setItem('currentAdmissionData', JSON.stringify(record));
+        alert('Admission loaded for editing. The form will open now.');
         window.location.href = 'admission.html';
     }
 
