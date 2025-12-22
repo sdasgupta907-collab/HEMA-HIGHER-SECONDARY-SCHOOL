@@ -1122,6 +1122,7 @@
     }
 
     function grandTotalFromEnquiry(enq) {
+        // Try multiple possible field names
         const keys = ['grandTotal', 'grandTotalFee', 'totalFee'];
         for (const k of keys) {
             const v = safeGet(enq, k);
@@ -1422,9 +1423,9 @@
     }
 
     function reloadData() {
-        allEnquiries = getArrayFromLocalStorage('enquiryRecords');
+        allEnquiries = getArrayFromLocalStorage('enquiries');
         if (!allEnquiries.length) {
-            allEnquiries = getArrayFromLocalStorage('enquiries');
+            allEnquiries = getArrayFromLocalStorage('enquiryRecords');
         }
 
         allRegistrations = getArrayFromLocalStorage('registrationRecords');
@@ -1500,16 +1501,18 @@
         const sib2Section = safeGet(enq, 'sib2Section');
 
         const feeClass = feeClassFromAny(enq);
-        const admissionFee = safeGet(enq, 'admissionFee');
-        const developmentFund = safeGet(enq, 'developmentFund');
-        const cautionMoney = safeGet(enq, 'cautionMoney');
-        const totalAdmission = safeGet(enq, 'totalAdmission');
+        
+        // FIXED: Get fee details from the record
+        const admissionFee = safeGet(enq, 'admissionFee') || safeGet(enq, 'feeAdmission');
+        const developmentFund = safeGet(enq, 'developmentFund') || safeGet(enq, 'feeDevelopment') || '5,000';
+        const cautionMoney = safeGet(enq, 'cautionMoney') || safeGet(enq, 'feeCaution') || '3,000';
+        const totalAdmission = safeGet(enq, 'totalAdmission') || safeGet(enq, 'feeTotal');
         const tuitionFee = safeGet(enq, 'tuitionFee');
         const annualCharges = safeGet(enq, 'annualCharges');
         const totalAnnual = safeGet(enq, 'totalAnnual');
         const monthlyInstallment = safeGet(enq, 'monthlyInstallment');
-        const grandAdmission = safeGet(enq, 'grandAdmission');
-        const grandAnnual = safeGet(enq, 'grandAnnual');
+        const grandAdmission = safeGet(enq, 'grandAdmission') || totalAdmission;
+        const grandAnnual = safeGet(enq, 'grandAnnual') || totalAnnual;
         const grandTotal = grandTotalFromEnquiry(enq);
 
         const discount8 = safeGet(enq, 'discount8');
@@ -1521,7 +1524,7 @@
         const source = safeGet(enq, 'infoSource') || safeGet(enq, 'source');
         const referredType = safeGet(enq, 'referredType');
         const referredName = safeGet(enq, 'referredName');
-        const timestamp = safeGet(enq, 'timestamp');
+        const timestamp = safeGet(enq, 'timestamp') || safeGet(enq, 'submittedDate');
 
         const docList = [];
         for (let i = 1; i <= 10; i++) {
@@ -2442,28 +2445,33 @@
         URL.revokeObjectURL(url);
     }
 
+    // FIXED: Edit functions now save to correct localStorage keys
     function editEnquiry(index) {
         const record = allEnquiries[index];
         if (!record) return;
-        localStorage.setItem('editEnquiryData', JSON.stringify(record));
-        sessionStorage.setItem('editingEnquiryIndex', String(index));
-        alert('Enquiry loaded for editing. The form will open now.');
-        window.location.href = 'enquiry.html';
+        
+        // Save with index for updating
+        const editData = {...record, editIndex: index};
+        localStorage.setItem('editEnquiryData', JSON.stringify(editData));
+        
+        alert('Enquiry loaded for editing. Redirecting to form...');
+        window.location.href = 'WORKING_enquiry.html';
     }
 
     function deleteEnquiry(index) {
         if (!confirm('Delete this enquiry record permanently?')) return;
         allEnquiries.splice(index, 1);
-        localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
         localStorage.setItem('enquiries', JSON.stringify(allEnquiries));
+        localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
         reloadData();
     }
 
     function editRegistration(index) {
         const record = allRegistrations[index];
         if (!record) return;
-        localStorage.setItem('currentRegistrationData', JSON.stringify(record));
-        alert('Registration loaded for editing. The form will open now.');
+        const editData = {...record, editIndex: index};
+        localStorage.setItem('editRegistrationData', JSON.stringify(editData));
+        alert('Registration loaded for editing. Redirecting to form...');
         window.location.href = 'registration.html';
     }
 
@@ -2478,8 +2486,9 @@
     function editAdmission(index) {
         const record = allAdmissions[index];
         if (!record) return;
-        localStorage.setItem('currentAdmissionData', JSON.stringify(record));
-        alert('Admission loaded for editing. The form will open now.');
+        const editData = {...record, editIndex: index};
+        localStorage.setItem('editAdmissionData', JSON.stringify(editData));
+        alert('Admission loaded for editing. Redirecting to form...');
         window.location.href = 'admission.html';
     }
 
