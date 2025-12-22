@@ -1339,103 +1339,136 @@
 
     
     function buildEnquiryModal(record, modalBody) {
+        const studentName = studentNameFromAny(record);
+        const fatherName = fatherNameFromAny(record);
+        const motherName = motherNameFromAny(record);
+        const cls = classFromAny(record);
+        const feeClass = feeClassFromAny(record);
+        const grandTotal = grandTotalFromEnquiry(record);
+        const sib1 = siblingLabel(record, 1);
+        const sib2 = siblingLabel(record, 2);
+
         modalBody.innerHTML = `
             <div class="modal-section">
                 <h3>Student Information</h3>
-                <p><strong>Date:</strong> ${record.date || ''}</p>
-                <p><strong>Student Name:</strong> ${record.studentName || ''}</p>
-                <p><strong>Class:</strong> ${record.class || ''}</p>
-                <p><strong>Father Name:</strong> ${record.fatherName || ''}</p>
-                <p><strong>Father Mobile:</strong> ${record.fatherMobile || ''}</p>
-                <p><strong>Mother Name:</strong> ${record.motherName || ''}</p>
-                <p><strong>Address:</strong> ${record.address || ''}</p>
+                <p><strong>S.No:</strong> ${safeGet(record, 'sno') || ''}</p>
+                <p><strong>Date:</strong> ${safeGet(record, 'date') || ''}</p>
+                <p><strong>Student Name:</strong> ${studentName || ''}</p>
+                <p><strong>Gender:</strong> ${safeGet(record, 'gender') || ''}</p>
+                <p><strong>Class Applied:</strong> ${cls || ''}</p>
+                <p><strong>Date of Birth:</strong> ${safeGet(record, 'dob') || ''}</p>
+                <p><strong>Age:</strong> ${safeGet(record, 'currentAge') || ''}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Parent Information</h3>
+                <p><strong>Father Name:</strong> ${fatherName || ''}</p>
+                <p><strong>Father Mobile:</strong> ${safeGet(record, 'fatherMobile') || ''}</p>
+                <p><strong>Mother Name:</strong> ${motherName || ''}</p>
+                <p><strong>Mother Mobile:</strong> ${safeGet(record, 'motherMobile') || ''}</p>
+                <p><strong>Landline:</strong> ${safeGet(record, 'landline') || ''}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Address</h3>
+                <p><strong>Address:</strong> ${safeGet(record, 'address') || ''}</p>
+                <p><strong>Area:</strong> ${safeGet(record, 'area') || ''}</p>
+                <p><strong>City:</strong> ${safeGet(record, 'city') || ''}</p>
+                <p><strong>District:</strong> ${safeGet(record, 'district') || ''}</p>
+                <p><strong>State:</strong> ${safeGet(record, 'state') || ''}</p>
+                <p><strong>Pincode:</strong> ${safeGet(record, 'pincode') || ''}</p>
             </div>
             <div class="modal-section">
                 <h3>Sibling Information</h3>
-                <p><strong>Sibling 1:</strong> ${record.sibling1 || 'N/A'}</p>
-                <p><strong>Sibling 2:</strong> ${record.sibling2 || 'N/A'}</p>
+                <p><strong>Sibling 1:</strong> ${sib1 || 'N/A'}</p>
+                <p><strong>Sibling 2:</strong> ${sib2 || 'N/A'}</p>
             </div>
             <div class="modal-section">
                 <h3>Fee Details</h3>
-                <p><strong>Fee Class:</strong> ${record.feeClass || ''}</p>
-                <p><strong>Tuition Fee:</strong> ₹${record.tuitionFee || '0'}</p>
-                <p><strong>Transport Fee:</strong> ₹${record.transportFee || '0'}</p>
-                <p><strong>Other Fee:</strong> ₹${record.otherFee || '0'}</p>
-                <p><strong>Grand Total:</strong> ₹${record.grandTotal || '0'}</p>
+                <p><strong>Fee Class:</strong> ${feeClass || ''}</p>
+                <p><strong>Grand Total:</strong> ₹${grandTotal || '0'}</p>
+                <p><strong>Tuition Fee:</strong> ₹${safeGet(record, 'tuitionFee') || '0'}</p>
+                <p><strong>Transport Fee:</strong> ₹${safeGet(record, 'transportFee') || '0'}</p>
+                <p><strong>Other Fee:</strong> ₹${safeGet(record, 'otherFee') || '0'}</p>
             </div>
             <div class="modal-section">
                 <h3>Calculator Snapshot</h3>
-                <p><strong>Monthly Fee:</strong> ₹${record.monthlyFee || '0'}</p>
-                <p><strong>Annual Fee:</strong> ₹${record.annualFee || '0'}</p>
-                <p><strong>Total Calculated:</strong> ₹${record.calculatedTotal || record.grandTotal || '0'}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Documents</h3>
-                <p>${record.documents || 'No documents specified'}</p>
+                <p><strong>Monthly Fee:</strong> ₹${safeGet(record, 'monthlyFee') || '0'}</p>
+                <p><strong>Annual Fee:</strong> ₹${safeGet(record, 'annualFee') || '0'}</p>
+                <p><strong>Total Calculated:</strong> ₹${safeGet(record, 'calculatedTotal') || grandTotal || '0'}</p>
             </div>
         `;
     }
 
     function buildRegistrationModal(record, modalBody) {
+        const studentName = studentNameFromAny(record);
+        const fatherName = fatherNameFromAny(record);
+        const cls = classFromAny(record);
+
         modalBody.innerHTML = `
             <div class="modal-section">
                 <h3>Registration Information</h3>
-                <p><strong>Reg. S.No:</strong> ${record.regSNo || ''}</p>
-                <p><strong>Date:</strong> ${record.date || ''}</p>
-                <p><strong>Student Name:</strong> ${record.studentName || ''}</p>
-                <p><strong>Class:</strong> ${record.class || ''}</p>
-                <p><strong>Father Name:</strong> ${record.fatherName || ''}</p>
-                <p><strong>Father Mobile:</strong> ${record.fatherMobile || ''}</p>
-                <p><strong>Address:</strong> ${record.address || ''}</p>
+                <p><strong>Reg. S.No:</strong> ${safeGet(record, 'regSNo') || ''}</p>
+                <p><strong>Date:</strong> ${safeGet(record, 'date') || ''}</p>
+                <p><strong>Student Name:</strong> ${studentName || ''}</p>
+                <p><strong>Class:</strong> ${cls || ''}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Parent Information</h3>
+                <p><strong>Father Name:</strong> ${fatherName || ''}</p>
+                <p><strong>Father Mobile:</strong> ${safeGet(record, 'fatherMobile') || ''}</p>
+                <p><strong>Address:</strong> ${safeGet(record, 'address') || ''}</p>
             </div>
             <div class="modal-section">
                 <h3>Fee Details</h3>
-                <p><strong>Admission Fee:</strong> ₹${record.feeAdmission || '0'}</p>
-                <p><strong>Development Fee:</strong> ₹${record.feeDevelopment || '0'}</p>
-                <p><strong>Caution Fee:</strong> ₹${record.feeCaution || '0'}</p>
-                <p><strong>Total Fee:</strong> ₹${record.feeTotal || '0'}</p>
+                <p><strong>Admission Fee:</strong> ₹${safeGet(record, 'feeAdmission') || '0'}</p>
+                <p><strong>Development Fee:</strong> ₹${safeGet(record, 'feeDevelopment') || '0'}</p>
+                <p><strong>Caution Fee:</strong> ₹${safeGet(record, 'feeCaution') || '0'}</p>
+                <p><strong>Total Fee:</strong> ₹${safeGet(record, 'feeTotal') || '0'}</p>
             </div>
             <div class="modal-section">
                 <h3>Calculator Snapshot</h3>
-                <p><strong>Base Fees:</strong> ₹${record.baseFees || '0'}</p>
-                <p><strong>Additional Charges:</strong> ₹${record.additionalCharges || '0'}</p>
-                <p><strong>Discount:</strong> ₹${record.discount || '0'}</p>
-                <p><strong>Final Amount:</strong> ₹${record.finalAmount || record.feeTotal || '0'}</p>
+                <p><strong>Base Fees:</strong> ₹${safeGet(record, 'baseFees') || '0'}</p>
+                <p><strong>Additional Charges:</strong> ₹${safeGet(record, 'additionalCharges') || '0'}</p>
+                <p><strong>Discount:</strong> ₹${safeGet(record, 'discount') || '0'}</p>
+                <p><strong>Final Amount:</strong> ₹${safeGet(record, 'finalAmount') || safeGet(record, 'feeTotal') || '0'}</p>
             </div>
         `;
     }
 
     function buildAdmissionModal(record, modalBody) {
+        const studentName = studentNameFromAny(record);
+        const fatherName = fatherNameFromAny(record);
+        const cls = classFromAny(record);
+
         modalBody.innerHTML = `
             <div class="modal-section">
                 <h3>Admission Information</h3>
-                <p><strong>Scholar No:</strong> ${record.scholarNo || ''}</p>
-                <p><strong>Admission Date:</strong> ${record.admissionDate || ''}</p>
-                <p><strong>Student Name:</strong> ${record.studentName || ''}</p>
-                <p><strong>Class:</strong> ${record.class || ''}</p>
-                <p><strong>Section:</strong> ${record.section || ''}</p>
-                <p><strong>Father Name:</strong> ${record.fatherName || ''}</p>
-                <p><strong>Father Mobile:</strong> ${record.fatherMobile || ''}</p>
-                <p><strong>Address:</strong> ${record.address || ''}</p>
-                <p><strong>Category:</strong> ${record.category || ''}</p>
+                <p><strong>Scholar No:</strong> ${safeGet(record, 'scholarNo') || ''}</p>
+                <p><strong>Admission Date:</strong> ${safeGet(record, 'admissionDate') || ''}</p>
+                <p><strong>Student Name:</strong> ${studentName || ''}</p>
+                <p><strong>Class:</strong> ${cls || ''}</p>
+                <p><strong>Section:</strong> ${safeGet(record, 'section') || ''}</p>
+                <p><strong>Father Name:</strong> ${fatherName || ''}</p>
+                <p><strong>Father Mobile:</strong> ${safeGet(record, 'fatherMobile') || ''}</p>
+                <p><strong>Address:</strong> ${safeGet(record, 'address') || ''}</p>
+                <p><strong>Category:</strong> ${safeGet(record, 'category') || ''}</p>
             </div>
             <div class="modal-section">
                 <h3>Fee Details</h3>
-                <p><strong>Admission Fee:</strong> ₹${record.admissionFee || '0'}</p>
-                <p><strong>Annual Fee:</strong> ₹${record.annualFee || '0'}</p>
-                <p><strong>Monthly Fee:</strong> ₹${record.monthlyFee || '0'}</p>
-                <p><strong>Transport Fee:</strong> ₹${record.transportFee || '0'}</p>
+                <p><strong>Admission Fee:</strong> ₹${safeGet(record, 'admissionFee') || '0'}</p>
+                <p><strong>Annual Fee:</strong> ₹${safeGet(record, 'annualFee') || '0'}</p>
+                <p><strong>Monthly Fee:</strong> ₹${safeGet(record, 'monthlyFee') || '0'}</p>
+                <p><strong>Transport Fee:</strong> ₹${safeGet(record, 'transportFee') || '0'}</p>
             </div>
             <div class="modal-section">
                 <h3>Calculator Snapshot</h3>
-                <p><strong>Total Payable:</strong> ₹${record.totalPayable || '0'}</p>
-                <p><strong>Amount Paid:</strong> ₹${record.amountPaid || '0'}</p>
-                <p><strong>Balance:</strong> ₹${record.balance || '0'}</p>
+                <p><strong>Total Payable:</strong> ₹${safeGet(record, 'totalPayable') || '0'}</p>
+                <p><strong>Amount Paid:</strong> ₹${safeGet(record, 'amountPaid') || '0'}</p>
+                <p><strong>Balance:</strong> ₹${safeGet(record, 'balance') || '0'}</p>
             </div>
             <div class="modal-section">
                 <h3>Documents</h3>
-                <p><strong>Student Docs:</strong> ${record.docsStudent || '0'} ✓</p>
-                <p><strong>Parent Docs:</strong> ${record.docsParent || '0'} ✓</p>
+                <p><strong>Student Docs:</strong> ${safeGet(record, 'docsStudent') || '0'} ✓</p>
+                <p><strong>Parent Docs:</strong> ${safeGet(record, 'docsParent') || '0'} ✓</p>
             </div>
         `;
     }
