@@ -1557,6 +1557,39 @@
     }
 
     console.log('✅ ENQUIRY FORM LOADED SUCCESSFULLY!');
+
+    // Check for edit data on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        const editData = localStorage.getItem('editEnquiryData');
+        if (editData) {
+            const data = JSON.parse(editData);
+
+            // Populate all form fields
+            if (data.date) document.getElementById('date').value = data.date;
+            if (data.studentName) document.getElementById('studentName').value = data.studentName;
+            if (data.class) document.getElementById('class').value = data.class;
+            if (data.fatherName) document.getElementById('fatherName').value = data.fatherName;
+            if (data.fatherMobile) document.getElementById('fatherMobile').value = data.fatherMobile;
+            if (data.motherName) document.getElementById('motherName').value = data.motherName;
+            if (data.address) document.getElementById('address').value = data.address;
+            if (data.sibling1) document.getElementById('sibling1').value = data.sibling1;
+            if (data.sibling2) document.getElementById('sibling2').value = data.sibling2;
+            if (data.feeClass) document.getElementById('feeClass').value = data.feeClass;
+            if (data.tuitionFee) document.getElementById('tuitionFee').value = data.tuitionFee;
+            if (data.transportFee) document.getElementById('transportFee').value = data.transportFee;
+            if (data.otherFee) document.getElementById('otherFee').value = data.otherFee;
+            if (data.grandTotal) document.getElementById('grandTotal').value = data.grandTotal;
+            if (data.monthlyFee) document.getElementById('monthlyFee').value = data.monthlyFee;
+            if (data.annualFee) document.getElementById('annualFee').value = data.annualFee;
+
+            // Clear the localStorage after loading
+            localStorage.removeItem('editEnquiryData');
+
+            // Alert user that edit mode is active
+            alert('Edit mode: Form loaded with existing data. Modify and save to update.');
+        }
+    });
+
 </script>
 
 </body>
