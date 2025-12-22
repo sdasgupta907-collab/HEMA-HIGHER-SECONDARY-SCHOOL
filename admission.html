@@ -1803,6 +1803,41 @@ function finalSubmit() {
 }
 
 console.log('✅ Admission form scripts loaded successfully');
+
+    // Check for edit data on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        const editData = localStorage.getItem('editAdmissionData');
+        if (editData) {
+            const data = JSON.parse(editData);
+
+            // Populate form fields - adjust IDs to match your admission form
+            if (data.scholarNo) document.getElementById('scholarNo').value = data.scholarNo;
+            if (data.admissionDate) document.getElementById('admissionDate').value = data.admissionDate;
+            if (data.studentName) document.getElementById('studentName').value = data.studentName;
+            if (data.class) document.getElementById('class').value = data.class;
+            if (data.section) document.getElementById('section').value = data.section;
+            if (data.fatherName) document.getElementById('fatherName').value = data.fatherName;
+            if (data.fatherMobile) document.getElementById('fatherMobile').value =.fatherMobile;
+            if (data.address) document.getElementById('address').value = data.address;
+            if (data.category) document.getElementById('category').value = data.category;
+            if (data.admissionFee) document.getElementById('admissionFee').value = data.admissionFee;
+            if (data.annualFee) document.getElementById('annualFee').value = data.annualFee;
+            if (data.monthlyFee) document.getElementById('monthlyFee').value = data.monthlyFee;
+            if (data.transportFee) document.getElementById('transportFee').value = data.transportFee;
+            if (data.totalPayable) document.getElementById('totalPayable').value = data.totalPayable;
+            if (data.amountPaid) document.getElementById('amountPaid').value = data.amountPaid;
+            if (data.balance) document.getElementById('balance').value = data.balance;
+            if (data.docsStudent) document.getElementById('docsStudent').value = data.docsStudent;
+            if (data.docsParent) document.getElementById('docsParent').value = data.docsParent;
+
+            // Clear the localStorage after loading
+            localStorage.removeItem('editAdmissionData');
+
+            // Alert user that edit mode is active
+            alert('Edit mode: Form loaded with existing data. Modify and save to update.');
+        }
+    });
+
 </script>
 
 </body>
