@@ -1337,7 +1337,110 @@
         applyFilters();
     }
 
-    function openRecordModal(type, index) {
+    
+    function buildEnquiryModal(record, modalBody) {
+        modalBody.innerHTML = `
+            <div class="modal-section">
+                <h3>Student Information</h3>
+                <p><strong>Date:</strong> ${record.date || ''}</p>
+                <p><strong>Student Name:</strong> ${record.studentName || ''}</p>
+                <p><strong>Class:</strong> ${record.class || ''}</p>
+                <p><strong>Father Name:</strong> ${record.fatherName || ''}</p>
+                <p><strong>Father Mobile:</strong> ${record.fatherMobile || ''}</p>
+                <p><strong>Mother Name:</strong> ${record.motherName || ''}</p>
+                <p><strong>Address:</strong> ${record.address || ''}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Sibling Information</h3>
+                <p><strong>Sibling 1:</strong> ${record.sibling1 || 'N/A'}</p>
+                <p><strong>Sibling 2:</strong> ${record.sibling2 || 'N/A'}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Fee Details</h3>
+                <p><strong>Fee Class:</strong> ${record.feeClass || ''}</p>
+                <p><strong>Tuition Fee:</strong> ₹${record.tuitionFee || '0'}</p>
+                <p><strong>Transport Fee:</strong> ₹${record.transportFee || '0'}</p>
+                <p><strong>Other Fee:</strong> ₹${record.otherFee || '0'}</p>
+                <p><strong>Grand Total:</strong> ₹${record.grandTotal || '0'}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Calculator Snapshot</h3>
+                <p><strong>Monthly Fee:</strong> ₹${record.monthlyFee || '0'}</p>
+                <p><strong>Annual Fee:</strong> ₹${record.annualFee || '0'}</p>
+                <p><strong>Total Calculated:</strong> ₹${record.calculatedTotal || record.grandTotal || '0'}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Documents</h3>
+                <p>${record.documents || 'No documents specified'}</p>
+            </div>
+        `;
+    }
+
+    function buildRegistrationModal(record, modalBody) {
+        modalBody.innerHTML = `
+            <div class="modal-section">
+                <h3>Registration Information</h3>
+                <p><strong>Reg. S.No:</strong> ${record.regSNo || ''}</p>
+                <p><strong>Date:</strong> ${record.date || ''}</p>
+                <p><strong>Student Name:</strong> ${record.studentName || ''}</p>
+                <p><strong>Class:</strong> ${record.class || ''}</p>
+                <p><strong>Father Name:</strong> ${record.fatherName || ''}</p>
+                <p><strong>Father Mobile:</strong> ${record.fatherMobile || ''}</p>
+                <p><strong>Address:</strong> ${record.address || ''}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Fee Details</h3>
+                <p><strong>Admission Fee:</strong> ₹${record.feeAdmission || '0'}</p>
+                <p><strong>Development Fee:</strong> ₹${record.feeDevelopment || '0'}</p>
+                <p><strong>Caution Fee:</strong> ₹${record.feeCaution || '0'}</p>
+                <p><strong>Total Fee:</strong> ₹${record.feeTotal || '0'}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Calculator Snapshot</h3>
+                <p><strong>Base Fees:</strong> ₹${record.baseFees || '0'}</p>
+                <p><strong>Additional Charges:</strong> ₹${record.additionalCharges || '0'}</p>
+                <p><strong>Discount:</strong> ₹${record.discount || '0'}</p>
+                <p><strong>Final Amount:</strong> ₹${record.finalAmount || record.feeTotal || '0'}</p>
+            </div>
+        `;
+    }
+
+    function buildAdmissionModal(record, modalBody) {
+        modalBody.innerHTML = `
+            <div class="modal-section">
+                <h3>Admission Information</h3>
+                <p><strong>Scholar No:</strong> ${record.scholarNo || ''}</p>
+                <p><strong>Admission Date:</strong> ${record.admissionDate || ''}</p>
+                <p><strong>Student Name:</strong> ${record.studentName || ''}</p>
+                <p><strong>Class:</strong> ${record.class || ''}</p>
+                <p><strong>Section:</strong> ${record.section || ''}</p>
+                <p><strong>Father Name:</strong> ${record.fatherName || ''}</p>
+                <p><strong>Father Mobile:</strong> ${record.fatherMobile || ''}</p>
+                <p><strong>Address:</strong> ${record.address || ''}</p>
+                <p><strong>Category:</strong> ${record.category || ''}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Fee Details</h3>
+                <p><strong>Admission Fee:</strong> ₹${record.admissionFee || '0'}</p>
+                <p><strong>Annual Fee:</strong> ₹${record.annualFee || '0'}</p>
+                <p><strong>Monthly Fee:</strong> ₹${record.monthlyFee || '0'}</p>
+                <p><strong>Transport Fee:</strong> ₹${record.transportFee || '0'}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Calculator Snapshot</h3>
+                <p><strong>Total Payable:</strong> ₹${record.totalPayable || '0'}</p>
+                <p><strong>Amount Paid:</strong> ₹${record.amountPaid || '0'}</p>
+                <p><strong>Balance:</strong> ₹${record.balance || '0'}</p>
+            </div>
+            <div class="modal-section">
+                <h3>Documents</h3>
+                <p><strong>Student Docs:</strong> ${record.docsStudent || '0'} ✓</p>
+                <p><strong>Parent Docs:</strong> ${record.docsParent || '0'} ✓</p>
+            </div>
+        `;
+    }
+
+function openRecordModal(type, index) {
         currentModalType = type;
         let record = null;
 
