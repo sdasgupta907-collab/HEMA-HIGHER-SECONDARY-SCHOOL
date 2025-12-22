@@ -1598,6 +1598,38 @@ function proceedToAdmission() {
 }
 
 console.log('✅ Registration form scripts loaded successfully');
+
+    // Check for edit data on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        const editData = localStorage.getItem('editRegistrationData');
+        if (editData) {
+            const data = JSON.parse(editData);
+
+            // Populate form fields
+            if (data.regSNo) document.getElementById('regSNo').value = data.regSNo;
+            if (data.date) document.getElementById('date').value = data.date;
+            if (data.studentName) document.getElementById('studentName').value = data.studentName;
+            if (data.class) document.getElementById('class').value = data.class;
+            if (data.fatherName) document.getElementById('fatherName').value = data.fatherName;
+            if (data.fatherMobile) document.getElementById('fatherMobile').value = data.fatherMobile;
+            if (data.address) document.getElementById('address').value = data.address;
+            if (data.feeAdmission) document.getElementById('feeAdmission').value = data.feeAdmission;
+            if (data.feeDevelopment) document.getElementById('feeDevelopment').value = data.feeDevelopment;
+            if (data.feeCaution) document.getElementById('feeCaution').value = data.feeCaution;
+            if (data.feeTotal) document.getElementById('feeTotal').value = data.feeTotal;
+            if (data.baseFees) document.getElementById('baseFees').value = data.baseFees;
+            if (data.additionalCharges) document.getElementById('additionalCharges').value = data.additionalCharges;
+            if (data.discount) document.getElementById('discount').value = data.discount;
+            if (data.finalAmount) document.getElementById('finalAmount').value = data.finalAmount;
+
+            // Clear the localStorage after loading
+            localStorage.removeItem('editRegistrationData');
+
+            // Alert user that edit mode is active
+            alert('Edit mode: Form loaded with existing data. Modify and save to update.');
+        }
+    });
+
 </script>
 
 </body>
