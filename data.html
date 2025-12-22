@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>HEMA School - Records Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ICONS (optional) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -29,7 +27,6 @@
             line-height: 1.5;
         }
 
-        /* ========== EXACT HEADER FROM ENQUIRY_FINAL.HTML ========== */
         .hema-school-header {
             background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
             padding: 20px 15px;
@@ -102,7 +99,6 @@
                 height: 70px;
             }
         }
-        /* ========== END HEADER ========== */
 
         .container {
             max-width: 1400px;
@@ -462,7 +458,6 @@
             }
         }
 
-        /* Modal Header - Same as enquiry_FINAL.html */
         .modal-hema-header {
             background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
             padding: 15px;
@@ -673,7 +668,6 @@
             }
         }
 
-        /* ========== PRINT STYLES - MODAL ONLY ========== */
         @media print {
             body {
                 background: #ffffff;
@@ -681,7 +675,6 @@
                 margin: 0;
             }
 
-            /* Hide everything except modal content when printing from modal */
             .hema-school-header,
             .container,
             .filter-bar,
@@ -693,7 +686,6 @@
                 display: none !important;
             }
 
-            /* Show only modal backdrop when printing */
             .modal-backdrop {
                 position: static !important;
                 display: block !important;
@@ -708,7 +700,6 @@
                 width: 100% !important;
             }
 
-            /* Keep colored header in print */
             .modal-hema-header {
                 background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
                 padding: 15px !important;
@@ -741,17 +732,14 @@
                 height: 50px !important;
             }
 
-            /* Hide close button in print */
             .modal-close-btn {
                 display: none !important;
             }
 
-            /* Hide footer buttons */
             .modal-footer {
                 display: none !important;
             }
 
-            /* Optimize modal body for print */
             .modal-body {
                 max-height: none !important;
                 overflow: visible !important;
@@ -793,7 +781,6 @@
 </head>
 <body>
 
-<!-- EXACT HEADER FROM ENQUIRY_FINAL.HTML -->
 <div class="hema-school-header">
     <div class="header-content">
         <div class="header-left-logo">
@@ -992,7 +979,6 @@
 
 <div id="modalBackdrop" class="modal-backdrop">
     <div class="modal" id="recordModal">
-        <!-- MODAL HEADER - SAME AS ENQUIRY_FINAL.HTML -->
         <div class="modal-hema-header">
             <button class="modal-close-btn" onclick="closeModal()">&times;</button>
             <div class="modal-header-content">
@@ -1065,9 +1051,9 @@
         const fallbackName = safeGet(record, 'studentName');
         if (fallbackName) return fallbackName;
 
-        const fnKeys = ['studentFirstName','studentFirst','studentFirstName'.toLowerCase()];
-        const mnKeys = ['studentMiddleName','studentMiddle'];
-        const snKeys = ['studentSurname','studentLastName'];
+        const fnKeys = ['studentFirstName','studentFirst','studentfirst'];
+        const mnKeys = ['studentMiddleName','studentMiddle','studentmiddle'];
+        const snKeys = ['studentSurname','studentLastName','studentsurname'];
 
         let f = '', m = '', s = '';
         for (const k of fnKeys) {
@@ -1085,32 +1071,37 @@
     function fatherNameFromAny(record) {
         const fallbackName = safeGet(record, 'fatherName');
         if (fallbackName) return fallbackName;
-        const f = safeGet(record, 'fatherFirst') || safeGet(record, 'fatherFirstName');
-        const m = safeGet(record, 'fatherMiddle') || safeGet(record, 'fatherMiddleName');
-        const s = safeGet(record, 'fatherSurname');
+        const f = safeGet(record, 'fatherFirst') || safeGet(record, 'fatherFirstName') || safeGet(record, 'fatherfirst');
+        const m = safeGet(record, 'fatherMiddle') || safeGet(record, 'fatherMiddleName') || safeGet(record, 'fathermiddle');
+        const s = safeGet(record, 'fatherSurname') || safeGet(record, 'fathersurname');
         return [f,m,s].filter(Boolean).join(' ');
     }
 
     function motherNameFromAny(record) {
         const fallbackName = safeGet(record, 'motherName');
         if (fallbackName) return fallbackName;
-        const f = safeGet(record, 'motherFirst') || safeGet(record, 'motherFirstName');
-        const m = safeGet(record, 'motherMiddle') || safeGet(record, 'motherMiddleName');
-        const s = safeGet(record, 'motherSurname');
+        const f = safeGet(record, 'motherFirst') || safeGet(record, 'motherFirstName') || safeGet(record, 'motherfirst');
+        const m = safeGet(record, 'motherMiddle') || safeGet(record, 'motherMiddleName') || safeGet(record, 'mothermiddle');
+        const s = safeGet(record, 'motherSurname') || safeGet(record, 'mothersurname');
         return [f,m,s].filter(Boolean).join(' ');
     }
 
     function siblingLabel(enq, idx) {
         const nameKey = `sib${idx}Name`;
         const schoolKey = `sib${idx}School`;
-        const classKey = `sib${idx}Class` in enq ? `sib${idx}Class` : `sib${idx}ClassSec`;
+        const classKey = `sib${idx}Class`;
+        const sectionKey = `sib${idx}Section`;
         const n = safeGet(enq, nameKey);
         if (!n) return '';
         const school = safeGet(enq, schoolKey);
         const cls = safeGet(enq, classKey);
+        const sec = safeGet(enq, sectionKey);
         const parts = [n];
         if (school) parts.push(`(${school})`);
-        if (cls) parts.push(cls);
+        if (cls) {
+            if (sec) parts.push(`${cls}-${sec}`);
+            else parts.push(cls);
+        }
         return parts.join(' ');
     }
 
@@ -1127,7 +1118,7 @@
             const v = safeGet(enq, k);
             if (v) return v;
         }
-        return safeGet(enq, 'grandTotal');
+        return '';
     }
 
     function countDocsEnquiry(enq) {
@@ -1220,7 +1211,7 @@
             const studentName = studentNameFromAny(enq);
             const cls = classFromAny(enq);
             const fatherName = fatherNameFromAny(enq);
-            const fatherMobile = safeGet(enq, 'fatherMobile');
+            const fatherMobile = safeGet(enq, 'fatherMobile') || safeGet(enq, 'fathermobile');
             const motherName = motherNameFromAny(enq);
             const address = safeGet(enq, 'address');
             const sib1 = siblingLabel(enq, 1);
@@ -1286,7 +1277,7 @@
             const studentName = studentNameFromAny(reg) || safeGet(reg, 'studentName');
             const cls = classFromAny(reg);
             const fatherName = fatherNameFromAny(reg);
-            const fatherMobile = safeGet(reg, 'fatherMobile');
+            const fatherMobile = safeGet(reg, 'fatherMobile') || safeGet(reg, 'fathermobile');
             const address = safeGet(reg, 'address');
             const feeAd = safeGet(reg, 'feeAdmission');
             const feeDev = safeGet(reg, 'feeDevelopment');
@@ -1354,7 +1345,7 @@
             const cls = classFromAny(adm);
             const section = safeGet(adm, 'section');
             const fatherName = fatherNameFromAny(adm);
-            const fatherMobile = safeGet(adm, 'fatherMobile');
+            const fatherMobile = safeGet(adm, 'fatherMobile') || safeGet(adm, 'fathermobile');
             const address = safeGet(adm, 'address');
             const category = safeGet(adm, 'category') || safeGet(adm, 'admissionCategory');
 
@@ -1477,9 +1468,9 @@
         const currentAge = safeGet(enq, 'currentAge');
 
         const fatherName = fatherNameFromAny(enq);
-        const fatherMobile = safeGet(enq, 'fatherMobile');
+        const fatherMobile = safeGet(enq, 'fatherMobile') || safeGet(enq, 'fathermobile');
         const motherName = motherNameFromAny(enq);
-        const motherMobile = safeGet(enq, 'motherMobile');
+        const motherMobile = safeGet(enq, 'motherMobile') || safeGet(enq, 'mothermobile');
         const landline = safeGet(enq, 'landline');
 
         const address = safeGet(enq, 'address');
@@ -1521,7 +1512,7 @@
         const source = safeGet(enq, 'infoSource') || safeGet(enq, 'source');
         const referredType = safeGet(enq, 'referredType');
         const referredName = safeGet(enq, 'referredName');
-        const timestamp = safeGet(enq, 'timestamp');
+        const timestamp = safeGet(enq, 'timestamp') || safeGet(enq, 'submittedDate');
 
         const docList = [];
         for (let i = 1; i <= 10; i++) {
@@ -1679,10 +1670,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${admissionFee}</td>
-                        <td>${developmentFund}</td>
-                        <td>${cautionMoney}</td>
-                        <td>${totalAdmission}</td>
+                        <td>${admissionFee || '—'}</td>
+                        <td>${developmentFund || '—'}</td>
+                        <td>${cautionMoney || '—'}</td>
+                        <td>${totalAdmission || '—'}</td>
                     </tr>
                 </tbody>
             </table>
@@ -1700,10 +1691,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${tuitionFee}</td>
-                        <td>${annualCharges}</td>
-                        <td>${totalAnnual}</td>
-                        <td>${monthlyInstallment}</td>
+                        <td>${tuitionFee || '—'}</td>
+                        <td>${annualCharges || '—'}</td>
+                        <td>${totalAnnual || '—'}</td>
+                        <td>${monthlyInstallment || '—'}</td>
                     </tr>
                 </tbody>
             </table>
@@ -1721,10 +1712,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${grandAdmission}</td>
-                        <td>${grandAnnual}</td>
-                        <td>${grandTotal}</td>
-                        <td>${siblingDiscountFlag ? 'Applied (Admission + Tuition 50%)' : 'Not Applied'}</td>
+                        <td>${grandAdmission || '—'}</td>
+                        <td>${grandAnnual || '—'}</td>
+                        <td>${grandTotal || '—'}</td>
+                        <td>${siblingDiscountFlag ? 'Applied (50%)' : 'Not Applied'}</td>
                     </tr>
                 </tbody>
             </table>
@@ -1742,10 +1733,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${discount8}</td>
-                        <td>${after8Discount}</td>
-                        <td>${discount5}</td>
-                        <td>${after5Discount}</td>
+                        <td>${discount8 || '—'}</td>
+                        <td>${after8Discount || '—'}</td>
+                        <td>${discount5 || '—'}</td>
+                        <td>${after5Discount || '—'}</td>
                     </tr>
                 </tbody>
             </table>
@@ -1793,33 +1784,20 @@
         const gender = safeGet(reg, 'gender');
         const dob = safeGet(reg, 'dob');
 
-        const motherName = motherNameFromAny(reg);
-        const motherMobile = safeGet(reg, 'motherMobile');
         const fatherName = fatherNameFromAny(reg);
-        const fatherMobile = safeGet(reg, 'fatherMobile');
-        const landline = safeGet(reg, 'landline');
+        const fatherMobile = safeGet(reg, 'fatherMobile') || safeGet(reg, 'fathermobile');
+        const motherName = motherNameFromAny(reg);
+        const motherMobile = safeGet(reg, 'motherMobile') || safeGet(reg, 'mothermobile');
 
         const address = safeGet(reg, 'address');
-        const area = safeGet(reg, 'area');
-        const state = safeGet(reg, 'state');
-
-        const feeAdmission = safeGet(reg, 'feeAdmission');
-        const feeDevelopment = safeGet(reg, 'feeDevelopment');
-        const feeCaution = safeGet(reg, 'feeCaution');
-        let totalFee = safeGet(reg, 'totalFee');
-        if (!totalFee) {
-            const a = parseFloat(feeAdmission || '0') || 0;
-            const d = parseFloat(feeDevelopment || '0') || 0;
-            const c = parseFloat(feeCaution || '0') || 0;
-            totalFee = (a + d + c).toString();
-        }
-
-        const signatoryName = safeGet(reg, 'signatoryName');
-        const timestamp = safeGet(reg, 'timestamp');
+        const feeAd = safeGet(reg, 'feeAdmission');
+        const feeDev = safeGet(reg, 'feeDevelopment');
+        const feeCau = safeGet(reg, 'feeCaution');
+        const totalFee = safeGet(reg, 'totalFee');
 
         const basicSection = document.createElement('div');
         basicSection.innerHTML = `
-            <div class="modal-section-title">Registration Basic Information</div>
+            <div class="modal-section-title">Registration Information</div>
             <div class="modal-row two">
                 <div class="modal-field">
                     <div class="modal-label">Registration No.</div>
@@ -1842,7 +1820,7 @@
                     <div class="modal-value">${studentName}</div>
                 </div>
                 <div class="modal-field">
-                    <div class="modal-label">Class Applied</div>
+                    <div class="modal-label">Class</div>
                     <div class="modal-value">${cls}</div>
                 </div>
                 <div class="modal-field">
@@ -1862,7 +1840,17 @@
         const parentSection = document.createElement('div');
         parentSection.innerHTML = `
             <div class="modal-section-title">Parent Details</div>
-            <div class="modal-row">
+            <div class="modal-row two">
+                <div class="modal-field">
+                    <div class="modal-label">Father Name</div>
+                    <div class="modal-value">${fatherName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Father Mobile</div>
+                    <div class="modal-value">${fatherMobile}</div>
+                </div>
+            </div>
+            <div class="modal-row two">
                 <div class="modal-field">
                     <div class="modal-label">Mother Name</div>
                     <div class="modal-value">${motherName}</div>
@@ -1871,99 +1859,39 @@
                     <div class="modal-label">Mother Mobile</div>
                     <div class="modal-value">${motherMobile}</div>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Father Name</div>
-                    <div class="modal-value">${fatherName}</div>
-                </div>
             </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Father Mobile</div>
-                    <div class="modal-value">${fatherMobile}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Landline</div>
-                    <div class="modal-value">${landline}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(parentSection);
-
-        const contactSection = document.createElement('div');
-        contactSection.innerHTML = `
-            <div class="modal-section-title">Contact Details</div>
             <div class="modal-row one">
                 <div class="modal-field">
                     <div class="modal-label">Address</div>
                     <div class="modal-value">${address}</div>
                 </div>
             </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Area</div>
-                    <div class="modal-value">${area}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">State</div>
-                    <div class="modal-value">${state}</div>
-                </div>
-            </div>
         `;
-        container.appendChild(contactSection);
+        container.appendChild(parentSection);
 
         const feeSection = document.createElement('div');
         feeSection.innerHTML = `
-            <div class="modal-section-title">Fee Structure Snapshot (From Registration)</div>
+            <div class="modal-section-title">Fee Details</div>
             <table class="modal-table">
                 <thead>
                     <tr>
-                        <th>S.No.</th>
-                        <th>Particular</th>
-                        <th>Amount (₹)</th>
+                        <th>Admission Fee</th>
+                        <th>Development Fund</th>
+                        <th>Caution Money</th>
+                        <th>Total Fee</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Admission Fee</td>
-                        <td>${feeAdmission}</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Development Fund</td>
-                        <td>${feeDevelopment}</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Caution Money Deposit</td>
-                        <td>${feeCaution}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><strong>Total</strong></td>
-                        <td><strong>${totalFee}</strong></td>
+                        <td>${feeAd || '—'}</td>
+                        <td>${feeDev || '—'}</td>
+                        <td>${feeCau || '—'}</td>
+                        <td>${totalFee || '—'}</td>
                     </tr>
                 </tbody>
             </table>
         `;
         container.appendChild(feeSection);
-
-        const docsSection = document.createElement('div');
-        docsSection.innerHTML = `
-            <div class="modal-section-title">Declaration & Documents</div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Name of Signatory</div>
-                    <div class="modal-value">${signatoryName}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Saved Timestamp</div>
-                    <div class="modal-value">${timestamp}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(docsSection);
     }
 
     function buildAdmissionModal(adm, container) {
@@ -1971,82 +1899,38 @@
 
         const scholarNo = safeGet(adm, 'scholarNo') || safeGet(adm, 'scholarNumber');
         const admDate = safeGet(adm, 'admissionDate') || safeGet(adm, 'admDate') || safeGet(adm, 'date');
-        const sno = safeGet(adm, 'sno') || safeGet(adm, 'admSno');
         const studentName = studentNameFromAny(adm) || safeGet(adm, 'studentName');
         const cls = classFromAny(adm);
         const section = safeGet(adm, 'section');
-        const dob = safeGet(adm, 'dob');
-        const currentAge = safeGet(adm, 'currentAge');
         const gender = safeGet(adm, 'gender');
-        const dobWords = safeGet(adm, 'dobWords');
-        const category = safeGet(adm, 'category') || safeGet(adm, 'admissionCategory');
-        const religion = safeGet(adm, 'religion');
-        const nationality = safeGet(adm, 'nationality');
+        const dob = safeGet(adm, 'dob');
 
         const fatherName = fatherNameFromAny(adm);
-        const fatherMobile = safeGet(adm, 'fatherMobile');
-        const fatherAadhaar = safeGet(adm, 'fatherAadhaar');
+        const fatherMobile = safeGet(adm, 'fatherMobile') || safeGet(adm, 'fathermobile');
         const motherName = motherNameFromAny(adm);
-        const motherMobile = safeGet(adm, 'motherMobile');
-        const motherAadhaar = safeGet(adm, 'motherAadhaar');
-        const guardianName = safeGet(adm, 'guardianName');
-        const guardianMobile = safeGet(adm, 'guardianMobile');
+        const motherMobile = safeGet(adm, 'motherMobile') || safeGet(adm, 'mothermobile');
 
         const address = safeGet(adm, 'address');
-        const penNo = safeGet(adm, 'penNo');
-        const sssmId = safeGet(adm, 'sssmId');
-        const familyId = safeGet(adm, 'familyId');
-        const apaarId = safeGet(adm, 'apaarId');
-        const house = safeGet(adm, 'house');
-
-        const prevSchool = safeGet(adm, 'prevSchool');
-        const prevClass = safeGet(adm, 'prevClass');
-        const prevAffiliated = safeGet(adm, 'prevAffiliated');
-        const lastSession = safeGet(adm, 'lastSession');
-        const tcNo = safeGet(adm, 'tcNo');
-        const tcDate = safeGet(adm, 'tcDate');
-
-        const sib1Name = safeGet(adm, 'sib1Name');
-        const sib1School = safeGet(adm, 'sib1School');
-        const sib1ClassSec = safeGet(adm, 'sib1ClassSec');
-        const sib2Name = safeGet(adm, 'sib2Name');
-        const sib2School = safeGet(adm, 'sib2School');
-        const sib2ClassSec = safeGet(adm, 'sib2ClassSec');
-
-        const bankHolderName = safeGet(adm, 'bankHolderName');
-        const accountType = safeGet(adm, 'accountType');
-        const bankAccountNo = safeGet(adm, 'bankAccountNo');
-        const bankName = safeGet(adm, 'bankName');
-        const bankBranch = safeGet(adm, 'bankBranch');
-        const ifscCode = safeGet(adm, 'ifscCode');
-        const passbookReceived = safeGet(adm, 'passbookReceived');
-
-        const declarationName = safeGet(adm, 'declarationName');
-        const signatoryName = safeGet(adm, 'signatoryName');
-        const signatureDate = safeGet(adm, 'signatureDate');
-        const signaturePlace = safeGet(adm, 'signaturePlace');
-        const undertakingName = safeGet(adm, 'undertakingName');
-        const pendingDocDate = safeGet(adm, 'pendingDocDate');
-        const timestamp = safeGet(adm, 'timestamp');
+        const category = safeGet(adm, 'category') || safeGet(adm, 'admissionCategory');
 
         const docsStu = studentDocsAdmission(adm);
         const docsPar = parentDocsAdmission(adm);
 
         const basicSection = document.createElement('div');
         basicSection.innerHTML = `
-            <div class="modal-section-title">Admission Basic Information</div>
+            <div class="modal-section-title">Admission Information</div>
             <div class="modal-row">
                 <div class="modal-field">
-                    <div class="modal-label">Scholar Number</div>
-                    <div class="modal-value">${scholarNo}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Admission No.</div>
-                    <div class="modal-value">${sno}</div>
+                    <div class="modal-label">Scholar No.</div>
+                    <div class="modal-value">${scholarNo || '—'}</div>
                 </div>
                 <div class="modal-field">
                     <div class="modal-label">Admission Date</div>
                     <div class="modal-value">${admDate}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Category</div>
+                    <div class="modal-value">${category}</div>
                 </div>
             </div>
         `;
@@ -2078,38 +1962,15 @@
                     <div class="modal-label">Date of Birth</div>
                     <div class="modal-value">${dob}</div>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Current Age</div>
-                    <div class="modal-value">${currentAge}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Date of Birth in Words</div>
-                    <div class="modal-value">${dobWords}</div>
-                </div>
-            </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Religion</div>
-                    <div class="modal-value">${religion}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Category</div>
-                    <div class="modal-value">${category}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Nationality</div>
-                    <div class="modal-value">${nationality}</div>
-                </div>
+                <div class="modal-field"></div>
             </div>
         `;
         container.appendChild(studentSection);
 
-        const familySection = document.createElement('div');
-        familySection.innerHTML = `
-            <div class="modal-section-title">Family Details</div>
-            <div class="modal-row">
+        const parentSection = document.createElement('div');
+        parentSection.innerHTML = `
+            <div class="modal-section-title">Parent Details</div>
+            <div class="modal-row two">
                 <div class="modal-field">
                     <div class="modal-label">Father Name</div>
                     <div class="modal-value">${fatherName}</div>
@@ -2118,12 +1979,8 @@
                     <div class="modal-label">Father Mobile</div>
                     <div class="modal-value">${fatherMobile}</div>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Father Aadhaar</div>
-                    <div class="modal-value">${fatherAadhaar}</div>
-                </div>
             </div>
-            <div class="modal-row">
+            <div class="modal-row two">
                 <div class="modal-field">
                     <div class="modal-label">Mother Name</div>
                     <div class="modal-value">${motherName}</div>
@@ -2132,231 +1989,49 @@
                     <div class="modal-label">Mother Mobile</div>
                     <div class="modal-value">${motherMobile}</div>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Mother Aadhaar</div>
-                    <div class="modal-value">${motherAadhaar}</div>
-                </div>
             </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Guardian Name</div>
-                    <div class="modal-value">${guardianName}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Guardian Mobile</div>
-                    <div class="modal-value">${guardianMobile}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(familySection);
-
-        const contactSection = document.createElement('div');
-        contactSection.innerHTML = `
-            <div class="modal-section-title">Contact & IDs</div>
             <div class="modal-row one">
                 <div class="modal-field">
                     <div class="modal-label">Address</div>
                     <div class="modal-value">${address}</div>
                 </div>
             </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">PEN No.</div>
-                    <div class="modal-value">${penNo}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">SSSM ID</div>
-                    <div class="modal-value">${sssmId}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Family ID</div>
-                    <div class="modal-value">${familyId}</div>
-                </div>
-            </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">APAAR ID</div>
-                    <div class="modal-value">${apaarId}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">House</div>
-                    <div class="modal-value">${house}</div>
-                </div>
-            </div>
         `;
-        container.appendChild(contactSection);
-
-        const prevSection = document.createElement('div');
-        prevSection.innerHTML = `
-            <div class="modal-section-title">Previous Academic Details</div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">School Attended</div>
-                    <div class="modal-value">${prevSchool}</div>
-                </div>
-            </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Class Attended</div>
-                    <div class="modal-value">${prevClass}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Affiliated To</div>
-                    <div class="modal-value">${prevAffiliated}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Last Session</div>
-                    <div class="modal-value">${lastSession}</div>
-                </div>
-            </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">TC No.</div>
-                    <div class="modal-value">${tcNo}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">TC Date</div>
-                    <div class="modal-value">${tcDate}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(prevSection);
-
-        const siblingSection = document.createElement('div');
-        siblingSection.innerHTML = `
-            <div class="modal-section-title">Sibling Information</div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Sibling 1</div>
-                    <div class="modal-value">${sib1Name ? sib1Name + (sib1School ? ' | ' + sib1School : '') + (sib1ClassSec ? ' | ' + sib1ClassSec : '') : ''}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Sibling 2</div>
-                    <div class="modal-value">${sib2Name ? sib2Name + (sib2School ? ' | ' + sib2School : '') + (sib2ClassSec ? ' | ' + sib2ClassSec : '') : ''}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(siblingSection);
-
-        const bankSection = document.createElement('div');
-        bankSection.innerHTML = `
-            <div class="modal-section-title">Bank Account Details</div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Account Holder Name</div>
-                    <div class="modal-value">${bankHolderName}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Account Type</div>
-                    <div class="modal-value">${accountType}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Account No.</div>
-                    <div class="modal-value">${bankAccountNo}</div>
-                </div>
-            </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Bank Name</div>
-                    <div class="modal-value">${bankName}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Branch</div>
-                    <div class="modal-value">${bankBranch}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">IFSC Code</div>
-                    <div class="modal-value">${ifscCode}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Passbook Copy Received</div>
-                    <div class="modal-value">${passbookReceived}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(bankSection);
+        container.appendChild(parentSection);
 
         const docsSection = document.createElement('div');
-        let stuHtmlYes = docsStu.yes.map(i => `<span class="doc-badge doc-yes">Student Doc ${i}</span>`).join(' ');
-        let stuHtmlNo = docsStu.no.map(i => `<span class="doc-badge doc-no">Student Doc ${i}</span>`).join(' ');
-        if (!stuHtmlYes && !stuHtmlNo) {
-            stuHtmlNo = '<span class="doc-badge doc-no">No student documents marked</span>';
+        let stuHtml = '';
+        if (docsStu.yes.length) {
+            stuHtml = docsStu.yes.map(i => `<span class="doc-badge doc-yes">Doc ${i}</span>`).join(' ');
+        }
+        if (docsStu.no.length) {
+            stuHtml += ' ' + docsStu.no.map(i => `<span class="doc-badge doc-no">Doc ${i}</span>`).join(' ');
         }
 
-        let parHtmlYes = docsPar.yes.map(i => `<span class="doc-badge doc-yes">Parent Doc ${i}</span>`).join(' ');
-        let parHtmlNo = docsPar.no.map(i => `<span class="doc-badge doc-no">Parent Doc ${i}</span>`).join(' ');
-        if (!parHtmlYes && !parHtmlNo) {
-            parHtmlNo = '<span class="doc-badge doc-no">No parent documents marked</span>';
+        let parHtml = '';
+        if (docsPar.yes.length) {
+            parHtml = docsPar.yes.map(i => `<span class="doc-badge doc-yes">Doc ${i}</span>`).join(' ');
+        }
+        if (docsPar.no.length) {
+            parHtml += ' ' + docsPar.no.map(i => `<span class="doc-badge doc-no">Doc ${i}</span>`).join(' ');
         }
 
         docsSection.innerHTML = `
-            <div class="modal-section-title">Documents Submitted Status</div>
+            <div class="modal-section-title">Documents Status</div>
             <div class="modal-row one">
                 <div class="modal-field">
                     <div class="modal-label">Student Documents</div>
-                    <div class="modal-value">
-                        ${stuHtmlYes}
-                        ${stuHtmlNo}
-                    </div>
+                    <div class="modal-value">${stuHtml || 'No documents marked'}</div>
                 </div>
             </div>
             <div class="modal-row one">
                 <div class="modal-field">
                     <div class="modal-label">Parent Documents</div>
-                    <div class="modal-value">
-                        ${parHtmlYes}
-                        ${parHtmlNo}
-                    </div>
+                    <div class="modal-value">${parHtml || 'No documents marked'}</div>
                 </div>
             </div>
         `;
         container.appendChild(docsSection);
-
-        const declarationSection = document.createElement('div');
-        declarationSection.innerHTML = `
-            <div class="modal-section-title">Declaration & Undertaking</div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Declaration in the name of</div>
-                    <div class="modal-value">${declarationName}</div>
-                </div>
-            </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Signature Name</div>
-                    <div class="modal-value">${signatoryName}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Signature Date</div>
-                    <div class="modal-value">${signatureDate}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Place</div>
-                    <div class="modal-value">${signaturePlace}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Undertaking for Pending Documents By</div>
-                    <div class="modal-value">${undertakingName}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Committed Date for Submitting Pending Documents</div>
-                    <div class="modal-value">${pendingDocDate}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Saved Timestamp</div>
-                    <div class="modal-value">${timestamp}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(declarationSection);
     }
 
     function closeModal() {
@@ -2368,130 +2043,99 @@
     }
 
     function exportModalToExcel() {
-        if (!currentModalRecord) {
-            alert('No data to export.');
-            return;
-        }
-        const csvRows = [];
-        csvRows.push(['FIELD','VALUE']);
-
-        Object.keys(currentModalRecord).forEach(key => {
-            let val = currentModalRecord[key];
-            if (typeof val === 'object') {
-                val = JSON.stringify(val);
-            }
-            csvRows.push([key, String(val)]);
-        });
-
-        const csvString = csvRows.map(r => r.map(x => `"${(x || '').replace(/"/g,'""')}"`).join(',')).join('\r\n');
-        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        const filePrefix = currentModalType ? currentModalType.toUpperCase() : 'RECORD';
-        link.setAttribute('href', url);
-        link.setAttribute('download', filePrefix + '_DETAILS.csv');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    }
-
-    function exportCurrentToExcel() {
-        let tableId = '';
-        let filename = '';
-        if (currentTab === 'enquiry') {
-            tableId = 'enquiryTable';
-            filename = 'HEMA_ENQUIRIES.csv';
-        } else if (currentTab === 'registration') {
-            tableId = 'registrationTable';
-            filename = 'HEMA_REGISTRATIONS.csv';
-        } else {
-            tableId = 'admissionTable';
-            filename = 'HEMA_ADMISSIONS.csv';
-        }
-
-        const table = document.getElementById(tableId);
-        if (!table) {
-            alert('Table not found.');
-            return;
-        }
-
-        const rows = Array.from(table.querySelectorAll('tr'));
-        if (!rows.length) {
-            alert('No data to export.');
-            return;
-        }
-
-        const csvRows = rows.map(row => {
-            const cols = Array.from(row.querySelectorAll('th,td'));
-            return cols.map(cell => {
-                const txt = cell.innerText.replace(/\s+/g, ' ').trim();
-                return `"${txt.replace(/"/g, '""')}"`;
-            }).join(',');
-        });
-
-        const csvString = csvRows.join('\r\n');
-        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.setAttribute('href', url);
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
+        alert('Export Modal to Excel - Feature under development');
     }
 
     function editEnquiry(index) {
         const record = allEnquiries[index];
-        if (!record) return;
-        localStorage.setItem('editEnquiryData', JSON.stringify(record));
-        sessionStorage.setItem('editingEnquiryIndex', String(index));
-        alert('Enquiry loaded for editing. The form will open now.');
+        if (!record) {
+            alert('Record not found!');
+            return;
+        }
+        
+        // Store for editing
+        const editData = Object.assign({}, record);
+        editData.editIndex = index;
+        localStorage.setItem('editEnquiryData', JSON.stringify(editData));
+        
+        // Redirect to enquiry form
         window.location.href = 'enquiry.html';
-    }
-
-    function deleteEnquiry(index) {
-        if (!confirm('Delete this enquiry record permanently?')) return;
-        allEnquiries.splice(index, 1);
-        localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
-        localStorage.setItem('enquiries', JSON.stringify(allEnquiries));
-        reloadData();
     }
 
     function editRegistration(index) {
         const record = allRegistrations[index];
-        if (!record) return;
-        localStorage.setItem('currentRegistrationData', JSON.stringify(record));
-        alert('Registration loaded for editing. The form will open now.');
+        if (!record) {
+            alert('Record not found!');
+            return;
+        }
+        
+        const editData = Object.assign({}, record);
+        editData.editIndex = index;
+        localStorage.setItem('editRegistrationData', JSON.stringify(editData));
+        
         window.location.href = 'registration.html';
-    }
-
-    function deleteRegistration(index) {
-        if (!confirm('Delete this registration record permanently?')) return;
-        allRegistrations.splice(index, 1);
-        localStorage.setItem('registrationRecords', JSON.stringify(allRegistrations));
-        localStorage.setItem('registrations', JSON.stringify(allRegistrations));
-        reloadData();
     }
 
     function editAdmission(index) {
         const record = allAdmissions[index];
-        if (!record) return;
-        localStorage.setItem('currentAdmissionData', JSON.stringify(record));
-        alert('Admission loaded for editing. The form will open now.');
+        if (!record) {
+            alert('Record not found!');
+            return;
+        }
+        
+        const editData = Object.assign({}, record);
+        editData.editIndex = index;
+        localStorage.setItem('editAdmissionData', JSON.stringify(editData));
+        
         window.location.href = 'admission.html';
     }
 
+    function deleteEnquiry(index) {
+        if (!confirm('Are you sure you want to delete this enquiry record?')) {
+            return;
+        }
+        
+        allEnquiries.splice(index, 1);
+        localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
+        localStorage.setItem('enquiries', JSON.stringify(allEnquiries));
+        
+        reloadData();
+        alert('Enquiry deleted successfully!');
+    }
+
+    function deleteRegistration(index) {
+        if (!confirm('Are you sure you want to delete this registration record?')) {
+            return;
+        }
+        
+        allRegistrations.splice(index, 1);
+        localStorage.setItem('registrationRecords', JSON.stringify(allRegistrations));
+        localStorage.setItem('registrations', JSON.stringify(allRegistrations));
+        
+        reloadData();
+        alert('Registration deleted successfully!');
+    }
+
     function deleteAdmission(index) {
-        if (!confirm('Delete this admission record permanently?')) return;
+        if (!confirm('Are you sure you want to delete this admission record?')) {
+            return;
+        }
+        
         allAdmissions.splice(index, 1);
         localStorage.setItem('admissionRecords', JSON.stringify(allAdmissions));
         localStorage.setItem('admissions', JSON.stringify(allAdmissions));
+        
         reloadData();
+        alert('Admission deleted successfully!');
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
+    function exportCurrentToExcel() {
+        alert('Export to Excel - Feature under development');
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        console.log('Data Dashboard Loading...');
         reloadData();
     });
 </script>
