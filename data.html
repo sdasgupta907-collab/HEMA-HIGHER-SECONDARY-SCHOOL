@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <title>HEMA School - Records Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         html, body {
             width: 100%;
@@ -27,6 +26,7 @@
             line-height: 1.5;
         }
 
+        /* Header (blue) */
         .hema-school-header {
             background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
             padding: 20px 15px;
@@ -48,9 +48,7 @@
         }
 
         .header-left-logo,
-        .header-right-logo {
-            flex-shrink: 0;
-        }
+        .header-right-logo { flex-shrink: 0; }
 
         .logo-img {
             width: 90px;
@@ -87,17 +85,9 @@
         }
 
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .school-name {
-                font-size: 24px;
-            }
-            .logo-img {
-                width: 70px;
-                height: 70px;
-            }
+            .header-content { flex-direction: column; text-align: center; }
+            .school-name { font-size: 24px; }
+            .logo-img { width: 70px; height: 70px; }
         }
 
         .container {
@@ -109,6 +99,7 @@
             padding: 20px;
         }
 
+        /* Tabs */
         .nav-tabs {
             display: flex;
             flex-wrap: wrap;
@@ -132,41 +123,22 @@
             transition: all 0.3s;
         }
 
-        .tab-enquiry {
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-        .tab-registration {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-        .tab-admission {
-            background: #fff3e0;
-            color: #ef6c00;
-        }
+        .tab-enquiry { background: #e3f2fd; color: #1565c0; }
+        .tab-registration { background: #e8f5e9; color: #2e7d32; }
+        .tab-admission { background: #fff3e0; color: #ef6c00; }
 
         .nav-tabs button.active {
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .tab-enquiry.active {
-            background: #1565c0;
-            color: #ffffff;
-        }
-        .tab-registration.active {
-            background: #2e7d32;
-            color: #ffffff;
-        }
-        .tab-admission.active {
-            background: #ef6c00;
-            color: #ffffff;
-        }
+        .tab-enquiry.active { background: #1565c0; color: #ffffff; }
+        .tab-registration.active { background: #2e7d32; color: #ffffff; }
+        .tab-admission.active { background: #ef6c00; color: #ffffff; }
 
-        .nav-tabs button i {
-            font-size: 16px;
-        }
+        .nav-tabs button i { font-size: 16px; }
 
+        /* Summary cards */
         .dashboard-summary {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -185,20 +157,9 @@
             overflow: hidden;
         }
 
-        .summary-title {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .summary-value {
-            font-size: 22px;
-            font-weight: 800;
-        }
-
-        .summary-sub {
-            font-size: 11px;
-            opacity: 0.9;
-        }
+        .summary-title { font-size: 13px; font-weight: 600; }
+        .summary-value { font-size: 22px; font-weight: 800; }
+        .summary-sub { font-size: 11px; opacity: 0.9; }
 
         .summary-icon {
             position: absolute;
@@ -221,6 +182,7 @@
             background: linear-gradient(135deg, #ab47bc, #6a1b9a);
         }
 
+        /* Filters */
         .filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -276,24 +238,11 @@
             transition: all 0.25s;
         }
 
-        .btn i {
-            font-size: 13px;
-        }
+        .btn i { font-size: 13px; }
 
-        .btn-export {
-            background: #2e7d32;
-            color: #ffffff;
-        }
-
-        .btn-print {
-            background: #1976d2;
-            color: #ffffff;
-        }
-
-        .btn-refresh {
-            background: #757575;
-            color: #ffffff;
-        }
+        .btn-export { background: #2e7d32; color: #ffffff; }
+        .btn-print { background: #1976d2; color: #ffffff; }
+        .btn-refresh { background: #757575; color: #ffffff; }
 
         .btn:hover {
             opacity: 0.9;
@@ -301,9 +250,7 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .records-section {
-            margin-top: 10px;
-        }
+        .records-section { margin-top: 10px; }
 
         .records-section h2 {
             font-size: 16px;
@@ -313,13 +260,8 @@
             padding-left: 8px;
         }
 
-        .records-container {
-            display: none;
-        }
-
-        .records-container.active {
-            display: block;
-        }
+        .records-container { display: none; }
+        .records-container.active { display: block; }
 
         .records-table-wrapper {
             max-height: 450px;
@@ -347,9 +289,7 @@
             white-space: nowrap;
         }
 
-        thead tr {
-            background: #e3f2fd;
-        }
+        thead tr { background: #e3f2fd; }
 
         thead th {
             font-weight: 700;
@@ -357,9 +297,7 @@
             border-bottom: 2px solid #bbdefb;
         }
 
-        tbody tr:nth-child(even) {
-            background: #fafafa;
-        }
+        tbody tr:nth-child(even) { background: #fafafa; }
 
         .col-actions {
             text-align: center;
@@ -399,20 +337,9 @@
             margin: 1px;
         }
 
-        .btn-edit {
-            background: #ff9800;
-            color: #fff;
-        }
-
-        .btn-delete {
-            background: #f44336;
-            color: #fff;
-        }
-
-        .btn-view {
-            background: #1976d2;
-            color: #fff;
-        }
+        .btn-edit { background: #ff9800; color: #fff; }
+        .btn-delete { background: #f44336; color: #fff; }
+        .btn-view { background: #1976d2; color: #fff; }
 
         .no-data {
             text-align: center;
@@ -421,6 +348,7 @@
             font-size: 13px;
         }
 
+        /* Modal */
         .modal-backdrop {
             position: fixed;
             inset: 0;
@@ -433,9 +361,7 @@
             z-index: 2000;
         }
 
-        .modal-backdrop.active {
-            display: flex;
-        }
+        .modal-backdrop.active { display: flex; }
 
         .modal {
             background: #ffffff;
@@ -448,14 +374,8 @@
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .modal-hema-header {
@@ -475,9 +395,7 @@
         }
 
         .modal-header-left-logo,
-        .modal-header-right-logo {
-            flex-shrink: 0;
-        }
+        .modal-header-right-logo { flex-shrink: 0; }
 
         .modal-logo-img {
             width: 60px;
@@ -561,13 +479,8 @@
             margin-bottom: 6px;
         }
 
-        .modal-row.two {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .modal-row.one {
-            grid-template-columns: 1fr;
-        }
+        .modal-row.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .modal-row.one { grid-template-columns: 1fr; }
 
         .modal-field {
             display: flex;
@@ -604,9 +517,7 @@
             padding: 4px 5px;
         }
 
-        .modal-table th {
-            background: #f0f0f0;
-        }
+        .modal-table th { background: #f0f0f0; }
 
         .doc-badge {
             display: inline-block;
@@ -616,15 +527,8 @@
             margin: 1px 1px;
         }
 
-        .doc-yes {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .doc-no {
-            background: #ffebee;
-            color: #c62828;
-        }
+        .doc-yes { background: #e8f5e9; color: #2e7d32; }
+        .doc-no  { background: #ffebee; color: #c62828; }
 
         .modal-footer {
             padding: 8px 16px 10px;
@@ -640,34 +544,23 @@
             padding: 6px 10px;
         }
 
+        /* Responsive */
         @media (max-width: 1024px) {
-            .dashboard-summary {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .dashboard-summary { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            .dashboard-summary {
-                grid-template-columns: 1fr 1fr;
-            }
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .modal-row {
-                grid-template-columns: 1fr;
-            }
+            .container { padding: 15px; }
+            .dashboard-summary { grid-template-columns: 1fr 1fr; }
+            .filter-bar { flex-direction: column; align-items: stretch; }
+            .modal-row { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
-            .dashboard-summary {
-                grid-template-columns: 1fr;
-            }
+            .dashboard-summary { grid-template-columns: 1fr; }
         }
 
+        /* Print: only modal with header */
         @media print {
             body {
                 background: #ffffff;
@@ -718,27 +611,16 @@
                 -webkit-print-color-adjust: exact !important;
             }
 
-            .modal-school-name {
-                font-size: 18pt !important;
-            }
-
+            .modal-school-name { font-size: 18pt !important; }
             .modal-school-info,
-            .modal-affiliation {
-                font-size: 9pt !important;
-            }
-
+            .modal-affiliation { font-size: 9pt !important; }
             .modal-logo-img {
                 width: 50px !important;
                 height: 50px !important;
             }
 
-            .modal-close-btn {
-                display: none !important;
-            }
-
-            .modal-footer {
-                display: none !important;
-            }
+            .modal-close-btn,
+            .modal-footer { display: none !important; }
 
             .modal-body {
                 max-height: none !important;
@@ -758,10 +640,7 @@
                 margin-bottom: 8px !important;
             }
 
-            .modal-label {
-                font-size: 9pt !important;
-            }
-
+            .modal-label { font-size: 9pt !important; }
             .modal-value {
                 font-size: 10pt !important;
                 border: 1px solid #999 !important;
@@ -781,6 +660,7 @@
 </head>
 <body>
 
+<!-- Header -->
 <div class="hema-school-header">
     <div class="header-content">
         <div class="header-left-logo">
@@ -800,6 +680,7 @@
 </div>
 
 <div class="container">
+    <!-- Tabs -->
     <div class="nav-tabs">
         <button id="tabEnquiry" class="tab-enquiry active" onclick="switchTab('enquiry')">
             <i class="fa-regular fa-file-lines"></i> Enquiry Records
@@ -812,6 +693,7 @@
         </button>
     </div>
 
+    <!-- Summary -->
     <div class="dashboard-summary">
         <div class="summary-card summary-enquiry">
             <div class="summary-title">Total Enquiries</div>
@@ -839,6 +721,7 @@
         </div>
     </div>
 
+    <!-- Filters -->
     <div class="filter-bar">
         <div class="filter-left">
             <div class="filter-group">
@@ -885,7 +768,9 @@
         </div>
     </div>
 
+    <!-- Tables -->
     <div class="records-section">
+        <!-- Enquiry -->
         <div id="enquiryRecords" class="records-container active">
             <h2>Enquiry Records</h2>
             <div class="records-table-wrapper">
@@ -908,8 +793,7 @@
                         <th class="col-actions">Actions</th>
                     </tr>
                     </thead>
-                    <tbody id="enquiryBody">
-                    </tbody>
+                    <tbody id="enquiryBody"></tbody>
                 </table>
             </div>
             <div id="enquiryNoData" class="no-data" style="display:none;">
@@ -917,6 +801,7 @@
             </div>
         </div>
 
+        <!-- Registration -->
         <div id="registrationRecords" class="records-container">
             <h2>Registration Records</h2>
             <div class="records-table-wrapper">
@@ -937,8 +822,7 @@
                         <th class="col-actions">Actions</th>
                     </tr>
                     </thead>
-                    <tbody id="registrationBody">
-                    </tbody>
+                    <tbody id="registrationBody"></tbody>
                 </table>
             </div>
             <div id="registrationNoData" class="no-data" style="display:none;">
@@ -946,6 +830,7 @@
             </div>
         </div>
 
+        <!-- Admission -->
         <div id="admissionRecords" class="records-container">
             <h2>Admission Records</h2>
             <div class="records-table-wrapper">
@@ -966,8 +851,7 @@
                         <th class="col-actions">Actions</th>
                     </tr>
                     </thead>
-                    <tbody id="admissionBody">
-                    </tbody>
+                    <tbody id="admissionBody"></tbody>
                 </table>
             </div>
             <div id="admissionNoData" class="no-data" style="display:none;">
@@ -977,6 +861,7 @@
     </div>
 </div>
 
+<!-- View Modal -->
 <div id="modalBackdrop" class="modal-backdrop">
     <div class="modal" id="recordModal">
         <div class="modal-hema-header">
@@ -989,7 +874,10 @@
                     <h1 class="modal-school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
                     <p class="modal-affiliation"><strong>Affiliated to CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
                     <p class="modal-school-info">School Code: 50383 | Affiliation No.: 1030417</p>
-                    <p class="modal-school-info">Govindpura, Bhopal, MP - 462023 | 📧 support@hemaschool.education | 📞 0755-2457270</p>
+                    <p class="modal-school-info">
+                        Govindpura, Bhopal, MP - 462023 |
+                        📧 support@hemaschool.education | 📞 0755-2457270
+                    </p>
                 </div>
                 <div class="modal-header-right-logo">
                     <img src="empathy-logo.png" alt="Empathy Logo" class="modal-logo-img">
@@ -1005,9 +893,7 @@
             <button class="btn btn-export" onclick="exportModalToExcel()">
                 <i class="fa-solid fa-file-excel"></i> Export
             </button>
-            <button class="btn btn-refresh" onclick="closeModal()">
-                Close
-            </button>
+            <button class="btn btn-refresh" onclick="closeModal()">Close</button>
         </div>
     </div>
 </div>
@@ -1056,50 +942,52 @@
         const snKeys = ['studentSurname','studentLastName','studentsurname'];
 
         let f = '', m = '', s = '';
-        for (const k of fnKeys) {
-            if (!f) f = safeGet(record, k);
-        }
-        for (const k of mnKeys) {
-            if (!m) m = safeGet(record, k);
-        }
-        for (const k of snKeys) {
-            if (!s) s = safeGet(record, k);
-        }
+        for (const k of fnKeys) { if (!f) f = safeGet(record, k); }
+        for (const k of mnKeys) { if (!m) m = safeGet(record, k); }
+        for (const k of snKeys) { if (!s) s = safeGet(record, k); }
+
         return [f,m,s].filter(Boolean).join(' ');
     }
 
     function fatherNameFromAny(record) {
         const fallbackName = safeGet(record, 'fatherName');
         if (fallbackName) return fallbackName;
+
         const f = safeGet(record, 'fatherFirst') || safeGet(record, 'fatherFirstName') || safeGet(record, 'fatherfirst');
         const m = safeGet(record, 'fatherMiddle') || safeGet(record, 'fatherMiddleName') || safeGet(record, 'fathermiddle');
         const s = safeGet(record, 'fatherSurname') || safeGet(record, 'fathersurname');
+
         return [f,m,s].filter(Boolean).join(' ');
     }
 
     function motherNameFromAny(record) {
         const fallbackName = safeGet(record, 'motherName');
         if (fallbackName) return fallbackName;
+
         const f = safeGet(record, 'motherFirst') || safeGet(record, 'motherFirstName') || safeGet(record, 'motherfirst');
         const m = safeGet(record, 'motherMiddle') || safeGet(record, 'motherMiddleName') || safeGet(record, 'mothermiddle');
         const s = safeGet(record, 'motherSurname') || safeGet(record, 'mothersurname');
+
         return [f,m,s].filter(Boolean).join(' ');
     }
 
     function siblingLabel(enq, idx) {
-        const nameKey = `sib${idx}Name`;
-        const schoolKey = `sib${idx}School`;
-        const classKey = `sib${idx}Class`;
-        const sectionKey = `sib${idx}Section`;
+        const nameKey = 'sib' + idx + 'Name';
+        const schoolKey = 'sib' + idx + 'School';
+        const classKey = 'sib' + idx + 'Class';
+        const sectionKey = 'sib' + idx + 'Section';
+
         const n = safeGet(enq, nameKey);
         if (!n) return '';
+
         const school = safeGet(enq, schoolKey);
         const cls = safeGet(enq, classKey);
         const sec = safeGet(enq, sectionKey);
+
         const parts = [n];
-        if (school) parts.push(`(${school})`);
+        if (school) parts.push('(' + school + ')');
         if (cls) {
-            if (sec) parts.push(`${cls}-${sec}`);
+            if (sec) parts.push(cls + '-' + sec);
             else parts.push(cls);
         }
         return parts.join(' ');
@@ -1108,8 +996,7 @@
     function feeClassFromAny(enq) {
         const idVal = safeGet(enq, 'feeClass');
         if (idVal) return idVal;
-        const cl = classFromAny(enq);
-        return cl;
+        return classFromAny(enq);
     }
 
     function grandTotalFromEnquiry(enq) {
@@ -1159,14 +1046,27 @@
         const e = allEnquiries.length;
         const r = allRegistrations.length;
         const a = allAdmissions.length;
+
         document.getElementById('totalEnquiryCount').innerText = e;
         document.getElementById('totalRegistrationCount').innerText = r;
         document.getElementById('totalAdmissionCount').innerText = a;
+
         let rate = 0;
         if (e > 0) {
             rate = Math.round((a / e) * 100);
         }
         document.getElementById('conversionRate').innerText = rate + '%';
+    }
+
+    function rowMatchesFilters(name, father, mobile, cls, nameFilter, mobileFilter, classFilter) {
+        let ok = true;
+        const combinedName = (name + ' ' + father).toLowerCase();
+
+        if (nameFilter && !combinedName.includes(nameFilter)) ok = false;
+        if (mobileFilter && !mobile.toLowerCase().includes(mobileFilter)) ok = false;
+        if (classFilter && cls.toLowerCase() !== classFilter) ok = false;
+
+        return ok;
     }
 
     function applyFilters() {
@@ -1181,17 +1081,6 @@
         } else {
             renderAdmissionTable(nameFilter, mobileFilter, classFilter);
         }
-    }
-
-    function rowMatchesFilters(name, father, mobile, cls, nameFilter, mobileFilter, classFilter) {
-        let ok = true;
-        const combinedName = (name + ' ' + father).toLowerCase();
-
-        if (nameFilter && !combinedName.includes(nameFilter)) ok = false;
-        if (mobileFilter && !mobile.toLowerCase().includes(mobileFilter)) ok = false;
-        if (classFilter && cls.toLowerCase() !== classFilter) ok = false;
-
-        return ok;
     }
 
     function renderEnquiryTable(nameFilter = '', mobileFilter = '', classFilter = '') {
@@ -1220,12 +1109,12 @@
             const grandTot = grandTotalFromEnquiry(enq);
             const docCount = countDocsEnquiry(enq);
 
-            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls, nameFilter, mobileFilter, classFilter)) {
+            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls,
+                nameFilter, mobileFilter, classFilter)) {
                 return;
             }
 
             const tr = document.createElement('tr');
-
             tr.innerHTML = `
                 <td>${sno || (index + 1)}</td>
                 <td>${date}</td>
@@ -1241,13 +1130,16 @@
                 <td>${grandTot}</td>
                 <td><span class="badge badge-enquiry">${docCount} ✓</span></td>
                 <td class="col-actions">
-                    <button class="action-btn btn-view" onclick="openRecordModal('enquiry', ${index})">
+                    <button class="action-btn btn-view"
+                            onclick="openRecordModal('enquiry', ${index})">
                         <i class="fa-regular fa-eye"></i>
                     </button>
-                    <button class="action-btn btn-edit" onclick="editEnquiry(${index})">
+                    <button class="action-btn btn-edit"
+                            onclick="editEnquiry(${index})">
                         <i class="fa-regular fa-pen-to-square"></i>
                     </button>
-                    <button class="action-btn btn-delete" onclick="deleteEnquiry(${index})">
+                    <button class="action-btn btn-delete"
+                            onclick="deleteEnquiry(${index})">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </td>
@@ -1283,6 +1175,7 @@
             const feeDev = safeGet(reg, 'feeDevelopment');
             const feeCau = safeGet(reg, 'feeCaution');
             let totalFee = safeGet(reg, 'totalFee');
+
             if (!totalFee) {
                 const a = parseFloat(feeAd || '0') || 0;
                 const d = parseFloat(feeDev || '0') || 0;
@@ -1290,7 +1183,8 @@
                 totalFee = (a + d + c).toString();
             }
 
-            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls, nameFilter, mobileFilter, classFilter)) {
+            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls,
+                nameFilter, mobileFilter, classFilter)) {
                 return;
             }
 
@@ -1308,13 +1202,16 @@
                 <td>${feeCau}</td>
                 <td>${totalFee}</td>
                 <td class="col-actions">
-                    <button class="action-btn btn-view" onclick="openRecordModal('registration', ${index})">
+                    <button class="action-btn btn-view"
+                            onclick="openRecordModal('registration', ${index})">
                         <i class="fa-regular fa-eye"></i>
                     </button>
-                    <button class="action-btn btn-edit" onclick="editRegistration(${index})">
+                    <button class="action-btn btn-edit"
+                            onclick="editRegistration(${index})">
                         <i class="fa-regular fa-pen-to-square"></i>
                     </button>
-                    <button class="action-btn btn-delete" onclick="deleteRegistration(${index})">
+                    <button class="action-btn btn-delete"
+                            onclick="deleteRegistration(${index})">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </td>
@@ -1340,7 +1237,9 @@
 
         allAdmissions.forEach((adm, index) => {
             const scholarNo = safeGet(adm, 'scholarNo') || safeGet(adm, 'scholarNumber');
-            const admDate = safeGet(adm, 'admissionDate') || safeGet(adm, 'admDate') || safeGet(adm, 'date');
+            const admDate = safeGet(adm, 'admissionDate') ||
+                            safeGet(adm, 'admDate') ||
+                            safeGet(adm, 'date');
             const studentName = studentNameFromAny(adm) || safeGet(adm, 'studentName');
             const cls = classFromAny(adm);
             const section = safeGet(adm, 'section');
@@ -1352,7 +1251,8 @@
             const docsStu = studentDocsAdmission(adm);
             const docsPar = parentDocsAdmission(adm);
 
-            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls, nameFilter, mobileFilter, classFilter)) {
+            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls,
+                nameFilter, mobileFilter, classFilter)) {
                 return;
             }
 
@@ -1370,13 +1270,16 @@
                 <td><span class="badge badge-admission">${docsStu.yes.length} ✓</span></td>
                 <td><span class="badge badge-admission">${docsPar.yes.length} ✓</span></td>
                 <td class="col-actions">
-                    <button class="action-btn btn-view" onclick="openRecordModal('admission', ${index})">
+                    <button class="action-btn btn-view"
+                            onclick="openRecordModal('admission', ${index})">
                         <i class="fa-regular fa-eye"></i>
                     </button>
-                    <button class="action-btn btn-edit" onclick="editAdmission(${index})">
+                    <button class="action-btn btn-edit"
+                            onclick="editAdmission(${index})">
                         <i class="fa-regular fa-pen-to-square"></i>
                     </button>
-                    <button class="action-btn btn-delete" onclick="deleteAdmission(${index})">
+                    <button class="action-btn btn-delete"
+                            onclick="deleteAdmission(${index})">
                         <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </td>
@@ -1391,6 +1294,7 @@
 
     function switchTab(tab) {
         currentTab = tab;
+
         document.getElementById('tabEnquiry').classList.remove('active');
         document.getElementById('tabRegistration').classList.remove('active');
         document.getElementById('tabAdmission').classList.remove('active');
@@ -1409,6 +1313,7 @@
             document.getElementById('tabAdmission').classList.add('active');
             document.getElementById('admissionRecords').classList.add('active');
         }
+
         applyFilters();
     }
 
@@ -1435,13 +1340,11 @@
     function openRecordModal(type, index) {
         currentModalType = type;
         let record = null;
-        if (type === 'enquiry') {
-            record = allEnquiries[index];
-        } else if (type === 'registration') {
-            record = allRegistrations[index];
-        } else {
-            record = allAdmissions[index];
-        }
+
+        if (type === 'enquiry')       record = allEnquiries[index];
+        else if (type === 'registration') record = allRegistrations[index];
+        else                           record = allAdmissions[index];
+
         currentModalRecord = record;
         const modalBody = document.getElementById('modalBody');
 
@@ -1455,6 +1358,8 @@
 
         document.getElementById('modalBackdrop').classList.add('active');
     }
+
+    /* ====== Modal builders ====== */
 
     function buildEnquiryModal(enq, container) {
         container.innerHTML = '';
@@ -1485,20 +1390,24 @@
         const sib1School = safeGet(enq, 'sib1School');
         const sib1Class = safeGet(enq, 'sib1Class');
         const sib1Section = safeGet(enq, 'sib1Section');
+
         const sib2Name = safeGet(enq, 'sib2Name');
         const sib2School = safeGet(enq, 'sib2School');
         const sib2Class = safeGet(enq, 'sib2Class');
         const sib2Section = safeGet(enq, 'sib2Section');
 
         const feeClass = feeClassFromAny(enq);
+
         const admissionFee = safeGet(enq, 'admissionFee');
         const developmentFund = safeGet(enq, 'developmentFund');
         const cautionMoney = safeGet(enq, 'cautionMoney');
         const totalAdmission = safeGet(enq, 'totalAdmission');
+
         const tuitionFee = safeGet(enq, 'tuitionFee');
         const annualCharges = safeGet(enq, 'annualCharges');
         const totalAnnual = safeGet(enq, 'totalAnnual');
         const monthlyInstallment = safeGet(enq, 'monthlyInstallment');
+
         const grandAdmission = safeGet(enq, 'grandAdmission');
         const grandAnnual = safeGet(enq, 'grandAnnual');
         const grandTotal = grandTotalFromEnquiry(enq);
@@ -1507,7 +1416,8 @@
         const after8Discount = safeGet(enq, 'after8Discount');
         const discount5 = safeGet(enq, 'discount5');
         const after5Discount = safeGet(enq, 'after5Discount');
-        const siblingDiscountFlag = safeGet(enq, 'siblingDiscount') || safeGet(enq, 'siblingDiscountApplied');
+        const siblingDiscountFlag = safeGet(enq, 'siblingDiscount') ||
+                                    safeGet(enq, 'siblingDiscountApplied');
 
         const source = safeGet(enq, 'infoSource') || safeGet(enq, 'source');
         const referredType = safeGet(enq, 'referredType');
@@ -1521,6 +1431,7 @@
             if (val) docList.push(val);
         }
 
+        /* Basic section */
         const basicSection = document.createElement('div');
         basicSection.innerHTML = `
             <div class="modal-section-title">Basic Information</div>
@@ -1643,11 +1554,25 @@
             <div class="modal-row two">
                 <div class="modal-field">
                     <div class="modal-label">Sibling 1</div>
-                    <div class="modal-value">${sib1Name ? sib1Name + (sib1School ? ' | ' + sib1School : '') + (sib1Class ? ' | ' + sib1Class : '') + (sib1Section ? ' - ' + sib1Section : '') : ''}</div>
+                    <div class="modal-value">
+                        ${sib1Name
+                            ? sib1Name +
+                              (sib1School ? ' | ' + sib1School : '') +
+                              (sib1Class ? ' | ' + sib1Class : '') +
+                              (sib1Section ? ' - ' + sib1Section : '')
+                            : ''}
+                    </div>
                 </div>
                 <div class="modal-field">
                     <div class="modal-label">Sibling 2</div>
-                    <div class="modal-value">${sib2Name ? sib2Name + (sib2School ? ' | ' + sib2School : '') + (sib2Class ? ' | ' + sib2Class : '') + (sib2Section ? ' - ' + sib2Section : '') : ''}</div>
+                    <div class="modal-value">
+                        ${sib2Name
+                            ? sib2Name +
+                              (sib2School ? ' | ' + sib2School : '') +
+                              (sib2Class ? ' | ' + sib2Class : '') +
+                              (sib2Section ? ' - ' + sib2Section : '')
+                            : ''}
+                    </div>
                 </div>
             </div>
         `;
@@ -1656,11 +1581,10 @@
         const feeSection = document.createElement('div');
         feeSection.innerHTML = `
             <div class="modal-section-title">Fee Details - Calculator Snapshot</div>
+
             <table class="modal-table">
                 <thead>
-                    <tr>
-                        <th colspan="4">One-time Admission Fees</th>
-                    </tr>
+                    <tr><th colspan="4">One-time Admission Fees</th></tr>
                     <tr>
                         <th>Admission Fee</th>
                         <th>Development Fund</th>
@@ -1677,11 +1601,10 @@
                     </tr>
                 </tbody>
             </table>
+
             <table class="modal-table">
                 <thead>
-                    <tr>
-                        <th colspan="4">Annual Fees (9 Months)</th>
-                    </tr>
+                    <tr><th colspan="4">Annual Fees (9 Months)</th></tr>
                     <tr>
                         <th>Tuition Fee</th>
                         <th>Annual Charges</th>
@@ -1698,11 +1621,10 @@
                     </tr>
                 </tbody>
             </table>
+
             <table class="modal-table">
                 <thead>
-                    <tr>
-                        <th colspan="4">Grand Total</th>
-                    </tr>
+                    <tr><th colspan="4">Grand Total</th></tr>
                     <tr>
                         <th>One-time Admission</th>
                         <th>Annual Fees</th>
@@ -1719,11 +1641,10 @@
                     </tr>
                 </tbody>
             </table>
+
             <table class="modal-table">
                 <thead>
-                    <tr>
-                        <th colspan="4">One-time Payment Discount (Annual Fee only)</th>
-                    </tr>
+                    <tr><th colspan="4">One-time Payment Discount (Annual Fee only)</th></tr>
                     <tr>
                         <th>8% Discount (till 30 Apr)</th>
                         <th>Payable after 8%</th>
@@ -1746,10 +1667,13 @@
         const docsSection = document.createElement('div');
         let docsHtml = '';
         if (docList.length) {
-            docsHtml = docList.map(d => `<span class="doc-badge doc-yes">${d}</span>`).join(' ');
+            docsHtml = docList
+                .map(d => `<span class="doc-badge doc-yes">${d}</span>`)
+                .join(' ');
         } else {
             docsHtml = '<span class="doc-badge doc-no">No documents checked</span>';
         }
+
         docsSection.innerHTML = `
             <div class="modal-section-title">Required Documents Checklist</div>
             <div class="modal-row one">
@@ -1898,7 +1822,9 @@
         container.innerHTML = '';
 
         const scholarNo = safeGet(adm, 'scholarNo') || safeGet(adm, 'scholarNumber');
-        const admDate = safeGet(adm, 'admissionDate') || safeGet(adm, 'admDate') || safeGet(adm, 'date');
+        const admDate = safeGet(adm, 'admissionDate') ||
+                        safeGet(adm, 'admDate') ||
+                        safeGet(adm, 'date');
         const studentName = studentNameFromAny(adm) || safeGet(adm, 'studentName');
         const cls = classFromAny(adm);
         const section = safeGet(adm, 'section');
@@ -2002,18 +1928,26 @@
         const docsSection = document.createElement('div');
         let stuHtml = '';
         if (docsStu.yes.length) {
-            stuHtml = docsStu.yes.map(i => `<span class="doc-badge doc-yes">Doc ${i}</span>`).join(' ');
+            stuHtml = docsStu.yes
+                .map(i => `<span class="doc-badge doc-yes">Doc ${i}</span>`)
+                .join(' ');
         }
         if (docsStu.no.length) {
-            stuHtml += ' ' + docsStu.no.map(i => `<span class="doc-badge doc-no">Doc ${i}</span>`).join(' ');
+            stuHtml += ' ' + docsStu.no
+                .map(i => `<span class="doc-badge doc-no">Doc ${i}</span>`)
+                .join(' ');
         }
 
         let parHtml = '';
         if (docsPar.yes.length) {
-            parHtml = docsPar.yes.map(i => `<span class="doc-badge doc-yes">Doc ${i}</span>`).join(' ');
+            parHtml = docsPar.yes
+                .map(i => `<span class="doc-badge doc-yes">Doc ${i}</span>`)
+                .join(' ');
         }
         if (docsPar.no.length) {
-            parHtml += ' ' + docsPar.no.map(i => `<span class="doc-badge doc-no">Doc ${i}</span>`).join(' ');
+            parHtml += ' ' + docsPar.no
+                .map(i => `<span class="doc-badge doc-no">Doc ${i}</span>`)
+                .join(' ');
         }
 
         docsSection.innerHTML = `
@@ -2043,8 +1977,10 @@
     }
 
     function exportModalToExcel() {
-        alert('Export Modal to Excel - Feature under development');
+        alert('Export Modal to Excel - feature under development.');
     }
+
+    /* ====== Edit / Delete ====== */
 
     function editEnquiry(index) {
         const record = allEnquiries[index];
@@ -2052,14 +1988,20 @@
             alert('Record not found!');
             return;
         }
-        
-        // Store for editing
         const editData = Object.assign({}, record);
         editData.editIndex = index;
         localStorage.setItem('editEnquiryData', JSON.stringify(editData));
-        
-        // Redirect to enquiry form
         window.location.href = 'enquiry.html';
+    }
+
+    function deleteEnquiry(index) {
+        if (!confirm('Are you sure you want to delete this enquiry record?')) return;
+
+        allEnquiries.splice(index, 1);
+        localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
+        localStorage.setItem('enquiries', JSON.stringify(allEnquiries));
+        reloadData();
+        alert('Enquiry deleted successfully!');
     }
 
     function editRegistration(index) {
@@ -2068,12 +2010,20 @@
             alert('Record not found!');
             return;
         }
-        
         const editData = Object.assign({}, record);
         editData.editIndex = index;
         localStorage.setItem('editRegistrationData', JSON.stringify(editData));
-        
         window.location.href = 'registration.html';
+    }
+
+    function deleteRegistration(index) {
+        if (!confirm('Are you sure you want to delete this registration record?')) return;
+
+        allRegistrations.splice(index, 1);
+        localStorage.setItem('registrationRecords', JSON.stringify(allRegistrations));
+        localStorage.setItem('registrations', JSON.stringify(allRegistrations));
+        reloadData();
+        alert('Registration deleted successfully!');
     }
 
     function editAdmission(index) {
@@ -2082,60 +2032,28 @@
             alert('Record not found!');
             return;
         }
-        
         const editData = Object.assign({}, record);
         editData.editIndex = index;
         localStorage.setItem('editAdmissionData', JSON.stringify(editData));
-        
         window.location.href = 'admission.html';
     }
 
-    function deleteEnquiry(index) {
-        if (!confirm('Are you sure you want to delete this enquiry record?')) {
-            return;
-        }
-        
-        allEnquiries.splice(index, 1);
-        localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
-        localStorage.setItem('enquiries', JSON.stringify(allEnquiries));
-        
-        reloadData();
-        alert('Enquiry deleted successfully!');
-    }
-
-    function deleteRegistration(index) {
-        if (!confirm('Are you sure you want to delete this registration record?')) {
-            return;
-        }
-        
-        allRegistrations.splice(index, 1);
-        localStorage.setItem('registrationRecords', JSON.stringify(allRegistrations));
-        localStorage.setItem('registrations', JSON.stringify(allRegistrations));
-        
-        reloadData();
-        alert('Registration deleted successfully!');
-    }
-
     function deleteAdmission(index) {
-        if (!confirm('Are you sure you want to delete this admission record?')) {
-            return;
-        }
-        
+        if (!confirm('Are you sure you want to delete this admission record?')) return;
+
         allAdmissions.splice(index, 1);
         localStorage.setItem('admissionRecords', JSON.stringify(allAdmissions));
         localStorage.setItem('admissions', JSON.stringify(allAdmissions));
-        
         reloadData();
         alert('Admission deleted successfully!');
     }
 
     function exportCurrentToExcel() {
-        alert('Export to Excel - Feature under development');
+        alert('Export to Excel - feature under development.');
     }
 
-    // Initialize on page load
-    window.addEventListener('DOMContentLoaded', function() {
-        console.log('Data Dashboard Loading...');
+    /* Init */
+    window.addEventListener('DOMContentLoaded', function () {
         reloadData();
     });
 </script>
