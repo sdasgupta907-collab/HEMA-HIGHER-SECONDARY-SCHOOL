@@ -1,1083 +1,2500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HEMA School - Dashboard & Records</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    background: #f5f5f5;
-    padding: 0;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
-    padding: 15px 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
-}
-
-.header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.logo-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
-    min-width: 250px;
-}
-
-.logo {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 3px solid white;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-
-.school-info h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 0 5px 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.school-info p {
-    font-size: 12px;
-    margin: 2px 0;
-    opacity: 0.95;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-    font-size: 13px;
-}
-
-.contact-info div {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-menu {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    margin-top: 15px;
-    padding: 10px;
-}
-
-.nav-menu ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-menu a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    display: inline-block;
-    font-weight: 500;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.container {
-    max-width: 1400px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.page-header {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.page-header h2 {
-    color: #1e3c72;
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.dashboard-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.stat-card {
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    color: white;
-    transition: transform 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-}
-
-.stat-card i {
-    font-size: 48px;
-    margin-bottom: 15px;
-}
-
-.stat-number {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.stat-label {
-    font-size: 14px;
-    text-transform: uppercase;
-}
-
-.enquiry-stat {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
-}
-
-.registration-stat {
-    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
-    color: #333;
-    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
-}
-
-.admission-stat {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
-}
-
-.month-summary {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-}
-
-.month-summary h3 {
-    color: #1e3c72;
-    margin-bottom: 20px;
-}
-
-.month-numbers {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.month-item {
-    flex: 1;
-    min-width: 200px;
-    text-align: center;
-}
-
-.month-count {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.tab-button {
-    flex: 1;
-    min-width: 150px;
-    padding: 15px 25px;
-    background: white;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    color: #666;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.tab-button:hover {
-    border-color: #1e3c72;
-    color: #1e3c72;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.tab-button.active {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
-    border-color: #1e3c72;
-    box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
-}
-
-.tab-content {
-    display: none;
-    animation: fadeIn 0.3s ease;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.section-header {
-    background: white;
-    padding: 20px;
-    border-radius: 10px 10px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.section-header h3 {
-    color: #1e3c72;
-    font-size: 22px;
-    margin: 0;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.action-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    color: white;
-}
-
-.export-excel { background: #28a745; }
-.export-excel:hover { background: #218838; }
-.print-btn { background: #6c757d; }
-.print-btn:hover { background: #5a6268; }
-.refresh-btn { background: #17a2b8; }
-.refresh-btn:hover { background: #138496; }
-
-.table-container {
-    background: white;
-    border-radius: 0 0 10px 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-
-thead {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
-}
-
-thead th {
-    padding: 15px 10px;
-    text-align: left;
-    font-weight: 600;
-}
-
-tbody tr {
-    border-bottom: 1px solid #eee;
-    transition: background-color 0.2s ease;
-}
-
-tbody tr:hover {
-    background-color: #f8f9fa;
-}
-
-tbody td {
-    padding: 12px 10px;
-    color: #333;
-}
-
-.no-records {
-    text-align: center;
-    padding: 40px;
-    color: #999;
-}
-
-.no-records i {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 15px;
-}
-
-.action-icons {
-    display: flex;
-    gap: 10px;
-}
-
-.icon-btn {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    color: white;
-    transition: all 0.2s ease;
-}
-
-.icon-btn:hover { transform: scale(1.1); }
-.view-btn { background: #007bff; }
-.view-btn:hover { background: #0056b3; }
-.delete-btn { background: #dc3545; }
-.delete-btn:hover { background: #c82333; }
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background-color: white;
-    margin: 3% auto;
-    padding: 0;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 800px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-}
-
-.modal-header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
-    padding: 20px 25px;
-    border-radius: 10px 10px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-header h3 {
-    margin: 0;
-    font-size: 22px;
-}
-
-.close {
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover {
-    color: #ddd;
-}
-
-.modal-body {
-    padding: 25px;
-}
-
-.detail-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.detail-item {
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 6px;
-    border-left: 4px solid #1e3c72;
-}
-
-.detail-label {
-    font-weight: 600;
-    color: #1e3c72;
-    font-size: 13px;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-}
-
-.detail-value {
-    color: #333;
-    font-size: 15px;
-}
-
-.modal-footer {
-    padding: 20px 25px;
-    background: #f8f9fa;
-    border-radius: 0 0 10px 10px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.modal-btn {
-    padding: 10px 25px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-}
-
-.edit-modal-btn {
-    background: #ffc107;
-    color: #333;
-}
-
-.edit-modal-btn:hover {
-    background: #e0a800;
-}
-
-.print-detail-btn {
-    background: #28a745;
-}
-
-.print-detail-btn:hover {
-    background: #218838;
-}
-
-.close-btn {
-    background: #6c757d;
-}
-
-.close-btn:hover {
-    background: #5a6268;
-}
-
-@media print {
-    .header, .nav-menu, .tabs, .section-header, .action-icons, .modal-footer, .dashboard-stats, .month-summary {
-        display: none !important;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <title>HEMA School - Records Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ICONS (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 100%);
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* ========== EXACT HEADER FROM ENQUIRY_FINAL.HTML ========== */
+        .hema-school-header {
+            background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+            padding: 20px 15px;
+            margin: 0 0 20px 0;
+            border-radius: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color-adjust: exact;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .header-left-logo,
+        .header-right-logo {
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            display: block;
+        }
+
+        .header-center {
+            flex: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .school-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .affiliation {
+            font-size: 14px;
+            color: #FFD700;
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .school-info {
+            font-size: 13px;
+            color: white;
+            margin: 3px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .school-name {
+                font-size: 24px;
+            }
+            .logo-img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+        /* ========== END HEADER ========== */
+
+        .container {
+            max-width: 1400px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            padding: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .nav-tabs button {
+            flex: 1;
+            min-width: 160px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .tab-enquiry {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .tab-registration {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .tab-admission {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .nav-tabs button.active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-enquiry.active {
+            background: #1565c0;
+            color: #ffffff;
+        }
+        .tab-registration.active {
+            background: #2e7d32;
+            color: #ffffff;
+        }
+        .tab-admission.active {
+            background: #ef6c00;
+            color: #ffffff;
+        }
+
+        .nav-tabs button i {
+            font-size: 16px;
+        }
+
+        .dashboard-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-title {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .summary-sub {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .summary-icon {
+            position: absolute;
+            right: 10px;
+            bottom: 8px;
+            font-size: 26px;
+            opacity: 0.25;
+        }
+
+        .summary-enquiry {
+            background: linear-gradient(135deg, #42a5f5, #1565c0);
+        }
+        .summary-registration {
+            background: linear-gradient(135deg, #66bb6a, #2e7d32);
+        }
+        .summary-admission {
+            background: linear-gradient(135deg, #ffa726, #ef6c00);
+        }
+        .summary-conversion {
+            background: linear-gradient(135deg, #ab47bc, #6a1b9a);
+        }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-left {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+        }
+
+        .filter-right {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn {
+            border-radius: 5px;
+            padding: 7px 12px;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.25s;
+        }
+
+        .btn i {
+            font-size: 13px;
+        }
+
+        .btn-export {
+            background: #2e7d32;
+            color: #ffffff;
+        }
+
+        .btn-print {
+            background: #1976d2;
+            color: #ffffff;
+        }
+
+        .btn-refresh {
+            background: #757575;
+            color: #ffffff;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .records-section {
+            margin-top: 10px;
+        }
+
+        .records-section h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #1e3a5f;
+            border-left: 4px solid #1565c0;
+            padding-left: 8px;
+        }
+
+        .records-container {
+            display: none;
+        }
+
+        .records-container.active {
+            display: block;
+        }
+
+        .records-table-wrapper {
+            max-height: 450px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        table thead {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        th, td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        thead tr {
+            background: #e3f2fd;
+        }
+
+        thead th {
+            font-weight: 700;
+            color: #1e3a5f;
+            border-bottom: 2px solid #bbdefb;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .col-actions {
+            text-align: center;
+            min-width: 110px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .badge-enquiry {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .badge-registration {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .badge-admission {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .action-btn {
+            border: none;
+            padding: 4px 7px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin: 1px;
+        }
+
+        .btn-edit {
+            background: #ff9800;
+            color: #fff;
+        }
+
+        .btn-delete {
+            background: #f44336;
+            color: #fff;
+        }
+
+        .btn-view {
+            background: #1976d2;
+            color: #fff;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 30px 10px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px 10px;
+            overflow-y: auto;
+            z-index: 2000;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #ffffff;
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeInDown 0.35s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal Header - Same as enquiry_FINAL.html */
+        .modal-hema-header {
+            background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+            padding: 15px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color-adjust: exact;
+        }
+
+        .modal-header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            max-width: 100%;
+        }
+
+        .modal-header-left-logo,
+        .modal-header-right-logo {
+            flex-shrink: 0;
+        }
+
+        .modal-logo-img {
+            width: 60px;
+            height: 60px;
+            display: block;
+        }
+
+        .modal-header-center {
+            flex: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .modal-school-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin: 0 0 5px 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-affiliation {
+            font-size: 11px;
+            color: #FFD700;
+            margin: 3px 0;
+            font-weight: 600;
+        }
+
+        .modal-school-info {
+            font-size: 10px;
+            color: white;
+            margin: 2px 0;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 12px 16px 16px;
+            max-height: 65vh;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+
+        .modal-section-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin: 10px 0 5px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #e3f2fd;
+            color: #1e3a5f;
+        }
+
+        .modal-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .modal-row.two {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .modal-row.one {
+            grid-template-columns: 1fr;
+        }
+
+        .modal-field {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .modal-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .modal-value {
+            font-size: 12px;
+            padding: 4px 6px;
+            border-radius: 4px;
+            background: #fafafa;
+            border: 1px solid #eee;
+            min-height: 20px;
+            word-break: break-word;
+        }
+
+        .modal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 5px 0 10px;
+            font-size: 11px;
+        }
+
+        .modal-table th,
+        .modal-table td {
+            border: 1px solid #ccc;
+            padding: 4px 5px;
+        }
+
+        .modal-table th {
+            background: #f0f0f0;
+        }
+
+        .doc-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            margin: 1px 1px;
+        }
+
+        .doc-yes {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .doc-no {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .modal-footer {
+            padding: 8px 16px 10px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+
+        .modal-footer .btn {
+            font-size: 11px;
+            padding: 6px 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .dashboard-summary {
+                grid-template-columns: 1fr 1fr;
+            }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .modal-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== PRINT STYLES - MODAL ONLY ========== */
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+                margin: 0;
+            }
+
+            /* Hide everything except modal content when printing from modal */
+            .hema-school-header,
+            .container,
+            .filter-bar,
+            .nav-tabs,
+            .dashboard-summary,
+            .btn,
+            .action-btn,
+            .records-section {
+                display: none !important;
+            }
+
+            /* Show only modal backdrop when printing */
+            .modal-backdrop {
+                position: static !important;
+                display: block !important;
+                background: white !important;
+                padding: 0 !important;
+            }
+
+            .modal {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            /* Keep colored header in print */
+            .modal-hema-header {
+                background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
+                padding: 15px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                page-break-after: avoid !important;
+            }
+
+            .modal-hema-header * {
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+
+            .modal-affiliation {
+                color: #FFD700 !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+
+            .modal-school-name {
+                font-size: 18pt !important;
+            }
+
+            .modal-school-info,
+            .modal-affiliation {
+                font-size: 9pt !important;
+            }
+
+            .modal-logo-img {
+                width: 50px !important;
+                height: 50px !important;
+            }
+
+            /* Hide close button in print */
+            .modal-close-btn {
+                display: none !important;
+            }
+
+            /* Hide footer buttons */
+            .modal-footer {
+                display: none !important;
+            }
+
+            /* Optimize modal body for print */
+            .modal-body {
+                max-height: none !important;
+                overflow: visible !important;
+                padding: 10px !important;
+            }
+
+            .modal-section-title {
+                font-size: 11pt !important;
+                background: #e3f2fd !important;
+                -webkit-print-color-adjust: exact !important;
+                page-break-after: avoid !important;
+            }
+
+            .modal-row {
+                page-break-inside: avoid !important;
+                margin-bottom: 8px !important;
+            }
+
+            .modal-label {
+                font-size: 9pt !important;
+            }
+
+            .modal-value {
+                font-size: 10pt !important;
+                border: 1px solid #999 !important;
+            }
+
+            .modal-table {
+                font-size: 9pt !important;
+                page-break-inside: avoid !important;
+            }
+
+            .modal-table th {
+                background: #f0f0f0 !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="header">
+<!-- EXACT HEADER FROM ENQUIRY_FINAL.HTML -->
+<div class="hema-school-header">
     <div class="header-content">
-        <div class="logo-section">
-            <img src="https://i.postimg.cc/vBpby9Kp/image.jpg" alt="HEMA School Logo" class="logo">
-            <div class="school-info">
-                <h1>HEMA HIGHER SECONDARY SCHOOL</h1>
-                <p><strong>Affiliated to:</strong> CENTRAL BOARD OF SECONDARY EDUCATION</p>
-                <p><strong>School Code:</strong> 50383 | <strong>Affiliation No.:</strong> 1030417</p>
-                <p>Govindpura, Bhopal, Madhya Pradesh, India - 462023</p>
-            </div>
+        <div class="header-left-logo">
+            <img src="school-logo.png" alt="HEMA Logo" class="logo-img">
         </div>
-        <div class="contact-info">
-            <div><i class="fas fa-envelope"></i><span>support@hemaschool.education</span></div>
-            <div><i class="fas fa-phone"></i><span>0755-2457270</span></div>
+        <div class="header-center">
+            <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
+            <p class="affiliation"><strong>Affiliated to CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
+            <p class="school-info">School Code: 50383 | Affiliation No.: 1030417</p>
+            <p class="school-info">Govindpura, Bhopal, Madhya Pradesh, India - 462023</p>
+            <p class="school-info">📧 support@hemaschool.education | 📞 0755-2457270</p>
         </div>
-    </div>
-    <div class="nav-menu">
-        <ul>
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="enquiry.html"><i class="fas fa-question-circle"></i> Enquiry</a></li>
-            <li><a href="registration.html"><i class="fas fa-user-plus"></i> Registration</a></li>
-            <li><a href="admission.html"><i class="fas fa-clipboard-check"></i> Admission</a></li>
-            <li><a href="data.html" class="active"><i class="fas fa-database"></i> Dashboard</a></li>
-        </ul>
+        <div class="header-right-logo">
+            <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
+        </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="page-header">
-        <h2><i class="fas fa-tachometer-alt"></i> Dashboard & Records</h2>
-        <p>Complete overview and management of student records</p>
-    </div>
-
-    <div class="tabs">
-        <button class="tab-button active" onclick="openTab('status')">
-            <i class="fas fa-tachometer-alt"></i> Dashboard
+    <div class="nav-tabs">
+        <button id="tabEnquiry" class="tab-enquiry active" onclick="switchTab('enquiry')">
+            <i class="fa-regular fa-file-lines"></i> Enquiry Records
         </button>
-        <button class="tab-button" onclick="openTab('enquiry')">
-            <i class="fas fa-question-circle"></i> Enquiries
+        <button id="tabRegistration" class="tab-registration" onclick="switchTab('registration')">
+            <i class="fa-regular fa-id-card"></i> Registration Records
         </button>
-        <button class="tab-button" onclick="openTab('registration')">
-            <i class="fas fa-user-plus"></i> Registrations
-        </button>
-        <button class="tab-button" onclick="openTab('admission')">
-            <i class="fas fa-clipboard-check"></i> Admissions
+        <button id="tabAdmission" class="tab-admission" onclick="switchTab('admission')">
+            <i class="fa-solid fa-user-check"></i> Admission Records
         </button>
     </div>
 
-    <div id="status" class="tab-content active">
-        <div class="dashboard-stats">
-            <div class="stat-card enquiry-stat">
-                <i class="fas fa-question-circle"></i>
-                <div class="stat-number" id="enquiryWeek">0</div>
-                <div class="stat-label">Enquiries This Week</div>
-            </div>
-            <div class="stat-card registration-stat">
-                <i class="fas fa-user-plus"></i>
-                <div class="stat-number" id="regWeek">0</div>
-                <div class="stat-label">Registrations This Week</div>
-            </div>
-            <div class="stat-card admission-stat">
-                <i class="fas fa-clipboard-check"></i>
-                <div class="stat-number" id="admWeek">0</div>
-                <div class="stat-label">Admissions This Week</div>
-            </div>
+    <div class="dashboard-summary">
+        <div class="summary-card summary-enquiry">
+            <div class="summary-title">Total Enquiries</div>
+            <div class="summary-value" id="totalEnquiryCount">0</div>
+            <div class="summary-sub">All enquiries received</div>
+            <div class="summary-icon"><i class="fa-regular fa-file-lines"></i></div>
         </div>
-        <div class="month-summary">
-            <h3><i class="fas fa-calendar"></i> This Month Summary</h3>
-            <div class="month-numbers">
-                <div class="month-item">
-                    <div class="month-count" id="enquiryMonth" style="color: #28a745;">0</div>
-                    <div>Enquiries</div>
-                </div>
-                <div class="month-item">
-                    <div class="month-count" id="regMonth" style="color: #ffc107;">0</div>
-                    <div>Registrations</div>
-                </div>
-                <div class="month-item">
-                    <div class="month-count" id="admMonth" style="color: #dc3545;">0</div>
-                    <div>Admissions</div>
-                </div>
-            </div>
+        <div class="summary-card summary-registration">
+            <div class="summary-title">Total Registrations</div>
+            <div class="summary-value" id="totalRegistrationCount">0</div>
+            <div class="summary-sub">Enquiries converted to registration</div>
+            <div class="summary-icon"><i class="fa-regular fa-id-card"></i></div>
+        </div>
+        <div class="summary-card summary-admission">
+            <div class="summary-title">Total Admissions</div>
+            <div class="summary-value" id="totalAdmissionCount">0</div>
+            <div class="summary-sub">Registrations converted to admission</div>
+            <div class="summary-icon"><i class="fa-solid fa-user-check"></i></div>
+        </div>
+        <div class="summary-card summary-conversion">
+            <div class="summary-title">Enquiry → Admission</div>
+            <div class="summary-value" id="conversionRate">0%</div>
+            <div class="summary-sub">Overall conversion rate</div>
+            <div class="summary-icon"><i class="fa-solid fa-chart-line"></i></div>
         </div>
     </div>
 
-    <div id="enquiry" class="tab-content">
-        <div class="section-header">
-            <h3><i class="fas fa-question-circle"></i> Enquiry Records</h3>
-            <div class="action-buttons">
-                <button class="action-btn export-excel" onclick="exportToExcel('enquiry')">
-                    <i class="fas fa-file-excel"></i> Export Excel
-                </button>
-                <button class="action-btn print-btn" onclick="printTable('enquiry')">
-                    <i class="fas fa-print"></i> Print
-                </button>
-                <button class="action-btn refresh-btn" onclick="loadEnquiries()">
-                    <i class="fas fa-sync-alt"></i> Refresh
-                </button>
+    <div class="filter-bar">
+        <div class="filter-left">
+            <div class="filter-group">
+                <label for="searchName"><i class="fa-solid fa-magnifying-glass"></i> Student / Father Name:</label>
+                <input type="text" id="searchName" placeholder="Type name to search..." oninput="applyFilters()">
+            </div>
+            <div class="filter-group">
+                <label for="searchMobile"><i class="fa-solid fa-phone"></i> Mobile:</label>
+                <input type="text" id="searchMobile" placeholder="10-digit mobile" oninput="applyFilters()">
+            </div>
+            <div class="filter-group">
+                <label for="filterClass"><i class="fa-solid fa-layer-group"></i> Class:</label>
+                <select id="filterClass" onchange="applyFilters()">
+                    <option value="">All</option>
+                    <option value="NURSERY">NURSERY</option>
+                    <option value="KG I">KG I</option>
+                    <option value="KG II">KG II</option>
+                    <option value="CLASS I">CLASS I</option>
+                    <option value="CLASS II">CLASS II</option>
+                    <option value="CLASS III">CLASS III</option>
+                    <option value="CLASS IV">CLASS IV</option>
+                    <option value="CLASS V">CLASS V</option>
+                    <option value="CLASS VI">CLASS VI</option>
+                    <option value="CLASS VII">CLASS VII</option>
+                    <option value="CLASS VIII">CLASS VIII</option>
+                    <option value="CLASS IX">CLASS IX</option>
+                    <option value="CLASS X">CLASS X</option>
+                    <option value="CLASS XI">CLASS XI</option>
+                    <option value="CLASS XII">CLASS XII</option>
+                </select>
             </div>
         </div>
-        <div class="table-container">
-            <table id="enquiryTable">
-                <thead>
+
+        <div class="filter-right">
+            <button class="btn btn-refresh" onclick="reloadData()">
+                <i class="fa-solid fa-rotate"></i> Reload
+            </button>
+            <button class="btn btn-print" onclick="window.print()">
+                <i class="fa-solid fa-print"></i> Print Table
+            </button>
+            <button class="btn btn-export" onclick="exportCurrentToExcel()">
+                <i class="fa-solid fa-file-excel"></i> Export to Excel
+            </button>
+        </div>
+    </div>
+
+    <div class="records-section">
+        <div id="enquiryRecords" class="records-container active">
+            <h2>Enquiry Records</h2>
+            <div class="records-table-wrapper">
+                <table id="enquiryTable">
+                    <thead>
                     <tr>
-                        <th>S.No</th>
+                        <th>S.No.</th>
                         <th>Date</th>
                         <th>Student Name</th>
                         <th>Class</th>
-                        <th>Gender</th>
+                        <th>Father Name</th>
                         <th>Father Mobile</th>
-                        <th>District</th>
-                        <th>Pincode</th>
-                        <th>Actions</th>
+                        <th>Mother Name</th>
+                        <th>Address</th>
+                        <th>Sibling 1</th>
+                        <th>Sibling 2</th>
+                        <th>Fee Class</th>
+                        <th>Grand Total Fee</th>
+                        <th>Docs (Total ✓)</th>
+                        <th class="col-actions">Actions</th>
                     </tr>
-                </thead>
-                <tbody id="enquiryTableBody">
-                    <tr><td colspan="9" class="no-records"><i class="fas fa-inbox"></i><div>No enquiry records found</div></td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="registration" class="tab-content">
-        <div class="section-header">
-            <h3><i class="fas fa-user-plus"></i> Registration Records</h3>
-            <div class="action-buttons">
-                <button class="action-btn export-excel" onclick="exportToExcel('registration')">
-                    <i class="fas fa-file-excel"></i> Export Excel
-                </button>
-                <button class="action-btn print-btn" onclick="printTable('registration')">
-                    <i class="fas fa-print"></i> Print
-                </button>
-                <button class="action-btn refresh-btn" onclick="loadRegistrations()">
-                    <i class="fas fa-sync-alt"></i> Refresh
-                </button>
+                    </thead>
+                    <tbody id="enquiryBody">
+                    </tbody>
+                </table>
+            </div>
+            <div id="enquiryNoData" class="no-data" style="display:none;">
+                No enquiry data found in localStorage.
             </div>
         </div>
-        <div class="table-container">
-            <table id="registrationTable">
-                <thead>
+
+        <div id="registrationRecords" class="records-container">
+            <h2>Registration Records</h2>
+            <div class="records-table-wrapper">
+                <table id="registrationTable">
+                    <thead>
                     <tr>
-                        <th>S.No</th>
+                        <th>Reg. S.No.</th>
                         <th>Date</th>
                         <th>Student Name</th>
                         <th>Class</th>
-                        <th>Gender</th>
+                        <th>Father Name</th>
                         <th>Father Mobile</th>
-                        <th>District</th>
-                        <th>Actions</th>
+                        <th>Address</th>
+                        <th>Fee Admission</th>
+                        <th>Fee Development</th>
+                        <th>Fee Caution</th>
+                        <th>Fee Total</th>
+                        <th class="col-actions">Actions</th>
                     </tr>
-                </thead>
-                <tbody id="registrationTableBody">
-                    <tr><td colspan="8" class="no-records"><i class="fas fa-inbox"></i><div>No registration records found</div></td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="admission" class="tab-content">
-        <div class="section-header">
-            <h3><i class="fas fa-clipboard-check"></i> Admission Records</h3>
-            <div class="action-buttons">
-                <button class="action-btn export-excel" onclick="exportToExcel('admission')">
-                    <i class="fas fa-file-excel"></i> Export Excel
-                </button>
-                <button class="action-btn print-btn" onclick="printTable('admission')">
-                    <i class="fas fa-print"></i> Print
-                </button>
-                <button class="action-btn refresh-btn" onclick="loadAdmissions()">
-                    <i class="fas fa-sync-alt"></i> Refresh
-                </button>
+                    </thead>
+                    <tbody id="registrationBody">
+                    </tbody>
+                </table>
+            </div>
+            <div id="registrationNoData" class="no-data" style="display:none;">
+                No registration data found in localStorage.
             </div>
         </div>
-        <div class="table-container">
-            <table id="admissionTable">
-                <thead>
+
+        <div id="admissionRecords" class="records-container">
+            <h2>Admission Records</h2>
+            <div class="records-table-wrapper">
+                <table id="admissionTable">
+                    <thead>
                     <tr>
-                        <th>S.No</th>
-                        <th>Date</th>
+                        <th>Scholar No.</th>
+                        <th>Admission Date</th>
                         <th>Student Name</th>
                         <th>Class</th>
                         <th>Section</th>
-                        <th>Scholar No</th>
-                        <th>District</th>
-                        <th>Actions</th>
+                        <th>Father Name</th>
+                        <th>Father Mobile</th>
+                        <th>Address</th>
+                        <th>Category</th>
+                        <th>Docs Student ✓</th>
+                        <th>Docs Parent ✓</th>
+                        <th class="col-actions">Actions</th>
                     </tr>
-                </thead>
-                <tbody id="admissionTableBody">
-                    <tr><td colspan="8" class="no-records"><i class="fas fa-inbox"></i><div>No admission records found</div></td></tr>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="admissionBody">
+                    </tbody>
+                </table>
+            </div>
+            <div id="admissionNoData" class="no-data" style="display:none;">
+                No admission data found in localStorage.
+            </div>
         </div>
     </div>
 </div>
 
-<div id="viewModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3><i class="fas fa-eye"></i> Record Details</h3>
-            <span class="close" onclick="closeModal()">&times;</span>
+<div id="modalBackdrop" class="modal-backdrop">
+    <div class="modal" id="recordModal">
+        <!-- MODAL HEADER - SAME AS ENQUIRY_FINAL.HTML -->
+        <div class="modal-hema-header">
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header-content">
+                <div class="modal-header-left-logo">
+                    <img src="school-logo.png" alt="HEMA Logo" class="modal-logo-img">
+                </div>
+                <div class="modal-header-center">
+                    <h1 class="modal-school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
+                    <p class="modal-affiliation"><strong>Affiliated to CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
+                    <p class="modal-school-info">School Code: 50383 | Affiliation No.: 1030417</p>
+                    <p class="modal-school-info">Govindpura, Bhopal, MP - 462023 | 📧 support@hemaschool.education | 📞 0755-2457270</p>
+                </div>
+                <div class="modal-header-right-logo">
+                    <img src="empathy-logo.png" alt="Empathy Logo" class="modal-logo-img">
+                </div>
+            </div>
         </div>
+
         <div class="modal-body" id="modalBody"></div>
         <div class="modal-footer">
-            <button class="modal-btn edit-modal-btn" onclick="editCurrentRecord()">
-                <i class="fas fa-edit"></i> Edit
+            <button class="btn btn-print" onclick="printModal()">
+                <i class="fa-solid fa-print"></i> Print
             </button>
-            <button class="modal-btn print-detail-btn" onclick="window.print()">
-                <i class="fas fa-print"></i> Print
+            <button class="btn btn-export" onclick="exportModalToExcel()">
+                <i class="fa-solid fa-file-excel"></i> Export
             </button>
-            <button class="modal-btn close-btn" onclick="closeModal()">
-                <i class="fas fa-times"></i> Close
+            <button class="btn btn-refresh" onclick="closeModal()">
+                Close
             </button>
         </div>
     </div>
 </div>
 
 <script>
-let currentRecord = null;
-let currentRecordType = null;
-let currentRecordIndex = null;
+    let allEnquiries = [];
+    let allRegistrations = [];
+    let allAdmissions = [];
+    let currentTab = 'enquiry';
+    let currentModalType = '';
+    let currentModalRecord = null;
 
-// FIXED: Date format function - DD/MM/YYYY
-function formatDate(dateStr) {
-    if (!dateStr) return 'N/A';
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return dateStr;
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
-
-window.onload = function() {
-    loadDashboardStats();
-    loadEnquiries();
-    loadRegistrations();
-    loadAdmissions();
-};
-
-function openTab(tabName) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-    document.getElementById(tabName).classList.add('active');
-    if (window.event && window.event.currentTarget) {
-        window.event.currentTarget.classList.add('active');
-    }
-}
-
-function loadDashboardStats() {
-    const now = new Date();
-    const weekStart = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-
-    const enquiries = JSON.parse(localStorage.getItem('enquiries') || '[]');
-    const enquiryWeek = enquiries.filter(r => new Date(r.date || r.submittedDate) >= weekStart).length;
-    const enquiryMonth = enquiries.filter(r => new Date(r.date || r.submittedDate) >= monthStart).length;
-
-    const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
-    const regWeek = registrations.filter(r => new Date(r.registrationDate || r.date) >= weekStart).length;
-    const regMonth = registrations.filter(r => new Date(r.registrationDate || r.date) >= monthStart).length;
-
-    const admissions = JSON.parse(localStorage.getItem('admissions') || '[]');
-    const admWeek = admissions.filter(r => new Date(r.admissionDate || r.date) >= weekStart).length;
-    const admMonth = admissions.filter(r => new Date(r.admissionDate || r.date) >= monthStart).length;
-
-    document.getElementById('enquiryWeek').textContent = enquiryWeek;
-    document.getElementById('regWeek').textContent = regWeek;
-    document.getElementById('admWeek').textContent = admWeek;
-    document.getElementById('enquiryMonth').textContent = enquiryMonth;
-    document.getElementById('regMonth').textContent = regMonth;
-    document.getElementById('admMonth').textContent = admMonth;
-}
-
-function loadEnquiries() {
-    const enquiries = JSON.parse(localStorage.getItem('enquiries') || '[]');
-    const tbody = document.getElementById('enquiryTableBody');
-
-    console.log('Loading enquiries:', enquiries.length);
-
-    if (enquiries.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" class="no-records"><i class="fas fa-inbox"></i><div>No enquiry records found</div></td></tr>';
-        return;
-    }
-
-    tbody.innerHTML = '';
-    enquiries.forEach((record, index) => {
-        const studentName = ((record.studentFirst || '') + ' ' + (record.studentMiddle || '') + ' ' + (record.studentSurname || record.studentName || '')).trim() || 'N/A';
-        const className = record.classApplied || record.classApplying || 'N/A';
-        const date = formatDate(record.date || record.submittedDate);
-
-        const row = tbody.insertRow();
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${date}</td>
-            <td>${studentName}</td>
-            <td>${className}</td>
-            <td>${record.gender || 'N/A'}</td>
-            <td>${record.fatherMobile || 'N/A'}</td>
-            <td>${record.district || 'N/A'}</td>
-            <td>${record.pincode || 'N/A'}</td>
-            <td class="action-icons">
-                <button class="icon-btn view-btn" onclick='viewRecord(${JSON.stringify(record).replace(/'/g, "&#39;")}, "enquiry", ${index})'>
-                    <i class="fas fa-eye"></i>
-                </button>
-                <button class="icon-btn delete-btn" onclick="deleteRecord(${index}, 'enquiry')">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </td>
-        `;
-    });
-}
-
-function loadRegistrations() {
-    const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
-    const tbody = document.getElementById('registrationTableBody');
-
-    console.log('Loading registrations:', registrations.length);
-
-    if (registrations.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="no-records"><i class="fas fa-inbox"></i><div>No registration records found</div></td></tr>';
-        return;
-    }
-
-    tbody.innerHTML = '';
-    registrations.forEach((record, index) => {
-        const studentName = ((record.studentFirst || '') + ' ' + (record.studentMiddle || '') + ' ' + (record.studentSurname || record.studentName || '')).trim() || 'N/A';
-        const className = record.classApplied || record.classAdmission || 'N/A';
-        const date = formatDate(record.registrationDate || record.date);
-
-        const row = tbody.insertRow();
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${date}</td>
-            <td>${studentName}</td>
-            <td>${className}</td>
-            <td>${record.gender || 'N/A'}</td>
-            <td>${record.fatherMobile || 'N/A'}</td>
-            <td>${record.district || 'N/A'}</td>
-            <td class="action-icons">
-                <button class="icon-btn view-btn" onclick='viewRecord(${JSON.stringify(record).replace(/'/g, "&#39;")}, "registration", ${index})'>
-                    <i class="fas fa-eye"></i>
-                </button>
-                <button class="icon-btn delete-btn" onclick="deleteRecord(${index}, 'registration')">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </td>
-        `;
-    });
-}
-
-function loadAdmissions() {
-    const admissions = JSON.parse(localStorage.getItem('admissions') || '[]');
-    const tbody = document.getElementById('admissionTableBody');
-
-    console.log('Loading admissions:', admissions.length);
-
-    if (admissions.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="no-records"><i class="fas fa-inbox"></i><div>No admission records found</div></td></tr>';
-        return;
-    }
-
-    tbody.innerHTML = '';
-    admissions.forEach((record, index) => {
-        const date = formatDate(record.admissionDate || record.date);
-        const scholarNo = record.scholarNo || record.scholarNumber || 'N/A';
-
-        const row = tbody.insertRow();
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${date}</td>
-            <td>${record.studentName || 'N/A'}</td>
-            <td>${record.class || record.classAdmission || 'N/A'}</td>
-            <td>${record.section || 'N/A'}</td>
-            <td>${scholarNo}</td>
-            <td>${record.district || 'N/A'}</td>
-            <td class="action-icons">
-                <button class="icon-btn view-btn" onclick='viewRecord(${JSON.stringify(record).replace(/'/g, "&#39;")}, "admission", ${index})'>
-                    <i class="fas fa-eye"></i>
-                </button>
-                <button class="icon-btn delete-btn" onclick="deleteRecord(${index}, 'admission')">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </td>
-        `;
-    });
-}
-
-function viewRecord(record, type, index) {
-    currentRecord = record;
-    currentRecordType = type;
-    currentRecordIndex = index;
-
-    const modalBody = document.getElementById('modalBody');
-    let html = '<div class="detail-grid">';
-
-    if (type === 'enquiry') {
-        const studentName = ((record.studentFirst || '') + ' ' + (record.studentMiddle || '') + ' ' + (record.studentSurname || record.studentName || '')).trim() || 'N/A';
-        const fatherName = ((record.fatherFirst || '') + ' ' + (record.fatherMiddle || '') + ' ' + (record.fatherSurname || record.fatherName || '')).trim() || 'N/A';
-        const motherName = ((record.motherFirst || '') + ' ' + (record.motherMiddle || '') + ' ' + (record.motherSurname || record.motherName || '')).trim() || 'N/A';
-
-        html += `
-            <div class="detail-item"><div class="detail-label">Date</div><div class="detail-value">${formatDate(record.date || record.submittedDate)}</div></div>
-            <div class="detail-item"><div class="detail-label">Student Name</div><div class="detail-value">${studentName}</div></div>
-            <div class="detail-item"><div class="detail-label">Gender</div><div class="detail-value">${record.gender || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">DOB</div><div class="detail-value">${formatDate(record.dob)}</div></div>
-            <div class="detail-item"><div class="detail-label">Class Applied</div><div class="detail-value">${record.classApplied || record.classApplying || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Father Name</div><div class="detail-value">${fatherName}</div></div>
-            <div class="detail-item"><div class="detail-label">Father Mobile</div><div class="detail-value">${record.fatherMobile || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Mother Name</div><div class="detail-value">${motherName}</div></div>
-            <div class="detail-item"><div class="detail-label">Mother Mobile</div><div class="detail-value">${record.motherMobile || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Email</div><div class="detail-value">${record.email || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Address</div><div class="detail-value">${record.address || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">District</div><div class="detail-value">${record.district || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">State</div><div class="detail-value">${record.state || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Pincode</div><div class="detail-value">${record.pincode || 'N/A'}</div></div>
-        `;
-    } else if (type === 'registration') {
-        const studentName = ((record.studentFirst || '') + ' ' + (record.studentMiddle || '') + ' ' + (record.studentSurname || record.studentName || '')).trim() || 'N/A';
-        html += `
-            <div class="detail-item"><div class="detail-label">Date</div><div class="detail-value">${formatDate(record.registrationDate || record.date)}</div></div>
-            <div class="detail-item"><div class="detail-label">Student Name</div><div class="detail-value">${studentName}</div></div>
-            <div class="detail-item"><div class="detail-label">Class</div><div class="detail-value">${record.classApplied || record.classAdmission || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Gender</div><div class="detail-value">${record.gender || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">DOB</div><div class="detail-value">${formatDate(record.dob)}</div></div>
-            <div class="detail-item"><div class="detail-label">Father Mobile</div><div class="detail-value">${record.fatherMobile || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">District</div><div class="detail-value">${record.district || 'N/A'}</div></div>
-        `;
-    } else {
-        html += `
-            <div class="detail-item"><div class="detail-label">Date</div><div class="detail-value">${formatDate(record.admissionDate || record.date)}</div></div>
-            <div class="detail-item"><div class="detail-label">Scholar No</div><div class="detail-value">${record.scholarNo || record.scholarNumber || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Student Name</div><div class="detail-value">${record.studentName || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Class</div><div class="detail-value">${record.class || record.classAdmission || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">Section</div><div class="detail-value">${record.section || 'N/A'}</div></div>
-            <div class="detail-item"><div class="detail-label">District</div><div class="detail-value">${record.district || 'N/A'}</div></div>
-        `;
-    }
-
-    html += '</div>';
-    modalBody.innerHTML = html;
-    document.getElementById('viewModal').style.display = 'block';
-}
-
-// NEW: Edit function
-function editCurrentRecord() {
-    if (!currentRecord || !currentRecordType) {
-        alert('No record selected!');
-        return;
-    }
-
-    localStorage.setItem('editRecord', JSON.stringify({
-        record: currentRecord,
-        type: currentRecordType,
-        index: currentRecordIndex
-    }));
-
-    if (currentRecordType === 'enquiry') {
-        window.location.href = 'enquiry.html?edit=true';
-    } else if (currentRecordType === 'registration') {
-        window.location.href = 'registration.html?edit=true';
-    } else {
-        window.location.href = 'admission.html?edit=true';
-    }
-}
-
-// FIXED: Excel export with ALL fields
-function exportToExcel(type) {
-    let data, filename;
-
-    if (type === 'enquiry') {
-        data = JSON.parse(localStorage.getItem('enquiries') || '[]');
-        filename = 'Enquiry_Records.xlsx';
-    } else if (type === 'registration') {
-        data = JSON.parse(localStorage.getItem('registrations') || '[]');
-        filename = 'Registration_Records.xlsx';
-    } else {
-        data = JSON.parse(localStorage.getItem('admissions') || '[]');
-        filename = 'Admission_Records.xlsx';
-    }
-
-    if (data.length === 0) {
-        alert('No data to export!');
-        return;
-    }
-
-    // FIXED: Export ALL fields, not just table columns
-    const ws = XLSX.utils.json_to_sheet(data.map(record => {
-        if (type === 'enquiry' || type === 'registration') {
-            return {
-                ...record,
-                date: formatDate(record.date || record.submittedDate || record.registrationDate),
-                studentName: ((record.studentFirst || '') + ' ' + (record.studentMiddle || '') + ' ' + (record.studentSurname || record.studentName || '')).trim()
-            };
+    function getArrayFromLocalStorage(key) {
+        try {
+            const raw = localStorage.getItem(key);
+            if (!raw) return [];
+            const data = JSON.parse(raw);
+            return Array.isArray(data) ? data : [];
+        } catch (e) {
+            console.error('Error parsing localStorage for', key, e);
+            return [];
         }
-        return {
-            ...record,
-            date: formatDate(record.admissionDate || record.date)
-        };
-    }));
+    }
 
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, type.charAt(0).toUpperCase() + type.slice(1));
-    XLSX.writeFile(wb, filename);
-}
+    function safeGet(obj, key, fallback = '') {
+        if (!obj) return fallback;
+        if (obj[key] === undefined || obj[key] === null) return fallback;
+        return String(obj[key]).trim();
+    }
 
-function printTable(type) {
-    const printWindow = window.open('', '', 'height=600,width=800');
-    const table = document.getElementById(type + 'Table').cloneNode(true);
-    const actionCells = table.querySelectorAll('th:last-child, td:last-child');
-    actionCells.forEach(cell => cell.remove());
+    function classFromAny(record) {
+        const keys = ['classApplied', 'class', 'classApplying'];
+        for (const k of keys) {
+            const val = safeGet(record, k);
+            if (val) return val;
+        }
+        return '';
+    }
 
-    printWindow.document.write('<html><head><title>Print</title>');
-    printWindow.document.write('<style>body{font-family:Arial;}table{width:100%;border-collapse:collapse;margin-top:20px;}th,td{border:1px solid #ddd;padding:8px;text-align:left;}th{background:#1e3c72;color:white;}h2{color:#1e3c72;}</style>');
-    printWindow.document.write('</head><body><h2>HEMA Higher Secondary School</h2>');
-    printWindow.document.write('<h3>' + type.charAt(0).toUpperCase() + type.slice(1) + ' Records</h3>');
-    printWindow.document.write(table.outerHTML);
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    setTimeout(() => { printWindow.print(); printWindow.close(); }, 250);
-}
+    function studentNameFromAny(record) {
+        const fallbackName = safeGet(record, 'studentName');
+        if (fallbackName) return fallbackName;
 
-function deleteRecord(index, type) {
-    if (!confirm('Are you sure you want to delete this record?')) return;
+        const fnKeys = ['studentFirstName','studentFirst','studentFirstName'.toLowerCase()];
+        const mnKeys = ['studentMiddleName','studentMiddle'];
+        const snKeys = ['studentSurname','studentLastName'];
 
-    const key = type === 'enquiry' ? 'enquiries' : type === 'registration' ? 'registrations' : 'admissions';
-    const records = JSON.parse(localStorage.getItem(key) || '[]');
-    records.splice(index, 1);
-    localStorage.setItem(key, JSON.stringify(records));
+        let f = '', m = '', s = '';
+        for (const k of fnKeys) {
+            if (!f) f = safeGet(record, k);
+        }
+        for (const k of mnKeys) {
+            if (!m) m = safeGet(record, k);
+        }
+        for (const k of snKeys) {
+            if (!s) s = safeGet(record, k);
+        }
+        return [f,m,s].filter(Boolean).join(' ');
+    }
 
-    if (type === 'enquiry') loadEnquiries();
-    else if (type === 'registration') loadRegistrations();
-    else loadAdmissions();
+    function fatherNameFromAny(record) {
+        const fallbackName = safeGet(record, 'fatherName');
+        if (fallbackName) return fallbackName;
+        const f = safeGet(record, 'fatherFirst') || safeGet(record, 'fatherFirstName');
+        const m = safeGet(record, 'fatherMiddle') || safeGet(record, 'fatherMiddleName');
+        const s = safeGet(record, 'fatherSurname');
+        return [f,m,s].filter(Boolean).join(' ');
+    }
 
-    loadDashboardStats();
-    alert('Record deleted successfully!');
-}
+    function motherNameFromAny(record) {
+        const fallbackName = safeGet(record, 'motherName');
+        if (fallbackName) return fallbackName;
+        const f = safeGet(record, 'motherFirst') || safeGet(record, 'motherFirstName');
+        const m = safeGet(record, 'motherMiddle') || safeGet(record, 'motherMiddleName');
+        const s = safeGet(record, 'motherSurname');
+        return [f,m,s].filter(Boolean).join(' ');
+    }
 
-function closeModal() {
-    document.getElementById('viewModal').style.display = 'none';
-    currentRecord = null;
-    currentRecordType = null;
-    currentRecordIndex = null;
-}
+    function siblingLabel(enq, idx) {
+        const nameKey = `sib${idx}Name`;
+        const schoolKey = `sib${idx}School`;
+        const classKey = `sib${idx}Class` in enq ? `sib${idx}Class` : `sib${idx}ClassSec`;
+        const n = safeGet(enq, nameKey);
+        if (!n) return '';
+        const school = safeGet(enq, schoolKey);
+        const cls = safeGet(enq, classKey);
+        const parts = [n];
+        if (school) parts.push(`(${school})`);
+        if (cls) parts.push(cls);
+        return parts.join(' ');
+    }
 
-window.onclick = function(event) {
-    if (event.target == document.getElementById('viewModal')) closeModal();
-}
+    function feeClassFromAny(enq) {
+        const idVal = safeGet(enq, 'feeClass');
+        if (idVal) return idVal;
+        const cl = classFromAny(enq);
+        return cl;
+    }
 
-console.log('✅ PERFECT data.html loaded - Date DD/MM/YYYY + Edit + Full Excel export');
+    function grandTotalFromEnquiry(enq) {
+        const keys = ['grandTotal', 'grandTotalFee', 'totalFee'];
+        for (const k of keys) {
+            const v = safeGet(enq, k);
+            if (v) return v;
+        }
+        return safeGet(enq, 'grandTotal');
+    }
+
+    function countDocsEnquiry(enq) {
+        let count = 0;
+        for (let i = 1; i <= 10; i++) {
+            const key = 'doc' + i;
+            const v = safeGet(enq, key);
+            if (v) count++;
+        }
+        return count;
+    }
+
+    function studentDocsAdmission(adm) {
+        const yes = [];
+        const no = [];
+        for (let i = 1; i <= 9; i++) {
+            const yesKey = 'docs' + i;
+            const vYes = safeGet(adm, yesKey);
+            if (vYes === 'yes') yes.push(i);
+            else if (vYes === 'not') no.push(i);
+        }
+        return { yes, no };
+    }
+
+    function parentDocsAdmission(adm) {
+        const yes = [];
+        const no = [];
+        for (let i = 1; i <= 6; i++) {
+            const yesKey = 'docp' + i;
+            const vYes = safeGet(adm, yesKey);
+            if (vYes === 'yes') yes.push(i);
+            else if (vYes === 'not') no.push(i);
+        }
+        return { yes, no };
+    }
+
+    function updateSummaryCards() {
+        const e = allEnquiries.length;
+        const r = allRegistrations.length;
+        const a = allAdmissions.length;
+        document.getElementById('totalEnquiryCount').innerText = e;
+        document.getElementById('totalRegistrationCount').innerText = r;
+        document.getElementById('totalAdmissionCount').innerText = a;
+        let rate = 0;
+        if (e > 0) {
+            rate = Math.round((a / e) * 100);
+        }
+        document.getElementById('conversionRate').innerText = rate + '%';
+    }
+
+    function applyFilters() {
+        const nameFilter = document.getElementById('searchName').value.toLowerCase();
+        const mobileFilter = document.getElementById('searchMobile').value.toLowerCase();
+        const classFilter = document.getElementById('filterClass').value.toLowerCase();
+
+        if (currentTab === 'enquiry') {
+            renderEnquiryTable(nameFilter, mobileFilter, classFilter);
+        } else if (currentTab === 'registration') {
+            renderRegistrationTable(nameFilter, mobileFilter, classFilter);
+        } else {
+            renderAdmissionTable(nameFilter, mobileFilter, classFilter);
+        }
+    }
+
+    function rowMatchesFilters(name, father, mobile, cls, nameFilter, mobileFilter, classFilter) {
+        let ok = true;
+        const combinedName = (name + ' ' + father).toLowerCase();
+
+        if (nameFilter && !combinedName.includes(nameFilter)) ok = false;
+        if (mobileFilter && !mobile.toLowerCase().includes(mobileFilter)) ok = false;
+        if (classFilter && cls.toLowerCase() !== classFilter) ok = false;
+
+        return ok;
+    }
+
+    function renderEnquiryTable(nameFilter = '', mobileFilter = '', classFilter = '') {
+        const body = document.getElementById('enquiryBody');
+        const noData = document.getElementById('enquiryNoData');
+        body.innerHTML = '';
+
+        if (!allEnquiries.length) {
+            noData.style.display = 'block';
+            return;
+        }
+        noData.style.display = 'none';
+
+        allEnquiries.forEach((enq, index) => {
+            const sno = safeGet(enq, 'sno');
+            const date = safeGet(enq, 'date');
+            const studentName = studentNameFromAny(enq);
+            const cls = classFromAny(enq);
+            const fatherName = fatherNameFromAny(enq);
+            const fatherMobile = safeGet(enq, 'fatherMobile');
+            const motherName = motherNameFromAny(enq);
+            const address = safeGet(enq, 'address');
+            const sib1 = siblingLabel(enq, 1);
+            const sib2 = siblingLabel(enq, 2);
+            const feeClass = feeClassFromAny(enq);
+            const grandTot = grandTotalFromEnquiry(enq);
+            const docCount = countDocsEnquiry(enq);
+
+            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls, nameFilter, mobileFilter, classFilter)) {
+                return;
+            }
+
+            const tr = document.createElement('tr');
+
+            tr.innerHTML = `
+                <td>${sno || (index + 1)}</td>
+                <td>${date}</td>
+                <td>${studentName}</td>
+                <td>${cls}</td>
+                <td>${fatherName}</td>
+                <td>${fatherMobile}</td>
+                <td>${motherName}</td>
+                <td>${address}</td>
+                <td>${sib1}</td>
+                <td>${sib2}</td>
+                <td>${feeClass}</td>
+                <td>${grandTot}</td>
+                <td><span class="badge badge-enquiry">${docCount} ✓</span></td>
+                <td class="col-actions">
+                    <button class="action-btn btn-view" onclick="openRecordModal('enquiry', ${index})">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                    <button class="action-btn btn-edit" onclick="editEnquiry(${index})">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                    <button class="action-btn btn-delete" onclick="deleteEnquiry(${index})">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </td>
+            `;
+            body.appendChild(tr);
+        });
+
+        if (!body.children.length) {
+            noData.style.display = 'block';
+        }
+    }
+
+    function renderRegistrationTable(nameFilter = '', mobileFilter = '', classFilter = '') {
+        const body = document.getElementById('registrationBody');
+        const noData = document.getElementById('registrationNoData');
+        body.innerHTML = '';
+
+        if (!allRegistrations.length) {
+            noData.style.display = 'block';
+            return;
+        }
+        noData.style.display = 'none';
+
+        allRegistrations.forEach((reg, index) => {
+            const sno = safeGet(reg, 'sno') || safeGet(reg, 'regSno');
+            const date = safeGet(reg, 'date') || safeGet(reg, 'regDate');
+            const studentName = studentNameFromAny(reg) || safeGet(reg, 'studentName');
+            const cls = classFromAny(reg);
+            const fatherName = fatherNameFromAny(reg);
+            const fatherMobile = safeGet(reg, 'fatherMobile');
+            const address = safeGet(reg, 'address');
+            const feeAd = safeGet(reg, 'feeAdmission');
+            const feeDev = safeGet(reg, 'feeDevelopment');
+            const feeCau = safeGet(reg, 'feeCaution');
+            let totalFee = safeGet(reg, 'totalFee');
+            if (!totalFee) {
+                const a = parseFloat(feeAd || '0') || 0;
+                const d = parseFloat(feeDev || '0') || 0;
+                const c = parseFloat(feeCau || '0') || 0;
+                totalFee = (a + d + c).toString();
+            }
+
+            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls, nameFilter, mobileFilter, classFilter)) {
+                return;
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${sno || (index + 1)}</td>
+                <td>${date}</td>
+                <td>${studentName}</td>
+                <td>${cls}</td>
+                <td>${fatherName}</td>
+                <td>${fatherMobile}</td>
+                <td>${address}</td>
+                <td>${feeAd}</td>
+                <td>${feeDev}</td>
+                <td>${feeCau}</td>
+                <td>${totalFee}</td>
+                <td class="col-actions">
+                    <button class="action-btn btn-view" onclick="openRecordModal('registration', ${index})">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                    <button class="action-btn btn-edit" onclick="editRegistration(${index})">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                    <button class="action-btn btn-delete" onclick="deleteRegistration(${index})">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </td>
+            `;
+            body.appendChild(tr);
+        });
+
+        if (!body.children.length) {
+            noData.style.display = 'block';
+        }
+    }
+
+    function renderAdmissionTable(nameFilter = '', mobileFilter = '', classFilter = '') {
+        const body = document.getElementById('admissionBody');
+        const noData = document.getElementById('admissionNoData');
+        body.innerHTML = '';
+
+        if (!allAdmissions.length) {
+            noData.style.display = 'block';
+            return;
+        }
+        noData.style.display = 'none';
+
+        allAdmissions.forEach((adm, index) => {
+            const scholarNo = safeGet(adm, 'scholarNo') || safeGet(adm, 'scholarNumber');
+            const admDate = safeGet(adm, 'admissionDate') || safeGet(adm, 'admDate') || safeGet(adm, 'date');
+            const studentName = studentNameFromAny(adm) || safeGet(adm, 'studentName');
+            const cls = classFromAny(adm);
+            const section = safeGet(adm, 'section');
+            const fatherName = fatherNameFromAny(adm);
+            const fatherMobile = safeGet(adm, 'fatherMobile');
+            const address = safeGet(adm, 'address');
+            const category = safeGet(adm, 'category') || safeGet(adm, 'admissionCategory');
+
+            const docsStu = studentDocsAdmission(adm);
+            const docsPar = parentDocsAdmission(adm);
+
+            if (!rowMatchesFilters(studentName, fatherName, fatherMobile, cls, nameFilter, mobileFilter, classFilter)) {
+                return;
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${scholarNo || '—'}</td>
+                <td>${admDate}</td>
+                <td>${studentName}</td>
+                <td>${cls}</td>
+                <td>${section}</td>
+                <td>${fatherName}</td>
+                <td>${fatherMobile}</td>
+                <td>${address}</td>
+                <td>${category}</td>
+                <td><span class="badge badge-admission">${docsStu.yes.length} ✓</span></td>
+                <td><span class="badge badge-admission">${docsPar.yes.length} ✓</span></td>
+                <td class="col-actions">
+                    <button class="action-btn btn-view" onclick="openRecordModal('admission', ${index})">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                    <button class="action-btn btn-edit" onclick="editAdmission(${index})">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                    <button class="action-btn btn-delete" onclick="deleteAdmission(${index})">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </td>
+            `;
+            body.appendChild(tr);
+        });
+
+        if (!body.children.length) {
+            noData.style.display = 'block';
+        }
+    }
+
+    function switchTab(tab) {
+        currentTab = tab;
+        document.getElementById('tabEnquiry').classList.remove('active');
+        document.getElementById('tabRegistration').classList.remove('active');
+        document.getElementById('tabAdmission').classList.remove('active');
+
+        document.getElementById('enquiryRecords').classList.remove('active');
+        document.getElementById('registrationRecords').classList.remove('active');
+        document.getElementById('admissionRecords').classList.remove('active');
+
+        if (tab === 'enquiry') {
+            document.getElementById('tabEnquiry').classList.add('active');
+            document.getElementById('enquiryRecords').classList.add('active');
+        } else if (tab === 'registration') {
+            document.getElementById('tabRegistration').classList.add('active');
+            document.getElementById('registrationRecords').classList.add('active');
+        } else {
+            document.getElementById('tabAdmission').classList.add('active');
+            document.getElementById('admissionRecords').classList.add('active');
+        }
+        applyFilters();
+    }
+
+    function reloadData() {
+        allEnquiries = getArrayFromLocalStorage('enquiryRecords');
+        if (!allEnquiries.length) {
+            allEnquiries = getArrayFromLocalStorage('enquiries');
+        }
+
+        allRegistrations = getArrayFromLocalStorage('registrationRecords');
+        if (!allRegistrations.length) {
+            allRegistrations = getArrayFromLocalStorage('registrations');
+        }
+
+        allAdmissions = getArrayFromLocalStorage('admissionRecords');
+        if (!allAdmissions.length) {
+            allAdmissions = getArrayFromLocalStorage('admissions');
+        }
+
+        updateSummaryCards();
+        applyFilters();
+    }
+
+    function openRecordModal(type, index) {
+        currentModalType = type;
+        let record = null;
+        if (type === 'enquiry') {
+            record = allEnquiries[index];
+        } else if (type === 'registration') {
+            record = allRegistrations[index];
+        } else {
+            record = allAdmissions[index];
+        }
+        currentModalRecord = record;
+        const modalBody = document.getElementById('modalBody');
+
+        if (type === 'enquiry') {
+            buildEnquiryModal(record, modalBody);
+        } else if (type === 'registration') {
+            buildRegistrationModal(record, modalBody);
+        } else {
+            buildAdmissionModal(record, modalBody);
+        }
+
+        document.getElementById('modalBackdrop').classList.add('active');
+    }
+
+    function buildEnquiryModal(enq, container) {
+        container.innerHTML = '';
+
+        const sno = safeGet(enq, 'sno');
+        const date = safeGet(enq, 'date');
+        const studentName = studentNameFromAny(enq);
+        const cls = classFromAny(enq);
+        const gender = safeGet(enq, 'gender');
+        const dob = safeGet(enq, 'dob');
+        const currentAge = safeGet(enq, 'currentAge');
+
+        const fatherName = fatherNameFromAny(enq);
+        const fatherMobile = safeGet(enq, 'fatherMobile');
+        const motherName = motherNameFromAny(enq);
+        const motherMobile = safeGet(enq, 'motherMobile');
+        const landline = safeGet(enq, 'landline');
+
+        const address = safeGet(enq, 'address');
+        const area = safeGet(enq, 'area');
+        const city = safeGet(enq, 'city');
+        const district = safeGet(enq, 'district');
+        const state = safeGet(enq, 'state');
+        const pincode = safeGet(enq, 'pincode');
+        const country = safeGet(enq, 'country');
+
+        const sib1Name = safeGet(enq, 'sib1Name');
+        const sib1School = safeGet(enq, 'sib1School');
+        const sib1Class = safeGet(enq, 'sib1Class');
+        const sib1Section = safeGet(enq, 'sib1Section');
+        const sib2Name = safeGet(enq, 'sib2Name');
+        const sib2School = safeGet(enq, 'sib2School');
+        const sib2Class = safeGet(enq, 'sib2Class');
+        const sib2Section = safeGet(enq, 'sib2Section');
+
+        const feeClass = feeClassFromAny(enq);
+        const admissionFee = safeGet(enq, 'admissionFee');
+        const developmentFund = safeGet(enq, 'developmentFund');
+        const cautionMoney = safeGet(enq, 'cautionMoney');
+        const totalAdmission = safeGet(enq, 'totalAdmission');
+        const tuitionFee = safeGet(enq, 'tuitionFee');
+        const annualCharges = safeGet(enq, 'annualCharges');
+        const totalAnnual = safeGet(enq, 'totalAnnual');
+        const monthlyInstallment = safeGet(enq, 'monthlyInstallment');
+        const grandAdmission = safeGet(enq, 'grandAdmission');
+        const grandAnnual = safeGet(enq, 'grandAnnual');
+        const grandTotal = grandTotalFromEnquiry(enq);
+
+        const discount8 = safeGet(enq, 'discount8');
+        const after8Discount = safeGet(enq, 'after8Discount');
+        const discount5 = safeGet(enq, 'discount5');
+        const after5Discount = safeGet(enq, 'after5Discount');
+        const siblingDiscountFlag = safeGet(enq, 'siblingDiscount') || safeGet(enq, 'siblingDiscountApplied');
+
+        const source = safeGet(enq, 'infoSource') || safeGet(enq, 'source');
+        const referredType = safeGet(enq, 'referredType');
+        const referredName = safeGet(enq, 'referredName');
+        const timestamp = safeGet(enq, 'timestamp');
+
+        const docList = [];
+        for (let i = 1; i <= 10; i++) {
+            const key = 'doc' + i;
+            const val = safeGet(enq, key);
+            if (val) docList.push(val);
+        }
+
+        const basicSection = document.createElement('div');
+        basicSection.innerHTML = `
+            <div class="modal-section-title">Basic Information</div>
+            <div class="modal-row two">
+                <div class="modal-field">
+                    <div class="modal-label">Enquiry No.</div>
+                    <div class="modal-value">${sno}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Date</div>
+                    <div class="modal-value">${date}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(basicSection);
+
+        const studentSection = document.createElement('div');
+        studentSection.innerHTML = `
+            <div class="modal-section-title">Student Details</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Student Name</div>
+                    <div class="modal-value">${studentName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Class Applying For</div>
+                    <div class="modal-value">${cls}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Gender</div>
+                    <div class="modal-value">${gender}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Date of Birth</div>
+                    <div class="modal-value">${dob}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Current Age</div>
+                    <div class="modal-value">${currentAge}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Fee Class (Calculator)</div>
+                    <div class="modal-value">${feeClass}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(studentSection);
+
+        const parentSection = document.createElement('div');
+        parentSection.innerHTML = `
+            <div class="modal-section-title">Parent Details</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Father Name</div>
+                    <div class="modal-value">${fatherName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Father Mobile</div>
+                    <div class="modal-value">${fatherMobile}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Landline</div>
+                    <div class="modal-value">${landline}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Mother Name</div>
+                    <div class="modal-value">${motherName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Mother Mobile</div>
+                    <div class="modal-value">${motherMobile}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Information Source</div>
+                    <div class="modal-value">${source}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(parentSection);
+
+        const contactSection = document.createElement('div');
+        contactSection.innerHTML = `
+            <div class="modal-section-title">Contact Details</div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Complete Address</div>
+                    <div class="modal-value">${address}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Area / Locality</div>
+                    <div class="modal-value">${area}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">City / District</div>
+                    <div class="modal-value">${city} ${district ? '(' + district + ')' : ''}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">State / PIN</div>
+                    <div class="modal-value">${state} ${pincode ? '- ' + pincode : ''}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Country</div>
+                    <div class="modal-value">${country}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(contactSection);
+
+        const siblingSection = document.createElement('div');
+        siblingSection.innerHTML = `
+            <div class="modal-section-title">Sibling Details (If any)</div>
+            <div class="modal-row two">
+                <div class="modal-field">
+                    <div class="modal-label">Sibling 1</div>
+                    <div class="modal-value">${sib1Name ? sib1Name + (sib1School ? ' | ' + sib1School : '') + (sib1Class ? ' | ' + sib1Class : '') + (sib1Section ? ' - ' + sib1Section : '') : ''}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Sibling 2</div>
+                    <div class="modal-value">${sib2Name ? sib2Name + (sib2School ? ' | ' + sib2School : '') + (sib2Class ? ' | ' + sib2Class : '') + (sib2Section ? ' - ' + sib2Section : '') : ''}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(siblingSection);
+
+        const feeSection = document.createElement('div');
+        feeSection.innerHTML = `
+            <div class="modal-section-title">Fee Details - Calculator Snapshot</div>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th colspan="4">One-time Admission Fees</th>
+                    </tr>
+                    <tr>
+                        <th>Admission Fee</th>
+                        <th>Development Fund</th>
+                        <th>Caution Money</th>
+                        <th>Total Admission Fees</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${admissionFee}</td>
+                        <td>${developmentFund}</td>
+                        <td>${cautionMoney}</td>
+                        <td>${totalAdmission}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th colspan="4">Annual Fees (9 Months)</th>
+                    </tr>
+                    <tr>
+                        <th>Tuition Fee</th>
+                        <th>Annual Charges</th>
+                        <th>Total Annual Fees</th>
+                        <th>Monthly Installment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${tuitionFee}</td>
+                        <td>${annualCharges}</td>
+                        <td>${totalAnnual}</td>
+                        <td>${monthlyInstallment}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th colspan="4">Grand Total</th>
+                    </tr>
+                    <tr>
+                        <th>One-time Admission</th>
+                        <th>Annual Fees</th>
+                        <th>Grand Total</th>
+                        <th>Sibling 2nd Child Discount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${grandAdmission}</td>
+                        <td>${grandAnnual}</td>
+                        <td>${grandTotal}</td>
+                        <td>${siblingDiscountFlag ? 'Applied (Admission + Tuition 50%)' : 'Not Applied'}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th colspan="4">One-time Payment Discount (Annual Fee only)</th>
+                    </tr>
+                    <tr>
+                        <th>8% Discount (till 30 Apr)</th>
+                        <th>Payable after 8%</th>
+                        <th>5% Discount (till 30 Jun)</th>
+                        <th>Payable after 5%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${discount8}</td>
+                        <td>${after8Discount}</td>
+                        <td>${discount5}</td>
+                        <td>${after5Discount}</td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+        container.appendChild(feeSection);
+
+        const docsSection = document.createElement('div');
+        let docsHtml = '';
+        if (docList.length) {
+            docsHtml = docList.map(d => `<span class="doc-badge doc-yes">${d}</span>`).join(' ');
+        } else {
+            docsHtml = '<span class="doc-badge doc-no">No documents checked</span>';
+        }
+        docsSection.innerHTML = `
+            <div class="modal-section-title">Required Documents Checklist</div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Documents Marked to be Provided at Admission</div>
+                    <div class="modal-value">${docsHtml}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Referred By</div>
+                    <div class="modal-value">${referredType} ${referredName ? '- ' + referredName : ''}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Saved Timestamp</div>
+                    <div class="modal-value">${timestamp}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(docsSection);
+    }
+
+    function buildRegistrationModal(reg, container) {
+        container.innerHTML = '';
+
+        const sno = safeGet(reg, 'sno') || safeGet(reg, 'regSno');
+        const date = safeGet(reg, 'date') || safeGet(reg, 'regDate');
+        const studentName = studentNameFromAny(reg) || safeGet(reg, 'studentName');
+        const cls = classFromAny(reg);
+        const gender = safeGet(reg, 'gender');
+        const dob = safeGet(reg, 'dob');
+
+        const motherName = motherNameFromAny(reg);
+        const motherMobile = safeGet(reg, 'motherMobile');
+        const fatherName = fatherNameFromAny(reg);
+        const fatherMobile = safeGet(reg, 'fatherMobile');
+        const landline = safeGet(reg, 'landline');
+
+        const address = safeGet(reg, 'address');
+        const area = safeGet(reg, 'area');
+        const state = safeGet(reg, 'state');
+
+        const feeAdmission = safeGet(reg, 'feeAdmission');
+        const feeDevelopment = safeGet(reg, 'feeDevelopment');
+        const feeCaution = safeGet(reg, 'feeCaution');
+        let totalFee = safeGet(reg, 'totalFee');
+        if (!totalFee) {
+            const a = parseFloat(feeAdmission || '0') || 0;
+            const d = parseFloat(feeDevelopment || '0') || 0;
+            const c = parseFloat(feeCaution || '0') || 0;
+            totalFee = (a + d + c).toString();
+        }
+
+        const signatoryName = safeGet(reg, 'signatoryName');
+        const timestamp = safeGet(reg, 'timestamp');
+
+        const basicSection = document.createElement('div');
+        basicSection.innerHTML = `
+            <div class="modal-section-title">Registration Basic Information</div>
+            <div class="modal-row two">
+                <div class="modal-field">
+                    <div class="modal-label">Registration No.</div>
+                    <div class="modal-value">${sno}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Date</div>
+                    <div class="modal-value">${date}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(basicSection);
+
+        const studentSection = document.createElement('div');
+        studentSection.innerHTML = `
+            <div class="modal-section-title">Student Details</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Student Name</div>
+                    <div class="modal-value">${studentName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Class Applied</div>
+                    <div class="modal-value">${cls}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Gender</div>
+                    <div class="modal-value">${gender}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Date of Birth</div>
+                    <div class="modal-value">${dob}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(studentSection);
+
+        const parentSection = document.createElement('div');
+        parentSection.innerHTML = `
+            <div class="modal-section-title">Parent Details</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Mother Name</div>
+                    <div class="modal-value">${motherName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Mother Mobile</div>
+                    <div class="modal-value">${motherMobile}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Father Name</div>
+                    <div class="modal-value">${fatherName}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Father Mobile</div>
+                    <div class="modal-value">${fatherMobile}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Landline</div>
+                    <div class="modal-value">${landline}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(parentSection);
+
+        const contactSection = document.createElement('div');
+        contactSection.innerHTML = `
+            <div class="modal-section-title">Contact Details</div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Address</div>
+                    <div class="modal-value">${address}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Area</div>
+                    <div class="modal-value">${area}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">State</div>
+                    <div class="modal-value">${state}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(contactSection);
+
+        const feeSection = document.createElement('div');
+        feeSection.innerHTML = `
+            <div class="modal-section-title">Fee Structure Snapshot (From Registration)</div>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Particular</th>
+                        <th>Amount (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Admission Fee</td>
+                        <td>${feeAdmission}</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Development Fund</td>
+                        <td>${feeDevelopment}</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Caution Money Deposit</td>
+                        <td>${feeCaution}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>Total</strong></td>
+                        <td><strong>${totalFee}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+        container.appendChild(feeSection);
+
+        const docsSection = document.createElement('div');
+        docsSection.innerHTML = `
+            <div class="modal-section-title">Declaration & Documents</div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Name of Signatory</div>
+                    <div class="modal-value">${signatoryName}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Saved Timestamp</div>
+                    <div class="modal-value">${timestamp}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(docsSection);
+    }
+
+    function buildAdmissionModal(adm, container) {
+        container.innerHTML = '';
+
+        const scholarNo = safeGet(adm, 'scholarNo') || safeGet(adm, 'scholarNumber');
+        const admDate = safeGet(adm, 'admissionDate') || safeGet(adm, 'admDate') || safeGet(adm, 'date');
+        const sno = safeGet(adm, 'sno') || safeGet(adm, 'admSno');
+        const studentName = studentNameFromAny(adm) || safeGet(adm, 'studentName');
+        const cls = classFromAny(adm);
+        const section = safeGet(adm, 'section');
+        const dob = safeGet(adm, 'dob');
+        const currentAge = safeGet(adm, 'currentAge');
+        const gender = safeGet(adm, 'gender');
+        const dobWords = safeGet(adm, 'dobWords');
+        const category = safeGet(adm, 'category') || safeGet(adm, 'admissionCategory');
+        const religion = safeGet(adm, 'religion');
+        const nationality = safeGet(adm, 'nationality');
+
+        const fatherName = fatherNameFromAny(adm);
+        const fatherMobile = safeGet(adm, 'fatherMobile');
+        const fatherAadhaar = safeGet(adm, 'fatherAadhaar');
+        const motherName = motherNameFromAny(adm);
+        const motherMobile = safeGet(adm, 'motherMobile');
+        const motherAadhaar = safeGet(adm, 'motherAadhaar');
+        const guardianName = safeGet(adm, 'guardianName');
+        const guardianMobile = safeGet(adm, 'guardianMobile');
+
+        const address = safeGet(adm, 'address');
+        const penNo = safeGet(adm, 'penNo');
+        const sssmId = safeGet(adm, 'sssmId');
+        const familyId = safeGet(adm, 'familyId');
+        const apaarId = safeGet(adm, 'apaarId');
+        const house = safeGet(adm, 'house');
+
+        const prevSchool = safeGet(adm, 'prevSchool');
+        const prevClass = safeGet(adm, 'prevClass');
+        const prevAffiliated = safeGet(adm, 'prevAffiliated');
+        const lastSession = safeGet(adm, 'lastSession');
+        const tcNo = safeGet(adm, 'tcNo');
+        const tcDate = safeGet(adm, 'tcDate');
+
+        const sib1Name = safeGet(adm, 'sib1Name');
+        const sib1School = safeGet(adm, 'sib1School');
+        const sib1ClassSec = safeGet(adm, 'sib1ClassSec');
+        const sib2Name = safeGet(adm, 'sib2Name');
+        const sib2School = safeGet(adm, 'sib2School');
+        const sib2ClassSec = safeGet(adm, 'sib2ClassSec');
+
+        const bankHolderName = safeGet(adm, 'bankHolderName');
+        const accountType = safeGet(adm, 'accountType');
+        const bankAccountNo = safeGet(adm, 'bankAccountNo');
+        const bankName = safeGet(adm, 'bankName');
+        const bankBranch = safeGet(adm, 'bankBranch');
+        const ifscCode = safeGet(adm, 'ifscCode');
+        const passbookReceived = safeGet(adm, 'passbookReceived');
+
+        const declarationName = safeGet(adm, 'declarationName');
+        const signatoryName = safeGet(adm, 'signatoryName');
+        const signatureDate = safeGet(adm, 'signatureDate');
+        const signaturePlace = safeGet(adm, 'signaturePlace');
+        const undertakingName = safeGet(adm, 'undertakingName');
+        const pendingDocDate = safeGet(adm, 'pendingDocDate');
+        const timestamp = safeGet(adm, 'timestamp');
+
+        const docsStu = studentDocsAdmission(adm);
+        const docsPar = parentDocsAdmission(adm);
+
+        const basicSection = document.createElement('div');
+        basicSection.innerHTML = `
+            <div class="modal-section-title">Admission Basic Information</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Scholar Number</div>
+                    <div class="modal-value">${scholarNo}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Admission No.</div>
+                    <div class="modal-value">${sno}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Admission Date</div>
+                    <div class="modal-value">${admDate}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(basicSection);
+
+        const studentSection = document.createElement('div');
+        studentSection.innerHTML = `
+            <div class="modal-section-title">Student Details</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Student Name</div>
+                    <div class="modal-value">${studentName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Class</div>
+                    <div class="modal-value">${cls}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Section</div>
+                    <div class="modal-value">${section}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Gender</div>
+                    <div class="modal-value">${gender}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Date of Birth</div>
+                    <div class="modal-value">${dob}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Current Age</div>
+                    <div class="modal-value">${currentAge}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Date of Birth in Words</div>
+                    <div class="modal-value">${dobWords}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Religion</div>
+                    <div class="modal-value">${religion}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Category</div>
+                    <div class="modal-value">${category}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Nationality</div>
+                    <div class="modal-value">${nationality}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(studentSection);
+
+        const familySection = document.createElement('div');
+        familySection.innerHTML = `
+            <div class="modal-section-title">Family Details</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Father Name</div>
+                    <div class="modal-value">${fatherName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Father Mobile</div>
+                    <div class="modal-value">${fatherMobile}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Father Aadhaar</div>
+                    <div class="modal-value">${fatherAadhaar}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Mother Name</div>
+                    <div class="modal-value">${motherName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Mother Mobile</div>
+                    <div class="modal-value">${motherMobile}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Mother Aadhaar</div>
+                    <div class="modal-value">${motherAadhaar}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Guardian Name</div>
+                    <div class="modal-value">${guardianName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Guardian Mobile</div>
+                    <div class="modal-value">${guardianMobile}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(familySection);
+
+        const contactSection = document.createElement('div');
+        contactSection.innerHTML = `
+            <div class="modal-section-title">Contact & IDs</div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Address</div>
+                    <div class="modal-value">${address}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">PEN No.</div>
+                    <div class="modal-value">${penNo}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">SSSM ID</div>
+                    <div class="modal-value">${sssmId}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Family ID</div>
+                    <div class="modal-value">${familyId}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">APAAR ID</div>
+                    <div class="modal-value">${apaarId}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">House</div>
+                    <div class="modal-value">${house}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(contactSection);
+
+        const prevSection = document.createElement('div');
+        prevSection.innerHTML = `
+            <div class="modal-section-title">Previous Academic Details</div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">School Attended</div>
+                    <div class="modal-value">${prevSchool}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Class Attended</div>
+                    <div class="modal-value">${prevClass}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Affiliated To</div>
+                    <div class="modal-value">${prevAffiliated}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Last Session</div>
+                    <div class="modal-value">${lastSession}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">TC No.</div>
+                    <div class="modal-value">${tcNo}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">TC Date</div>
+                    <div class="modal-value">${tcDate}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(prevSection);
+
+        const siblingSection = document.createElement('div');
+        siblingSection.innerHTML = `
+            <div class="modal-section-title">Sibling Information</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Sibling 1</div>
+                    <div class="modal-value">${sib1Name ? sib1Name + (sib1School ? ' | ' + sib1School : '') + (sib1ClassSec ? ' | ' + sib1ClassSec : '') : ''}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Sibling 2</div>
+                    <div class="modal-value">${sib2Name ? sib2Name + (sib2School ? ' | ' + sib2School : '') + (sib2ClassSec ? ' | ' + sib2ClassSec : '') : ''}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(siblingSection);
+
+        const bankSection = document.createElement('div');
+        bankSection.innerHTML = `
+            <div class="modal-section-title">Bank Account Details</div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Account Holder Name</div>
+                    <div class="modal-value">${bankHolderName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Account Type</div>
+                    <div class="modal-value">${accountType}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Account No.</div>
+                    <div class="modal-value">${bankAccountNo}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Bank Name</div>
+                    <div class="modal-value">${bankName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Branch</div>
+                    <div class="modal-value">${bankBranch}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">IFSC Code</div>
+                    <div class="modal-value">${ifscCode}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Passbook Copy Received</div>
+                    <div class="modal-value">${passbookReceived}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(bankSection);
+
+        const docsSection = document.createElement('div');
+        let stuHtmlYes = docsStu.yes.map(i => `<span class="doc-badge doc-yes">Student Doc ${i}</span>`).join(' ');
+        let stuHtmlNo = docsStu.no.map(i => `<span class="doc-badge doc-no">Student Doc ${i}</span>`).join(' ');
+        if (!stuHtmlYes && !stuHtmlNo) {
+            stuHtmlNo = '<span class="doc-badge doc-no">No student documents marked</span>';
+        }
+
+        let parHtmlYes = docsPar.yes.map(i => `<span class="doc-badge doc-yes">Parent Doc ${i}</span>`).join(' ');
+        let parHtmlNo = docsPar.no.map(i => `<span class="doc-badge doc-no">Parent Doc ${i}</span>`).join(' ');
+        if (!parHtmlYes && !parHtmlNo) {
+            parHtmlNo = '<span class="doc-badge doc-no">No parent documents marked</span>';
+        }
+
+        docsSection.innerHTML = `
+            <div class="modal-section-title">Documents Submitted Status</div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Student Documents</div>
+                    <div class="modal-value">
+                        ${stuHtmlYes}
+                        ${stuHtmlNo}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Parent Documents</div>
+                    <div class="modal-value">
+                        ${parHtmlYes}
+                        ${parHtmlNo}
+                    </div>
+                </div>
+            </div>
+        `;
+        container.appendChild(docsSection);
+
+        const declarationSection = document.createElement('div');
+        declarationSection.innerHTML = `
+            <div class="modal-section-title">Declaration & Undertaking</div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Declaration in the name of</div>
+                    <div class="modal-value">${declarationName}</div>
+                </div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field">
+                    <div class="modal-label">Signature Name</div>
+                    <div class="modal-value">${signatoryName}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Signature Date</div>
+                    <div class="modal-value">${signatureDate}</div>
+                </div>
+                <div class="modal-field">
+                    <div class="modal-label">Place</div>
+                    <div class="modal-value">${signaturePlace}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Undertaking for Pending Documents By</div>
+                    <div class="modal-value">${undertakingName}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Committed Date for Submitting Pending Documents</div>
+                    <div class="modal-value">${pendingDocDate}</div>
+                </div>
+            </div>
+            <div class="modal-row one">
+                <div class="modal-field">
+                    <div class="modal-label">Saved Timestamp</div>
+                    <div class="modal-value">${timestamp}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(declarationSection);
+    }
+
+    function closeModal() {
+        document.getElementById('modalBackdrop').classList.remove('active');
+    }
+
+    function printModal() {
+        window.print();
+    }
+
+    function exportModalToExcel() {
+        if (!currentModalRecord) {
+            alert('No data to export.');
+            return;
+        }
+        const csvRows = [];
+        csvRows.push(['FIELD','VALUE']);
+
+        Object.keys(currentModalRecord).forEach(key => {
+            let val = currentModalRecord[key];
+            if (typeof val === 'object') {
+                val = JSON.stringify(val);
+            }
+            csvRows.push([key, String(val)]);
+        });
+
+        const csvString = csvRows.map(r => r.map(x => `"${(x || '').replace(/"/g,'""')}"`).join(',')).join('\r\n');
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const filePrefix = currentModalType ? currentModalType.toUpperCase() : 'RECORD';
+        link.setAttribute('href', url);
+        link.setAttribute('download', filePrefix + '_DETAILS.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    function exportCurrentToExcel() {
+        let tableId = '';
+        let filename = '';
+        if (currentTab === 'enquiry') {
+            tableId = 'enquiryTable';
+            filename = 'HEMA_ENQUIRIES.csv';
+        } else if (currentTab === 'registration') {
+            tableId = 'registrationTable';
+            filename = 'HEMA_REGISTRATIONS.csv';
+        } else {
+            tableId = 'admissionTable';
+            filename = 'HEMA_ADMISSIONS.csv';
+        }
+
+        const table = document.getElementById(tableId);
+        if (!table) {
+            alert('Table not found.');
+            return;
+        }
+
+        const rows = Array.from(table.querySelectorAll('tr'));
+        if (!rows.length) {
+            alert('No data to export.');
+            return;
+        }
+
+        const csvRows = rows.map(row => {
+            const cols = Array.from(row.querySelectorAll('th,td'));
+            return cols.map(cell => {
+                const txt = cell.innerText.replace(/\s+/g, ' ').trim();
+                return `"${txt.replace(/"/g, '""')}"`;
+            }).join(',');
+        });
+
+        const csvString = csvRows.join('\r\n');
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    function editEnquiry(index) {
+        const record = allEnquiries[index];
+        if (!record) return;
+        localStorage.setItem('editEnquiryData', JSON.stringify(record));
+        sessionStorage.setItem('editingEnquiryIndex', String(index));
+        alert('Enquiry loaded for editing. The form will open now.');
+        window.location.href = 'enquiry.html';
+    }
+
+    function deleteEnquiry(index) {
+        if (!confirm('Delete this enquiry record permanently?')) return;
+        allEnquiries.splice(index, 1);
+        localStorage.setItem('enquiryRecords', JSON.stringify(allEnquiries));
+        localStorage.setItem('enquiries', JSON.stringify(allEnquiries));
+        reloadData();
+    }
+
+    function editRegistration(index) {
+        const record = allRegistrations[index];
+        if (!record) return;
+        localStorage.setItem('currentRegistrationData', JSON.stringify(record));
+        alert('Registration loaded for editing. The form will open now.');
+        window.location.href = 'registration.html';
+    }
+
+    function deleteRegistration(index) {
+        if (!confirm('Delete this registration record permanently?')) return;
+        allRegistrations.splice(index, 1);
+        localStorage.setItem('registrationRecords', JSON.stringify(allRegistrations));
+        localStorage.setItem('registrations', JSON.stringify(allRegistrations));
+        reloadData();
+    }
+
+    function editAdmission(index) {
+        const record = allAdmissions[index];
+        if (!record) return;
+        localStorage.setItem('currentAdmissionData', JSON.stringify(record));
+        alert('Admission loaded for editing. The form will open now.');
+        window.location.href = 'admission.html';
+    }
+
+    function deleteAdmission(index) {
+        if (!confirm('Delete this admission record permanently?')) return;
+        allAdmissions.splice(index, 1);
+        localStorage.setItem('admissionRecords', JSON.stringify(allAdmissions));
+        localStorage.setItem('admissions', JSON.stringify(allAdmissions));
+        reloadData();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        reloadData();
+    });
 </script>
+
 </body>
 </html>
