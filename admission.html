@@ -1808,33 +1808,68 @@ console.log('✅ Admission form scripts loaded successfully');
     window.addEventListener('DOMContentLoaded', function() {
         const editData = localStorage.getItem('editAdmissionData');
         if (editData) {
-            const data = JSON.parse(editData);
+            try {
+                const data = JSON.parse(editData);
+                console.log('Loading admission edit data:', data);
 
-            // Populate form fields - adjust IDs to match your admission form
-            if (data.scholarNo) document.getElementById('scholarNo').value = data.scholarNo;
-            if (data.admissionDate) document.getElementById('admissionDate').value = data.admissionDate;
-            if (data.studentName) document.getElementById('studentName').value = data.studentName;
-            if (data.class) document.getElementById('class').value = data.class;
-            if (data.section) document.getElementById('section').value = data.section;
-            if (data.fatherName) document.getElementById('fatherName').value = data.fatherName;
-            if (data.fatherMobile) document.getElementById('fatherMobile').value =.fatherMobile;
-            if (data.address) document.getElementById('address').value = data.address;
-            if (data.category) document.getElementById('category').value = data.category;
-            if (data.admissionFee) document.getElementById('admissionFee').value = data.admissionFee;
-            if (data.annualFee) document.getElementById('annualFee').value = data.annualFee;
-            if (data.monthlyFee) document.getElementById('monthlyFee').value = data.monthlyFee;
-            if (data.transportFee) document.getElementById('transportFee').value = data.transportFee;
-            if (data.totalPayable) document.getElementById('totalPayable').value = data.totalPayable;
-            if (data.amountPaid) document.getElementById('amountPaid').value = data.amountPaid;
-            if (data.balance) document.getElementById('balance').value = data.balance;
-            if (data.docsStudent) document.getElementById('docsStudent').value = data.docsStudent;
-            if (data.docsParent) document.getElementById('docsParent').value = data.docsParent;
+                // Basic Information
+                if (data.scholarNo && document.getElementById('scholarNo')) document.getElementById('scholarNo').value = data.scholarNo;
+                if (data.admissionDate && document.getElementById('admissionDate')) document.getElementById('admissionDate').value = data.admissionDate;
+                if (data.studentName && document.getElementById('studentName')) document.getElementById('studentName').value = data.studentName;
+                if (data.class && document.getElementById('class')) document.getElementById('class').value = data.class;
+                if (data.section && document.getElementById('section')) document.getElementById('section').value = data.section;
+                if (data.dob && document.getElementById('dob')) document.getElementById('dob').value = data.dob;
+                if (data.currentAge && document.getElementById('currentAge')) document.getElementById('currentAge').value = data.currentAge;
+                if (data.gender && document.getElementById('gender')) document.getElementById('gender').value = data.gender;
+                if (data.dobWords && document.getElementById('dobWords')) document.getElementById('dobWords').value = data.dobWords;
+                if (data.dobCertNo && document.getElementById('dobCertNo')) document.getElementById('dobCertNo').value = data.dobCertNo;
+                if (data.religion && document.getElementById('religion')) document.getElementById('religion').value = data.religion;
+                if (data.nationality && document.getElementById('nationality')) document.getElementById('nationality').value = data.nationality;
+                if (data.aadhaarNo && document.getElementById('aadhaarNo')) document.getElementById('aadhaarNo').value = data.aadhaarNo;
+                if (data.category && document.getElementById('category')) document.getElementById('category').value = data.category;
+                if (data.casteCertNo && document.getElementById('casteCertNo')) document.getElementById('casteCertNo').value = data.casteCertNo;
+                if (data.address && document.getElementById('address')) document.getElementById('address').value = data.address;
 
-            // Clear the localStorage after loading
-            localStorage.removeItem('editAdmissionData');
+                // Additional IDs
+                if (data.penNo && document.getElementById('penNo')) document.getElementById('penNo').value = data.penNo;
+                if (data.sssmId && document.getElementById('sssmId')) document.getElementById('sssmId').value = data.sssmId;
+                if (data.familyId && document.getElementById('familyId')) document.getElementById('familyId').value = data.familyId;
+                if (data.apaarId && document.getElementById('apaarId')) document.getElementById('apaarId').value = data.apaarId;
+                if (data.house && document.getElementById('house')) document.getElementById('house').value = data.house;
+                if (data.admissionCategory && document.getElementById('admissionCategory')) document.getElementById('admissionCategory').value = data.admissionCategory;
 
-            // Alert user that edit mode is active
-            alert('Edit mode: Form loaded with existing data. Modify and save to update.');
+                // Previous School
+                if (data.prevSchool && document.getElementById('prevSchool')) document.getElementById('prevSchool').value = data.prevSchool;
+                if (data.prevClass && document.getElementById('prevClass')) document.getElementById('prevClass').value = data.prevClass;
+                if (data.prevAffiliated && document.getElementById('prevAffiliated')) document.getElementById('prevAffiliated').value = data.prevAffiliated;
+                if (data.lastSession && document.getElementById('lastSession')) document.getElementById('lastSession').value = data.lastSession;
+                if (data.tcNo && document.getElementById('tcNo')) document.getElementById('tcNo').value = data.tcNo;
+                if (data.tcDate && document.getElementById('tcDate')) document.getElementById('tcDate').value = data.tcDate;
+
+                // Parent Information
+                if (data.motherName && document.getElementById('motherName')) document.getElementById('motherName').value = data.motherName;
+                if (data.motherQual && document.getElementById('motherQual')) document.getElementById('motherQual').value = data.motherQual;
+                if (data.motherOcc && document.getElementById('motherOcc')) document.getElementById('motherOcc').value = data.motherOcc;
+                if (data.motherMobile && document.getElementById('motherMobile')) document.getElementById('motherMobile').value = data.motherMobile;
+                if (data.motherAadhaar && document.getElementById('motherAadhaar')) document.getElementById('motherAadhaar').value = data.motherAadhaar;
+
+                if (data.fatherName && document.getElementById('fatherName')) document.getElementById('fatherName').value = data.fatherName;
+                if (data.fatherQual && document.getElementById('fatherQual')) document.getElementById('fatherQual').value = data.fatherQual;
+                if (data.fatherOcc && document.getElementById('fatherOcc')) document.getElementById('fatherOcc').value = data.fatherOcc;
+                if (data.fatherMobile && document.getElementById('fatherMobile')) document.getElementById('fatherMobile').value = data.fatherMobile;
+                if (data.fatherAadhaar && document.getElementById('fatherAadhaar')) document.getElementById('fatherAadhaar').value = data.fatherAadhaar;
+
+                if (data.guardianName && document.getElementById('guardianName')) document.getElementById('guardianName').value = data.guardianName;
+                if (data.guardianQual && document.getElementById('guardianQual')) document.getElementById('guardianQual').value = data.guardianQual;
+
+                // Clear the localStorage after loading
+                localStorage.removeItem('editAdmissionData');
+
+                // Alert user
+                alert('✏️ Edit Mode: Admission form loaded with existing data. Modify and save to update.');
+            } catch (error) {
+                console.error('Error loading admission edit data:', error);
+            }
         }
     });
 
