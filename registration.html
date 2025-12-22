@@ -1603,30 +1603,64 @@ console.log('✅ Registration form scripts loaded successfully');
     window.addEventListener('DOMContentLoaded', function() {
         const editData = localStorage.getItem('editRegistrationData');
         if (editData) {
-            const data = JSON.parse(editData);
+            try {
+                const data = JSON.parse(editData);
+                console.log('Loading registration edit data:', data);
 
-            // Populate form fields
-            if (data.regSNo) document.getElementById('regSNo').value = data.regSNo;
-            if (data.date) document.getElementById('date').value = data.date;
-            if (data.studentName) document.getElementById('studentName').value = data.studentName;
-            if (data.class) document.getElementById('class').value = data.class;
-            if (data.fatherName) document.getElementById('fatherName').value = data.fatherName;
-            if (data.fatherMobile) document.getElementById('fatherMobile').value = data.fatherMobile;
-            if (data.address) document.getElementById('address').value = data.address;
-            if (data.feeAdmission) document.getElementById('feeAdmission').value = data.feeAdmission;
-            if (data.feeDevelopment) document.getElementById('feeDevelopment').value = data.feeDevelopment;
-            if (data.feeCaution) document.getElementById('feeCaution').value = data.feeCaution;
-            if (data.feeTotal) document.getElementById('feeTotal').value = data.feeTotal;
-            if (data.baseFees) document.getElementById('baseFees').value = data.baseFees;
-            if (data.additionalCharges) document.getElementById('additionalCharges').value = data.additionalCharges;
-            if (data.discount) document.getElementById('discount').value = data.discount;
-            if (data.finalAmount) document.getElementById('finalAmount').value = data.finalAmount;
+                // Populate fields
+                if (data.date && document.getElementById('date')) document.getElementById('date').value = data.date;
+                if (data.sno && document.getElementById('sno')) document.getElementById('sno').value = data.sno;
+                if (data.studentFirst && document.getElementById('studentFirst')) document.getElementById('studentFirst').value = data.studentFirst;
+                if (data.studentMiddle && document.getElementById('studentMiddle')) document.getElementById('studentMiddle').value = data.studentMiddle;
+                if (data.studentSurname && document.getElementById('studentSurname')) document.getElementById('studentSurname').value = data.studentSurname;
+                if (data.classApplied && document.getElementById('classApplied')) document.getElementById('classApplied').value = data.classApplied;
+                if (data.dob && document.getElementById('dob')) document.getElementById('dob').value = data.dob;
 
-            // Clear the localStorage after loading
-            localStorage.removeItem('editRegistrationData');
+                // Gender - handle radio buttons
+                if (data.gender === 'Male' && document.getElementById('genderMale')) {
+                    document.getElementById('genderMale').checked = true;
+                } else if (data.gender === 'Female' && document.getElementById('genderFemale')) {
+                    document.getElementById('genderFemale').checked = true;
+                }
 
-            // Alert user that edit mode is active
-            alert('Edit mode: Form loaded with existing data. Modify and save to update.');
+                // Parent information
+                if (data.fatherFirst && document.getElementById('fatherFirst')) document.getElementById('fatherFirst').value = data.fatherFirst;
+                if (data.fatherMiddle && document.getElementById('fatherMiddle')) document.getElementById('fatherMiddle').value = data.fatherMiddle;
+                if (data.fatherSurname && document.getElementById('fatherSurname')) document.getElementById('fatherSurname').value = data.fatherSurname;
+                if (data.fatherMobile && document.getElementById('fatherMobile')) document.getElementById('fatherMobile').value = data.fatherMobile;
+                if (data.motherFirst && document.getElementById('motherFirst')) document.getElementById('motherFirst').value = data.motherFirst;
+                if (data.motherMiddle && document.getElementById('motherMiddle')) document.getElementById('motherMiddle').value = data.motherMiddle;
+                if (data.motherSurname && document.getElementById('motherSurname')) document.getElementById('motherSurname').value = data.motherSurname;
+                if (data.motherMobile && document.getElementById('motherMobile')) document.getElementById('motherMobile').value = data.motherMobile;
+                if (data.landline && document.getElementById('landline')) document.getElementById('landline').value = data.landline;
+
+                // Address
+                if (data.address && document.getElementById('address')) document.getElementById('address').value = data.address;
+                if (data.area && document.getElementById('area')) document.getElementById('area').value = data.area;
+                if (data.state && document.getElementById('state')) document.getElementById('state').value = data.state;
+
+                // Sibling information
+                if (data.sib1Name && document.getElementById('sib1Name')) document.getElementById('sib1Name').value = data.sib1Name;
+                if (data.sib1School && document.getElementById('sib1School')) document.getElementById('sib1School').value = data.sib1School;
+                if (data.sib1ClassSec && document.getElementById('sib1ClassSec')) document.getElementById('sib1ClassSec').value = data.sib1ClassSec;
+                if (data.sib2Name && document.getElementById('sib2Name')) document.getElementById('sib2Name').value = data.sib2Name;
+                if (data.sib2School && document.getElementById('sib2School')) document.getElementById('sib2School').value = data.sib2School;
+                if (data.sib2ClassSec && document.getElementById('sib2ClassSec')) document.getElementById('sib2ClassSec').value = data.sib2ClassSec;
+
+                // Fee information
+                if (data.feeAdmission && document.getElementById('feeAdmission')) document.getElementById('feeAdmission').value = data.feeAdmission;
+                if (data.feeDevelopment && document.getElementById('feeDevelopment')) document.getElementById('feeDevelopment').value = data.feeDevelopment;
+                if (data.feeCaution && document.getElementById('feeCaution')) document.getElementById('feeCaution').value = data.feeCaution;
+                if (data.totalFee && document.getElementById('totalFee')) document.getElementById('totalFee').value = data.totalFee;
+
+                // Clear the localStorage after loading
+                localStorage.removeItem('editRegistrationData');
+
+                // Alert user
+                alert('✏️ Edit Mode: Registration form loaded with existing data. Modify and save to update.');
+            } catch (error) {
+                console.error('Error loading registration edit data:', error);
+            }
         }
     });
 
