@@ -2106,27 +2106,17 @@ button:hover {
 
         // PROCEED TO REGISTRATION
         function proceedToRegistration() {
-            console.log('📋 Proceeding to Registration...');
-
-            // Validate form first
-            if (!document.getElementById('enquiryForm').checkValidity()) {
-                alert('⚠️ Please fill all required fields marked with *');
-                return;
-            }
-
-            // SAVE the enquiry first
-            const saved = saveEnquiry();
-
-            // Only proceed if save was successful
-            if (saved !== false) {
-                console.log('✅ Data saved, redirecting to registration...');
-                setTimeout(() => {
-                    window.location.href = 'registration.html';
-                }, 1000);
-            } else {
-                console.log('❌ Save failed, not redirecting');
-            }
+        const form = document.getElementById('enquiryForm');
+        if (!form.checkValidity()) {
+            alert('⚠️ Please fill required fields');
+            form.reportValidity();
+            return;
         }
+        const saved = saveEnquiry();
+        if (saved) {
+            setTimeout(() => { window.location.href = 'registration.html'; }, 1000);
+        }
+    }
 
         // LOAD LOGO IF AVAILABLE
         window.addEventListener('load', function() {
@@ -2190,116 +2180,26 @@ function printForm() {
 // 2. SAVE ENQUIRY FUNCTION - COMPLETE WITH ALL FIELDS
 // ============================================================================
 function saveEnquiry() {
-    console.log('💾 saveEnquiry() called');
-
-    // Collect ALL form data
-    const formData = {
-        // Basic Information
-        sno: document.getElementById('sno')?.value || '',
-        date: document.getElementById('date')?.value || '',
-
-        // Student Details
-        studentFirstName: document.getElementById('studentFirstName')?.value || '',
-        studentMiddleName: document.getElementById('studentMiddleName')?.value || '',
-        studentSurname: document.getElementById('studentSurname')?.value || '',
-        gender: document.querySelector('input[name="gender"]:checked')?.value || '',
-        classApplying: document.getElementById('classApplying')?.value || '',
-        dob: document.getElementById('dob')?.value || '',
-        currentAge: document.getElementById('currentAge')?.value || '',
-        ageAsOn: document.getElementById('ageAsOn')?.value || '',
-
-        // Parent Details
-        fatherFirstName: document.getElementById('fatherFirstName')?.value || '',
-        fatherMiddleName: document.getElementById('fatherMiddleName')?.value || '',
-        fatherSurname: document.getElementById('fatherSurname')?.value || '',
-        motherFirstName: document.getElementById('motherFirstName')?.value || '',
-        motherMiddleName: document.getElementById('motherMiddleName')?.value || '',
-        motherSurname: document.getElementById('motherSurname')?.value || '',
-        fatherMobile: document.getElementById('fatherMobile')?.value || '',
-        motherMobile: document.getElementById('motherMobile')?.value || '',
-        landline: document.getElementById('landline')?.value || '',
-
-        // Address Details
-        address: document.getElementById('address')?.value || '',
-        area: document.getElementById('area')?.value || '',
-        city: document.getElementById('city')?.value || '',
-        district: document.getElementById('district')?.value || '',
-        state: document.getElementById('state')?.value || '',
-        pincode: document.getElementById('pincode')?.value || '',
-        country: document.getElementById('country')?.value || '',
-
-        // Sibling Information
-        sibling1Name: document.getElementById('sibling1Name')?.value || '',
-        sibling1School: document.getElementById('sibling1School')?.value || '',
-        sibling1Class: document.getElementById('sibling1Class')?.value || '',
-        sibling1Section: document.getElementById('sibling1Section')?.value || '',
-        sibling2Name: document.getElementById('sibling2Name')?.value || '',
-        sibling2School: document.getElementById('sibling2School')?.value || '',
-        sibling2Class: document.getElementById('sibling2Class')?.value || '',
-        sibling2Section: document.getElementById('sibling2Section')?.value || '',
-
-        // Information Source
-        infoSource: document.querySelector('input[name="infoSource"]:checked')?.value || '',
-        referredType: document.querySelector('input[name="referredType"]:checked')?.value || '',
-        referredName: document.getElementById('referredName')?.value || '',
-
-        // Timestamp
-        timestamp: new Date().toISOString()
-    };
-
-    console.log('📋 Form data collected:', formData);
-
-    // VALIDATION - Check required fields
-    if (!formData.studentFirstName || formData.studentFirstName.trim() === '') {
-        alert('❌ ERROR: Please enter Student First Name');
-        document.getElementById('studentFirstName')?.focus();
+    console.log('💾 Saving Enquiry...');
+    const form = document.getElementById('enquiryForm');
+    if (!form.checkValidity()) {
+        form.reportValidity();
         return false;
     }
-
-    if (!formData.classApplying || formData.classApplying === '') {
-        alert('❌ ERROR: Please select Class Applying For');
-        document.getElementById('classApplying')?.focus();
-        return false;
+    const formData = new FormData(form);
+    const enquiryData = {};
+    for (let [key, value] of formData.entries()) {
+        enquiryData[key] = value;
     }
-
-    if (!formData.fatherMobile || formData.fatherMobile.trim() === '') {
-        alert('❌ ERROR: Please enter Father Mobile Number');
-        document.getElementById('fatherMobile')?.focus();
-        return false;
-    }
-
-    try {
-        // Check if editing existing record
-        const editIndex = sessionStorage.getItem('editingEnquiryIndex');
-        let enquiryRecords = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
-
-        if (editIndex !== null && editIndex !== '' && editIndex !== 'null') {
-            // Update existing record
-            enquiryRecords[parseInt(editIndex)] = formData;
-            sessionStorage.removeItem('editingEnquiryIndex');
-            console.log('✏️ Updated existing record at index:', editIndex);
-        } else {
-            // Add new record
-            enquiryRecords.push(formData);
-            console.log('➕ Added new record');
-        }
-
-        // Save to localStorage - BOTH places for compatibility
-        localStorage.setItem('enquiryRecords', JSON.stringify(enquiryRecords));
-        localStorage.setItem('currentEnquiryData', JSON.stringify(formData));
-
-        console.log('✅ Saved to localStorage');
-        console.log('📊 Total enquiry records:', enquiryRecords.length);
-
-        alert('✅ SUCCESS!\n\nEnquiry saved successfully!\n\nTotal enquiries: ' + enquiryRecords.length);
-
-        return true;
-
-    } catch (error) {
-        console.error('❌ Error saving enquiry:', error);
-        alert('❌ ERROR: Failed to save data\n\nError: ' + error.message);
-        return false;
-    }
+    enquiryData.submittedDate = new Date().toLocaleDateString('en-IN');
+    enquiryData.recordId = 'ENQ' + Date.now();
+    let enquiries = JSON.parse(localStorage.getItem('enquiries') || '[]');
+    enquiries.unshift(enquiryData);
+    localStorage.setItem('enquiries', JSON.stringify(enquiries));
+    localStorage.setItem('currentEnquiry', JSON.stringify(enquiryData));
+    console.log('✅ Saved!', enquiryData);
+    alert('✅ SUCCESS!\n\nEnquiry saved!\nRecord: ' + enquiryData.recordId);
+    return true;
 }
 
 // ============================================================================
