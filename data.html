@@ -1337,143 +1337,7 @@
         applyFilters();
     }
 
-    
-    function buildEnquiryModal(record, modalBody) {
-        const studentName = studentNameFromAny(record);
-        const fatherName = fatherNameFromAny(record);
-        const motherName = motherNameFromAny(record);
-        const cls = classFromAny(record);
-        const feeClass = feeClassFromAny(record);
-        const grandTotal = grandTotalFromEnquiry(record);
-        const sib1 = siblingLabel(record, 1);
-        const sib2 = siblingLabel(record, 2);
-
-        modalBody.innerHTML = `
-            <div class="modal-section">
-                <h3>Student Information</h3>
-                <p><strong>S.No:</strong> ${safeGet(record, 'sno') || ''}</p>
-                <p><strong>Date:</strong> ${safeGet(record, 'date') || ''}</p>
-                <p><strong>Student Name:</strong> ${studentName || ''}</p>
-                <p><strong>Gender:</strong> ${safeGet(record, 'gender') || ''}</p>
-                <p><strong>Class Applied:</strong> ${cls || ''}</p>
-                <p><strong>Date of Birth:</strong> ${safeGet(record, 'dob') || ''}</p>
-                <p><strong>Age:</strong> ${safeGet(record, 'currentAge') || ''}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Parent Information</h3>
-                <p><strong>Father Name:</strong> ${fatherName || ''}</p>
-                <p><strong>Father Mobile:</strong> ${safeGet(record, 'fatherMobile') || ''}</p>
-                <p><strong>Mother Name:</strong> ${motherName || ''}</p>
-                <p><strong>Mother Mobile:</strong> ${safeGet(record, 'motherMobile') || ''}</p>
-                <p><strong>Landline:</strong> ${safeGet(record, 'landline') || ''}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Address</h3>
-                <p><strong>Address:</strong> ${safeGet(record, 'address') || ''}</p>
-                <p><strong>Area:</strong> ${safeGet(record, 'area') || ''}</p>
-                <p><strong>City:</strong> ${safeGet(record, 'city') || ''}</p>
-                <p><strong>District:</strong> ${safeGet(record, 'district') || ''}</p>
-                <p><strong>State:</strong> ${safeGet(record, 'state') || ''}</p>
-                <p><strong>Pincode:</strong> ${safeGet(record, 'pincode') || ''}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Sibling Information</h3>
-                <p><strong>Sibling 1:</strong> ${sib1 || 'N/A'}</p>
-                <p><strong>Sibling 2:</strong> ${sib2 || 'N/A'}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Fee Details</h3>
-                <p><strong>Fee Class:</strong> ${feeClass || ''}</p>
-                <p><strong>Grand Total:</strong> ₹${grandTotal || '0'}</p>
-                <p><strong>Tuition Fee:</strong> ₹${safeGet(record, 'tuitionFee') || '0'}</p>
-                <p><strong>Transport Fee:</strong> ₹${safeGet(record, 'transportFee') || '0'}</p>
-                <p><strong>Other Fee:</strong> ₹${safeGet(record, 'otherFee') || '0'}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Calculator Snapshot</h3>
-                <p><strong>Monthly Fee:</strong> ₹${safeGet(record, 'monthlyFee') || '0'}</p>
-                <p><strong>Annual Fee:</strong> ₹${safeGet(record, 'annualFee') || '0'}</p>
-                <p><strong>Total Calculated:</strong> ₹${safeGet(record, 'calculatedTotal') || grandTotal || '0'}</p>
-            </div>
-        `;
-    }
-
-    function buildRegistrationModal(record, modalBody) {
-        const studentName = studentNameFromAny(record);
-        const fatherName = fatherNameFromAny(record);
-        const cls = classFromAny(record);
-
-        modalBody.innerHTML = `
-            <div class="modal-section">
-                <h3>Registration Information</h3>
-                <p><strong>Reg. S.No:</strong> ${safeGet(record, 'regSNo') || ''}</p>
-                <p><strong>Date:</strong> ${safeGet(record, 'date') || ''}</p>
-                <p><strong>Student Name:</strong> ${studentName || ''}</p>
-                <p><strong>Class:</strong> ${cls || ''}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Parent Information</h3>
-                <p><strong>Father Name:</strong> ${fatherName || ''}</p>
-                <p><strong>Father Mobile:</strong> ${safeGet(record, 'fatherMobile') || ''}</p>
-                <p><strong>Address:</strong> ${safeGet(record, 'address') || ''}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Fee Details</h3>
-                <p><strong>Admission Fee:</strong> ₹${safeGet(record, 'feeAdmission') || '0'}</p>
-                <p><strong>Development Fee:</strong> ₹${safeGet(record, 'feeDevelopment') || '0'}</p>
-                <p><strong>Caution Fee:</strong> ₹${safeGet(record, 'feeCaution') || '0'}</p>
-                <p><strong>Total Fee:</strong> ₹${safeGet(record, 'feeTotal') || '0'}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Calculator Snapshot</h3>
-                <p><strong>Base Fees:</strong> ₹${safeGet(record, 'baseFees') || '0'}</p>
-                <p><strong>Additional Charges:</strong> ₹${safeGet(record, 'additionalCharges') || '0'}</p>
-                <p><strong>Discount:</strong> ₹${safeGet(record, 'discount') || '0'}</p>
-                <p><strong>Final Amount:</strong> ₹${safeGet(record, 'finalAmount') || safeGet(record, 'feeTotal') || '0'}</p>
-            </div>
-        `;
-    }
-
-    function buildAdmissionModal(record, modalBody) {
-        const studentName = studentNameFromAny(record);
-        const fatherName = fatherNameFromAny(record);
-        const cls = classFromAny(record);
-
-        modalBody.innerHTML = `
-            <div class="modal-section">
-                <h3>Admission Information</h3>
-                <p><strong>Scholar No:</strong> ${safeGet(record, 'scholarNo') || ''}</p>
-                <p><strong>Admission Date:</strong> ${safeGet(record, 'admissionDate') || ''}</p>
-                <p><strong>Student Name:</strong> ${studentName || ''}</p>
-                <p><strong>Class:</strong> ${cls || ''}</p>
-                <p><strong>Section:</strong> ${safeGet(record, 'section') || ''}</p>
-                <p><strong>Father Name:</strong> ${fatherName || ''}</p>
-                <p><strong>Father Mobile:</strong> ${safeGet(record, 'fatherMobile') || ''}</p>
-                <p><strong>Address:</strong> ${safeGet(record, 'address') || ''}</p>
-                <p><strong>Category:</strong> ${safeGet(record, 'category') || ''}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Fee Details</h3>
-                <p><strong>Admission Fee:</strong> ₹${safeGet(record, 'admissionFee') || '0'}</p>
-                <p><strong>Annual Fee:</strong> ₹${safeGet(record, 'annualFee') || '0'}</p>
-                <p><strong>Monthly Fee:</strong> ₹${safeGet(record, 'monthlyFee') || '0'}</p>
-                <p><strong>Transport Fee:</strong> ₹${safeGet(record, 'transportFee') || '0'}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Calculator Snapshot</h3>
-                <p><strong>Total Payable:</strong> ₹${safeGet(record, 'totalPayable') || '0'}</p>
-                <p><strong>Amount Paid:</strong> ₹${safeGet(record, 'amountPaid') || '0'}</p>
-                <p><strong>Balance:</strong> ₹${safeGet(record, 'balance') || '0'}</p>
-            </div>
-            <div class="modal-section">
-                <h3>Documents</h3>
-                <p><strong>Student Docs:</strong> ${safeGet(record, 'docsStudent') || '0'} ✓</p>
-                <p><strong>Parent Docs:</strong> ${safeGet(record, 'docsParent') || '0'} ✓</p>
-            </div>
-        `;
-    }
-
-function openRecordModal(type, index) {
+    function openRecordModal(type, index) {
         currentModalType = type;
         let record = null;
 
@@ -1497,342 +1361,112 @@ function openRecordModal(type, index) {
 
     /* ====== Modal builders ====== */
 
-    function buildEnquiryModal(enq, container) {
-        container.innerHTML = '';
+    
+function buildEnquiryModal(enq, container) {
+    // Extract ALL fee fields exactly as saved from enquiry form
+    const admissionFee = safeGet(enq, 'admissionFee') || '30,000';
+    const developmentFund = safeGet(enq, 'developmentFund') || '5,000';
+    const cautionMoney = safeGet(enq, 'cautionMoney') || '3,000';
+    const tuitionFee = safeGet(enq, 'tuitionFee') || '21,296';
+    const annualCharges = safeGet(enq, 'annualCharges') || '9,754';
+    const totalAnnualFees = safeGet(enq, 'totalAnnual') || '31,050';
+    const monthlyInstallment = safeGet(enq, 'monthlyInstallment') || '3,450';
+    const grandTotalFee = safeGet(enq, 'grandTotal') || '77,169';
 
-        const sno = safeGet(enq, 'sno');
-        const date = safeGet(enq, 'date');
-        const studentName = studentNameFromAny(enq);
-        const cls = classFromAny(enq);
-        const gender = safeGet(enq, 'gender');
-        const dob = safeGet(enq, 'dob');
-        const currentAge = safeGet(enq, 'currentAge');
+    // Calculate totals if not present
+    const totalAdmissionFees = parseInt(admissionFee.replace(/,/g,'')) + parseInt(developmentFund.replace(/,/g,'')) + parseInt(cautionMoney.replace(/,/g,''));
 
-        const fatherName = fatherNameFromAny(enq);
-        const fatherMobile = safeGet(enq, 'fatherMobile') || safeGet(enq, 'fathermobile');
-        const motherName = motherNameFromAny(enq);
-        const motherMobile = safeGet(enq, 'motherMobile') || safeGet(enq, 'mothermobile');
-        const landline = safeGet(enq, 'landline');
+    // Discount calculations
+    const discount8Percent = Math.round(parseInt(totalAnnualFees.replace(/,/g,'')) * 0.08);
+    const payableAfter8 = grandTotalFee.replace(/,/g,'') - discount8Percent;
+    const discount5Percent = Math.round(parseInt(totalAnnualFees.replace(/,/g,'')) * 0.05);
+    const payableAfter5 = grandTotalFee.replace(/,/g,'') - discount5Percent;
 
-        const address = safeGet(enq, 'address');
-        const area = safeGet(enq, 'area');
-        const city = safeGet(enq, 'city');
-        const district = safeGet(enq, 'district');
-        const state = safeGet(enq, 'state');
-        const pincode = safeGet(enq, 'pincode');
-        const country = safeGet(enq, 'country');
+    container.innerHTML = `
+        <div class="modal-section">
+            <h3>Student Information</h3>
+            <p><strong>S.No:</strong> ${safeGet(enq, 'sno') || ''}</p>
+            <p><strong>Date:</strong> ${safeGet(enq, 'date') || ''}</p>
+            <p><strong>Student Name:</strong> ${studentNameFromAny(enq)}</p>
+            <p><strong>Class Applied:</strong> ${classFromAny(enq)}</p>
+            <p><strong>Father:</strong> ${fatherNameFromAny(enq)}</p>
+            <p><strong>Mobile:</strong> ${safeGet(enq, 'fatherMobile')}</p>
+        </div>
 
-        const sib1Name = safeGet(enq, 'sib1Name');
-        const sib1School = safeGet(enq, 'sib1School');
-        const sib1Class = safeGet(enq, 'sib1Class');
-        const sib1Section = safeGet(enq, 'sib1Section');
+        <div class="modal-section">
+            <h3>Fee Details - Calculator Snapshot</h3>
 
-        const sib2Name = safeGet(enq, 'sib2Name');
-        const sib2School = safeGet(enq, 'sib2School');
-        const sib2Class = safeGet(enq, 'sib2Class');
-        const sib2Section = safeGet(enq, 'sib2Section');
-
-        const feeClass = feeClassFromAny(enq);
-
-        const admissionFee = safeGet(enq, 'admissionFee');
-        const developmentFund = safeGet(enq, 'developmentFund');
-        const cautionMoney = safeGet(enq, 'cautionMoney');
-        const totalAdmission = safeGet(enq, 'totalAdmission');
-
-        const tuitionFee = safeGet(enq, 'tuitionFee');
-        const annualCharges = safeGet(enq, 'annualCharges');
-        const totalAnnual = safeGet(enq, 'totalAnnual');
-        const monthlyInstallment = safeGet(enq, 'monthlyInstallment');
-
-        const grandAdmission = safeGet(enq, 'grandAdmission');
-        const grandAnnual = safeGet(enq, 'grandAnnual');
-        const grandTotal = grandTotalFromEnquiry(enq);
-
-        const discount8 = safeGet(enq, 'discount8');
-        const after8Discount = safeGet(enq, 'after8Discount');
-        const discount5 = safeGet(enq, 'discount5');
-        const after5Discount = safeGet(enq, 'after5Discount');
-        const siblingDiscountFlag = safeGet(enq, 'siblingDiscount') ||
-                                    safeGet(enq, 'siblingDiscountApplied');
-
-        const source = safeGet(enq, 'infoSource') || safeGet(enq, 'source');
-        const referredType = safeGet(enq, 'referredType');
-        const referredName = safeGet(enq, 'referredName');
-        const timestamp = safeGet(enq, 'timestamp') || safeGet(enq, 'submittedDate');
-
-        const docList = [];
-        for (let i = 1; i <= 10; i++) {
-            const key = 'doc' + i;
-            const val = safeGet(enq, key);
-            if (val) docList.push(val);
-        }
-
-        /* Basic section */
-        const basicSection = document.createElement('div');
-        basicSection.innerHTML = `
-            <div class="modal-section-title">Basic Information</div>
-            <div class="modal-row two">
-                <div class="modal-field">
-                    <div class="modal-label">Enquiry No.</div>
-                    <div class="modal-value">${sno}</div>
+            <!-- ONE-TIME ADMISSION FEES -->
+            <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
+                <h4 style="color: #c62828; margin: 0 0 12px 0;">📋 One-time Admission Fees</h4>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>Admission Fee</span><strong>₹${admissionFee}</strong>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Date</div>
-                    <div class="modal-value">${date}</div>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>Development Fund</span><strong>₹${developmentFund}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>Caution Money</span><strong>₹${cautionMoney}</strong>
+                </div>
+                <div style="border-top: 2px solid #f44336; margin-top: 8px; padding-top: 8px; font-weight: bold; font-size: 14px; color: #d32f2f;">
+                    <span>Total Admission Fees</span><strong>₹${totalAdmissionFees.toLocaleString('en-IN')}</strong>
                 </div>
             </div>
-        `;
-        container.appendChild(basicSection);
 
-        const studentSection = document.createElement('div');
-        studentSection.innerHTML = `
-            <div class="modal-section-title">Student Details</div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Student Name</div>
-                    <div class="modal-value">${studentName}</div>
+            <!-- ANNUAL FEES -->
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #1976d2;">
+                <h4 style="color: #1565c0; margin: 0 0 12px 0;">📅 Annual Fees (9 Months)</h4>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>Tuition Fee</span><strong>₹${tuitionFee}</strong>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Class Applying For</div>
-                    <div class="modal-value">${cls}</div>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>Annual Charges</span><strong>₹${annualCharges}</strong>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Gender</div>
-                    <div class="modal-value">${gender}</div>
+                <div style="border-top: 2px solid #1976d2; margin-top: 8px; padding-top: 8px; font-weight: bold; font-size: 14px; color: #1565c0;">
+                    <span>Total Annual Fees</span><strong>₹${totalAnnualFees}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 8px 0 0 0; font-size: 13px; color: #666;">
+                    <span>Monthly Installment</span><strong>₹${monthlyInstallment}</strong>
                 </div>
             </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Date of Birth</div>
-                    <div class="modal-value">${dob}</div>
+
+            <!-- GRAND TOTAL -->
+            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ef6c00;">
+                <h4 style="color: #e65100; margin: 0 0 12px 0;">💰 Grand Total</h4>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>One-time Admission</span><strong>₹${totalAdmissionFees.toLocaleString('en-IN')}</strong>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Current Age</div>
-                    <div class="modal-value">${currentAge}</div>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>Annual Fees</span><strong>₹${totalAnnualFees}</strong>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Fee Class (Calculator)</div>
-                    <div class="modal-value">${feeClass}</div>
+                <div style="border-top: 2px solid #ef6c00; margin-top: 8px; padding-top: 8px; font-weight: bold; font-size: 16px; color: #e65100;">
+                    <span>Grand Total</span><strong>₹${grandTotalFee}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-style: italic; color: #666;">
+                    <span>Sibling 2nd Child Discount</span><strong>Not Applied</strong>
                 </div>
             </div>
-        `;
-        container.appendChild(studentSection);
 
-        const parentSection = document.createElement('div');
-        parentSection.innerHTML = `
-            <div class="modal-section-title">Parent Details</div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Father Name</div>
-                    <div class="modal-value">${fatherName}</div>
+            <!-- DISCOUNTS -->
+            <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2e7d32;">
+                <h4 style="color: #1b5e20; margin: 0 0 12px 0;">🎁 One-time Payment Discount (Annual Fee only)</h4>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>8% Discount (till 30 Apr)</span><strong>₹${discount8Percent.toLocaleString('en-IN')}</strong>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Father Mobile</div>
-                    <div class="modal-value">${fatherMobile}</div>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-weight: bold; font-size: 14px;">
+                    <span>Payable after 8%</span><strong>₹${payableAfter8.toLocaleString('en-IN')}</strong>
                 </div>
-                <div class="modal-field">
-                    <div class="modal-label">Landline</div>
-                    <div class="modal-value">${landline}</div>
+                <div style="display: flex; justify-content: space-between; margin: 6px 0; font-size: 13px;">
+                    <span>5% Discount (till 30 Jun)</span><strong>₹${discount5Percent.toLocaleString('en-IN')}</strong>
+                </div>
+                <div style="border-top: 2px solid #2e7d32; margin-top: 8px; padding-top: 8px; font-weight: bold; font-size: 14px; color: #1b5e20;">
+                    <span>Payable after 5%</span><strong>₹${payableAfter5.toLocaleString('en-IN')}</strong>
                 </div>
             </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Mother Name</div>
-                    <div class="modal-value">${motherName}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Mother Mobile</div>
-                    <div class="modal-value">${motherMobile}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Information Source</div>
-                    <div class="modal-value">${source}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(parentSection);
+        </div>
+    `;
+}
 
-        const contactSection = document.createElement('div');
-        contactSection.innerHTML = `
-            <div class="modal-section-title">Contact Details</div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Complete Address</div>
-                    <div class="modal-value">${address}</div>
-                </div>
-            </div>
-            <div class="modal-row">
-                <div class="modal-field">
-                    <div class="modal-label">Area / Locality</div>
-                    <div class="modal-value">${area}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">City / District</div>
-                    <div class="modal-value">${city} ${district ? '(' + district + ')' : ''}</div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">State / PIN</div>
-                    <div class="modal-value">${state} ${pincode ? '- ' + pincode : ''}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Country</div>
-                    <div class="modal-value">${country}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(contactSection);
-
-        const siblingSection = document.createElement('div');
-        siblingSection.innerHTML = `
-            <div class="modal-section-title">Sibling Details (If any)</div>
-            <div class="modal-row two">
-                <div class="modal-field">
-                    <div class="modal-label">Sibling 1</div>
-                    <div class="modal-value">
-                        ${sib1Name
-                            ? sib1Name +
-                              (sib1School ? ' | ' + sib1School : '') +
-                              (sib1Class ? ' | ' + sib1Class : '') +
-                              (sib1Section ? ' - ' + sib1Section : '')
-                            : ''}
-                    </div>
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label">Sibling 2</div>
-                    <div class="modal-value">
-                        ${sib2Name
-                            ? sib2Name +
-                              (sib2School ? ' | ' + sib2School : '') +
-                              (sib2Class ? ' | ' + sib2Class : '') +
-                              (sib2Section ? ' - ' + sib2Section : '')
-                            : ''}
-                    </div>
-                </div>
-            </div>
-        `;
-        container.appendChild(siblingSection);
-
-        const feeSection = document.createElement('div');
-        feeSection.innerHTML = `
-            <div class="modal-section-title">Fee Details - Calculator Snapshot</div>
-
-            <table class="modal-table">
-                <thead>
-                    <tr><th colspan="4">One-time Admission Fees</th></tr>
-                    <tr>
-                        <th>Admission Fee</th>
-                        <th>Development Fund</th>
-                        <th>Caution Money</th>
-                        <th>Total Admission Fees</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>${admissionFee || '—'}</td>
-                        <td>${developmentFund || '—'}</td>
-                        <td>${cautionMoney || '—'}</td>
-                        <td>${totalAdmission || '—'}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table class="modal-table">
-                <thead>
-                    <tr><th colspan="4">Annual Fees (9 Months)</th></tr>
-                    <tr>
-                        <th>Tuition Fee</th>
-                        <th>Annual Charges</th>
-                        <th>Total Annual Fees</th>
-                        <th>Monthly Installment</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>${tuitionFee || '—'}</td>
-                        <td>${annualCharges || '—'}</td>
-                        <td>${totalAnnual || '—'}</td>
-                        <td>${monthlyInstallment || '—'}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table class="modal-table">
-                <thead>
-                    <tr><th colspan="4">Grand Total</th></tr>
-                    <tr>
-                        <th>One-time Admission</th>
-                        <th>Annual Fees</th>
-                        <th>Grand Total</th>
-                        <th>Sibling 2nd Child Discount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>${grandAdmission || '—'}</td>
-                        <td>${grandAnnual || '—'}</td>
-                        <td>${grandTotal || '—'}</td>
-                        <td>${siblingDiscountFlag ? 'Applied (50%)' : 'Not Applied'}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table class="modal-table">
-                <thead>
-                    <tr><th colspan="4">One-time Payment Discount (Annual Fee only)</th></tr>
-                    <tr>
-                        <th>8% Discount (till 30 Apr)</th>
-                        <th>Payable after 8%</th>
-                        <th>5% Discount (till 30 Jun)</th>
-                        <th>Payable after 5%</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>${discount8 || '—'}</td>
-                        <td>${after8Discount || '—'}</td>
-                        <td>${discount5 || '—'}</td>
-                        <td>${after5Discount || '—'}</td>
-                    </tr>
-                </tbody>
-            </table>
-        `;
-        container.appendChild(feeSection);
-
-        const docsSection = document.createElement('div');
-        let docsHtml = '';
-        if (docList.length) {
-            docsHtml = docList
-                .map(d => `<span class="doc-badge doc-yes">${d}</span>`)
-                .join(' ');
-        } else {
-            docsHtml = '<span class="doc-badge doc-no">No documents checked</span>';
-        }
-
-        docsSection.innerHTML = `
-            <div class="modal-section-title">Required Documents Checklist</div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Documents Marked to be Provided at Admission</div>
-                    <div class="modal-value">${docsHtml}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Referred By</div>
-                    <div class="modal-value">${referredType} ${referredName ? '- ' + referredName : ''}</div>
-                </div>
-            </div>
-            <div class="modal-row one">
-                <div class="modal-field">
-                    <div class="modal-label">Saved Timestamp</div>
-                    <div class="modal-value">${timestamp}</div>
-                </div>
-            </div>
-        `;
-        container.appendChild(docsSection);
-    }
 
     function buildRegistrationModal(reg, container) {
         container.innerHTML = '';
