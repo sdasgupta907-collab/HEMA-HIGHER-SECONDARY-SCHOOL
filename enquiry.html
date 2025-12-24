@@ -1098,525 +1098,223 @@
                 </div>
             </fieldset>
 
-            <!-- FEE DETAILS SECTION -->
-            <fieldset class="fee-calculator-section">
-                <legend>💰 FEE DETAILS - ACADEMIC SESSION 2026-2027</legend>
-
-                <!-- Class Selection -->
-                <div class="fee-input-group">
-                    <label for="feeClass"><strong>Select Class</strong></label>
-                    <select id="feeClass" onchange="calculateFees()">
-                        <option value="">-- Select Class --</option>
-                        <option value="nursery">Nursery / KG-I / KG-II</option>
-                        <option value="1">Class I</option>
-                        <option value="2">Class II</option>
-                        <option value="3">Class III</option>
-                        <option value="4">Class IV-V</option>
-                        <option value="6">Class VI-VIII</option>
-                        <option value="9">Class IX-X</option>
-                        <option value="11sci">Class XI-XII Science - PCM/PCB (Optional)</option>
-                        <option value="11sci2">Class XI-XII Science - Hindi/Psy</option>
-                        <option value="11comm">Class XI-XII Commerce - (Optional)</option>
-                        <option value="11hum">Class XI-XII Humanities</option>
-                    </select>
-                </div>
-
-                <!-- Sibling Checkbox -->
-                <div class="fee-input-group sibling-checkbox">
-                    <label>
-                        <input type="checkbox" id="siblingDiscount" onchange="calculateFees()">
-                        <span><strong>2nd Child Discount</strong> - 50% off Admission Fee & Tuition Fee</span>
-                    </label>
-                </div>
-
-                <!-- Fee Display Tables -->
-                <div id="feeDisplay" style="display: none;">
-                    <!-- Admission Fees -->
-                    <div class="fee-table-container">
-                        <h4>ONE-TIME ADMISSION FEES</h4>
-                        <table class="fee-display-table">
-                            <thead>
-                            <tr>
-                                <th>S.NO.</th>
-                                <th>PARTICULAR</th>
-                                <th style="text-align: right;">AMOUNT (₹)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>ADMISSION FEE</td>
-                                <td style="text-align: right;" id="admissionFee">0</td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>DEVELOPMENT FUND</td>
-                                <td style="text-align: right;" id="developmentFund">5,000</td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>CAUTION MONEY DEPOSIT</td>
-                                <td style="text-align: right;" id="cautionMoney">3,000</td>
-                            </tr>
-                            <tr class="total-row">
-                                <td colspan="2"><strong>TOTAL ADMISSION FEES</strong></td>
-                                <td style="text-align: right;"><strong id="totalAdmission">0</strong></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Annual Fees -->
-                    <div class="fee-table-container">
-                        <h4>ANNUAL FEES (9 MONTHS - APRIL TO FEBRUARY)</h4>
-                        <table class="fee-display-table">
-                            <thead>
-                            <tr>
-                                <th>S.NO.</th>
-                                <th>PARTICULAR</th>
-                                <th style="text-align: right;">AMOUNT (₹)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>4.</td>
-                                <td>TUITION FEE (9 Installments)</td>
-                                <td style="text-align: right;" id="tuitionFee">0</td>
-                            </tr>
-                            <tr>
-                                <td>5.</td>
-                                <td>ANNUAL CHARGES (9 Installments)</td>
-                                <td style="text-align: right;" id="annualCharges">0</td>
-                            </tr>
-                            <tr class="total-row">
-                                <td colspan="2"><strong>TOTAL ANNUAL FEES</strong></td>
-                                <td style="text-align: right;"><strong id="totalAnnual">0</strong></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Monthly Installment -->
-                    <div class="fee-table-container">
-                        <h4>MONTHLY INSTALLMENT</h4>
-                        <table class="fee-display-table">
-                            <tbody>
-                            <tr>
-                                <td><strong>Monthly Payment (9 months)</strong></td>
-                                <td style="text-align: right;"><strong id="monthlyInstallment">0</strong></td>
-                            </tr>
-                            <tr style="background: #fff9e6;">
-                                <td colspan="2" style="text-align: center; font-style: italic; font-size: 13px;">📅 Payment Due: 5th to 15th of every month</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Grand Total -->
-                    <div class="grand-total-display">
-                        <h3>🎓 TOTAL FEES FOR ACADEMIC YEAR 2026-2027</h3>
-                        <div class="grand-total-row">
-                            <span>One-Time Admission Fees</span>
-                            <span id="grandAdmission">0</span>
-                        </div>
-                        <div class="grand-total-row">
-                            <span>Annual Fees (9 Months)</span>
-                            <span id="grandAnnual">0</span>
-                        </div>
-                        <div class="grand-total-row grand-sum">
-                            <span><strong>GRAND TOTAL</strong></span>
-                            <span><strong id="grandTotal">0</strong></span>
-                        </div>
-                    </div>
-
-                    <!-- Discount Info -->
-                    <div class="discount-display">
-                        <h4>🎁 ONE-TIME PAYMENT DISCOUNTS (on Annual Fees only)</h4>
-                        <div class="discount-row">
-                            <div class="discount-box">
-                                <strong>8% Discount (By 30th April 2026)</strong>
-                                <p>Save: ₹ <span id="discount8">0</span></p>
-                                <p>Pay: ₹ <span id="after8Discount">0</span></p>
-                            </div>
-                            <div class="discount-box">
-                                <strong>5% Discount (By 30th June 2026)</strong>
-                                <p>Save: ₹ <span id="discount5">0</span></p>
-                                <p>Pay: ₹ <span id="after5Discount">0</span></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Important Notes -->
-                    <div class="fee-notes-display">
-                        <h4>📌 IMPORTANT NOTES</h4>
-                        <ul>
-                            <li>Registration Fee: ₹1,500/- (Non-refundable)</li>
-                            <li>Sibling Discount: 50% on Admission & Tuition for 2nd child</li>
-                            <li>Late Payment: ₹10/day fine after due date</li>
-                            <li>Caution Money: Refundable at TC issuance</li>
-                        </ul>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- REQUIRED DOCUMENTS -->
-            <fieldset>
-                <legend>📄 REQUIRED DOCUMENTS CHECKLIST</legend>
-                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Please check the documents that will be provided at the time of admission</p>
-
-                <div class="documents-grid">
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc1" name="doc1" value="Birth Certificate">
-                        <label for="doc1">Birth Certificate (Original + Copy)</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc2" name="doc2" value="Aadhaar Card">
-                        <label for="doc2">Aadhaar Card / Passport</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc3" name="doc3" value="Transfer Certificate">
-                        <label for="doc3">Transfer Certificate (TC)</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc4" name="doc4" value="Mark Sheet">
-                        <label for="doc4">Mark Sheet (Previous Class)</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc5" name="doc5" value="Character Certificate">
-                        <label for="doc5">Character Certificate</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc6" name="doc6" value="Vaccination Certificate">
-                        <label for="doc6">Vaccination Certificate</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc7" name="doc7" value="Photographs">
-                        <label for="doc7">Passport Photos (4 copies 4x6)</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc8" name="doc8" value="Parent ID">
-                        <label for="doc8">Parent ID Proof (Both)</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc9" name="doc9" value="Address Proof">
-                        <label for="doc9">Address Proof (Electricity/Rent)</label>
-                    </div>
-                    <div class="doc-item">
-                        <input type="checkbox" id="doc10" name="doc10" value="Medical Certificate">
-                        <label for="doc10">Medical Certificate (Optional)</label>
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- BUTTONS -->
-            <div class="buttons no-print">
-                <button type="button" onclick="printForm()" class="btn-print">🖨️ PRINT / SAVE AS PDF</button>
-                <button type="button" onclick="saveEnquiry()" class="btn-submit">💾 SAVE ENQUIRY</button>
-                <button type="button" onclick="proceedToRegistration()" class="btn-register">➡️ PROCEED TO REGISTRATION</button>
-                <button type="reset" class="btn-reset">🔄 CLEAR FORM</button>
-            </div>
-        </form>
+    <!-- PAGE 1 NAVIGATION -->
+    
+    <!-- BUTTONS SECTION -->
+    <div class="buttons no-print" style="display: flex; gap: 15px; margin-top: 30px; justify-content: center; flex-wrap: wrap;">
+        <button type="button" onclick="printForm()" class="btn-print" style="background: #2196F3; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
+            🖨️ PRINT / SAVE AS PDF
+        </button>
+        <button type="button" onclick="saveEnquiry()" class="btn-submit" style="background: #4CAF50; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
+            💾 SAVE ENQUIRY
+        </button>
     </div>
-</div>
+
+<div style="text-align: center; margin: 30px auto; padding: 25px; max-width: 1200px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <h3 style="color: #1976d2; margin: 0 0 20px 0; font-size: 20px; font-weight: bold;">📄 Page 1 of 2 - Personal Information Complete</h3>
+        <button type="button" onclick="goToPage2()" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 16px 45px; font-size: 17px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 12px rgba(76,175,80,0.3); transition: all 0.3s;">
+            ➡️ NEXT: FEE CALCULATOR & DOCUMENTS
+        </button>
+        <p style="margin-top: 15px; color: #555; font-size: 14px; font-style: italic;">✅ All data auto-saved and will be carried forward</p>
+    </div>
+
+    </form>
+    </div>
+    </div>
 
 <script>
-    // FEE DATA
-    const feeData = {
-        'nursery': { admission: 27000, development: 5000, caution: 3000, tuition: 14645, annual: 6955, monthly: 2400 },
-        '1': { admission: 30000, development: 5000, caution: 3000, tuition: 21296, annual: 9754, monthly: 3450 },
-        '2': { admission: 30000, development: 5000, caution: 3000, tuition: 22634, annual: 13906, monthly: 4060 },
-        '3': { admission: 30000, development: 5000, caution: 3000, tuition: 23954, annual: 15304, monthly: 4362 },
-        '4': { admission: 30000, development: 5000, caution: 3000, tuition: 26620, annual: 17390, monthly: 4890 },
-        '6': { admission: 41000, development: 5000, caution: 3000, tuition: 29280, annual: 17385, monthly: 5185 },
-        '9': { admission: 55000, development: 5000, caution: 3000, tuition: 29286, annual: 23634, monthly: 5880 },
-        '11sci': { admission: 62000, development: 5000, caution: 3000, tuition: 29280, annual: 25044, monthly: 6036 },
-        '11sci2': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 18090, monthly: 5264 },
-        '11comm': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 23526, monthly: 5868 },
-        '11hum': { admission: 62000, development: 5000, caution: 3000, tuition: 29290, annual: 16700, monthly: 5110 }
-    };
+// PAGE 1 AUTO-SAVE FUNCTIONALITY
+function autoSavePage1() {
+    const form = document.getElementById('enquiryForm');
+    if (!form) return;
 
-    function formatCurrency(amount) {
-        return amount.toLocaleString('en-IN');
+    const formData = new FormData(form);
+    const data = {};
+    for (let [key, value] of formData.entries()) {
+        data[key] = value;
     }
 
-    function calculateFees() {
-        const selectedClass = document.getElementById('feeClass').value;
-        const isSibling = document.getElementById('siblingDiscount').checked;
-        const feeDisplay = document.getElementById('feeDisplay');
+    // Save gender radio button
+    const gender = document.querySelector('input[name="gender"]:checked');
+    if (gender) data.gender = gender.value;
 
-        if (!selectedClass) {
-            feeDisplay.style.display = 'none';
-            return;
-        }
+    // Save source checkboxes
+    const sources = document.querySelectorAll('input[name="source"]:checked');
+    data.sources = Array.from(sources).map(s => s.value);
 
-        feeDisplay.style.display = 'block';
+    // Save referred type
+    const referredType = document.querySelector('input[name="referredType"]:checked');
+    if (referredType) data.referredType = referredType.value;
 
-        const fees = feeData[selectedClass];
-        let admissionFee = fees.admission;
-        let tuitionFee = fees.tuition;
+    localStorage.setItem('enquiryPage1', JSON.stringify(data));
+    console.log('✅ Page 1 auto-saved', data);
+}
 
-        if (isSibling) {
-            admissionFee = Math.round(fees.admission * 0.5);
-            tuitionFee = Math.round(fees.tuition * 0.5);
-        }
+// Auto-save on every input
+document.addEventListener('input', autoSavePage1);
+document.addEventListener('change', autoSavePage1);
 
-        const developmentFund = fees.development;
-        const cautionMoney = fees.caution;
-        const annualCharges = fees.annual;
-        const monthlyInstallment = fees.monthly;
-
-        const totalAdmission = admissionFee + developmentFund + cautionMoney;
-        const totalAnnual = tuitionFee + annualCharges;
-        const grandTotal = totalAdmission + totalAnnual;
-
-        const discount8Percent = Math.round(totalAnnual * 0.08);
-        const discount5Percent = Math.round(totalAnnual * 0.05);
-        const after8Discount = totalAdmission + (totalAnnual - discount8Percent);
-        const after5Discount = totalAdmission + (totalAnnual - discount5Percent);
-
-        document.getElementById('admissionFee').textContent = formatCurrency(admissionFee);
-        document.getElementById('developmentFund').textContent = formatCurrency(developmentFund);
-        document.getElementById('cautionMoney').textContent = formatCurrency(cautionMoney);
-        document.getElementById('totalAdmission').textContent = formatCurrency(totalAdmission);
-
-        document.getElementById('tuitionFee').textContent = formatCurrency(tuitionFee);
-        document.getElementById('annualCharges').textContent = formatCurrency(annualCharges);
-        document.getElementById('totalAnnual').textContent = formatCurrency(totalAnnual);
-        document.getElementById('monthlyInstallment').textContent = formatCurrency(monthlyInstallment);
-
-        document.getElementById('grandAdmission').textContent = formatCurrency(totalAdmission);
-        document.getElementById('grandAnnual').textContent = formatCurrency(totalAnnual);
-        document.getElementById('grandTotal').textContent = formatCurrency(grandTotal);
-
-        document.getElementById('discount8').textContent = formatCurrency(discount8Percent);
-        document.getElementById('after8Discount').textContent = formatCurrency(after8Discount);
-        document.getElementById('discount5').textContent = formatCurrency(discount5Percent);
-        document.getElementById('after5Discount').textContent = formatCurrency(after5Discount);
-    }
-
-    // AGE CALCULATION
-    function calculateAge(dob, asOfDate) {
-        const dobDate = new Date(dob);
-        const refDate = asOfDate ? new Date(asOfDate) : new Date();
-
-        let years = refDate.getFullYear() - dobDate.getFullYear();
-        let months = refDate.getMonth() - dobDate.getMonth();
-        let days = refDate.getDate() - dobDate.getDate();
-
-        if (days < 0) {
-            months--;
-            days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
-        }
-
-        if (months < 0) {
-            years--;
-            months += 12;
-        }
-
-        return { years, months, days };
-    }
-
-    function updateAgeDisplays() {
-        const dob = document.getElementById('dob').value;
-        const selectedClass = document.getElementById('classApplied').value;
-
-        if (!dob) {
-            document.getElementById('ageDisplay').innerHTML = "-- Select DOB --";
-            document.getElementById('ageAsOnGroup').style.display = 'none';
-            return;
-        }
-
-        // Current age
-        const currentAge = calculateAge(dob);
-        document.getElementById('ageDisplay').innerHTML = `<strong>${currentAge.years}</strong> Years <strong>${currentAge.months}</strong> Months <strong>${currentAge.days}</strong> Days`;
-
-        // Age as on specific date based on class
-        const ageAsOnGroup = document.getElementById('ageAsOnGroup');
-        const ageAsOnLabel = document.getElementById('ageAsOnLabel');
-        const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
-        const ageAsOnInfo = document.getElementById('ageAsOnInfo');
-
-        if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
-            // Age as on 31 July 2026
-            const ageAsOn31July = calculateAge(dob, '2026-07-31');
-            ageAsOnGroup.style.display = 'block';
-            ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
-            ageAsOnDisplay.innerHTML = `<strong>${ageAsOn31July.years}</strong> Y <strong>${ageAsOn31July.months}</strong> M <strong>${ageAsOn31July.days}</strong> D`;
-            ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
-        } else if (selectedClass === 'I') {
-            // Age as on 30 Sept 2026
-            const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
-            ageAsOnGroup.style.display = 'block';
-            ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
-            ageAsOnDisplay.innerHTML = `<strong>${ageAsOn30Sept.years}</strong> Y <strong>${ageAsOn30Sept.months}</strong> M <strong>${ageAsOn30Sept.days}</strong> D`;
-            ageAsOnInfo.textContent = 'For Class I admission';
-        } else {
-            ageAsOnGroup.style.display = 'none';
-        }
-    }
-
-    document.getElementById('dob').addEventListener('change', updateAgeDisplays);
-    document.getElementById('classApplied').addEventListener('change', updateAgeDisplays);
-
-    // AUTO-UPPERCASE
-    document.querySelectorAll('.uppercase').forEach(input => {
-        input.addEventListener('input', function () {
-            this.value = this.value.toUpperCase();
+// Load saved data on page load
+window.addEventListener('load', function() {
+    const saved = localStorage.getItem('enquiryPage1');
+    if (saved) {
+        const data = JSON.parse(saved);
+        Object.keys(data).forEach(key => {
+            const field = document.getElementById(key);
+            if (field) {
+                if (field.type === 'radio') {
+                    const radio = document.querySelector(`input[name="${key}"][value="${data[key]}"]`);
+                    if (radio) radio.checked = true;
+                } else if (field.type === 'checkbox') {
+                    field.checked = data[key];
+                } else {
+                    field.value = data[key];
+                }
+            }
         });
-    });
+        console.log('✅ Page 1 loaded saved data');
+    }
+});
 
-    // SET TODAY'S DATE
-    document.getElementById('date').valueAsDate = new Date();
 
-    // ✅ AUTO-GENERATE S.NO STARTING FROM 2026001
-    window.addEventListener('load', function () {
-        let records = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
-        const nextNum = 2026001 + records.length;
-        document.getElementById('sno').value = nextNum.toString();
-    });
+// ============================================================
+// AGE CALCULATION - FULL WORKING VERSION
+// ============================================================
+function calculateAge(dob, asOfDate) {
+    const dobDate = new Date(dob);
+    const refDate = asOfDate ? new Date(asOfDate) : new Date();
 
-    // PRINT FUNCTION
-    function printForm() {
-        window.print();
+    let years = refDate.getFullYear() - dobDate.getFullYear();
+    let months = refDate.getMonth() - dobDate.getMonth();
+    let days = refDate.getDate() - dobDate.getDate();
+
+    if (days < 0) {
+        months--;
+        days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
     }
 
-    // SAVE ENQUIRY FUNCTION
-    function saveEnquiry() {
-        console.log('Saving Enquiry...');
-
-        try {
-            const form = document.getElementById('enquiryForm');
-
-            // Validate using HTML5 validation
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return false;
-            }
-
-            // Get ALL form data using FormData
-            const formData = new FormData(form);
-            const enquiryData = {};
-
-            // Convert FormData to object
-            for (let [key, value] of formData.entries()) {
-                enquiryData[key] = value;
-            }
-
-            // Add metadata
-            enquiryData.submittedDate = new Date().toLocaleDateString('en-IN');
-            enquiryData.submittedTime = new Date().toLocaleTimeString('en-IN');
-            enquiryData.recordId = 'ENQ-' + Date.now();
-
-            // Add fee details from calculator
-            enquiryData.feeClass = document.getElementById('feeClass').value;
-            enquiryData.grandTotal = document.getElementById('grandTotal').textContent;
-            enquiryData.currentAge = document.getElementById('ageDisplay').textContent;
-            enquiryData.timestamp = new Date().toISOString();
-
-            // Get existing enquiries
-            let enquiries = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
-
-            // Add new enquiry
-            enquiries.unshift(enquiryData);
-
-            // Save to localStorage
-            localStorage.setItem('enquiryRecords', JSON.stringify(enquiries));
-
-            // Also save as current for registration
-            localStorage.setItem('currentEnquiry', JSON.stringify(enquiryData));
-
-            console.log('Enquiry saved successfully!', enquiryData);
-            alert(`✅ SUCCESS! Enquiry saved successfully! ID: ${enquiryData.recordId}`);
-
-            return true;
-        } catch (error) {
-            console.error('Error saving enquiry:', error);
-            alert('❌ ERROR: Failed to save - ' + error.message);
-            return false;
-        }
+    if (months < 0) {
+        years--;
+        months += 12;
     }
 
-    // PROCEED TO REGISTRATION
-    function proceedToRegistration() {
-        console.log('proceedToRegistration called');
+    return { years, months, days };
+}
 
-        // IMPORTANT: First save the enquiry data
-        const saved = saveEnquiry();
+function updateAgeDisplays() {
+    const dob = document.getElementById('dob').value;
+    const selectedClass = document.getElementById('classApplied').value;
 
-        if (saved === true) {
-            console.log('Data saved successfully, proceeding to registration...');
-            alert('Proceeding to Registration Form... (enquiry data will be automatically filled!)');
-
-            // Small delay to ensure data is saved, then redirect
-            setTimeout(function () {
-                window.location.href = 'registration.html';
-            }, 500);
-        } else {
-            console.log('Save failed, not proceeding to registration');
-        }
+    if (!dob) {
+        document.getElementById('ageDisplay').innerHTML = '-- Select DOB --';
+        const ageAsOnGroup = document.getElementById('ageAsOnGroup');
+        if (ageAsOnGroup) ageAsOnGroup.style.display = 'none';
+        return;
     }
 
-    console.log('✅ ENQUIRY FORM LOADED SUCCESSFULLY!');
+    // Current age
+    const currentAge = calculateAge(dob);
+    document.getElementById('ageDisplay').innerHTML = 
+        '<strong>' + currentAge.years + '</strong> Years <strong>' + 
+        currentAge.months + '</strong> Months <strong>' + 
+        currentAge.days + '</strong> Days';
 
-    // Check for edit data on page load
-    window.addEventListener('DOMContentLoaded', function() {
-        const editData = localStorage.getItem('editEnquiryData');
-        if (editData) {
-            try {
-                const data = JSON.parse(editData);
-                console.log('Loading edit data:', data);
+    // Age as on specific date based on class
+    const ageAsOnGroup = document.getElementById('ageAsOnGroup');
+    const ageAsOnLabel = document.getElementById('ageAsOnLabel');
+    const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
+    const ageAsOnInfo = document.getElementById('ageAsOnInfo');
 
-                // Populate fields with actual form field names from new-4.html
-                if (data.sno && document.getElementById('sno')) document.getElementById('sno').value = data.sno;
-                if (data.date && document.getElementById('date')) document.getElementById('date').value = data.date;
-                if (data.studentFirst && document.getElementById('studentFirst')) document.getElementById('studentFirst').value = data.studentFirst;
-                if (data.studentMiddle && document.getElementById('studentMiddle')) document.getElementById('studentMiddle').value = data.studentMiddle;
-                if (data.studentSurname && document.getElementById('studentSurname')) document.getElementById('studentSurname').value = data.studentSurname;
-                if (data.gender && document.getElementById('gender')) document.getElementById('gender').value = data.gender;
-                if (data.classApplied && document.getElementById('classApplied')) document.getElementById('classApplied').value = data.classApplied;
-                if (data.dob && document.getElementById('dob')) document.getElementById('dob').value = data.dob;
-                if (data.fatherFirst && document.getElementById('fatherFirst')) document.getElementById('fatherFirst').value = data.fatherFirst;
-                if (data.fatherMiddle && document.getElementById('fatherMiddle')) document.getElementById('fatherMiddle').value = data.fatherMiddle;
-                if (data.fatherSurname && document.getElementById('fatherSurname')) document.getElementById('fatherSurname').value = data.fatherSurname;
-                if (data.motherFirst && document.getElementById('motherFirst')) document.getElementById('motherFirst').value = data.motherFirst;
-                if (data.motherMiddle && document.getElementById('motherMiddle')) document.getElementById('motherMiddle').value = data.motherMiddle;
-                if (data.motherSurname && document.getElementById('motherSurname')) document.getElementById('motherSurname').value = data.motherSurname;
-                if (data.fatherMobile && document.getElementById('fatherMobile')) document.getElementById('fatherMobile').value = data.fatherMobile;
-                if (data.motherMobile && document.getElementById('motherMobile')) document.getElementById('motherMobile').value = data.motherMobile;
-                if (data.landline && document.getElementById('landline')) document.getElementById('landline').value = data.landline;
-                if (data.address && document.getElementById('address')) document.getElementById('address').value = data.address;
-                if (data.area && document.getElementById('area')) document.getElementById('area').value = data.area;
-                if (data.city && document.getElementById('city')) document.getElementById('city').value = data.city;
-                if (data.district && document.getElementById('district')) document.getElementById('district').value = data.district;
-                if (data.state && document.getElementById('state')) document.getElementById('state').value = data.state;
-                if (data.pincode && document.getElementById('pincode')) document.getElementById('pincode').value = data.pincode;
-                if (data.country && document.getElementById('country')) document.getElementById('country').value = data.country;
+    if (!ageAsOnGroup) return;
 
-                // Sibling information
-                if (data.sib1Name && document.getElementById('sib1Name')) document.getElementById('sib1Name').value = data.sib1Name;
-                if (data.sib1School && document.getElementById('sib1School')) document.getElementById('sib1School').value = data.sib1School;
-                if (data.sib1Class && document.getElementById('sib1Class')) document.getElementById('sib1Class').value = data.sib1Class;
-                if (data.sib1Section && document.getElementById('sib1Section')) document.getElementById('sib1Section').value = data.sib1Section;
-                if (data.sib2Name && document.getElementById('sib2Name')) document.getElementById('sib2Name').value = data.sib2Name;
-                if (data.sib2School && document.getElementById('sib2School')) document.getElementById('sib2School').value = data.sib2School;
-                if (data.sib2Class && document.getElementById('sib2Class')) document.getElementById('sib2Class').value = data.sib2Class;
-                if (data.sib2Section && document.getElementById('sib2Section')) document.getElementById('sib2Section').value = data.sib2Section;
+    if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
+        // Age as on 31 July 2026
+        const ageAsOn31July = calculateAge(dob, '2026-07-31');
+        ageAsOnGroup.style.display = 'block';
+        ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
+        ageAsOnDisplay.innerHTML = 
+            '<strong>' + ageAsOn31July.years + '</strong> Y <strong>' + 
+            ageAsOn31July.months + '</strong> M <strong>' + 
+            ageAsOn31July.days + '</strong> D';
+        ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
+    } else if (selectedClass === 'I') {
+        // Age as on 30 Sept 2026
+        const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
+        ageAsOnGroup.style.display = 'block';
+        ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
+        ageAsOnDisplay.innerHTML = 
+            '<strong>' + ageAsOn30Sept.years + '</strong> Y <strong>' + 
+            ageAsOn30Sept.months + '</strong> M <strong>' + 
+            ageAsOn30Sept.days + '</strong> D';
+        ageAsOnInfo.textContent = 'For Class I admission';
+    } else {
+        ageAsOnGroup.style.display = 'none';
+    }
+}
 
-                // Fee information
-                if (data.feeClass && document.getElementById('feeClass')) document.getElementById('feeClass').value = data.feeClass;
+// ============================================================
+// S.NO AUTO-GENERATION - STARTING FROM 2026001
+// ============================================================
+function generateSNo() {
+    let records = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
+    const nextNum = 2026001 + records.length;
+    const snoField = document.getElementById('sno');
+    if (snoField) {
+        snoField.value = nextNum.toString();
+    }
+    console.log('✅ S.No generated:', nextNum);
+}
 
-                // Clear the localStorage after loading
-                localStorage.removeItem('editEnquiryData');
+// ============================================================
+// PRINT / SAVE AS PDF FUNCTION
+// ============================================================
+function printForm() {
+    window.print();
+}
 
-                // Alert user that edit mode is active
-                alert('✏️ Edit Mode: Form loaded with existing data. Modify and save to update.');
-            } catch (error) {
-                console.error('Error loading edit data:', error);
-            }
-        }
-    });
+// ============================================================
+// SAVE ENQUIRY FUNCTION
+// ============================================================
+function saveEnquiry() {
+    console.log('Saving Page 1 Enquiry...');
 
+    const form = document.getElementById('enquiryForm');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return false;
+    }
+
+    autoSavePage1();
+    alert('✅ Page 1 data saved successfully!\nClick NEXT to proceed to Fee Calculator.');
+    return true;
+}
+
+// ============================================================
+// EVENT LISTENERS - AGE CALCULATION
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    const dobField = document.getElementById('dob');
+    const classField = document.getElementById('classApplied');
+
+    if (dobField) {
+        dobField.addEventListener('change', updateAgeDisplays);
+    }
+
+    if (classField) {
+        classField.addEventListener('change', updateAgeDisplays);
+    }
+
+    // Generate S.No on load
+    generateSNo();
+
+    console.log('✅ Page 1 functions loaded');
+});
+
+
+function goToPage2() {
+    autoSavePage1();
+    window.location.href = 'enquiry-page2.html';
+}
 </script>
-
 </body>
 </html>
