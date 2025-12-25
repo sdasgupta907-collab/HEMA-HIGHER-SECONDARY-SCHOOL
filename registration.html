@@ -416,7 +416,7 @@ function saveRegistration() {
 function proceedToAdmission() {
     saveRegistration();
     setTimeout(() => {
-        window.location.href = 'admission.html';
+        window.location.href = 'TESTED_4_admission-2.html';
     }, 500);
 }
 
@@ -1022,10 +1022,10 @@ function proceedToAdmission() {
         <div class="container">
 
         <div class="nav-bar no-print">
-            <a href="enquiry.html">📝 Enquiry</a>
-            <a href="registration.html" class="active">📋 Registration</a>
-            <a href="admission.html">✅ Admission</a>
-            <a href="data-5-CONNECTED.html" >📊 Records</a>
+            <a href="enquiry-page1-COMPLETE.html">📝 Enquiry</a>
+            <a href="TESTED_3_registration-1.html" class="active">📋 Registration</a>
+            <a href="TESTED_4_admission-2.html">✅ Admission</a>
+            <a href="data-5.html" >📊 Records</a>
         </div>
 
         <form id="registrationForm">
@@ -1384,7 +1384,7 @@ function proceedToAdmission() {
             localStorage.setItem('currentRegistration', JSON.stringify(data));
 
             if (confirm('Registration saved successfully!\n\nClick OK to proceed to Admission Form\nClick Cancel to stay here')) {
-                window.location.href = 'admission.html';
+                window.location.href = 'TESTED_4_admission-2.html';
             }
         });
     </script>
