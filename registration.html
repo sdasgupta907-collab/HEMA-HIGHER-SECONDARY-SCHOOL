@@ -416,7 +416,7 @@ function saveRegistration() {
 function proceedToAdmission() {
     saveRegistration();
     setTimeout(() => {
-        window.location.href = 'TESTED_4_admission-2.html';
+        window.location.href = 'admission-CONNECTED.html';
     }, 500);
 }
 
@@ -1384,7 +1384,7 @@ function proceedToAdmission() {
             localStorage.setItem('currentRegistration', JSON.stringify(data));
 
             if (confirm('Registration saved successfully!\n\nClick OK to proceed to Admission Form\nClick Cancel to stay here')) {
-                window.location.href = 'TESTED_4_admission-2.html';
+                window.location.href = 'admission-CONNECTED.html';
             }
         });
     </script>
