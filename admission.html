@@ -1515,9 +1515,9 @@ button:hover {
             alert('✓ Admission form submitted successfully!\n\nAll records are saved.');
 
             if (confirm('Do you want to:\n- Click OK to view all records\n- Click Cancel to add another enquiry')) {
-                window.location.href = 'data-5-CONNECTED.html';
+                window.location.href = 'data-CONNECTED.html';
             } else {
-                window.location.href = 'index.html';
+                window.location.href = 'data-CONNECTED.html';
             }
         });
     
@@ -1560,7 +1560,7 @@ function saveAdmission() {
     // Optionally redirect to data page
     const goToRecords = confirm('Would you like to view the Records Dashboard?');
     if (goToRecords) {
-        window.location.href = 'data-5-CONNECTED.html';
+        window.location.href = 'data-CONNECTED.html';
     }
 }
 
@@ -1662,7 +1662,7 @@ function submitAdmission() {
     localStorage.setItem('admissionRecords', JSON.stringify(admRecords));
 
     alert('✅ Admission completed! Redirecting to Records Dashboard...');
-    window.location.href = 'COMPLETE-RECORDS-DASHBOARD.html';
+    window.location.href = 'data-CONNECTED.html';
 }
 </script>
 
@@ -1790,7 +1790,7 @@ function finalSubmit() {
 
         // Redirect to dashboard
         setTimeout(function() {
-            window.location.href = 'WORKING-RECORDS-DASHBOARD.html';
+            window.location.href = 'data-CONNECTED.html';
         }, 1000);
 
         return true;
