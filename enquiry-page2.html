@@ -279,93 +279,279 @@
         /* ========== PRINT STYLES - A4 WITH COLORED HEADER ========== */
         @media print {
             @page {
-                size: A4;
-                margin: 10mm 8mm;
+                size: A4 portrait;
+                margin: 8mm;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
 
             body {
-                background: white;
-                padding: 0;
-                margin: 0;
-            }
-
-            /* Keep colored header in print */
-            .hema-school-header {
-                background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
-                padding: 15px !important;
-                margin: 0 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                color-adjust: exact !important;
-            }
-
-            .hema-school-header * {
-                color: white !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .affiliation {
-                color: #FFD700 !important;
-                -webkit-print-color-adjust: exact !important;
-            }
-
-            .school-name {
-                font-size: 24pt !important;
-            }
-
-            .school-info, .affiliation {
+                background: white !important;
+                font-family: Arial, Helvetica, sans-serif !important;
                 font-size: 10pt !important;
+                color: #000 !important;
+                line-height: 1.25 !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
-            .logo-img {
-                width: 70px !important;
-                height: 70px !important;
-            }
-
-            /* Hide buttons and navigation */
-            button, .btn, .btn-group, .button-group, .nav-tabs, .no-print {
+            /* Hide navigation and buttons */
+            .nav-bar, button, .btn, .no-print, .auto-save-indicator {
                 display: none !important;
             }
 
-            /* Optimize sections */
-            .section {
-                margin: 8px 0 !important;
-                padding: 10px !important;
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            /* Header - compact matching page 1 */
+            .hema-school-header {
+                background: white !important;
+                border: 1.5px solid #000 !important;
+                padding: 6px 8px !important;
+                margin: 0 0 8px 0 !important;
                 box-shadow: none !important;
-                border: 1px solid #999 !important;
-                page-break-inside: avoid !important;
             }
 
-            .section h2, .section h3 {
-                font-size: 13pt !important;
-                color: #1E3A5F !important;
-                -webkit-print-color-adjust: exact !important;
+            .header-content {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 8px !important;
             }
 
-            .form-row {
-                margin-bottom: 5px !important;
+            .logo-img {
+                width: 52px !important;
+                height: 52px !important;
             }
 
-            input, select, textarea {
-                border: none !important;
-                border-bottom: 1px solid #333 !important;
-                padding: 2px 4px !important;
+            .header-center {
+                flex: 1 !important;
+                text-align: center !important;
+            }
+
+            .school-name {
+                font-size: 14pt !important;
+                font-weight: bold !important;
+                color: #000 !important;
+                margin: 2px 0 !important;
+                letter-spacing: 0.5px !important;
+            }
+
+            .affiliation, .school-info {
+                font-size: 8pt !important;
+                color: #000 !important;
+                margin: 1px 0 !important;
+                line-height: 1.15 !important;
+            }
+
+            /* Page title */
+            h2 {
                 font-size: 11pt !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                text-decoration: underline !important;
+                margin: 5px 0 6px 0 !important;
+                color: #000 !important;
             }
 
-            label {
+            h3 {
                 font-size: 10pt !important;
                 font-weight: bold !important;
+                margin: 5px 0 3px 0 !important;
+                color: #000 !important;
+                text-align: center !important;
             }
 
-            table {
+            /* Section headers */
+            .section h3, .section h4 {
                 font-size: 10pt !important;
+                font-weight: bold !important;
+                margin: 4px 0 !important;
+                color: #000 !important;
+            }
+
+            /* Hide legends */
+            legend {
+                display: none !important;
+            }
+
+            /* All fieldsets */
+            fieldset {
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 0 4px 0 !important;
+            }
+
+            /* Form rows */
+            .form-row, .row {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 8px !important;
+                margin: 4px 0 !important;
+                align-items: baseline !important;
+            }
+
+            .row.half {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .row.full {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Form groups */
+            .form-group {
+                display: block !important;
+                font-size: 10pt !important;
+            }
+
+            .form-group label {
+                display: inline !important;
+                font-size: 10pt !important;
+                font-weight: normal !important;
+                color: #000 !important;
+                margin-right: 4px !important;
+            }
+
+            .form-group.required label::after {
+                content: "*" !important;
+                color: #000 !important;
+            }
+
+            /* Inputs */
+            input[type="text"], input[type="date"], input[type="tel"], 
+            input[type="number"], select {
+                display: inline !important;
+                border: none !important;
+                border-bottom: 1px solid #000 !important;
+                padding: 0 2px 1px 2px !important;
+                font-size: 10pt !important;
+                background: white !important;
+                color: #000 !important;
+                width: auto !important;
+                min-width: 80px !important;
+            }
+
+            input[readonly] {
+                background: white !important;
+            }
+
+            /* Checkboxes */
+            input[type="checkbox"], input[type="radio"] {
+                width: 12px !important;
+                height: 12px !important;
+                margin: 0 3px 0 0 !important;
+                border: 1px solid #000 !important;
+                vertical-align: middle !important;
+                -webkit-appearance: none !important;
+                appearance: none !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            input[type="checkbox"]:checked, input[type="radio"]:checked {
+                background: #000 !important;
+            }
+
+            /* Tables - compact for portrait */
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                margin: 4px 0 !important;
+                font-size: 9pt !important;
+                page-break-inside: auto !important;
+            }
+
+            table th, table td {
+                padding: 3px 4px !important;
+                border: 1px solid #000 !important;
+                text-align: left !important;
+                font-size: 9pt !important;
+                line-height: 1.2 !important;
             }
 
             table th {
-                background: #E3F2FD !important;
+                background: #e8e8e8 !important;
+                font-weight: bold !important;
                 -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            table tr {
+                page-break-inside: avoid !important;
+            }
+
+            /* Fee details section */
+            .fee-details, .fee-calculator {
+                margin: 4px 0 !important;
+            }
+
+            .fee-summary {
+                margin: 4px 0 !important;
+            }
+
+            .fee-summary p {
+                font-size: 10pt !important;
+                margin: 2px 0 !important;
+            }
+
+            .fee-summary strong {
+                font-weight: bold !important;
+            }
+
+            /* Documents section */
+            .documents-section {
+                margin: 4px 0 !important;
+            }
+
+            .document-checklist {
+                margin: 4px 0 !important;
+            }
+
+            .document-checklist label {
+                display: block !important;
+                font-size: 9pt !important;
+                margin: 2px 0 !important;
+                line-height: 1.3 !important;
+            }
+
+            .document-item {
+                display: flex !important;
+                align-items: flex-start !important;
+                margin: 2px 0 !important;
+            }
+
+            /* Compact spacing for portrait */
+            p {
+                margin: 2px 0 !important;
+                font-size: 10pt !important;
+            }
+
+            /* Ensure black text */
+            * {
+                color: #000 !important;
+            }
+
+            /* Page break control */
+            form, .section {
+                page-break-inside: avoid !important;
+            }
+
+            /* Hide bottom navigation */
+            div[style*="background: linear-gradient"] {
+                display: none !important;
+            }
+
+            /* Optimize for half page */
+            .main-container {
+                max-height: 50vh !important;
             }
         }
 
@@ -1035,7 +1221,7 @@
     <!-- PAGE 2 NAVIGATION -->
     <div style="text-align: center; margin: 30px 0; padding: 25px; background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
         <h3 style="color: #2e7d32; margin: 0 0 20px 0; font-size: 20px; font-weight: bold;">✅ Page 2 of 2 - Review & Submit</h3>
-        <button type="button" onclick="window.location.href='enquiry-page1.html'" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; padding: 14px 35px; font-size: 15px; border: none; border-radius: 20px; cursor: pointer; margin-right: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(255,152,0,0.3);">
+        <button type="button" onclick="window.location.href='enquiry-page1-COMPLETE.html'" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; padding: 14px 35px; font-size: 15px; border: none; border-radius: 20px; cursor: pointer; margin-right: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(255,152,0,0.3);">
             ⬅️ PREVIOUS: PERSONAL INFO
         </button>
         <button type="button" onclick="saveCompleteEnquiry()" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 16px 50px; font-size: 17px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 12px rgba(76,175,80,0.3);">
@@ -1376,7 +1562,7 @@ function saveEnquiry() {
 
             // Small delay to ensure data is saved, then redirect
             setTimeout(function () {
-                window.location.href = 'registration.html';
+                window.location.href = 'TESTED_3_registration-1.html';
             }, 500);
         } else {
             console.log('Save failed, not proceeding to registration');
