@@ -369,7 +369,61 @@ button:hover {
         -webkit-print-color-adjust: exact !important;
     }
 }
-</style>
+
+        .nav-tabs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
+        }
+
+        .nav-tabs a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Hide navigation when printing or saving as PDF */
+        @media print {
+            .nav-tabs {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-tabs a {
+                text-align: center;
+            }
+        }
+    </style>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -932,7 +986,61 @@ button:hover {
             .info-item, .contact-item { font-size: 12px; }
         }
 
-</style>
+
+        .nav-tabs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
+        }
+
+        .nav-tabs a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Hide navigation when printing or saving as PDF */
+        @media print {
+            .nav-tabs {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-tabs a {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -957,12 +1065,20 @@ button:hover {
 
 
         <div class="container">
+    <div class="nav-tabs">
+        <a href="enquiry.html">📋 Enquiry</a>
+        <a href="registration.html">📝 Registration</a>
+        <a href="admission.html" class="active">✅ Admission</a>
+        <a href="data.html">📊 Records</a>
+    </div>
+
+
 
         <div class="nav-bar no-print">
-            <a href="enquiry-page1-COMPLETE.html">📝 Enquiry</a>
-            <a href="TESTED_3_registration-1.html">📋 Registration</a>
-            <a href="TESTED_4_admission-2.html" class="active">✅ Admission</a>
-            <a href="data-5.html" >📊 Records</a>
+            <a href="enquiry.html">📝 Enquiry</a>
+            <a href="registration.html">📋 Registration</a>
+            <a href="admission.html" class="active">✅ Admission</a>
+            <a href="data.html" >📊 Records</a>
         </div>
 
         <form id="admissionForm">
