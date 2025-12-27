@@ -656,6 +656,60 @@
                 -webkit-print-color-adjust: exact !important;
             }
         }
+    
+        .nav-tabs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
+        }
+
+        .nav-tabs a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Hide navigation when printing or saving as PDF */
+        @media print {
+            .nav-tabs {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-tabs a {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -680,6 +734,14 @@
 </div>
 
 <div class="container">
+    <div class="nav-tabs">
+        <a href="enquiry.html">📋 Enquiry</a>
+        <a href="registration.html">📝 Registration</a>
+        <a href="admission.html">✅ Admission</a>
+        <a href="data.html" class="active">📊 Records</a>
+    </div>
+
+
     <!-- Tabs -->
     <div class="nav-tabs">
         <button id="tabEnquiry" class="tab-enquiry active" onclick="switchTab('enquiry')">
