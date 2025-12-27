@@ -326,13 +326,7 @@
             background: rgba(70, 130, 180, 0.1);
         }
 
-        .sibling-section {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
-            border: 1px solid #e0e0e0;
-        }
+        .sibling-section { padding: 8px 0; margin: 10px 0; }
 
         .sibling-section h3 {
             color: #1e3c72 !important;
@@ -404,6 +398,18 @@
                 size: A4 portrait;
                 margin: 8mm;
             }
+
+            input#sno {
+                display: inline-block !important;
+                border: none !important;
+                border-bottom: 1px solid #000 !important;
+                background: white !important;
+                color: #000 !important;
+                font-weight: bold !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+
 
             * {
                 margin: 0;
@@ -643,22 +649,9 @@
                 font-weight: normal !important;
             }
 
-            textarea {
-                border: 1px solid #000 !important;
-                padding: 2px !important;
-                font-size: 9.5pt !important;
-                width: 100% !important;
-                background: white !important;
-                color: #000 !important;
-                line-height: 1.2 !important;
-                min-height: 20px !important;
-                max-height: 20px !important;
-                overflow: hidden !important;
-            }
+            textarea { border: none !important; border-bottom: 1px solid #000 !important; padding: 0 2px !important; font-size: 11pt !important; width: 100% !important; background: white !important; color: #000 !important; line-height: 1.2 !important; min-height: auto !important; max-height: none !important; height: auto !important; overflow: visible !important; resize: none !important; }
 
-            .sibling-section {
-                margin: 5px 0 !important;
-            }
+            .sibling-section { margin: 3px 0 !important; padding: 3px 0 !important; border: none !important; background: transparent !important; }
 
             .sibling-section h3 {
                 font-size: 10pt !important;
@@ -694,6 +687,60 @@
             }
         }
 
+    
+        .nav-tabs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
+        }
+
+        .nav-tabs a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Hide navigation when printing or saving as PDF */
+        @media print {
+            .nav-tabs {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-tabs a {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -718,6 +765,14 @@
 </div>
 
 <div class="container">
+    <div class="nav-tabs">
+        <a href="enquiry.html" class="active">📋 Enquiry</a>
+        <a href="registration.html">📝 Registration</a>
+        <a href="admission.html">✅ Admission</a>
+        <a href="data.html">📊 Records</a>
+    </div>
+
+
     <div class="nav-bar no-print">
         <a href="enquiry.html" class="active">📋 Enquiry</a>
         <a href="registration.html">📝 Registration</a>
@@ -733,8 +788,36 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="sno">S.NO.</label>
-                        <input type="text" id="sno" name="sno" value="" readonly style="background:#f0f0f0;font-weight:bold;color:#1e3c72;">
+                        <input type="text" id="sno" name="sno" value="2026001" style="background:#f0f0f0;font-weight:bold;color:#1e3c72;">
                     </div>
+
+<script>
+// S.NO AUTO-INCREMENT - WORKING VERSION
+(function() {
+    // Run immediately when script loads
+    var snoField = document.getElementById('sno');
+
+    if (snoField) {
+        var lastSNO = localStorage.getItem('lastEnquirySNO');
+
+        if (!lastSNO || lastSNO === 'null' || lastSNO === '') {
+            lastSNO = 2026000;
+        } else {
+            lastSNO = parseInt(lastSNO, 10);
+        }
+
+        var newSNO = lastSNO + 1;
+        snoField.value = newSNO;
+        localStorage.setItem('lastEnquirySNO', newSNO);
+
+        console.log('✅ S.NO generated: ' + newSNO);
+    } else {
+        console.error('❌ S.NO field not found!');
+    }
+})();
+</script>
+
+
                     <div class="form-group">
                         <label for="date">DATE</label>
                         <input type="date" id="date" name="date" required>
@@ -873,10 +956,6 @@
                         <input type="text" id="area" name="area" class="uppercase">
                     </div>
                     <div class="form-group required">
-                        <label for="city">CITY</label>
-                        <input type="text" id="city" name="city" class="uppercase" value="BHOPAL" required>
-                    </div>
-                    <div class="form-group required">
                         <label for="district">DISTRICT</label>
                         <input type="text" id="district" name="district" class="uppercase" value="BHOPAL" required>
                     </div>
@@ -891,11 +970,7 @@
                         <label for="pincode">PIN CODE</label>
                         <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" placeholder="6 digit PIN" required>
                     </div>
-                    <div class="form-group">
-                        <label for="country">COUNTRY</label>
-                        <input type="text" id="country" name="country" class="uppercase" value="INDIA" readonly>
                     </div>
-                </div>
             </fieldset>
 
             <!-- SIBLING DETAILS -->
@@ -1251,7 +1326,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function goToPage2() {
     autoSavePage1();
-    window.location.href = 'enquiry-page2-CONNECTED.html';
+    window.location.href = 'enquiry-page2.html';
 }
 </script>
 </body>
