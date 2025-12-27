@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEMA Higher Secondary School - Admission Portal</title>
+    <title>HEMA School Management System - Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -15,120 +15,207 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 0;
+        }
+
+        .hema-school-header {
+            background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+            padding: 20px 15px;
+            margin: 0;
+            border-radius: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color-adjust: exact;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            padding: 20px;
+            justify-content: space-between;
+            gap: 20px;
         }
 
-        .header {
-            background: white;
-            width: 100%;
-            max-width: 1200px;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        .header-left-logo,
+        .header-right-logo {
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            display: block;
+        }
+
+        .header-center {
+            flex: 1;
             text-align: center;
-            margin-bottom: 40px;
+            color: white;
         }
 
-        .header h1 {
-            color: #2d3748;
-            font-size: 2.2em;
-            margin-bottom: 10px;
+        .school-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .header .subtitle {
-            color: #4a5568;
-            font-size: 1.1em;
-            margin-bottom: 15px;
+        .affiliation {
+            font-size: 14px;
+            color: #FFD700;
+            margin: 5px 0;
+            font-weight: 600;
         }
 
-        .header .info {
-            color: #718096;
-            font-size: 0.95em;
-            line-height: 1.8;
+        .school-info {
+            font-size: 13px;
+            color: white;
+            margin: 3px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .school-name {
+                font-size: 24px;
+            }
+
+            .logo-img {
+                width: 70px;
+                height: 70px;
+            }
         }
 
         .container {
-            width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
-        .intro {
+        .hero-section {
             background: white;
-            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 40px;
+            padding: 50px 40px;
             text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
         }
 
-        .intro h2 {
-            color: #2d3748;
+        .hero-section h1 {
+            font-size: 42px;
+            color: #2c3e50;
             margin-bottom: 15px;
-            font-size: 1.8em;
+            font-weight: 700;
         }
 
-        .intro p {
-            color: #4a5568;
-            font-size: 1.1em;
-            line-height: 1.6;
+        .hero-section p {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .process-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .step-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            opacity: 0.9;
         }
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
+            margin-top: 30px;
         }
 
         .card {
             background: white;
-            padding: 35px 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+        .card:nth-child(1) {
+            border-top-color: #3498db;
+        }
+
+        .card:nth-child(2) {
+            border-top-color: #2ecc71;
+        }
+
+        .card:nth-child(3) {
+            border-top-color: #e74c3c;
+        }
+
+        .card:nth-child(4) {
+            border-top-color: #f39c12;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
         }
 
         .card-icon {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            color: #2d3748;
-            font-size: 1.5em;
+            font-size: 48px;
             margin-bottom: 15px;
         }
 
-        .card p {
-            color: #4a5568;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            font-size: 0.95em;
+        .card h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 12px;
         }
 
-        .card-btn {
+        .card p {
+            font-size: 15px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .card-button {
             display: inline-block;
             padding: 12px 30px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -136,31 +223,38 @@
             text-decoration: none;
             border-radius: 25px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .card-btn:hover {
+        .card-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
 
         .footer {
-            background: white;
-            width: 100%;
-            max-width: 1200px;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             text-align: center;
-            color: #4a5568;
+            padding: 30px;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            font-size: 16px;
+            opacity: 0.9;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.6em;
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .hero-section {
+                padding: 30px 20px;
+            }
+
+            .process-flow {
+                grid-template-columns: 1fr;
             }
 
             .cards-grid {
@@ -170,55 +264,90 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🏫 HEMA HIGHER SECONDARY SCHOOL</h1>
-        <div class="subtitle"><strong>Affiliated to CENTRAL BOARD OF SECONDARY EDUCATION</strong></div>
-        <div class="info">
-            <strong>School Code:</strong> 50383 | <strong>Affiliation No.:</strong> 1030417<br>
-            Govindpura, Bhopal, Madhya Pradesh, India - 462023<br>
-            📧 support@hemaschool.education | 📞 0755-2457270
+
+    <div class="hema-school-header">
+        <div class="header-content">
+            <div class="header-left-logo">
+                <img src="school-logo.png" alt="HEMA Logo" class="logo-img">
+            </div>
+            <div class="header-center">
+                <h1 class="school-name">HEMA HIGHER SECONDARY SCHOOL</h1>
+                <p class="affiliation"><strong>Affiliated to CENTRAL BOARD OF SECONDARY EDUCATION</strong></p>
+                <p class="school-info">School Code: 50383 | Affiliation No.: 1030417</p>
+                <p class="school-info">Govindpura, Bhopal, Madhya Pradesh, India - 462023</p>
+                <p class="school-info">📧 support@hemaschool.education | 📞 0755-2457270</p>
+            </div>
+            <div class="header-right-logo">
+                <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
+            </div>
         </div>
     </div>
 
     <div class="container">
-        <div class="intro">
-            <h2>Student Admission Management System</h2>
+        <div class="hero-section">
+            <h1>🎓 Welcome to School Management System</h1>
             <p>A comprehensive platform to manage student enquiries, registrations, and admissions efficiently.</p>
+
+            <h2 style="margin-top: 40px; margin-bottom: 20px; color: #2c3e50;">📋 Admission Process Flow</h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Enquiry</div>
+                    <div class="step-desc">Submit initial enquiry</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Registration</div>
+                    <div class="step-desc">Complete registration form</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Admission</div>
+                    <div class="step-desc">Final admission & fee payment</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Records</div>
+                    <div class="step-desc">View all data</div>
+                </div>
+            </div>
         </div>
 
         <div class="cards-grid">
             <div class="card">
-                <div class="card-icon">📋</div>
-                <h3>Enquiry</h3>
+                <div class="card-icon">📝</div>
+                <h3>Student Enquiry</h3>
                 <p>Submit initial enquiry for admission. Start your journey with us by filling basic student information.</p>
-                <a href="enquiry.html" class="card-btn">Start Enquiry →</a>
+                <a href="enquiry.html" class="card-button">Start Enquiry →</a>
             </div>
 
             <div class="card">
-                <div class="card-icon">📝</div>
-                <h3>Registration</h3>
+                <div class="card-icon">📋</div>
+                <h3>Student Registration</h3>
                 <p>Complete the registration form with detailed information for prospective students.</p>
-                <a href="registration.html" class="card-btn">Register Now →</a>
+                <a href="registration.html" class="card-button">Register Now →</a>
             </div>
 
             <div class="card">
                 <div class="card-icon">✅</div>
-                <h3>Admission</h3>
+                <h3>Student Admission</h3>
                 <p>Finalize admission with fee payment and document submission. Complete the enrollment process.</p>
-                <a href="admission.html" class="card-btn">Admit Student →</a>
+                <a href="admission.html" class="card-button">Admit Student →</a>
             </div>
 
             <div class="card">
                 <div class="card-icon">📊</div>
-                <h3>Records</h3>
+                <h3>View Records</h3>
                 <p>Access and manage all enquiry, registration, and admission records in one place.</p>
-                <a href="data.html" class="card-btn">View Data →</a>
+                <a href="data.html" class="card-button">View Data →</a>
             </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026-2027 HEMA Higher Secondary School | All Rights Reserved</p>
+            <p>Powered by School Management System</p>
         </div>
     </div>
 
-    <div class="footer">
-        <p>&copy; 2025 HEMA Higher Secondary School. All rights reserved.</p>
-    </div>
 </body>
 </html>
