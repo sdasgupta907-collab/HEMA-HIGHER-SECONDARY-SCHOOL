@@ -280,7 +280,7 @@
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 8mm;
+                margin: 6mm 8mm;
             }
 
             * {
@@ -294,7 +294,7 @@
                 font-family: Arial, Helvetica, sans-serif !important;
                 font-size: 10pt !important;
                 color: #000 !important;
-                line-height: 1.25 !important;
+                line-height: 1.2 !important;
                 margin: 0 !important;
                 padding: 0 !important;
             }
@@ -310,12 +310,12 @@
                 margin: 0 !important;
             }
 
-            /* Header - compact matching page 1 */
+            /* Header - compact */
             .hema-school-header {
                 background: white !important;
                 border: 1.5px solid #000 !important;
-                padding: 6px 8px !important;
-                margin: 0 0 8px 0 !important;
+                padding: 4px 6px !important;
+                margin: 0 0 5px 0 !important;
                 box-shadow: none !important;
             }
 
@@ -323,12 +323,12 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                gap: 8px !important;
+                gap: 6px !important;
             }
 
             .logo-img {
-                width: 52px !important;
-                height: 52px !important;
+                width: 45px !important;
+                height: 45px !important;
             }
 
             .header-center {
@@ -337,18 +337,18 @@
             }
 
             .school-name {
-                font-size: 14pt !important;
+                font-size: 12pt !important;
                 font-weight: bold !important;
                 color: #000 !important;
-                margin: 2px 0 !important;
+                margin: 1px 0 !important;
                 letter-spacing: 0.5px !important;
             }
 
             .affiliation, .school-info {
                 font-size: 8pt !important;
                 color: #000 !important;
-                margin: 1px 0 !important;
-                line-height: 1.15 !important;
+                margin: 0.5px 0 !important;
+                line-height: 1.1 !important;
             }
 
             /* Page title */
@@ -369,11 +369,10 @@
                 text-align: center !important;
             }
 
-            /* Section headers */
-            .section h3, .section h4 {
-                font-size: 10pt !important;
+            h4 {
+                font-size: 9pt !important;
                 font-weight: bold !important;
-                margin: 4px 0 !important;
+                margin: 4px 0 2px 0 !important;
                 color: #000 !important;
             }
 
@@ -389,64 +388,275 @@
                 margin: 0 0 4px 0 !important;
             }
 
-            /* Form rows */
-            .form-row, .row {
-                display: grid !important;
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 8px !important;
-                margin: 4px 0 !important;
-                align-items: baseline !important;
+            /* ========== STUDENT INFORMATION SECTION - VISIBLE IN PRINT ========== */
+            /* Show and format the student summary section */
+            div[style*="STUDENT INFORMATION"] {
+                background: white !important;
+                padding: 4px 6px !important;
+                margin: 4px 0 6px 0 !important;
+                border: 1.5px solid #000 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                display: block !important;
+                page-break-inside: avoid !important;
             }
 
-            .row.half {
-                grid-template-columns: repeat(2, 1fr) !important;
+            /* Heading for student info */
+            div[style*="STUDENT INFORMATION"] h3 {
+                font-size: 10pt !important;
+                font-weight: bold !important;
+                margin: 2px 0 4px 0 !important;
+                text-align: center !important;
+                text-decoration: underline !important;
+                color: #000 !important;
             }
 
-            .row.full {
-                grid-template-columns: 1fr !important;
+            /* Grid container - display as block with inline items */
+            div[style*="STUDENT INFORMATION"] > div {
+                display: block !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
 
-            /* Form groups */
-            .form-group {
+            /* Each summary field box - inline display */
+            div[style*="STUDENT INFORMATION"] > div > div {
+                display: inline-block !important;
+                background: white !important;
+                padding: 3px 8px !important;
+                margin: 2px 6px 2px 0 !important;
+                border: 1px solid #666 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                vertical-align: top !important;
+                min-width: 115px !important;
+            }
+
+            /* Labels inside summary boxes (S.No:, Date:, etc.) */
+            div[style*="STUDENT INFORMATION"] > div > div > div:first-child {
+                display: block !important;
+                font-weight: bold !important;
+                font-size: 9pt !important;
+                margin: 0 0 2px 0 !important;
+                color: #000 !important;
+            }
+
+            /* Values inside summary boxes (actual data) */
+            div[style*="STUDENT INFORMATION"] > div > div > div:last-child,
+            #summary-sno, #summary-date, #summary-student-name, 
+            #summary-class, #summary-father, #summary-mobile {
                 display: block !important;
                 font-size: 10pt !important;
+                font-weight: bold !important;
+                margin: 0 !important;
+                color: #000 !important;
+                line-height: 1.3 !important;
             }
 
-            .form-group label {
-                display: inline !important;
+            /* Fee Calculator Section */
+            .fee-calculator-section {
+                margin: 4px 0 !important;
+            }
+
+            .fee-input-group {
+                display: none !important;
+            }
+
+            /* ========== FEE TABLES - 10PT FONT ========== */
+            .fee-table-container {
+                margin: 4px 0 !important;
+                page-break-inside: avoid !important;
+            }
+
+            table.fee-display-table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                margin: 3px 0 !important;
                 font-size: 10pt !important;
+            }
+
+            table.fee-display-table th, 
+            table.fee-display-table td {
+                padding: 3px 4px !important;
+                border: 1px solid #000 !important;
+                text-align: left !important;
+                font-size: 10pt !important;
+                line-height: 1.3 !important;
+            }
+
+            table.fee-display-table th {
+                background: #e0e0e0 !important;
+                font-weight: bold !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            table.fee-display-table .total-row {
+                background: #f5f5f5 !important;
+                font-weight: bold !important;
+                font-size: 10pt !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* ========== GRAND TOTAL DISPLAY - 10PT BOLD ========== */
+            .grand-total-display {
+                margin: 4px 0 !important;
+                padding: 5px !important;
+                border: 1.5px solid #000 !important;
+                background: white !important;
+                page-break-inside: avoid !important;
+            }
+
+            .grand-total-display h3 {
+                font-size: 10pt !important;
+                font-weight: bold !important;
+                margin: 3px 0 4px 0 !important;
+                text-decoration: underline !important;
+            }
+
+            .grand-total-row {
+                display: flex !important;
+                justify-content: space-between !important;
+                font-size: 10pt !important;
+                padding: 3px 5px !important;
+                margin: 2px 0 !important;
+            }
+
+            .grand-total-row.grand-sum {
+                border-top: 1.5px solid #000 !important;
+                font-weight: bold !important;
+                background: #f0f0f0 !important;
+                font-size: 10pt !important;
+                padding: 4px 5px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* ========== DISCOUNT DISPLAY - 10PT ========== */
+            .discount-display {
+                margin: 4px 0 !important;
+                padding: 4px !important;
+                page-break-inside: avoid !important;
+            }
+
+            .discount-display h4 {
+                font-size: 10pt !important;
+                font-weight: bold !important;
+                margin: 3px 0 4px 0 !important;
+            }
+
+            .discount-row {
+                display: flex !important;
+                gap: 6px !important;
+                margin: 3px 0 !important;
+            }
+
+            .discount-box {
+                flex: 1 !important;
+                border: 1px solid #000 !important;
+                padding: 4px !important;
+                background: white !important;
+                font-size: 10pt !important;
+            }
+
+            .discount-box strong {
+                font-size: 10pt !important;
+                display: block !important;
+                margin-bottom: 3px !important;
+                font-weight: bold !important;
+            }
+
+            .discount-box p {
+                font-size: 10pt !important;
+                margin: 2px 0 !important;
+            }
+
+            /* Important Notes */
+            .important-notes {
+                font-size: 9pt !important;
+                line-height: 1.4 !important;
+                margin: 4px 0 !important;
+            }
+
+            .important-notes ul, .important-notes ol {
+                margin: 2px 0 2px 15px !important;
+                padding: 0 !important;
+            }
+
+            .important-notes li {
+                margin: 2px 0 !important;
+                font-size: 9pt !important;
+            }
+
+            /* ========== DOCUMENTS CHECKLIST - 9PT SINGLE LINE ========== */
+            .documents-section {
+                margin: 4px 0 !important;
+                page-break-inside: avoid !important;
+            }
+
+            /* Documents grid - display as SINGLE LINE */
+            .documents-grid {
+                display: block !important;
+                margin: 2px 0 !important;
+                font-size: 9pt !important;
+            }
+
+            /* Each document item INLINE */
+            .doc-item,
+            .document-item {
+                display: inline !important;
+                margin: 0 8px 0 0 !important;
+                font-size: 9pt !important;
+                line-height: 1.3 !important;
+            }
+
+            /* Checkboxes in documents */
+            .doc-item input[type="checkbox"],
+            .document-item input[type="checkbox"] {
+                width: 10px !important;
+                height: 10px !important;
+                margin: 0 3px 0 0 !important;
+                border: 1px solid #000 !important;
+                vertical-align: middle !important;
+                -webkit-appearance: none !important;
+                appearance: none !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .doc-item input[type="checkbox"]:checked,
+            .document-item input[type="checkbox"]:checked {
+                background: #000 !important;
+            }
+
+            /* Labels in documents - INLINE */
+            .doc-item label,
+            .document-item label {
+                display: inline !important;
+                font-size: 9pt !important;
+                margin: 0 !important;
+                line-height: 1.3 !important;
                 font-weight: normal !important;
-                color: #000 !important;
-                margin-right: 4px !important;
             }
 
-            .form-group.required label::after {
-                content: "*" !important;
-                color: #000 !important;
+            /* Document checklist alternative class */
+            .document-checklist {
+                display: block !important;
+                margin: 2px 0 !important;
+                font-size: 9pt !important;
             }
 
-            /* Inputs */
-            input[type="text"], input[type="date"], input[type="tel"], 
-            input[type="number"], select {
+            .document-checklist label {
                 display: inline !important;
-                border: none !important;
-                border-bottom: 1px solid #000 !important;
-                padding: 0 2px 1px 2px !important;
-                font-size: 10pt !important;
-                background: white !important;
-                color: #000 !important;
-                width: auto !important;
-                min-width: 80px !important;
+                font-size: 9pt !important;
+                margin: 0 8px 0 0 !important;
+                line-height: 1.3 !important;
             }
 
-            input[readonly] {
-                background: white !important;
-            }
-
-            /* Checkboxes */
+            /* General checkboxes */
             input[type="checkbox"], input[type="radio"] {
-                width: 12px !important;
-                height: 12px !important;
+                width: 10px !important;
+                height: 10px !important;
                 margin: 0 3px 0 0 !important;
                 border: 1px solid #000 !important;
                 vertical-align: middle !important;
@@ -460,75 +670,7 @@
                 background: #000 !important;
             }
 
-            /* Tables - compact for portrait */
-            table {
-                width: 100% !important;
-                border-collapse: collapse !important;
-                margin: 4px 0 !important;
-                font-size: 9pt !important;
-                page-break-inside: auto !important;
-            }
-
-            table th, table td {
-                padding: 3px 4px !important;
-                border: 1px solid #000 !important;
-                text-align: left !important;
-                font-size: 9pt !important;
-                line-height: 1.2 !important;
-            }
-
-            table th {
-                background: #e8e8e8 !important;
-                font-weight: bold !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            table tr {
-                page-break-inside: avoid !important;
-            }
-
-            /* Fee details section */
-            .fee-details, .fee-calculator {
-                margin: 4px 0 !important;
-            }
-
-            .fee-summary {
-                margin: 4px 0 !important;
-            }
-
-            .fee-summary p {
-                font-size: 10pt !important;
-                margin: 2px 0 !important;
-            }
-
-            .fee-summary strong {
-                font-weight: bold !important;
-            }
-
-            /* Documents section */
-            .documents-section {
-                margin: 4px 0 !important;
-            }
-
-            .document-checklist {
-                margin: 4px 0 !important;
-            }
-
-            .document-checklist label {
-                display: block !important;
-                font-size: 9pt !important;
-                margin: 2px 0 !important;
-                line-height: 1.3 !important;
-            }
-
-            .document-item {
-                display: flex !important;
-                align-items: flex-start !important;
-                margin: 2px 0 !important;
-            }
-
-            /* Compact spacing for portrait */
+            /* Compact spacing */
             p {
                 margin: 2px 0 !important;
                 font-size: 10pt !important;
@@ -549,398 +691,97 @@
                 display: none !important;
             }
 
-            /* Optimize for half page */
-            .main-container {
-                max-height: 50vh !important;
+            /* Make fee display visible in print */
+            #feeDisplay {
+                display: block !important;
+            }
+
+            /* Sibling checkbox area */
+            .sibling-checkbox {
+                font-size: 9pt !important;
+                margin: 3px 0 !important;
+            }
+
+            /* Form rows */
+            .form-row, .row {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 6px !important;
+                margin: 3px 0 !important;
+            }
+
+            /* Form groups and inputs */
+            .form-group {
+                display: block !important;
+                font-size: 9pt !important;
+            }
+
+            input[type="text"], input[type="date"], input[type="tel"], 
+            input[type="number"], select {
+                display: inline !important;
+                border: 1px solid #000 !important;
+                padding: 2px 3px !important;
+                font-size: 10pt !important;
+                background: white !important;
+                color: #000 !important;
+                width: auto !important;
+                min-width: 100px !important;
             }
         }
-
-        fieldset {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            padding: 20px;
-            background: #f9f9f9;
         }
-
-        legend {
-            font-size: 16px;
-            font-weight: bold;
-            color: #2874A6;
-            padding: 0 10px;
-        }
-
-        .row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 15px;
-        }
-
-        .row.full {
-            grid-template-columns: 1fr;
-        }
-
-        .row.half {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .row.four {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .form-group {
+    
+        .nav-tabs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
             display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333;
-            font-size: 13px;
-        }
-
-        .form-group.required label::after {
-            content: " *";
-            color: red;
-        }
-
-        input, select, textarea {
-            padding: 10px;
-            border: 1.5px solid #ddd;
-            border-radius: 5px;
-            font-size: 13px;
-            font-family: inherit;
-            transition: all 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
-        }
-
-        input.uppercase {
-            text-transform: uppercase;
-        }
-
-        input:read-only {
-            background: #f5f5f5;
-            cursor: not-allowed;
-        }
-
-        .gender-group {
-            display: flex;
-            gap: 20px;
-            margin-top: 8px;
-            flex-wrap: wrap;
-        }
-
-        .gender-group label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0;
-            font-weight: normal;
-        }
-
-        .gender-group input[type="radio"] {
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
-        }
-
-        .age-display {
-            padding: 10px;
-            background: #e8f0fe;
-            border-radius: 5px;
-            font-weight: 600;
-            color: #2874A6;
-            text-align: center;
-            min-height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .age-info {
-            font-size: 11px;
-            color: #666;
-            margin-top: 5px;
-            font-style: italic;
-        }
-
-        .documents-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .doc-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-
-        .doc-item:hover {
-            background: #e8f0fe;
-            border-color: #667eea;
-        }
-
-        .doc-item input[type="checkbox"] {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .doc-item label {
-            margin-bottom: 0;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
             justify-content: center;
             flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .fee-calculator-section {
-            border: 2px solid #3498DB;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            background: #f9f9f9;
-        }
-
-        .fee-calculator-section legend {
-            color: #2874A6;
-            font-weight: 700;
-            font-size: 18px;
-            padding: 0 10px;
-        }
-
-        .fee-input-group {
-            margin-bottom: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        .fee-input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #2874A6;
-            font-size: 15px;
-        }
-
-        .fee-input-group select {
-            width: 100%;
-            padding: 12px;
-            font-size: 15px;
-            border: 2px solid #3498DB;
-            border-radius: 5px;
-            background: white;
-            cursor: pointer;
-        }
-
-        .sibling-checkbox label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .sibling-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        .fee-table-container {
-            margin-bottom: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-        }
-
-        .fee-table-container h4 {
-            color: #2874A6;
-            margin-bottom: 10px;
-            padding: 8px;
-            background: #e8f4f8;
-            border-left: 4px solid #3498DB;
-        }
-
-        .fee-display-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .fee-display-table thead {
-            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
+        .nav-tabs a {
             color: white;
-        }
-
-        .fee-display-table th,
-        .fee-display-table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        .fee-display-table tbody tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        .fee-display-table .total-row {
-            background: #D6EAF8 !important;
-            font-weight: 700;
-        }
-
-        .grand-total-display {
-            background: linear-gradient(135deg, #2874A6 0%, #3498DB 100%);
-            color: white;
-            padding: 20px;
+            text-decoration: none;
+            padding: 10px 20px;
             border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .grand-total-display h3 {
-            margin: 0 0 15px 0;
-            text-align: center;
-        }
-
-        .grand-total-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .grand-sum {
-            font-size: 18px;
-            border-top: 2px solid white !important;
-            padding-top: 12px !important;
-            margin-top: 8px;
-        }
-
-        .discount-display {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .discount-display h4 {
-            color: #27AE60;
-            margin-bottom: 15px;
-        }
-
-        .discount-row {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .discount-box {
-            flex: 1;
-            min-width: 200px;
-            background: #E8F8F5;
-            padding: 15px;
-            border-radius: 5px;
-            border-left: 4px solid #27AE60;
-        }
-
-        .discount-box strong {
-            display: block;
-            color: #1E8449;
-            margin-bottom: 10px;
-        }
-
-        .discount-box p {
-            margin: 5px 0;
             font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
         }
 
-        .fee-notes-display {
-            background: #FFF9E6;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #F39C12;
+        .nav-tabs a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .fee-notes-display h4 {
-            color: #D68910;
-            margin-bottom: 10px;
+        .nav-tabs a.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
-        .fee-notes-display ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .fee-notes-display li {
-            padding: 5px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .fee-notes-display li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #27AE60;
-            font-weight: bold;
+        /* Hide navigation when printing or saving as PDF */
+        @media print {
+            .nav-tabs {
+                display: none !important;
+            }
         }
 
         @media (max-width: 768px) {
-            .discount-row {
+            .nav-tabs {
                 flex-direction: column;
+                align-items: stretch;
             }
 
-            .row, .row.half, .row.four {
-                grid-template-columns: 1fr;
+            .nav-tabs a {
+                text-align: center;
             }
-
-            .documents-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .source-group, .referred-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .source-group label, .referred-group label {
-            display: flex;
-            align-items: center;
-            font-weight: normal;
-        }
-
-        .source-group input[type="checkbox"],
-        .referred-group input[type="radio"] {
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .sibling-section {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #ddd;
         }
     </style>
 </head>
@@ -965,6 +806,14 @@
     </div>
 </div>
     <div class="container">
+    <div class="nav-tabs">
+        <a href="enquiry.html" class="active">📋 Enquiry</a>
+        <a href="registration.html">📝 Registration</a>
+        <a href="admission.html">✅ Admission</a>
+        <a href="data.html">📊 Records</a>
+    </div>
+
+
     <div class="form-container">
 
     <!-- STUDENT INFORMATION SUMMARY -->
@@ -1210,18 +1059,26 @@
             </fieldset>
 
             <!-- BUTTONS -->
-            <div class="buttons no-print">
-                <button type="button" onclick="printForm()" class="btn-print">🖨️ PRINT / SAVE AS PDF</button>
-                <button type="button" onclick="saveEnquiry()" class="btn-submit">💾 SAVE ENQUIRY</button>
-                <button type="button" onclick="proceedToRegistration()" class="btn-register">➡️ PROCEED TO REGISTRATION</button>
-                <button type="reset" class="btn-reset">🔄 CLEAR FORM</button>
+            <div class="buttons no-print" style="display: flex; gap: 15px; margin-top: 30px; justify-content: center; flex-wrap: wrap;">
+                <button type="button" onclick="printForm()" class="btn-print" style="background: #2196F3; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
+                    🖨️ PRINT / SAVE AS PDF
+                </button>
+                <button type="button" onclick="saveEnquiry()" class="btn-submit" style="background: #4CAF50; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
+                    💾 SAVE ENQUIRY
+                </button>
+                <button type="button" onclick="proceedToRegistration()" class="btn-register" style="background: #FF9800; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
+                    ➡️ PROCEED TO REGISTRATION
+                </button>
+                <button type="reset" class="btn-reset" style="background: #f44336; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
+                    🔄 CLEAR FORM
+                </button>
             </div>
         
 
     <!-- PAGE 2 NAVIGATION -->
     <div style="text-align: center; margin: 30px 0; padding: 25px; background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
         <h3 style="color: #2e7d32; margin: 0 0 20px 0; font-size: 20px; font-weight: bold;">✅ Page 2 of 2 - Review & Submit</h3>
-        <button type="button" onclick="window.location.href='enquiry-page1-COMPLETE.html'" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; padding: 14px 35px; font-size: 15px; border: none; border-radius: 20px; cursor: pointer; margin-right: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(255,152,0,0.3);">
+        <button type="button" onclick="window.location.href='enquiry.html'" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; padding: 14px 35px; font-size: 15px; border: none; border-radius: 20px; cursor: pointer; margin-right: 20px; font-weight: bold; box-shadow: 0 4px 10px rgba(255,152,0,0.3);">
             ⬅️ PREVIOUS: PERSONAL INFO
         </button>
         <button type="button" onclick="saveCompleteEnquiry()" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 16px 50px; font-size: 17px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 12px rgba(76,175,80,0.3);">
@@ -1562,7 +1419,7 @@ function saveEnquiry() {
 
             // Small delay to ensure data is saved, then redirect
             setTimeout(function () {
-                window.location.href = 'TESTED_3_registration-1.html';
+                window.location.href = 'registration.html';
             }, 500);
         } else {
             console.log('Save failed, not proceeding to registration');
