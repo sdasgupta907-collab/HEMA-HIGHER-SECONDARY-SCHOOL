@@ -1258,143 +1258,121 @@
     // SAVE ENQUIRY FUNCTION
     
 // LOAD PAGE 1 DATA AND POPULATE SUMMARY
+window.addEventListener('load', function() {
+    const page1Data = JSON.parse(localStorage.getItem('enquiryPage1') || '{}');
 
-    // LOAD PAGE 1 DATA AND POPULATE SUMMARY
-    window.addEventListener('load', function() {
+    // Populate summary
+    document.getElementById('summary-sno').textContent = page1Data.sno || '-';
+    document.getElementById('summary-date').textContent = page1Data.date ? 
+        new Date(page1Data.date).toLocaleDateString('en-IN') : 'DD/MM/YYYY';
+    document.getElementById('summary-student-name').textContent = 
+        [page1Data.studentFirst, page1Data.studentMiddle, page1Data.studentSurname]
+        .filter(Boolean).join(' ') || '-';
+    document.getElementById('summary-class').textContent = page1Data.classApplied || '-';
+    document.getElementById('summary-father').textContent = 
+        [page1Data.fatherFirst, page1Data.fatherMiddle, page1Data.fatherSurname]
+        .filter(Boolean).join(' ') || '-';
+    document.getElementById('summary-mobile').textContent = page1Data.fatherMobile || '-';
+
+    // Auto-trigger fee calculation
+    if (page1Data.classApplied) {
+        const feeClassField = document.getElementById('feeClass');
+        if (feeClassField) {
+            // Map classApplied to feeClass options
+            const classMap = {
+                'NURSERY': 'nursery',
+                'KG I': 'nursery',
+                'KG II': 'nursery',
+                'I': '1',
+                'II': '2',
+                'III': '3',
+                'IV': '4',
+                'V': '4',
+                'VI': '6',
+                'VII': '6',
+                'VIII': '6',
+                'IX': '9',
+                'X': '9',
+                'XI': '11sci',
+                'XII': '11sci'
+            };
+            feeClassField.value = classMap[page1Data.classApplied] || '';
+            setTimeout(function() {
+                if (typeof calculateFees === 'function') calculateFees();
+            }, 300);
+        }
+    }
+
+    console.log('✅ Page 2 loaded with Page 1 data');
+});
+
+
+    function saveCompleteEnquiry() {
         try {
+            // Get page 1 data
             const page1Data = JSON.parse(localStorage.getItem('enquiryPage1')) || {};
 
-            // Safe function to set text content
-            function safeSetText(id, value, defaultValue = '-') {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.textContent = value || defaultValue;
+            // Get form data from page 2
+            const form = document.getElementById('enquiryForm');
+            if (!form) {
+                alert('ERROR: Form not found!');
+                return false;
+            }
+
+            const formData = new FormData(form);
+            const page2Data = {};
+            for (let [key, value] of formData.entries()) {
+                page2Data[key] = value;
+            }
+
+            // Merge both pages
+            const completeData = {...page1Data, ...page2Data};
+
+            // Add metadata
+            completeData.recordId = 'ENQ-' + Date.now();
+            completeData.submittedDate = new Date().toLocaleDateString('en-IN');
+            completeData.submittedTime = new Date().toLocaleTimeString('en-IN');
+            completeData.timestamp = new Date().toISOString();
+
+            // Add fee details safely
+            const feeClassEl = document.getElementById('feeClass');
+            const grandTotalEl = document.getElementById('grandTotal');
+            const ageDisplayEl = document.getElementById('ageDisplay');
+
+            completeData.feeClass = feeClassEl ? feeClassEl.value : '';
+            completeData.grandTotal = grandTotalEl ? grandTotalEl.textContent : '0';
+            completeData.currentAge = ageDisplayEl ? ageDisplayEl.textContent : '';
+
+            // Get document checkboxes
+            for (let i = 1; i <= 10; i++) {
+                const doc = document.getElementById('doc' + i);
+                if (doc && doc.checked) {
+                    completeData['doc' + i] = doc.value;
                 }
             }
 
-            // Safe function to set value
-            function safeSetValue(id, value) {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.value = value || '';
-                }
-            }
+            // Save to localStorage
+            let enquiries = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+            enquiries.unshift(completeData);
+            localStorage.setItem('enquiryRecords', JSON.stringify(enquiries));
+            localStorage.setItem('currentEnquiry', JSON.stringify(completeData));
 
-            // Populate summary with null checks
-            safeSetText('summary-sno', page1Data.sno);
+            alert('SUCCESS! Complete Enquiry Saved! ' + completeData.recordId);
+            console.log('Complete enquiry saved:', completeData);
 
-            if (page1Data.date) {
-                try {
-                    const formattedDate = new Date(page1Data.date).toLocaleDateString('en-IN');
-                    safeSetText('summary-date', formattedDate);
-                } catch(e) {
-                    safeSetText('summary-date', page1Data.date);
-                }
-            }
+            // Clear Page 1 data
+            localStorage.removeItem('enquiryPage1');
 
-            // Student name
-            const studentName = [page1Data.studentFirst, page1Data.studentMiddle, page1Data.studentSurname]
-                .filter(Boolean)
-                .join(' ');
-            safeSetText('summary-student-name', studentName);
-
-            safeSetText('summary-class', page1Data.classApplied);
-
-            // Father name
-            const fatherName = [page1Data.fatherFirst, page1Data.fatherMiddle, page1Data.fatherSurname]
-                .filter(Boolean)
-                .join(' ');
-            safeSetText('summary-father', fatherName);
-
-            safeSetText('summary-mobile', page1Data.fatherMobile);
-
-            // Auto-trigger fee calculation if class is available
-            if (page1Data.classApplied) {
-                const feeClassField = document.getElementById('feeClass');
-                if (feeClassField) {
-                    // Map classApplied to feeClass options
-                    const classMap = {
-                        'NURSERY': 'nursery',
-                        'KG I': 'nursery',
-                        'KG II': 'nursery',
-                        'I': '1',
-                        'II': '2',
-                        'III': '3',
-                        'IV': '4',
-                        'V': '4',
-                        'VI': '6',
-                        'VII': '6',
-                        'VIII': '6',
-                        'IX': '9',
-                        'X': '9',
-                        'XI': '11sci',
-                        'XII': '11sci'
-                    };
-
-                    feeClassField.value = classMap[page1Data.classApplied] || '';
-
-                    // Trigger fee calculation after a short delay
-                    setTimeout(function() {
-                        if (typeof calculateFees === 'function') {
-                            calculateFees();
-                        }
-                    }, 300);
-                }
-            }
-
-            console.log('Page 2 loaded with Page 1 data');
+            return true;
         } catch (error) {
-            console.error('Error loading page 1 data:', error);
-            // Continue anyway - form will just be empty
-        }
-    });
-
-
-function saveCompleteEnquiry() {
-    const page1Data = JSON.parse(localStorage.getItem('enquiryPage1') || '{}');
-    const form = document.getElementById('enquiryForm');
-    const formData = new FormData(form);
-    const page2Data = {};
-    for (let [key, value] of formData.entries()) {
-        page2Data[key] = value;
-    }
-
-    // Merge both pages
-    const completeData = {...page1Data, ...page2Data};
-    completeData.recordId = 'ENQ-' + Date.now();
-    completeData.submittedDate = new Date().toLocaleDateString('en-IN');
-    completeData.submittedTime = new Date().toLocaleTimeString('en-IN');
-    completeData.timestamp = new Date().toISOString();
-
-    // Add fee details
-    completeData.feeClass = document.getElementById('feeClass')?.value || '';
-    completeData.grandTotal = document.getElementById('grandTotal')?.textContent || '0';
-    completeData.currentAge = document.getElementById('ageDisplay')?.textContent || '';
-
-    // Get document checkboxes
-    for (let i = 1; i <= 10; i++) {
-        const doc = document.getElementById('doc' + i);
-        if (doc && doc.checked) {
-            completeData['doc' + i] = doc.value;
+            console.error('Error in saveCompleteEnquiry:', error);
+            alert('ERROR: Failed to save - ' + error.message);
+            return false;
         }
     }
 
-    // Save to localStorage
-    let enquiries = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
-    enquiries.unshift(completeData);
-    localStorage.setItem('enquiryRecords', JSON.stringify(enquiries));
-    localStorage.setItem('currentEnquiry', JSON.stringify(completeData));
 
-    alert('✅ SUCCESS! Complete Enquiry Saved!\nID: ' + completeData.recordId);
-    console.log('✅ Complete enquiry saved:', completeData);
-
-    // Clear Page 1 data
-    localStorage.removeItem('enquiryPage1');
-
-    return true;
-}
-
-function saveEnquiry() {
+    function saveEnquiry() {
 
         console.log('Saving Enquiry...');
 
@@ -1451,27 +1429,27 @@ function saveEnquiry() {
     }
 
     // PROCEED TO REGISTRATION
+    
     function proceedToRegistration() {
         console.log('proceedToRegistration called');
 
-        // IMPORTANT: First save the enquiry data
-        const saved = saveEnquiry();
+        // First save the enquiry data
+        const saved = saveCompleteEnquiry();
 
-        if (saved === true) {
+        if (saved) {
             console.log('Data saved successfully, proceeding to registration...');
-            alert('Proceeding to Registration Form... (enquiry data will be automatically filled!)');
+            alert('Proceeding to Registration Form... enquiry data will be automatically filled!');
 
             // Small delay to ensure data is saved, then redirect
-            setTimeout(function () {
-                window.location.href = 'TESTED_3_registration-1.html';
+            setTimeout(function() {
+                window.location.href = 'registration.html';
             }, 500);
         } else {
             console.log('Save failed, not proceeding to registration');
         }
     }
 
-    console.log('✅ ENQUIRY FORM LOADED SUCCESSFULLY!');
-</script>
+    </script>
 
 </body>
 </html>
