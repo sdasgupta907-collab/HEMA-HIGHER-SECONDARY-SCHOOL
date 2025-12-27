@@ -1258,53 +1258,97 @@
     // SAVE ENQUIRY FUNCTION
     
 // LOAD PAGE 1 DATA AND POPULATE SUMMARY
-window.addEventListener('load', function() {
-    const page1Data = JSON.parse(localStorage.getItem('enquiryPage1') || '{}');
 
-    // Populate summary
-    document.getElementById('summary-sno').textContent = page1Data.sno || '-';
-    document.getElementById('summary-date').textContent = page1Data.date ? 
-        new Date(page1Data.date).toLocaleDateString('en-IN') : 'DD/MM/YYYY';
-    document.getElementById('summary-student-name').textContent = 
-        [page1Data.studentFirst, page1Data.studentMiddle, page1Data.studentSurname]
-        .filter(Boolean).join(' ') || '-';
-    document.getElementById('summary-class').textContent = page1Data.classApplied || '-';
-    document.getElementById('summary-father').textContent = 
-        [page1Data.fatherFirst, page1Data.fatherMiddle, page1Data.fatherSurname]
-        .filter(Boolean).join(' ') || '-';
-    document.getElementById('summary-mobile').textContent = page1Data.fatherMobile || '-';
+    // LOAD PAGE 1 DATA AND POPULATE SUMMARY
+    window.addEventListener('load', function() {
+        try {
+            const page1Data = JSON.parse(localStorage.getItem('enquiryPage1')) || {};
 
-    // Auto-trigger fee calculation
-    if (page1Data.classApplied) {
-        const feeClassField = document.getElementById('feeClass');
-        if (feeClassField) {
-            // Map classApplied to feeClass options
-            const classMap = {
-                'NURSERY': 'nursery',
-                'KG I': 'nursery',
-                'KG II': 'nursery',
-                'I': '1',
-                'II': '2',
-                'III': '3',
-                'IV': '4',
-                'V': '4',
-                'VI': '6',
-                'VII': '6',
-                'VIII': '6',
-                'IX': '9',
-                'X': '9',
-                'XI': '11sci',
-                'XII': '11sci'
-            };
-            feeClassField.value = classMap[page1Data.classApplied] || '';
-            setTimeout(function() {
-                if (typeof calculateFees === 'function') calculateFees();
-            }, 300);
+            // Safe function to set text content
+            function safeSetText(id, value, defaultValue = '-') {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = value || defaultValue;
+                }
+            }
+
+            // Safe function to set value
+            function safeSetValue(id, value) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.value = value || '';
+                }
+            }
+
+            // Populate summary with null checks
+            safeSetText('summary-sno', page1Data.sno);
+
+            if (page1Data.date) {
+                try {
+                    const formattedDate = new Date(page1Data.date).toLocaleDateString('en-IN');
+                    safeSetText('summary-date', formattedDate);
+                } catch(e) {
+                    safeSetText('summary-date', page1Data.date);
+                }
+            }
+
+            // Student name
+            const studentName = [page1Data.studentFirst, page1Data.studentMiddle, page1Data.studentSurname]
+                .filter(Boolean)
+                .join(' ');
+            safeSetText('summary-student-name', studentName);
+
+            safeSetText('summary-class', page1Data.classApplied);
+
+            // Father name
+            const fatherName = [page1Data.fatherFirst, page1Data.fatherMiddle, page1Data.fatherSurname]
+                .filter(Boolean)
+                .join(' ');
+            safeSetText('summary-father', fatherName);
+
+            safeSetText('summary-mobile', page1Data.fatherMobile);
+
+            // Auto-trigger fee calculation if class is available
+            if (page1Data.classApplied) {
+                const feeClassField = document.getElementById('feeClass');
+                if (feeClassField) {
+                    // Map classApplied to feeClass options
+                    const classMap = {
+                        'NURSERY': 'nursery',
+                        'KG I': 'nursery',
+                        'KG II': 'nursery',
+                        'I': '1',
+                        'II': '2',
+                        'III': '3',
+                        'IV': '4',
+                        'V': '4',
+                        'VI': '6',
+                        'VII': '6',
+                        'VIII': '6',
+                        'IX': '9',
+                        'X': '9',
+                        'XI': '11sci',
+                        'XII': '11sci'
+                    };
+
+                    feeClassField.value = classMap[page1Data.classApplied] || '';
+
+                    // Trigger fee calculation after a short delay
+                    setTimeout(function() {
+                        if (typeof calculateFees === 'function') {
+                            calculateFees();
+                        }
+                    }, 300);
+                }
+            }
+
+            console.log('Page 2 loaded with Page 1 data');
+        } catch (error) {
+            console.error('Error loading page 1 data:', error);
+            // Continue anyway - form will just be empty
         }
-    }
+    });
 
-    console.log('✅ Page 2 loaded with Page 1 data');
-});
 
 function saveCompleteEnquiry() {
     const page1Data = JSON.parse(localStorage.getItem('enquiryPage1') || '{}');
@@ -1419,7 +1463,7 @@ function saveEnquiry() {
 
             // Small delay to ensure data is saved, then redirect
             setTimeout(function () {
-                window.location.href = 'registration.html';
+                window.location.href = 'TESTED_3_registration-1.html';
             }, 500);
         } else {
             console.log('Save failed, not proceeding to registration');
