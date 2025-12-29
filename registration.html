@@ -280,93 +280,500 @@ button:hover {
 /* ============================================================================ */
 @media print {
     @page {
-        size: A4;
-        margin: 10mm 8mm;
+        size: A4 portrait;
+        margin: 8mm 8mm 8mm 8mm;
+        orphans: 1;
+        widows: 1;
     }
 
-    body {
-        background: white;
-        padding: 0;
+    * {
+        box-sizing: border-box;
         margin: 0;
+        padding: 0;
+        box-shadow: none !important;
+        text-shadow: none !important;
     }
 
-    /* Keep colored header in print */
+    html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: white !important;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: #000;
+        font-family: Arial, sans-serif;
+    }
+
+    /* HEADER - Blue gradient matching enquiry style */
     .hema-school-header {
-    background: linear-gradient(135deg, #4A8FCA 0%, #1E3A5F 100%);
-        padding: 15px !important;
+        background: linear-gradient(135deg, #4A8FCA 0%, #1E3A5F 100%) !important;
+        padding: 8px 8px !important;
         margin: 0 !important;
+        border: 2px solid #1E3A5F !important;
+        box-shadow: none !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-        color-adjust: exact !important;
+        page-break-after: avoid;
     }
 
-    .hema-school-header * {
-        color: white !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+    .header-content {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        max-width: 100% !important;
     }
 
-    .affiliation {
-        color: #FFD700;
-        -webkit-print-color-adjust: exact !important;
-    }
-
-    .school-name {
-        font-size: 24pt !important;
-    }
-
-    .school-info, .affiliation {
-        font-size: 10pt !important;
+    .header-left-logo,
+    .header-right-logo {
+        flex-shrink: 0 !important;
     }
 
     .logo-img {
-        width: 70px !important;
-        height: 70px !important;
+        width: 55px !important;
+        height: 55px !important;
+        display: block !important;
     }
 
-    /* Hide buttons and navigation */
-    button, .btn, .btn-group, .button-group, .nav-tabs, .no-print {
+    .header-center {
+        flex: 1 !important;
+        text-align: center !important;
+        color: white !important;
+    }
+
+    .school-name {
+        font-size: 16pt !important;
+        font-weight: bold !important;
+        color: white !important;
+        margin: 0 !important;
+        line-height: 1.1 !important;
+        letter-spacing: 0.5px !important;
+        text-shadow: none !important;
+    }
+
+    .affiliation {
+        font-size: 8pt !important;
+        color: #fff !important;
+        margin: 2px 0 0 0 !important;
+        line-height: 1 !important;
+    }
+
+    .school-info {
+        font-size: 7pt !important;
+        color: #ddd !important;
+        margin: 1px 0 0 0 !important;
+        line-height: 1 !important;
+    }
+
+    /* Hide navigation */
+    .nav-tabs, .nav-bar, button, .btn, .btn-group, .button-group, .form-actions {
         display: none !important;
     }
 
-    /* Optimize sections */
-    .section {
-        margin: 8px 0 !important;
-        padding: 10px !important;
-        box-shadow: none !important;
-        border: 1px solid #999 !important;
-        page-break-inside: avoid !important;
+    /* Container */
+    form, .container, .main-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
     }
 
-    .section h2, .section h3 {
-        font-size: 13pt !important;
-        color: #388E3C !important;
-        -webkit-print-color-adjust: exact !important;
+    /* Form header - DATE and S.NO */
+    .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 3px 0 !important;
+        padding: 2px 0 !important;
+        font-size: 11pt;
+        page-break-inside: avoid;
     }
 
-    .form-row {
-        margin-bottom: 5px !important;
+    .form-header h2 {
+        display: none !important;
     }
 
-    input, select, textarea {
+    .form-header .form-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 20px;
+    }
+
+    .form-header .form-group {
+        flex: 0 1 auto;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .form-header label {
+        display: inline;
+        font-weight: bold;
+        font-size: 11pt;
+        margin: 0 5px 0 0 !important;
+        padding: 0 !important;
+        color: #000 !important;
+    }
+
+    .form-header input {
         border: none !important;
-        border-bottom: 1px solid #333 !important;
-        padding: 2px 4px !important;
-        font-size: 11pt !important;
+        border-bottom: 1px solid #000 !important;
+        padding: 0 4px !important;
+        font-size: 11pt;
+        width: 120px;
+        background: white !important;
+        color: #000 !important;
+        box-shadow: none !important;
     }
 
+    /* Section titles */
+    .section-title {
+        font-size: 11pt;
+        font-weight: bold;
+        margin: 3px 0 2px 0 !important;
+        padding: 1px 2px !important;
+        background: white !important;
+        border: none !important;
+        color: #000 !important;
+        page-break-after: avoid;
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    /* Form rows */
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 2px 0 !important;
+        padding: 0 !important;
+        width: 100%;
+        page-break-inside: avoid;
+        align-items: flex-end;
+    }
+
+    .form-row.three-col .form-group {
+        flex: 1;
+        min-width: calc(33.33% - 7px);
+    }
+
+    .form-row.two-col .form-group {
+        flex: 1;
+        min-width: calc(50% - 5px);
+    }
+
+    /* Form groups */
+    .form-group {
+        flex: 1;
+        min-width: 100px;
+        display: flex;
+        align-items: center;
+        page-break-inside: avoid;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .form-group.full-width {
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .form-group.half-width {
+        flex-basis: calc(50% - 5px);
+    }
+
+    /* Labels */
     label {
+        display: inline;
+        font-size: 10pt;
+        font-weight: bold;
+        color: #000 !important;
+        margin: 0 5px 0 0 !important;
+        padding: 0 !important;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+    /* Inputs - clean underline only */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    textarea {
+        flex: 1;
+        padding: 0 4px !important;
+        font-size: 10pt;
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        background: white !important;
+        color: #000 !important;
+        font-family: Arial, sans-serif;
+        line-height: 1.3;
+        min-height: 16px;
+        box-shadow: none !important;
+    }
+
+    /* Address field - underline only */
+    textarea {
+        min-height: 30px;
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        padding: 0 4px !important;
+        background: white !important;
+    }
+
+    /* Radio and checkbox */
+    input[type="radio"],
+    input[type="checkbox"] {
+        margin: 0 3px 0 8px !important;
+        padding: 0 !important;
+        width: auto;
+        flex: none;
+        background: white !important;
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+
+    .gender-group,
+    .radio-group {
+        display: inline-flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .gender-group label,
+    .radio-group label {
+        display: inline-flex;
+        align-items: center;
+        font-weight: normal;
+        font-size: 10pt;
+        gap: 3px;
+        margin: 0 !important;
+        white-space: nowrap;
+        color: #000 !important;
+    }
+
+    /* Sibling entries */
+    .sibling-entry {
+        border: 1px solid #000 !important;
+        padding: 3px !important;
+        margin: 3px 0 !important;
+        background: white !important;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+    }
+
+    .sibling-entry .section-title {
+        font-size: 10pt;
+        margin: 0 0 2px 0 !important;
+        padding: 0 !important;
+        background: white !important;
+    }
+
+    /* Fee table */
+    .fee-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3px 0 !important;
+        font-size: 10pt;
+        box-shadow: none !important;
+    }
+
+    .fee-table th,
+    .fee-table td {
+        border: 1px solid #000 !important;
+        padding: 3px !important;
+        text-align: left;
+        line-height: 1;
+        background: white !important;
+        color: #000 !important;
+        box-shadow: none !important;
+    }
+
+    .fee-table th {
+        font-weight: bold;
+    }
+
+    .fee-table td.amount {
+        text-align: right;
+        font-weight: bold;
+    }
+
+    /* Documents Container */
+    .doc-list {
         font-size: 10pt !important;
+        border: 1px solid #000 !important;
+        padding: 3px !important;
+        background: white !important;
+        box-shadow: none !important;
+        margin: 3px 0 !important;
+        page-break-inside: avoid;
+    }
+
+    .doc-list h4 {
+        font-size: 12pt !important;
         font-weight: bold !important;
+        color: #000 !important;
+        border-bottom: 1px solid #000;
+        margin: 0 0 2px 0 !important;
+        padding: 0 !important;
+        line-height: 1;
     }
 
-    table {
+    .doc-list ul {
+        list-style: none;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .doc-list li {
         font-size: 10pt !important;
+        margin: 1px 0 !important;
+        padding-left: 15px !important;
+        position: relative;
+        color: #000 !important;
+        line-height: 1.1;
     }
 
-    table th {
-        background: #E3F2FD !important;
-        -webkit-print-color-adjust: exact !important;
+    .doc-list li:before {
+        content: "☐";
+        position: absolute;
+        left: 0;
+        font-size: 11pt;
+    }
+
+    /* Declaration section - 12pt font, NO shadow */
+    .declaration {
+        font-size: 12pt !important;
+        line-height: 1.4 !important;
+        border: 1px solid #000 !important;
+        padding: 4px !important;
+        margin: 4px 0 !important;
+        background: white !important;
+        box-shadow: none !important;
+        color: #000 !important;
+        page-break-inside: avoid;
+    }
+
+    .declaration strong {
+        font-size: 12pt !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+
+    .declaration br {
+        display: block;
+        content: "";
+    }
+
+    /* Signature section */
+    .signature-section {
+        display: flex;
+        gap: 25px;
+        margin: 5px 0 !important;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+    }
+
+    .signature-box {
+        flex: 1;
+        text-align: center;
+        border-top: 1px solid #000 !important;
+        padding-top: 12px !important;
+        min-height: 40px;
+        font-size: 12pt;
+        color: #000 !important;
+        box-shadow: none !important;
+    }
+
+    .signature-box label {
+        display: block;
+        font-weight: bold;
+        margin-top: 2px !important;
+        color: #000 !important;
+    }
+
+    /* Sections */
+    .section {
+        width: 100%;
+        margin: 2px 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        border: none !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+
+    .section h2,
+    .section h3 {
+        font-size: 11pt;
+        color: #000 !important;
+        margin: 0 0 2px 0 !important;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+    /* Text alignment */
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+        margin: 2px 0 !important;
+        page-break-after: avoid;
+        color: #000 !important;
+    }
+
+    p {
+        margin: 0 0 2px 0 !important;
+        line-height: 1.2;
+        color: #000 !important;
+    }
+
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10pt;
+        box-shadow: none !important;
+    }
+
+    table th,
+    table td {
+        border: 1px solid #000 !important;
+        padding: 2px 3px !important;
+        line-height: 1;
+        background: white !important;
+        color: #000 !important;
+        box-shadow: none !important;
+    }
+
+    /* Page break control */
+    .form-row,
+    .sibling-entry,
+    .declaration,
+    .signature-section,
+    .doc-list {
+        page-break-inside: avoid;
+    }
+
+    /* Remove padding from containers */
+    .container, .main-container {
+        padding: 0 !important;
+        margin: 0 !important;
     }
 }
 
@@ -1330,33 +1737,62 @@ function proceedToAdmission() {
 
             <div class="section-title">DOCUMENTS REQUIRED FOR ADMISSION</div>
             <div class="doc-list">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <div>
-                        <h4>Student Documents</h4>
-                        <ul>
-                            <li>Digital Birth Certificate (Municipal/Competent Authority) - copy</li>
-                            <li>Previous Class Report Card - copy</li>
-                            <li>Transfer Certificate (TC) duly countersigned (if applicable) - Original</li>
-                            <li>Aadhaar Card of Student - copy</li>
-                            <li>PAN Number (Udise Plus)/Apaar ID/Samagra ID & Family ID (if applicable) – Copy</li>
-                            <li>Passport-size Photo – Student (1) – Color Photo</li>
-                            <li>Digital Caste Certificate of Student (SC/ST/OBC) - Copy</li>
-                            <li>Special Category Documents (EWS / Single Parent / CWSN / Defence / Government Employee) - Copy</li>
-                            <li>Bank Account Details – Student's Passbook Copy – (if applicable)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4>Parent Documents</h4>
-                        <ul>
-                            <li>Aadhaar Card of Father - copy</li>
-                            <li>Aadhaar Card of Mother - copy</li>
-                            <li>Passport-size Photo – Father (1)</li>
-                            <li>Passport-size Photo – Mother (1)</li>
-                            <li>Address Proof (Electricity bill / Rent agreement / Passport, etc.) - copy</li>
-                            <li>Bank Account Details (if required) - copy</li>
-                        </ul>
-                    </div>
-                </div>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                    <thead>
+                        <tr style="background-color: #f0f0f0; border: 1px solid #ccc;">
+                            <th style="padding: 10px; text-align: left; border: 1px solid #ccc; font-weight: bold;">S.No.</th>
+                            <th style="padding: 10px; text-align: left; border: 1px solid #ccc; font-weight: bold;">Student Documents</th>
+                            <th style="padding: 10px; text-align: left; border: 1px solid #ccc; font-weight: bold;">Parent Documents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">1</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Digital Birth Certificate (Municipal/Competent Authority) - copy</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Aadhaar Card of Father - copy</td>
+                        </tr>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">2</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Previous Class Report Card - copy</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Aadhaar Card of Mother - copy</td>
+                        </tr>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">3</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Transfer Certificate (TC) duly countersigned (if applicable) - Original</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Passport-size Photo – Father (1)</td>
+                        </tr>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">4</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Aadhaar Card of Student - copy</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Passport-size Photo – Mother (1)</td>
+                        </tr>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">5</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">PAN Number (Udise Plus)/Apaar ID/Samagra ID & Family ID (if applicable) – Copy</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Address Proof (Electricity bill / Rent agreement / Passport, etc.) - copy</td>
+                        </tr>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">6</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Passport-size Photo – Student (1) – Color Photo</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Bank Account Details (if required) - copy</td>
+                        </tr>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">7</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Digital Caste Certificate of Student (SC/ST/OBC) - Copy</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;"></td>
+                        </tr>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">8</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Special Category Documents (EWS / Single Parent / CWSN / Defence / Government Employee) - Copy</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;"></td>
+                        </tr>
+                        <tr style="border: 1px solid #ccc;">
+                            <td style="padding: 10px; border: 1px solid #ccc;">9</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;">Bank Account Details – Student's Passbook Copy – (if applicable)</td>
+                            <td style="padding: 10px; border: 1px solid #ccc;"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="declaration">
