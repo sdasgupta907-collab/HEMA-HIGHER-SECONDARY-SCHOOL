@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEMA HIGHER SECONDARY SCHOOL - Enquiry Form 2026-2027</title>
-
     <style>
+
         /* ========== HEMA SCHOOL HEADER - EXACT MATCH FROM IMAGE ========== */
         * {
             box-sizing: border-box;
@@ -393,299 +393,7 @@
 
 
         /* PRINT STYLES - HALF A4 WITH LARGER FONTS */
-        @media print {
-            @page {
-                size: A4 portrait;
-                margin: 8mm;
-            }
-
-            input#sno {
-                display: inline-block !important;
-                border: none !important;
-                border-bottom: 1px solid #000 !important;
-                background: white !important;
-                color: #000 !important;
-                font-weight: bold !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-            }
-
-
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
-            body {
-                background: white !important;
-                font-family: Arial, Helvetica, sans-serif !important;
-                font-size: 10pt !important;
-                color: #000 !important;
-                line-height: 1.25 !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
-            .nav-bar, button, .btn, .no-print, .auto-save-indicator {
-                display: none !important;
-            }
-
-            .container {
-                max-width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-            }
-
-            .hema-school-header {
-                background: white !important;
-                border: 1.5px solid #000 !important;
-                padding: 6px 8px !important;
-                margin: 0 0 8px 0 !important;
-                box-shadow: none !important;
-            }
-
-            .header-content {
-                display: flex !important;
-                align-items: center !important;
-                justify-content: space-between !important;
-                gap: 8px !important;
-            }
-
-            .logo-img {
-                width: 52px !important;
-                height: 52px !important;
-            }
-
-            .header-center {
-                flex: 1 !important;
-                text-align: center !important;
-            }
-
-            .school-name {
-                font-size: 14pt !important;
-                font-weight: bold !important;
-                color: #000 !important;
-                margin: 2px 0 !important;
-                letter-spacing: 0.5px !important;
-            }
-
-            .affiliation, .school-info {
-                font-size: 8pt !important;
-                color: #000 !important;
-                margin: 1px 0 !important;
-                line-height: 1.15 !important;
-            }
-
-            .form-container form fieldset:first-of-type {
-                border: none !important;
-                margin: 0 0 8px 0 !important;
-            }
-
-            .form-container form fieldset:first-of-type legend {
-                display: none !important;
-            }
-
-            .form-container form fieldset:first-of-type .form-row {
-                display: grid !important;
-                grid-template-columns: 1fr 2fr 1fr !important;
-                align-items: center !important;
-                margin: 0 0 10px 0 !important;
-                gap: 8px !important;
-            }
-
-            .form-container form fieldset:first-of-type .form-row::before {
-                content: "ENQUIRY FORM 2026-2027" !important;
-                grid-column: 1 / 4 !important;
-                text-align: center !important;
-                font-size: 12pt !important;
-                font-weight: bold !important;
-                text-decoration: underline !important;
-                margin-bottom: 6px !important;
-            }
-
-            legend {
-                display: none !important;
-            }
-
-            fieldset {
-                border: none !important;
-                padding: 0 !important;
-                margin: 0 0 5px 0 !important;
-            }
-
-            .form-row, .row {
-                display: grid !important;
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 8px !important;
-                margin: 5px 0 !important;
-                align-items: baseline !important;
-            }
-
-            .row.half {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-
-            .row.full {
-                grid-template-columns: 1fr !important;
-            }
-
-            .form-group {
-                display: block !important;
-                font-size: 10pt !important;
-            }
-
-            .form-group label {
-                display: inline !important;
-                font-size: 10pt !important;
-                font-weight: normal !important;
-                color: #000 !important;
-                margin-right: 4px !important;
-            }
-
-            .form-group.required label::after {
-                content: "*" !important;
-                color: #000 !important;
-            }
-
-            input[type="text"], input[type="date"], input[type="tel"], select {
-                display: inline !important;
-                border: none !important;
-                border-bottom: 1px solid #000 !important;
-                padding: 0 2px 1px 2px !important;
-                font-size: 10pt !important;
-                background: white !important;
-                color: #000 !important;
-                width: auto !important;
-                min-width: 80px !important;
-            }
-
-            input[readonly] {
-                background: white !important;
-            }
-
-            .gender-group {
-                display: inline-flex !important;
-                gap: 8px !important;
-                align-items: center !important;
-                margin-left: 4px !important;
-            }
-
-            .gender-option {
-                display: inline-flex !important;
-                align-items: center !important;
-                gap: 2px !important;
-            }
-
-            input[type="checkbox"], input[type="radio"] {
-                width: 12px !important;
-                height: 12px !important;
-                margin: 0 !important;
-                border: 1px solid #000 !important;
-                vertical-align: middle !important;
-                -webkit-appearance: none !important;
-                appearance: none !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            input[type="checkbox"]:checked, input[type="radio"]:checked {
-                background: #000 !important;
-            }
-
-            .gender-option label {
-                margin: 0 0 0 2px !important;
-                font-weight: normal !important;
-            }
-
-            .source-section {
-                margin: 5px 0 !important;
-            }
-
-            .source-section label {
-                display: inline !important;
-                font-size: 10pt !important;
-                font-weight: normal !important;
-                margin-right: 8px !important;
-            }
-
-            .source-options, .source-group {
-                display: inline-flex !important;
-                flex-wrap: wrap !important;
-                gap: 8px !important;
-            }
-
-            .source-options label, .source-group label {
-                display: inline-flex !important;
-                align-items: center !important;
-                gap: 2px !important;
-                font-size: 10pt !important;
-                font-weight: normal !important;
-            }
-
-            .referred-section {
-                display: block !important;
-                margin: 5px 0 !important;
-            }
-
-            .referred-section label {
-                display: inline !important;
-                font-size: 10pt !important;
-                margin-right: 4px !important;
-            }
-
-            .referred-options, .referred-group {
-                display: inline-flex !important;
-                flex-wrap: wrap !important;
-                gap: 8px !important;
-                margin-left: 4px !important;
-            }
-
-            .referred-options label, .referred-group label {
-                display: inline-flex !important;
-                align-items: center !important;
-                gap: 2px !important;
-                font-size: 10pt !important;
-                font-weight: normal !important;
-            }
-
-            textarea { border: none !important; border-bottom: 1px solid #000 !important; padding: 0 2px !important; font-size: 11pt !important; width: 100% !important; background: white !important; color: #000 !important; line-height: 1.2 !important; min-height: auto !important; max-height: none !important; height: auto !important; overflow: visible !important; resize: none !important; }
-
-            .sibling-section { margin: 3px 0 !important; padding: 3px 0 !important; border: none !important; background: transparent !important; }
-
-            .sibling-section h3 {
-                font-size: 10pt !important;
-                font-weight: bold !important;
-                margin: 3px 0 !important;
-                color: #000 !important;
-            }
-
-            .age-display {
-                display: inline !important;
-                font-size: 10pt !important;
-                border-bottom: 1px solid #000 !important;
-                padding: 0 2px 1px 2px !important;
-                min-width: 115px !important;
-            }
-
-            .age-info {
-                font-size: 8pt !important;
-                color: #333 !important;
-                font-style: italic !important;
-            }
-
-            * {
-                color: #000 !important;
-            }
-
-            form {
-                page-break-inside: avoid !important;
-            }
-
-            div[style*="background: linear-gradient"] {
-                display: none !important;
-            }
-        }
+        
 
     
         .nav-tabs {
@@ -725,11 +433,7 @@
         }
 
         /* Hide navigation when printing or saving as PDF */
-        @media print {
-            .nav-tabs {
-                display: none !important;
-            }
-        }
+        
 
         @media (max-width: 768px) {
             .nav-tabs {
@@ -741,11 +445,745 @@
                 text-align: center;
             }
         }
+    
+
+
+        /* ========== HEMA SCHOOL HEADER - EXACT MATCH FROM IMAGE ========== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5f5;
+            padding: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Header with blue gradient background - matches image */
+        .hema-school-header {
+            background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%);
+            padding: 20px 15px;
+            margin: 0;
+            border-radius: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color-adjust: exact;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .header-left-logo,
+        .header-right-logo {
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            display: block;
+        }
+
+        .header-center {
+            flex: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .school-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .affiliation {
+            font-size: 14px;
+            color: #FFD700;
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .school-info {
+            font-size: 13px;
+            color: white;
+            margin: 3px 0;
+        }
+
+        /* Container */
+        .container, .main-container, form {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Sections */
+        .section {
+            width: 100%;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #4682B4;
+        }
+
+        .section h2, .section h3 {
+            font-size: 16px;
+            color: #1E3A5F;
+            margin-bottom: 12px;
+            font-weight: bold;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #E3F2FD;
+        }
+
+        /* Form rows */
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group.full-width {
+            flex-basis: 100%;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        /* Inputs */
+        input[type="text"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4682B4;
+            box-shadow: 0 0 0 2px rgba(70, 130, 180, 0.1);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        table th, table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background: #E3F2FD;
+            font-weight: bold;
+            color: #1E3A5F;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        button, .btn {
+            padding: 12px 24px;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+            min-width: 170px;
+            transition: all 0.3s;
+        }
+
+        .btn-print {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-submit {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-register {
+            background: #FF9800;
+            color: white;
+        }
+
+        .btn-reset {
+            background: #9E9E9E;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Navigation tabs */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .nav-tabs a, .nav-tabs button {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .school-name {
+                font-size: 24px;
+            }
+
+            .logo-img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .form-group {
+                min-width: 100%;
+                flex-basis: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        /* ========== PRINT STYLES - A4 WITH COLORED HEADER ========== */
+        
+        }
+    
+        .nav-tabs {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
+        }
+
+        .nav-tabs a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-tabs a.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Hide navigation when printing or saving as PDF */
+        
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-tabs a {
+                text-align: center;
+            }
+        }
+    
+    
+
+        /* OPTIMIZED PRINT STYLES - ONE PAGE WITH 12PT FONT */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 8mm 8mm;
+                orphans: 1;
+                widows: 1;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            html, body {
+                width: 100% !important;
+                height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            body {
+                font-family: Arial, sans-serif !important;
+                font-size: 11pt !important;
+                line-height: 1.15 !important;
+                color: #000 !important;
+                background: white !important;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+
+            /* ===== HEADER - ATTRACTIVE LAYOUT ===== */
+            .hema-school-header {
+                background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
+                padding: 8px 8px !important;
+                margin: 0 !important;
+                border: 2px solid #1E3A5F !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .header-content {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 8px !important;
+                max-width: 100% !important;
+            }
+
+            .header-left-logo,
+            .header-right-logo {
+                flex-shrink: 0 !important;
+            }
+
+            .logo-img {
+                width: 55px !important;
+                height: 55px !important;
+                display: block !important;
+            }
+
+            .header-center {
+                flex: 1 !important;
+                text-align: center !important;
+                color: white !important;
+            }
+
+            .school-name {
+                font-size: 16pt !important;
+                font-weight: bold !important;
+                color: white !important;
+                margin: 0 !important;
+                line-height: 1.1 !important;
+                letter-spacing: 0.5px !important;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+            }
+
+            .affiliation {
+                font-size: 8pt !important;
+                color: #fff !important;
+                margin: 2px 0 0 0 !important;
+                line-height: 1 !important;
+            }
+
+            .school-info {
+                font-size: 7pt !important;
+                color: #ddd !important;
+                margin: 1px 0 0 0 !important;
+                line-height: 1 !important;
+            }
+
+            /* Hide all non-form elements */
+            button, .btn, .no-print, .page-separator, .nav-tabs, .nav-bar,
+            .tab-content, .btn-group, .action-buttons {
+                display: none !important;
+            }
+
+            .container, .form-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                flex: 1 !important;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+
+            form {
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            /* ===== FORM TITLE ===== */
+            .form-title, h2 {
+                text-align: center !important;
+                font-size: 12pt !important;
+                font-weight: bold !important;
+                margin: 4px 0 !important;
+                padding: 2px 0 !important;
+                border-top: 2px solid #000 !important;
+                border-bottom: 2px solid #000 !important;
+                color: #000 !important;
+            }
+
+            /* ===== FIELDSETS - NO BORDERS ===== */
+            fieldset {
+                border: none !important;
+                padding: 0 !important;
+                margin: 2px 0 !important;
+                page-break-inside: avoid !important;
+            }
+
+            fieldset legend {
+                display: none !important;
+            }
+
+            /* ===== FORM ROWS - COMPACT ===== */
+            .form-row, .row {
+                display: grid !important;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+                gap: 4px 8px !important;
+                margin: 2px 0 !important;
+                align-items: baseline !important;
+            }
+
+            .form-row.two-column {
+                grid-template-columns: 1fr 1fr !important;
+            }
+
+            .form-row.three-column {
+                grid-template-columns: 1fr 1fr 1fr !important;
+            }
+
+            .form-group {
+                display: flex !important;
+                align-items: center !important;
+                gap: 3px !important;
+                font-size: 11pt !important;
+                flex-wrap: wrap !important;
+            }
+
+            .form-group label {
+                font-weight: bold !important;
+                color: #000 !important;
+                font-size: 11pt !important;
+                white-space: nowrap !important;
+                margin: 0 !important;
+            }
+
+            .form-group.full-width {
+                grid-column: 1 / -1 !important;
+            }
+
+            /* ===== INPUT FIELDS ===== */
+            input[type="text"],
+            input[type="date"],
+            input[type="tel"],
+            input[type="email"],
+            input[type="number"],
+            select,
+            textarea {
+                border: none !important;
+                border-bottom: 1px solid #000 !important;
+                padding: 0 2px !important;
+                font-size: 11pt !important;
+                background: transparent !important;
+                color: #000 !important;
+                font-family: Arial, sans-serif !important;
+                display: inline-block !important;
+                width: auto !important;
+                min-width: 60px !important;
+                height: 16px !important;
+                line-height: 1 !important;
+            }
+
+            input[type="text"]:focus,
+            input[type="date"]:focus,
+            input[type="tel"]:focus,
+            select:focus {
+                outline: none !important;
+                border-bottom: 1px solid #000 !important;
+            }
+
+            textarea {
+                width: 100% !important;
+                min-height: 20px !important;
+                max-height: 30px !important;
+                resize: none !important;
+                overflow: hidden !important;
+            }
+
+            /* ===== RADIO & CHECKBOX ===== */
+            input[type="checkbox"],
+            input[type="radio"] {
+                width: 10px !important;
+                height: 10px !important;
+                margin: 0 2px 0 0 !important;
+                border: 1px solid #000 !important;
+                vertical-align: middle !important;
+                accent-color: #000 !important;
+            }
+
+            .gender-group, .source-group, .referred-group {
+                display: inline-flex !important;
+                gap: 4px !important;
+                align-items: center !important;
+            }
+
+            /* ===== SIBLING SECTION - COMPACT ===== */
+            .sibling-section {
+                margin: 2px 0 !important;
+                padding: 0 !important;
+                background: none !important;
+                border: none !important;
+            }
+
+            .sibling-section h3 {
+                font-size: 10pt !important;
+                font-weight: bold !important;
+                margin: 2px 0 1px 0 !important;
+                color: #000 !important;
+                display: block !important;
+            }
+
+            .age-display {
+                display: inline !important;
+                border: none !important;
+                border-bottom: 1px solid #000 !important;
+                padding: 0 2px !important;
+                background: transparent !important;
+                font-size: 11pt !important;
+                min-width: 40px !important;
+            }
+
+            .age-info {
+                font-size: 7pt !important;
+                color: #666 !important;
+                font-style: italic !important;
+                margin-left: 2px !important;
+            }
+
+            /* ===== FEE DETAILS SECTION ===== */
+            .fee-calculator-section {
+                margin-top: 3px !important;
+                page-break-inside: avoid !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+
+            .fee-calculator-section legend {
+                display: block !important;
+                font-size: 11pt !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                margin: 3px 0 1px 0 !important;
+                background: transparent !important;
+                color: #000 !important;
+                border: none !important;
+                border-bottom: 1px solid #000 !important;
+                padding: 1px 0 1px 0 !important;
+            }
+
+            /* Hide fee input controls */
+            .fee-input-group, .fee-class-select, select[id*="fee"],
+            .calculate-btn, .fee-input {
+                display: none !important;
+            }
+
+            /* ===== TABLES - COMPACT ===== */
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                margin: 2px 0 !important;
+                font-size: 10pt !important;
+                page-break-inside: avoid !important;
+            }
+
+            table th,
+            table td {
+                border: 1px solid #000 !important;
+                padding: 2px 3px !important;
+                text-align: left !important;
+                color: #000 !important;
+                background: white !important;
+                line-height: 1.1 !important;
+            }
+
+            table th {
+                font-weight: bold !important;
+                text-align: center !important;
+                background: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            table td:last-child {
+                text-align: right !important;
+            }
+
+            /* ===== DOCUMENT CHECKLIST ===== */
+            .document-checklist,
+            .documents-section {
+                margin-top: 2px !important;
+                page-break-inside: avoid !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+
+            .document-checklist h3,
+            .documents-section h3 {
+                font-size: 10pt !important;
+                font-weight: bold !important;
+                margin: 2px 0 1px 0 !important;
+                border-bottom: 1px solid #000 !important;
+                color: #000 !important;
+                padding: 1px 0 !important;
+            }
+
+            .document-item {
+                font-size: 10pt !important;
+                margin: 1px 0 !important;
+                line-height: 1.1 !important;
+                page-break-inside: avoid !important;
+            }
+
+            .document-item input[type="checkbox"] {
+                width: 10px !important;
+                height: 10px !important;
+                margin: 0 3px 0 0 !important;
+                vertical-align: middle !important;
+            }
+
+            /* ===== IMPORTANT NOTES ===== */
+            .important-notes,
+            .fee-notes {
+                font-size: 9pt !important;
+                margin: 2px 0 !important;
+                line-height: 1.1 !important;
+                padding: 0 !important;
+            }
+
+            .important-notes ul,
+            .fee-notes ul {
+                margin: 1px 0 1px 12px !important;
+                padding: 0 !important;
+            }
+
+            .important-notes li,
+            .fee-notes li {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* ===== HIDE UNNECESSARY ELEMENTS ===== */
+            .nav-tabs, .nav-content, .tab-pane,
+            .btn-primary, .btn-secondary, .btn-success,
+            .modal, .dropdown, .alert {
+                display: none !important;
+            }
+
+            /* ===== FOOTER ===== */
+            .school-footer {
+                margin-top: 2px !important;
+                padding: 2px 0 !important;
+                border-top: 2px solid #000 !important;
+                font-size: 8pt !important;
+                text-align: center !important;
+                color: #000 !important;
+            }
+
+            /* ===== SPACING REDUCTION ===== */
+            h1, h2, h3, h4, h5, h6 {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            p {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            br {
+                display: none !important;
+            }
+        }
+
     </style>
 </head>
 <body>
-
-<!-- HEMA School Header with Blue Background -->
 <div class="hema-school-header">
     <div class="header-content">
         <div class="header-left-logo">
@@ -762,23 +1200,18 @@
             <img src="empathy-logo.png" alt="Empathy Logo" class="logo-img">
         </div>
     </div>
+
+
+
+<!-- HEMA School Header with Blue Background -->
+
 </div>
 
 <div class="container">
-    <div class="nav-tabs">
-        <a href="enquiry.html" class="active">📋 Enquiry</a>
-        <a href="registration.html">📝 Registration</a>
-        <a href="admission.html">✅ Admission</a>
-        <a href="data.html">📊 Records</a>
-    </div>
+    
 
 
-    <div class="nav-bar no-print">
-        <a href="enquiry.html" class="active">📋 Enquiry</a>
-        <a href="registration.html">📝 Registration</a>
-        <a href="admission.html">✅ Admission</a>
-        <a href="data.html">📊 Records</a>
-    </div>
+    
 
     <div class="form-container">
         <form id="enquiryForm">
@@ -879,11 +1312,11 @@
                         <label for="dob">DATE OF BIRTH</label>
                         <input type="date" id="dob" name="dob" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hide-print">
                         <label>CURRENT AGE</label>
                         <div id="ageDisplay" class="age-display">-- Select DOB --</div>
                     </div>
-                    <div class="form-group" id="ageAsOnGroup" style="display:none;">
+                    <div class="form-group hide-print" id="ageAsOnGroup" style="display:none;">
                         <label id="ageAsOnLabel">AGE AS ON</label>
                         <div id="ageAsOnDisplay" class="age-display">--</div>
                         <div class="age-info" id="ageAsOnInfo"></div>
@@ -1110,26 +1543,281 @@
                     </div>
                 </div>
             </fieldset>
+<!-- FEE DETAILS SECTION -->
+            <fieldset class="fee-calculator-section">
+                <legend>💰 FEE DETAILS - ACADEMIC SESSION 2026-2027</legend>
+
+                <!-- Class Selection -->
+                <div class="fee-input-group">
+                    <label for="feeClass"><strong>Select Class</strong></label>
+                    <select id="feeClass" onchange="calculateFees()">
+                        <option value="">-- Select Class --</option>
+                        <option value="nursery">Nursery / KG-I / KG-II</option>
+                        <option value="1">Class I</option>
+                        <option value="2">Class II</option>
+                        <option value="3">Class III</option>
+                        <option value="4">Class IV-V</option>
+                        <option value="6">Class VI-VIII</option>
+                        <option value="9">Class IX-X</option>
+                        <option value="11sci">Class XI-XII Science - PCM/PCB (Optional)</option>
+                        <option value="11sci2">Class XI-XII Science - Hindi/Psy</option>
+                        <option value="11comm">Class XI-XII Commerce - (Optional)</option>
+                        <option value="11hum">Class XI-XII Humanities</option>
+                    </select>
+                </div>
+
+                <!-- Sibling Checkbox -->
+                <div class="fee-input-group sibling-checkbox">
+                    <label>
+                        <input type="checkbox" id="siblingDiscount" onchange="calculateFees()">
+                        <span><strong>2nd Child Discount</strong> - 50% off Admission Fee & Tuition Fee</span>
+                    </label>
+                </div>
+
+                <!-- Fee Display Tables -->
+                <div id="feeDisplay" style="display: none;">
+                    <!-- Admission Fees -->
+                    <div class="fee-table-container">
+                        <h4>ONE-TIME ADMISSION FEES</h4>
+                        <table class="fee-display-table">
+                            <thead>
+                            <tr>
+                                <th>S.NO.</th>
+                                <th>PARTICULAR</th>
+                                <th style="text-align: right;">AMOUNT (₹)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>ADMISSION FEE</td>
+                                <td style="text-align: right;" id="admissionFee">0</td>
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>DEVELOPMENT FUND</td>
+                                <td style="text-align: right;" id="developmentFund">5,000</td>
+                            </tr>
+                            <tr>
+                                <td>3.</td>
+                                <td>CAUTION MONEY DEPOSIT</td>
+                                <td style="text-align: right;" id="cautionMoney">3,000</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="2"><strong>TOTAL ADMISSION FEES</strong></td>
+                                <td style="text-align: right;"><strong id="totalAdmission">0</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Annual Fees -->
+                    <div class="fee-table-container">
+                        <h4>ANNUAL FEES (9 MONTHS - APRIL TO FEBRUARY)</h4>
+                        <table class="fee-display-table">
+                            <thead>
+                            <tr>
+                                <th>S.NO.</th>
+                                <th>PARTICULAR</th>
+                                <th style="text-align: right;">AMOUNT (₹)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>4.</td>
+                                <td>TUITION FEE (9 Installments)</td>
+                                <td style="text-align: right;" id="tuitionFee">0</td>
+                            </tr>
+                            <tr>
+                                <td>5.</td>
+                                <td>ANNUAL CHARGES (9 Installments)</td>
+                                <td style="text-align: right;" id="annualCharges">0</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="2"><strong>TOTAL ANNUAL FEES</strong></td>
+                                <td style="text-align: right;"><strong id="totalAnnual">0</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Monthly Installment -->
+                    <div class="fee-table-container">
+                        <h4>MONTHLY INSTALLMENT</h4>
+                        <table class="fee-display-table">
+                            <tbody>
+                            <tr>
+                                <td><strong>Monthly Payment (9 months)</strong></td>
+                                <td style="text-align: right;"><strong id="monthlyInstallment">0</strong></td>
+                            </tr>
+                            <tr style="background: #fff9e6;">
+                                <td colspan="2" style="text-align: center; font-style: italic; font-size: 13px;">📅 Payment Due: 5th to 15th of every month</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Grand Total -->
+                    <div class="grand-total-display hide-print">
+                        <h3>🎓 TOTAL FEES FOR ACADEMIC YEAR 2026-2027</h3>
+                        <div class="grand-total-row">
+                            <span>One-Time Admission Fees</span>
+                            <span id="grandAdmission">0</span>
+                        </div>
+                        <div class="grand-total-row">
+                            <span>Annual Fees (9 Months)</span>
+                            <span id="grandAnnual">0</span>
+                        </div>
+                        <div class="grand-total-row grand-sum">
+                            <span><strong>GRAND TOTAL</strong></span>
+                            <span><strong id="grandTotal">0</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Discount Info -->
+                    <div class="discount-display hide-print">
+                        <h4>🎁 ONE-TIME PAYMENT DISCOUNTS (on Annual Fees only)</h4>
+                        <div class="discount-row">
+                            <div class="discount-box">
+                                <strong>8% Discount (By 30th April 2026)</strong>
+                                <p>Save: ₹ <span id="discount8">0</span></p>
+                                <p>Pay: ₹ <span id="after8Discount">0</span></p>
+                            </div>
+                            <div class="discount-box">
+                                <strong>5% Discount (By 30th June 2026)</strong>
+                                <p>Save: ₹ <span id="discount5">0</span></p>
+                                <p>Pay: ₹ <span id="after5Discount">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Important Notes -->
+                    <div class="fee-notes-display hide-print">
+                        <h4>📌 IMPORTANT NOTES</h4>
+                        <ul>
+                            <li>Registration Fee: ₹1,500/- (Non-refundable)</li>
+                            <li>Sibling Discount: 50% on Admission & Tuition for 2nd child</li>
+                            <li>Late Payment: ₹10/day fine after due date</li>
+                            <li>Caution Money: Refundable at TC issuance</li>
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- REQUIRED DOCUMENTS -->
+            <fieldset class="hide-print">
+                <legend>📄 DOCUMENTS REQUIRED FOR ADMISSION</legend>
+                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Please check the documents that will be provided at the time of admission</p>
+
+                <style>
+                    .documents-table-new {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-bottom: 15px;
+                        background: white;
+                    }
+                    .documents-table-new thead {
+                        background: #000;
+                        color: white;
+                    }
+                    .documents-table-new th {
+                        padding: 10px;
+                        text-align: left;
+                        font-weight: bold;
+                        border: 1px solid #000;
+                        font-size: 13px;
+                    }
+                    .documents-table-new td {
+                        padding: 10px;
+                        border: 1px solid #000;
+                        font-size: 12px;
+                        vertical-align: top;
+                    }
+                    .sno-col { width: 8%; text-align: center; font-weight: bold; }
+                    .student-docs-col { width: 46%; }
+                    .parent-docs-col { width: 46%; }
+                    @media print {
+                        .documents-table-new { page-break-inside: avoid !important; }
+                    }
+                </style>
+
+                <table class="documents-table-new">
+                    <thead>
+                        <tr>
+                            <th class="sno-col">S.No.</th>
+                            <th class="student-docs-col">Student Documents</th>
+                            <th class="parent-docs-col">Parent Documents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="sno-col">1</td><td>Digital Birth Certificate (Municipal/Competent Authority) - copy</td><td>Aadhaar Card of Father - copy</td></tr>
+                        <tr><td class="sno-col">2</td><td>Previous Class Report Card - copy</td><td>Aadhaar Card of Mother - copy</td></tr>
+                        <tr><td class="sno-col">3</td><td>Transfer Certificate (TC) duly countersigned (if applicable) - Original</td><td>Passport-size Photo – Father (1)</td></tr>
+                        <tr><td class="sno-col">4</td><td>Aadhaar Card of Student - copy</td><td>Passport-size Photo – Mother (1)</td></tr>
+                        <tr><td class="sno-col">5</td><td>PAN Number (Udise Plus)/Apaar ID/Samagra ID & Family ID (if applicable) – Copy</td><td>Address Proof (Electricity bill / Rent agreement / Passport, etc.) - copy</td></tr>
+                        <tr><td class="sno-col">6</td><td>Passport-size Photo – Student (1) – Color Photo</td><td>Bank Account Details (if required) - copy</td></tr>
+                        <tr><td class="sno-col">7</td><td>Digital Caste Certificate of Student (SC/ST/OBC) - Copy</td><td></td></tr>
+                        <tr><td class="sno-col">8</td><td>Special Category Documents (EWS / Single Parent / CWSN / Defence / Government Employee) - Copy</td><td></td></tr>
+                        <tr><td class="sno-col">9</td><td>Bank Account Details – Student's Passbook Copy – (if applicable)</td><td></td></tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <!-- BUTTONS -->
+            <div class="buttons no-print" style="display: flex; gap: 15px; margin-top: 30px; justify-content: center; flex-wrap: wrap;">
+                
+                
+                
+                <button type="reset" class="btn-reset" style="background: #f44336; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
+                    🔄 CLEAR FORM
+                </button>
+            </div>
+        
+
+    <!-- PAGE 2 NAVIGATION -->
+    
+
+    
+    <!-- NEW ACTION BUTTONS -->
+    <div style="text-align: center; margin: 30px 0; padding: 20px; background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); border-radius: 10px;">
+        <button type="button" onclick="window.print()" style="background: #2196F3; color: white; padding: 14px 28px; font-size: 15px; border-radius: 8px; cursor: pointer; border: none; font-weight: 600; min-width: 200px; margin: 10px; box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);">
+            🖨️ PRINT / SAVE AS PDF
+        </button>
+        <button type="button" onclick="saveEnquiry()" style="background: #4CAF50; color: white; padding: 14px 28px; font-size: 15px; border-radius: 8px; cursor: pointer; border: none; font-weight: 600; min-width: 200px; margin: 10px; box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);">
+            💾 SAVE ENQUIRY
+        </button>
+        <button type="button" onclick="window.location.href='registration.html'" style="background: linear-gradient(135deg, #FF6B6B 0%, #E84545 100%); color: white; padding: 14px 28px; font-size: 15px; border-radius: 8px; cursor: pointer; border: none; font-weight: 600; min-width: 200px; margin: 10px; box-shadow: 0 4px 8px rgba(232, 69, 69, 0.3);">
+            ➡️ PROCEED TO REGISTRATION
+        </button>
+    </div>
+
+
+            <!-- PARENT/GUARDIAN SIGNATURE -->
+            <fieldset class="hide-print">
+                <legend>✍️ PARENT/GUARDIAN SIGNATURE</legend>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div style="text-align: center; width: 45%;">
+                        <div style="border-bottom: 2px solid #333; height: 50px; margin-bottom: 5px;"></div>
+                        <p style="font-weight: bold; margin: 0; font-size: 12px;">Date</p>
+                    </div>
+                    <div style="text-align: center; width: 45%;">
+                        <div style="border-bottom: 2px solid #333; height: 50px; margin-bottom: 5px;"></div>
+                        <p style="font-weight: bold; margin: 0; font-size: 12px;">Signature of Parent/Guardian</p>
+                    </div>
+                </div>
+            </fieldset>
+
+</form>
+    </div>
+    </div>
+
 
     <!-- PAGE 1 NAVIGATION -->
     
     <!-- BUTTONS SECTION -->
-    <div class="buttons no-print" style="display: flex; gap: 15px; margin-top: 30px; justify-content: center; flex-wrap: wrap;">
-        <button type="button" onclick="printForm()" class="btn-print" style="background: #2196F3; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
-            🖨️ PRINT / SAVE AS PDF
-        </button>
-        <button type="button" onclick="saveEnquiry()" class="btn-submit" style="background: #4CAF50; color: white; padding: 12px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; border: none; font-weight: 600; min-width: 170px;">
-            💾 SAVE ENQUIRY
-        </button>
-    </div>
+    
 
-<div style="text-align: center; margin: 30px auto; padding: 25px; max-width: 1200px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-        <h3 style="color: #1976d2; margin: 0 0 20px 0; font-size: 20px; font-weight: bold;">📄 Page 1 of 2 - Personal Information Complete</h3>
-        <button type="button" onclick="goToPage2()" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 16px 45px; font-size: 17px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 12px rgba(76,175,80,0.3); transition: all 0.3s;">
-            ➡️ NEXT: FEE CALCULATOR & DOCUMENTS
-        </button>
-        <p style="margin-top: 15px; color: #555; font-size: 14px; font-style: italic;">✅ All data auto-saved and will be carried forward</p>
-    </div>
+
 
     </form>
     </div>
@@ -1329,5 +2017,991 @@ function goToPage2() {
     window.location.href = 'enquiry-page2.html';
 }
 </script>
+
+
+
+
+<!-- HEMA School Header with Blue Background -->
+
+</div>
+    <div class="container">
+    
+
+
+    <div class="form-container">
+
+    
+    </div>
+
+    <form id="enquiryForm">
+<script>
+    // FEE DATA
+    const feeData = {
+        'nursery': { admission: 27000, development: 5000, caution: 3000, tuition: 14645, annual: 6955, monthly: 2400 },
+        '1': { admission: 30000, development: 5000, caution: 3000, tuition: 21296, annual: 9754, monthly: 3450 },
+        '2': { admission: 30000, development: 5000, caution: 3000, tuition: 22634, annual: 13906, monthly: 4060 },
+        '3': { admission: 30000, development: 5000, caution: 3000, tuition: 23954, annual: 15304, monthly: 4362 },
+        '4': { admission: 30000, development: 5000, caution: 3000, tuition: 26620, annual: 17390, monthly: 4890 },
+        '6': { admission: 41000, development: 5000, caution: 3000, tuition: 29280, annual: 17385, monthly: 5185 },
+        '9': { admission: 55000, development: 5000, caution: 3000, tuition: 29286, annual: 23634, monthly: 5880 },
+        '11sci': { admission: 62000, development: 5000, caution: 3000, tuition: 29280, annual: 25044, monthly: 6036 },
+        '11sci2': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 18090, monthly: 5264 },
+        '11comm': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 23526, monthly: 5868 },
+        '11hum': { admission: 62000, development: 5000, caution: 3000, tuition: 29290, annual: 16700, monthly: 5110 }
+    };
+
+    function formatCurrency(amount) {
+        return amount.toLocaleString('en-IN');
+    }
+
+    function calculateFees() {
+        const selectedClass = document.getElementById('feeClass').value;
+        const isSibling = document.getElementById('siblingDiscount').checked;
+        const feeDisplay = document.getElementById('feeDisplay');
+
+        if (!selectedClass) {
+            feeDisplay.style.display = 'none';
+            return;
+        }
+
+        feeDisplay.style.display = 'block';
+
+        const fees = feeData[selectedClass];
+        let admissionFee = fees.admission;
+        let tuitionFee = fees.tuition;
+
+        if (isSibling) {
+            admissionFee = Math.round(fees.admission * 0.5);
+            tuitionFee = Math.round(fees.tuition * 0.5);
+        }
+
+        const developmentFund = fees.development;
+        const cautionMoney = fees.caution;
+        const annualCharges = fees.annual;
+        // Calculate monthly installment based on discounted tuition fee
+        let monthlyInstallment = fees.monthly;
+        if (isSibling) {
+            // Monthly installment should be based on discounted tuition + annual charges / 9
+            monthlyInstallment = Math.round((tuitionFee + annualCharges) / 9);
+        }
+
+        const totalAdmission = admissionFee + developmentFund + cautionMoney;
+        const totalAnnual = tuitionFee + annualCharges;
+        const grandTotal = totalAdmission + totalAnnual;
+
+        const discount8Percent = Math.round(totalAnnual * 0.08);
+        const discount5Percent = Math.round(totalAnnual * 0.05);
+        const after8Discount = totalAdmission + (totalAnnual - discount8Percent);
+        const after5Discount = totalAdmission + (totalAnnual - discount5Percent);
+
+        document.getElementById('admissionFee').textContent = formatCurrency(admissionFee);
+        document.getElementById('developmentFund').textContent = formatCurrency(developmentFund);
+        document.getElementById('cautionMoney').textContent = formatCurrency(cautionMoney);
+        document.getElementById('totalAdmission').textContent = formatCurrency(totalAdmission);
+
+        document.getElementById('tuitionFee').textContent = formatCurrency(tuitionFee);
+        document.getElementById('annualCharges').textContent = formatCurrency(annualCharges);
+        document.getElementById('totalAnnual').textContent = formatCurrency(totalAnnual);
+        document.getElementById('monthlyInstallment').textContent = formatCurrency(monthlyInstallment);
+
+        document.getElementById('grandAdmission').textContent = formatCurrency(totalAdmission);
+        document.getElementById('grandAnnual').textContent = formatCurrency(totalAnnual);
+        document.getElementById('grandTotal').textContent = formatCurrency(grandTotal);
+
+        document.getElementById('discount8').textContent = formatCurrency(discount8Percent);
+        document.getElementById('after8Discount').textContent = formatCurrency(after8Discount);
+        document.getElementById('discount5').textContent = formatCurrency(discount5Percent);
+        document.getElementById('after5Discount').textContent = formatCurrency(after5Discount);
+    }
+
+    // AGE CALCULATION
+    function calculateAge(dob, asOfDate) {
+        const dobDate = new Date(dob);
+        const refDate = asOfDate ? new Date(asOfDate) : new Date();
+
+        let years = refDate.getFullYear() - dobDate.getFullYear();
+        let months = refDate.getMonth() - dobDate.getMonth();
+        let days = refDate.getDate() - dobDate.getDate();
+
+        if (days < 0) {
+            months--;
+            days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        return { years, months, days };
+    }
+
+    function updateAgeDisplays() {
+        const dob = document.getElementById('dob').value;
+        const selectedClass = document.getElementById('classApplied').value;
+
+        if (!dob) {
+            document.getElementById('ageDisplay').innerHTML = "-- Select DOB --";
+            document.getElementById('ageAsOnGroup').style.display = 'none';
+            return;
+        }
+
+        // Current age
+        const currentAge = calculateAge(dob);
+        document.getElementById('ageDisplay').innerHTML = `<strong>${currentAge.years}</strong> Years <strong>${currentAge.months}</strong> Months <strong>${currentAge.days}</strong> Days`;
+
+        // Age as on specific date based on class
+        const ageAsOnGroup = document.getElementById('ageAsOnGroup');
+        const ageAsOnLabel = document.getElementById('ageAsOnLabel');
+        const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
+        const ageAsOnInfo = document.getElementById('ageAsOnInfo');
+
+        if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
+            // Age as on 31 July 2026
+            const ageAsOn31July = calculateAge(dob, '2026-07-31');
+            ageAsOnGroup.style.display = 'block';
+            ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
+            ageAsOnDisplay.innerHTML = `<strong>${ageAsOn31July.years}</strong> Y <strong>${ageAsOn31July.months}</strong> M <strong>${ageAsOn31July.days}</strong> D`;
+            ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
+        } else if (selectedClass === 'I') {
+            // Age as on 30 Sept 2026
+            const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
+            ageAsOnGroup.style.display = 'block';
+            ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
+            ageAsOnDisplay.innerHTML = `<strong>${ageAsOn30Sept.years}</strong> Y <strong>${ageAsOn30Sept.months}</strong> M <strong>${ageAsOn30Sept.days}</strong> D`;
+            ageAsOnInfo.textContent = 'For Class I admission';
+        } else {
+            ageAsOnGroup.style.display = 'none';
+        }
+    }
+
+    document.getElementById('dob').addEventListener('change', updateAgeDisplays);
+    document.getElementById('classApplied').addEventListener('change', updateAgeDisplays);
+
+    // AUTO-UPPERCASE
+    document.querySelectorAll('.uppercase').forEach(input => {
+        input.addEventListener('input', function () {
+            this.value = this.value.toUpperCase();
+        });
+    });
+
+    // SET TODAY'S DATE
+    document.getElementById('date').valueAsDate = new Date();
+
+    // ✅ AUTO-GENERATE S.NO STARTING FROM 2026001
+    window.addEventListener('load', function () {
+        let records = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
+        const nextNum = 2026001 + records.length;
+        document.getElementById('sno').value = nextNum.toString();
+    });
+
+    // PRINT FUNCTION
+    function printForm() {
+        window.print();
+    }
+
+    // SAVE ENQUIRY FUNCTION
+    
+// LOAD PAGE 1 DATA AND POPULATE SUMMARY
+window.addEventListener('load', function() {
+    const page1Data = JSON.parse(localStorage.getItem('enquiryPage1') || '{}');
+
+    // Populate summary
+    document.getElementById('summary-sno').textContent = page1Data.sno || '-';
+    document.getElementById('summary-date').textContent = page1Data.date ? 
+        new Date(page1Data.date).toLocaleDateString('en-IN') : 'DD/MM/YYYY';
+    document.getElementById('summary-student-name').textContent = 
+        [page1Data.studentFirst, page1Data.studentMiddle, page1Data.studentSurname]
+        .filter(Boolean).join(' ') || '-';
+    document.getElementById('summary-class').textContent = page1Data.classApplied || '-';
+    document.getElementById('summary-father').textContent = 
+        [page1Data.fatherFirst, page1Data.fatherMiddle, page1Data.fatherSurname]
+        .filter(Boolean).join(' ') || '-';
+    document.getElementById('summary-mobile').textContent = page1Data.fatherMobile || '-';
+
+    // Auto-trigger fee calculation
+    if (page1Data.classApplied) {
+        const feeClassField = document.getElementById('feeClass');
+        if (feeClassField) {
+            // Map classApplied to feeClass options
+            const classMap = {
+                'NURSERY': 'nursery',
+                'KG I': 'nursery',
+                'KG II': 'nursery',
+                'I': '1',
+                'II': '2',
+                'III': '3',
+                'IV': '4',
+                'V': '4',
+                'VI': '6',
+                'VII': '6',
+                'VIII': '6',
+                'IX': '9',
+                'X': '9',
+                'XI': '11sci',
+                'XII': '11sci'
+            };
+            feeClassField.value = classMap[page1Data.classApplied] || '';
+            setTimeout(function() {
+                if (typeof calculateFees === 'function') calculateFees();
+            }, 300);
+        }
+    }
+
+    console.log('✅ Page 2 loaded with Page 1 data');
+});
+
+
+    function saveCompleteEnquiry() {
+        try {
+            // Get page 1 data
+            const page1Data = JSON.parse(localStorage.getItem('enquiryPage1')) || {};
+
+            // Get form data from page 2
+            const form = document.getElementById('enquiryForm');
+            if (!form) {
+                alert('ERROR: Form not found!');
+                return false;
+            }
+
+            const formData = new FormData(form);
+            const page2Data = {};
+            for (let [key, value] of formData.entries()) {
+                page2Data[key] = value;
+            }
+
+            // Merge both pages
+            const completeData = {...page1Data, ...page2Data};
+
+            // Add metadata
+            completeData.recordId = 'ENQ-' + Date.now();
+            completeData.submittedDate = new Date().toLocaleDateString('en-IN');
+            completeData.submittedTime = new Date().toLocaleTimeString('en-IN');
+            completeData.timestamp = new Date().toISOString();
+
+            // Add fee details safely
+            const feeClassEl = document.getElementById('feeClass');
+            const grandTotalEl = document.getElementById('grandTotal');
+            const ageDisplayEl = document.getElementById('ageDisplay');
+
+            completeData.feeClass = feeClassEl ? feeClassEl.value : '';
+            completeData.grandTotal = grandTotalEl ? grandTotalEl.textContent : '0';
+            completeData.currentAge = ageDisplayEl ? ageDisplayEl.textContent : '';
+
+            // Get document checkboxes
+            for (let i = 1; i <= 10; i++) {
+                const doc = document.getElementById('doc' + i);
+                if (doc && doc.checked) {
+                    completeData['doc' + i] = doc.value;
+                }
+            }
+
+            // Save to localStorage
+            let enquiries = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+            enquiries.unshift(completeData);
+            localStorage.setItem('enquiryRecords', JSON.stringify(enquiries));
+            localStorage.setItem('currentEnquiry', JSON.stringify(completeData));
+
+            alert('SUCCESS! Complete Enquiry Saved! ' + completeData.recordId);
+            console.log('Complete enquiry saved:', completeData);
+
+            // Clear Page 1 data
+            localStorage.removeItem('enquiryPage1');
+
+            return true;
+        } catch (error) {
+            console.error('Error in saveCompleteEnquiry:', error);
+            alert('ERROR: Failed to save - ' + error.message);
+            return false;
+        }
+    }
+
+
+    function saveEnquiry() {
+
+        console.log('Saving Enquiry...');
+
+        try {
+            const form = document.getElementById('enquiryForm');
+
+            // Validate using HTML5 validation
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+
+            // Get ALL form data using FormData
+            const formData = new FormData(form);
+            const enquiryData = {};
+
+            // Convert FormData to object
+            for (let [key, value] of formData.entries()) {
+                enquiryData[key] = value;
+            }
+
+            // Add metadata
+            enquiryData.submittedDate = new Date().toLocaleDateString('en-IN');
+            enquiryData.submittedTime = new Date().toLocaleTimeString('en-IN');
+            enquiryData.recordId = 'ENQ-' + Date.now();
+
+            // Add fee details from calculator
+            enquiryData.feeClass = document.getElementById('feeClass').value;
+            enquiryData.grandTotal = document.getElementById('grandTotal').textContent;
+            enquiryData.currentAge = document.getElementById('ageDisplay').textContent;
+            enquiryData.timestamp = new Date().toISOString();
+
+            // Get existing enquiries
+            let enquiries = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
+
+            // Add new enquiry
+            enquiries.unshift(enquiryData);
+
+            // Save to localStorage
+            localStorage.setItem('enquiryRecords', JSON.stringify(enquiries));
+
+            // Also save as current for registration
+            localStorage.setItem('currentEnquiry', JSON.stringify(enquiryData));
+
+            console.log('Enquiry saved successfully!', enquiryData);
+            alert(`✅ SUCCESS! Enquiry saved successfully! ID: ${enquiryData.recordId}`);
+
+            return true;
+        } catch (error) {
+            console.error('Error saving enquiry:', error);
+            alert('❌ ERROR: Failed to save - ' + error.message);
+            return false;
+        }
+    }
+
+    // PROCEED TO REGISTRATION
+    
+    function proceedToRegistration() {
+        console.log('proceedToRegistration called');
+
+        // First save the enquiry data
+        const saved = saveCompleteEnquiry();
+
+        if (saved) {
+            console.log('Data saved successfully, proceeding to registration...');
+            alert('Proceeding to Registration Form... enquiry data will be automatically filled!');
+
+            // Small delay to ensure data is saved, then redirect
+            setTimeout(function() {
+                window.location.href = 'registration.html';
+            }, 500);
+        } else {
+            console.log('Save failed, not proceeding to registration');
+        }
+    }
+
+    </script>
+
+
+
+<script>
+
+// S.NO AUTO-INCREMENT - WORKING VERSION
+(function() {
+    // Run immediately when script loads
+    var snoField = document.getElementById('sno');
+
+    if (snoField) {
+        var lastSNO = localStorage.getItem('lastEnquirySNO');
+
+        if (!lastSNO || lastSNO === 'null' || lastSNO === '') {
+            lastSNO = 2026000;
+        } else {
+            lastSNO = parseInt(lastSNO, 10);
+        }
+
+        var newSNO = lastSNO + 1;
+        snoField.value = newSNO;
+        localStorage.setItem('lastEnquirySNO', newSNO);
+
+        console.log('✅ S.NO generated: ' + newSNO);
+    } else {
+        console.error('❌ S.NO field not found!');
+    }
+})();
+
+</script>
+
+<script>
+
+    // FEE DATA
+    const feeData = {
+        'nursery': { admission: 27000, development: 5000, caution: 3000, tuition: 14645, annual: 6955, monthly: 2400 },
+        '1': { admission: 30000, development: 5000, caution: 3000, tuition: 21296, annual: 9754, monthly: 3450 },
+        '2': { admission: 30000, development: 5000, caution: 3000, tuition: 22634, annual: 13906, monthly: 4060 },
+        '3': { admission: 30000, development: 5000, caution: 3000, tuition: 23954, annual: 15304, monthly: 4362 },
+        '4': { admission: 30000, development: 5000, caution: 3000, tuition: 26620, annual: 17390, monthly: 4890 },
+        '6': { admission: 41000, development: 5000, caution: 3000, tuition: 29280, annual: 17385, monthly: 5185 },
+        '9': { admission: 55000, development: 5000, caution: 3000, tuition: 29286, annual: 23634, monthly: 5880 },
+        '11sci': { admission: 62000, development: 5000, caution: 3000, tuition: 29280, annual: 25044, monthly: 6036 },
+        '11sci2': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 18090, monthly: 5264 },
+        '11comm': { admission: 62000, development: 5000, caution: 3000, tuition: 29286, annual: 23526, monthly: 5868 },
+        '11hum': { admission: 62000, development: 5000, caution: 3000, tuition: 29290, annual: 16700, monthly: 5110 }
+    };
+
+    function formatCurrency(amount) {
+        return amount.toLocaleString('en-IN');
+    }
+
+    function calculateFees() {
+        const selectedClass = document.getElementById('feeClass').value;
+        const isSibling = document.getElementById('siblingDiscount').checked;
+        const feeDisplay = document.getElementById('feeDisplay');
+
+        if (!selectedClass) {
+            feeDisplay.style.display = 'none';
+            return;
+        }
+
+        feeDisplay.style.display = 'block';
+
+        const fees = feeData[selectedClass];
+        let admissionFee = fees.admission;
+        let tuitionFee = fees.tuition;
+
+        if (isSibling) {
+            admissionFee = Math.round(fees.admission * 0.5);
+            tuitionFee = Math.round(fees.tuition * 0.5);
+        }
+
+        const developmentFund = fees.development;
+        const cautionMoney = fees.caution;
+        const annualCharges = fees.annual;
+        // Calculate monthly installment based on discounted tuition fee
+        let monthlyInstallment = fees.monthly;
+        if (isSibling) {
+            // Monthly installment should be based on discounted tuition + annual charges / 9
+            monthlyInstallment = Math.round((tuitionFee + annualCharges) / 9);
+        }
+
+        const totalAdmission = admissionFee + developmentFund + cautionMoney;
+        const totalAnnual = tuitionFee + annualCharges;
+        const grandTotal = totalAdmission + totalAnnual;
+
+        const discount8Percent = Math.round(totalAnnual * 0.08);
+        const discount5Percent = Math.round(totalAnnual * 0.05);
+        const after8Discount = totalAdmission + (totalAnnual - discount8Percent);
+        const after5Discount = totalAdmission + (totalAnnual - discount5Percent);
+
+        document.getElementById('admissionFee').textContent = formatCurrency(admissionFee);
+        document.getElementById('developmentFund').textContent = formatCurrency(developmentFund);
+        document.getElementById('cautionMoney').textContent = formatCurrency(cautionMoney);
+        document.getElementById('totalAdmission').textContent = formatCurrency(totalAdmission);
+
+        document.getElementById('tuitionFee').textContent = formatCurrency(tuitionFee);
+        document.getElementById('annualCharges').textContent = formatCurrency(annualCharges);
+        document.getElementById('totalAnnual').textContent = formatCurrency(totalAnnual);
+        document.getElementById('monthlyInstallment').textContent = formatCurrency(monthlyInstallment);
+
+        document.getElementById('grandAdmission').textContent = formatCurrency(totalAdmission);
+        document.getElementById('grandAnnual').textContent = formatCurrency(totalAnnual);
+        document.getElementById('grandTotal').textContent = formatCurrency(grandTotal);
+
+        document.getElementById('discount8').textContent = formatCurrency(discount8Percent);
+        document.getElementById('after8Discount').textContent = formatCurrency(after8Discount);
+        document.getElementById('discount5').textContent = formatCurrency(discount5Percent);
+        document.getElementById('after5Discount').textContent = formatCurrency(after5Discount);
+    }
+
+    // AGE CALCULATION
+    function calculateAge(dob, asOfDate) {
+        const dobDate = new Date(dob);
+        const refDate = asOfDate ? new Date(asOfDate) : new Date();
+
+        let years = refDate.getFullYear() - dobDate.getFullYear();
+        let months = refDate.getMonth() - dobDate.getMonth();
+        let days = refDate.getDate() - dobDate.getDate();
+
+        if (days < 0) {
+            months--;
+            days += new Date(refDate.getFullYear(), refDate.getMonth(), 0).getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        return { years, months, days };
+    }
+
+    function updateAgeDisplays() {
+        const dob = document.getElementById('dob').value;
+        const selectedClass = document.getElementById('classApplied').value;
+
+        if (!dob) {
+            document.getElementById('ageDisplay').innerHTML = "-- Select DOB --";
+            document.getElementById('ageAsOnGroup').style.display = 'none';
+            return;
+        }
+
+        // Current age
+        const currentAge = calculateAge(dob);
+        document.getElementById('ageDisplay').innerHTML = `<strong>${currentAge.years}</strong> Years <strong>${currentAge.months}</strong> Months <strong>${currentAge.days}</strong> Days`;
+
+        // Age as on specific date based on class
+        const ageAsOnGroup = document.getElementById('ageAsOnGroup');
+        const ageAsOnLabel = document.getElementById('ageAsOnLabel');
+        const ageAsOnDisplay = document.getElementById('ageAsOnDisplay');
+        const ageAsOnInfo = document.getElementById('ageAsOnInfo');
+
+        if (selectedClass === 'NURSERY' || selectedClass === 'KG I' || selectedClass === 'KG II') {
+            // Age as on 31 July 2026
+            const ageAsOn31July = calculateAge(dob, '2026-07-31');
+            ageAsOnGroup.style.display = 'block';
+            ageAsOnLabel.textContent = 'AGE AS ON 31 JULY 2026';
+            ageAsOnDisplay.innerHTML = `<strong>${ageAsOn31July.years}</strong> Y <strong>${ageAsOn31July.months}</strong> M <strong>${ageAsOn31July.days}</strong> D`;
+            ageAsOnInfo.textContent = 'For Nursery, KG I & KG II admission';
+        } else if (selectedClass === 'I') {
+            // Age as on 30 Sept 2026
+            const ageAsOn30Sept = calculateAge(dob, '2026-09-30');
+            ageAsOnGroup.style.display = 'block';
+            ageAsOnLabel.textContent = 'AGE AS ON 30 SEPT 2026';
+            ageAsOnDisplay.innerHTML = `<strong>${ageAsOn30Sept.years}</strong> Y <strong>${ageAsOn30Sept.months}</strong> M <strong>${ageAsOn30Sept.days}</strong> D`;
+            ageAsOnInfo.textContent = 'For Class I admission';
+        } else {
+            ageAsOnGroup.style.display = 'none';
+        }
+    }
+
+    document.getElementById('dob').addEventListener('change', updateAgeDisplays);
+    document.getElementById('classApplied').addEventListener('change', updateAgeDisplays);
+
+    // AUTO-UPPERCASE
+    document.querySelectorAll('.uppercase').forEach(input => {
+        input.addEventListener('input', function () {
+            this.value = this.value.toUpperCase();
+        });
+    });
+
+    // SET TODAY'S DATE
+    document.getElementById('date').valueAsDate = new Date();
+
+    // ✅ AUTO-GENERATE S.NO STARTING FROM 2026001
+    window.addEventListener('load', function () {
+        let records = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
+        const nextNum = 2026001 + records.length;
+        document.getElementById('sno').value = nextNum.toString();
+    });
+
+    // PRINT FUNCTION
+    function printForm() {
+        window.print();
+    }
+
+    // SAVE ENQUIRY FUNCTION
+    
+// LOAD PAGE 1 DATA AND POPULATE SUMMARY
+window.addEventListener('load', function() {
+    const page1Data = JSON.parse(localStorage.getItem('enquiryPage1') || '{}');
+
+    // Populate summary
+    document.getElementById('summary-sno').textContent = page1Data.sno || '-';
+    document.getElementById('summary-date').textContent = page1Data.date ? 
+        new Date(page1Data.date).toLocaleDateString('en-IN') : 'DD/MM/YYYY';
+    document.getElementById('summary-student-name').textContent = 
+        [page1Data.studentFirst, page1Data.studentMiddle, page1Data.studentSurname]
+        .filter(Boolean).join(' ') || '-';
+    document.getElementById('summary-class').textContent = page1Data.classApplied || '-';
+    document.getElementById('summary-father').textContent = 
+        [page1Data.fatherFirst, page1Data.fatherMiddle, page1Data.fatherSurname]
+        .filter(Boolean).join(' ') || '-';
+    document.getElementById('summary-mobile').textContent = page1Data.fatherMobile || '-';
+
+    // Auto-trigger fee calculation
+    if (page1Data.classApplied) {
+        const feeClassField = document.getElementById('feeClass');
+        if (feeClassField) {
+            // Map classApplied to feeClass options
+            const classMap = {
+                'NURSERY': 'nursery',
+                'KG I': 'nursery',
+                'KG II': 'nursery',
+                'I': '1',
+                'II': '2',
+                'III': '3',
+                'IV': '4',
+                'V': '4',
+                'VI': '6',
+                'VII': '6',
+                'VIII': '6',
+                'IX': '9',
+                'X': '9',
+                'XI': '11sci',
+                'XII': '11sci'
+            };
+            feeClassField.value = classMap[page1Data.classApplied] || '';
+            setTimeout(function() {
+                if (typeof calculateFees === 'function') calculateFees();
+            }, 300);
+        }
+    }
+
+    console.log('✅ Page 2 loaded with Page 1 data');
+});
+
+
+    function saveCompleteEnquiry() {
+        try {
+            // Get page 1 data
+            const page1Data = JSON.parse(localStorage.getItem('enquiryPage1')) || {};
+
+            // Get form data from page 2
+            const form = document.getElementById('enquiryForm');
+            if (!form) {
+                alert('ERROR: Form not found!');
+                return false;
+            }
+
+            const formData = new FormData(form);
+            const page2Data = {};
+            for (let [key, value] of formData.entries()) {
+                page2Data[key] = value;
+            }
+
+            // Merge both pages
+            const completeData = {...page1Data, ...page2Data};
+
+            // Add metadata
+            completeData.recordId = 'ENQ-' + Date.now();
+            completeData.submittedDate = new Date().toLocaleDateString('en-IN');
+            completeData.submittedTime = new Date().toLocaleTimeString('en-IN');
+            completeData.timestamp = new Date().toISOString();
+
+            // Add fee details safely
+            const feeClassEl = document.getElementById('feeClass');
+            const grandTotalEl = document.getElementById('grandTotal');
+            const ageDisplayEl = document.getElementById('ageDisplay');
+
+            completeData.feeClass = feeClassEl ? feeClassEl.value : '';
+            completeData.grandTotal = grandTotalEl ? grandTotalEl.textContent : '0';
+            completeData.currentAge = ageDisplayEl ? ageDisplayEl.textContent : '';
+
+            // Get document checkboxes
+            for (let i = 1; i <= 10; i++) {
+                const doc = document.getElementById('doc' + i);
+                if (doc && doc.checked) {
+                    completeData['doc' + i] = doc.value;
+                }
+            }
+
+            // Save to localStorage
+            let enquiries = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+            enquiries.unshift(completeData);
+            localStorage.setItem('enquiryRecords', JSON.stringify(enquiries));
+            localStorage.setItem('currentEnquiry', JSON.stringify(completeData));
+
+            alert('SUCCESS! Complete Enquiry Saved! ' + completeData.recordId);
+            console.log('Complete enquiry saved:', completeData);
+
+            // Clear Page 1 data
+            localStorage.removeItem('enquiryPage1');
+
+            return true;
+        } catch (error) {
+            console.error('Error in saveCompleteEnquiry:', error);
+            alert('ERROR: Failed to save - ' + error.message);
+            return false;
+        }
+    }
+
+
+    function saveEnquiry() {
+
+        console.log('Saving Enquiry...');
+
+        try {
+            const form = document.getElementById('enquiryForm');
+
+            // Validate using HTML5 validation
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+
+            // Get ALL form data using FormData
+            const formData = new FormData(form);
+            const enquiryData = {};
+
+            // Convert FormData to object
+            for (let [key, value] of formData.entries()) {
+                enquiryData[key] = value;
+            }
+
+            // Add metadata
+            enquiryData.submittedDate = new Date().toLocaleDateString('en-IN');
+            enquiryData.submittedTime = new Date().toLocaleTimeString('en-IN');
+            enquiryData.recordId = 'ENQ-' + Date.now();
+
+            // Add fee details from calculator
+            enquiryData.feeClass = document.getElementById('feeClass').value;
+            enquiryData.grandTotal = document.getElementById('grandTotal').textContent;
+            enquiryData.currentAge = document.getElementById('ageDisplay').textContent;
+            enquiryData.timestamp = new Date().toISOString();
+
+            // Get existing enquiries
+            let enquiries = JSON.parse(localStorage.getItem('enquiryRecords') || '[]');
+
+            // Add new enquiry
+            enquiries.unshift(enquiryData);
+
+            // Save to localStorage
+            localStorage.setItem('enquiryRecords', JSON.stringify(enquiries));
+
+            // Also save as current for registration
+            localStorage.setItem('currentEnquiry', JSON.stringify(enquiryData));
+
+            console.log('Enquiry saved successfully!', enquiryData);
+            alert(`✅ SUCCESS! Enquiry saved successfully! ID: ${enquiryData.recordId}`);
+
+            return true;
+        } catch (error) {
+            console.error('Error saving enquiry:', error);
+            alert('❌ ERROR: Failed to save - ' + error.message);
+            return false;
+        }
+    }
+
+    // PROCEED TO REGISTRATION
+    
+    function proceedToRegistration() {
+        console.log('proceedToRegistration called');
+
+        // First save the enquiry data
+        const saved = saveCompleteEnquiry();
+
+        if (saved) {
+            console.log('Data saved successfully, proceeding to registration...');
+            alert('Proceeding to Registration Form... enquiry data will be automatically filled!');
+
+            // Small delay to ensure data is saved, then redirect
+            setTimeout(function() {
+                window.location.href = 'registration.html';
+            }, 500);
+        } else {
+            console.log('Save failed, not proceeding to registration');
+        }
+    }
+
+    
+</script>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    console.log('Final merged form with new buttons loaded');
+});
+
+
+        // Handle print view field modifications
+        window.addEventListener('beforeprint', function() {
+            // 1. Handle dropdowns - replace "Select" with underscores
+            document.querySelectorAll('select').forEach(function(select) {
+                if (!select.value || select.selectedIndex === 0) {
+                    select.setAttribute('data-original-index', select.selectedIndex);
+                    select.setAttribute('data-print-placeholder', 'true');
+                    const placeholder = document.createElement('span');
+                    placeholder.className = 'print-select-placeholder';
+                    placeholder.textContent = '_______________';
+                    placeholder.style.position = 'absolute';
+                    placeholder.style.pointerEvents = 'none';
+                    placeholder.style.fontSize = '8pt';
+                    select.parentNode.style.position = 'relative';
+                    select.style.color = 'transparent';
+                    select.parentNode.insertBefore(placeholder, select);
+                }
+            });
+
+            // 2. Handle mobile numbers - replace with dashes
+            document.querySelectorAll('input[type="tel"], input[name="mobile"], input[name="fatherMobile"], input[name="motherMobile"]').forEach(function(input) {
+                if (input.value) {
+                    input.setAttribute('data-original-value', input.value);
+                    input.value = '----------';
+                }
+            });
+
+            // 3. Handle pincode - replace with dashes
+            const pincodeInput = document.getElementById('pincode');
+            if (pincodeInput && pincodeInput.value) {
+                pincodeInput.setAttribute('data-original-value', pincodeInput.value);
+                pincodeInput.value = '------';
+            }
+
+            // 4. Handle DOB - show dd/mm/yyyy if empty
+            document.querySelectorAll('input[type="date"], input[name="dob"]').forEach(function(input) {
+                if (!input.value) {
+                    input.setAttribute('data-original-value', input.value);
+                    input.setAttribute('placeholder', 'dd/mm/yyyy');
+                    input.style.color = '#999';
+                }
+            });
+        });
+
+        // Restore original values after print
+        window.addEventListener('afterprint', function() {
+            // Restore dropdowns
+            document.querySelectorAll('select[data-print-placeholder]').forEach(function(select) {
+                select.style.color = '';
+                select.removeAttribute('data-print-placeholder');
+                const placeholder = select.parentNode.querySelector('.print-select-placeholder');
+                if (placeholder) {
+                    placeholder.remove();
+                }
+            });
+
+            // Restore mobile numbers
+            document.querySelectorAll('input[type="tel"], input[name="mobile"], input[name="fatherMobile"], input[name="motherMobile"]').forEach(function(input) {
+                if (input.hasAttribute('data-original-value')) {
+                    input.value = input.getAttribute('data-original-value');
+                    input.removeAttribute('data-original-value');
+                }
+            });
+
+            // Restore pincode
+            const pincodeInput = document.getElementById('pincode');
+            if (pincodeInput && pincodeInput.hasAttribute('data-original-value')) {
+                pincodeInput.value = pincodeInput.getAttribute('data-original-value');
+                pincodeInput.removeAttribute('data-original-value');
+            }
+
+            // Restore DOB
+            document.querySelectorAll('input[type="date"], input[name="dob"]').forEach(function(input) {
+                if (input.hasAttribute('data-original-value')) {
+                    input.style.color = '';
+                    input.removeAttribute('placeholder');
+                    input.removeAttribute('data-original-value');
+                }
+            });
+        });
+
+</script>
 </body>
-</html>
+</html
+            /* ===== ULTRA COMPACT FOR 2 A4 PAGES ===== */
+            @page {
+                size: A4 portrait;
+                margin: 6mm 8mm !important;
+            }
+
+            body {
+                font-size: 8pt !important;
+                line-height: 1.05 !important;
+            }
+
+            /* Minimize all spacing */
+            fieldset {
+                margin: 0 0 2px 0 !important;
+                padding: 3px 5px !important;
+                border: 1px solid #333 !important;
+            }
+
+            legend {
+                font-size: 9pt !important;
+                padding: 1px 4px !important;
+                margin-bottom: 2px !important;
+                font-weight: bold !important;
+            }
+
+            .form-row {
+                margin: 0 !important;
+                padding: 1px 0 !important;
+                min-height: auto !important;
+            }
+
+            label {
+                font-size: 8pt !important;
+                line-height: 1.0 !important;
+                margin-bottom: 1px !important;
+            }
+
+            input, select, textarea {
+                font-size: 8pt !important;
+                padding: 1px 3px !important;
+                line-height: 1.0 !important;
+                height: auto !important;
+                min-height: 16px !important;
+            }
+
+            /* Compact tables */
+            table {
+                font-size: 8pt !important;
+                margin: 2px 0 !important;
+            }
+
+            table td, table th {
+                padding: 2px 3px !important;
+                line-height: 1.1 !important;
+            }
+
+            /* Header compact */
+            .hema-school-header {
+                padding: 4px 6px !important;
+                margin: 0 !important;
+            }
+
+            .header-center h1 {
+                font-size: 12pt !important;
+                margin: 1px 0 !important;
+            }
+
+            .header-center p {
+                font-size: 7pt !important;
+                margin: 0 !important;
+                line-height: 1.1 !important;
+            }
+
+            .logo-img {
+                width: 45px !important;
+                height: 45px !important;
+            }
+
+            /* Documents table compact */
+            .documents-table-new td,
+            .documents-table-new th {
+                padding: 2px 4px !important;
+                font-size: 8pt !important;
+            }
+
+            /* Fees section compact */
+            div:has-text("TOTAL FEES") {
+                font-size: 8pt !important;
+            }
+
+            /* ===== HIDE CURRENT AGE FIELD ===== */
+            label[for="currentAge"],
+            input#currentAge,
+            .form-row:has(#currentAge) {
+                display: none !important;
+            }
+
+            /* ===== SIGNATURE SECTION ===== */
+            fieldset:has(legend:contains("SIGNATURE")) {
+                display: block !important;
+                page-break-inside: avoid !important;
+                margin-top: 4px !important;
+                padding: 3px 5px !important;
+            }
+
+            /* ===== DROPDOWN UNDERSCORES ===== */
+            select option[value=""] {
+                display: none !important;
+            }
+
+            select:invalid,
+            select:not(:valid) {
+                color: transparent !important;
+                position: relative !important;
+            }
+
+            select:invalid::after,
+            select:not(:valid)::after {
+                content: "_______________" !important;
+                color: #000 !important;
+                position: absolute !important;
+                left: 6px !important;
+            }
+
+>
