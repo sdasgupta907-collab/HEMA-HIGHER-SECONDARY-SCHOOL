@@ -775,6 +775,58 @@ button:hover {
         padding: 0 !important;
         margin: 0 !important;
     }
+
+    /* Signature box 10pt */
+    .signature-box {
+        font-size: 10pt !important;
+    }
+
+    /* Receipt Info Section - 10pt Print Styles */
+    .receipt-info-section {
+        margin: 10px 0 !important;
+        padding: 5px 0 !important;
+        border-top: 1px solid #000 !important;
+        border-bottom: 1px solid #000 !important;
+        page-break-inside: avoid !important;
+    }
+
+    .receipt-info-section > div {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 18px !important;
+        font-size: 10pt !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .receipt-info-section span {
+        font-weight: 600 !important;
+        font-size: 10pt !important;
+        color: #000 !important;
+        white-space: nowrap !important;
+    }
+
+    .receipt-info-section input,
+    .receipt-info-section select {
+        border: 1px solid #000 !important;
+        padding: 2px 5px !important;
+        font-size: 10pt !important;
+        background: white !important;
+        color: #000 !important;
+    }
+
+    .receipt-info-section input#receiptNo {
+        width: 65px !important;
+    }
+
+    .receipt-info-section input#utrNo {
+        width: 95px !important;
+    }
+
+    .receipt-info-section select {
+        min-width: 70px !important;
+    }
+
 }
 
         .nav-tabs {
@@ -1803,7 +1855,7 @@ function proceedToAdmission() {
 
             <div class="signature-section">
                 <div>
-                    <div class="signature-box">Signature of Father/Mother/Guardian</div>
+                    <div class="signature-box" style="font-size: 10pt;">Signature of Father/Mother/Guardian</div>
                 </div>
                 <div>
                     <div class="form-group">
@@ -1811,6 +1863,32 @@ function proceedToAdmission() {
                         <input type="text" id="signatoryName" name="signatoryName" class="uppercase">
                     </div>
                 </div>
+
+
+            <div class="receipt-info-section" style="margin: 12px 0; padding: 6px 0; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+                <div style="display: flex; align-items: center; justify-content: flex-start; gap: 18px; font-size: 10pt; flex-wrap: nowrap;">
+                    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                        <span style="font-weight: 600;">Receipt No.: 2026-27/</span>
+                        <input type="text" id="receiptNo" name="receiptNo" style="width: 65px; padding: 2px 5px; border: 1px solid #999; border-radius: 2px; font-size: 10pt;">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                        <span style="font-weight: 600;">Payment Mode:</span>
+                        <select id="paymentMode" name="paymentMode" style="padding: 2px 5px; border: 1px solid #999; border-radius: 2px; font-size: 10pt; min-width: 70px;">
+                            <option value="">Select</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Cash">Cash</option>
+                            <option value="POS">POS</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                        <span style="font-weight: 600;">UTR No.:</span>
+                        <input type="text" id="utrNo" name="utrNo" style="width: 95px; padding: 2px 5px; border: 1px solid #999; border-radius: 2px; font-size: 10pt;">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+                        <span style="font-weight: 600;">Amount: 1500 (INR)</span>
+                    </div>
+                </div>
+            </div>
             </div>
 
             <div class="buttons">
