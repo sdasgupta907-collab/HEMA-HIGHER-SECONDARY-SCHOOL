@@ -64,7 +64,7 @@
         .header-center {
             flex: 1;
             text-align: center;
-            color: white;
+            color: black;
         }
 
         .school-name {
@@ -506,7 +506,7 @@
         .header-center {
             flex: 1;
             text-align: center;
-            color: white;
+            color: black;
         }
 
         .school-name {
@@ -808,12 +808,10 @@
 
             /* ===== HEADER - ATTRACTIVE LAYOUT ===== */
             .hema-school-header {
-                background: linear-gradient(135deg, #4682B4 0%, #1E3A5F 100%) !important;
+                background: white !important;
                 padding: 8px 8px !important;
                 margin: 0 !important;
-                border: 2px solid #1E3A5F !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+                border: 2px solid #000 !important;
             }
 
             .header-content {
@@ -838,31 +836,43 @@
             .header-center {
                 flex: 1 !important;
                 text-align: center !important;
-                color: white !important;
+                color: black !important;
             }
 
             .school-name {
                 font-size: 16pt !important;
                 font-weight: bold !important;
-                color: white !important;
+                color: black !important;
                 margin: 0 !important;
                 line-height: 1.1 !important;
                 letter-spacing: 0.5px !important;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
             }
 
             .affiliation {
                 font-size: 8pt !important;
-                color: #fff !important;
+                color: #000 !important;
                 margin: 2px 0 0 0 !important;
                 line-height: 1 !important;
             }
 
             .school-info {
                 font-size: 7pt !important;
-                color: #ddd !important;
+                color: #000 !important;
                 margin: 1px 0 0 0 !important;
                 line-height: 1 !important;
+            }
+
+            /* Add Enquiry Form Heading */
+            .container::before {
+                content: "Enquiry Form 2026-2027";
+                display: block !important;
+                text-align: center !important;
+                font-size: 16pt !important;
+                font-weight: bold !important;
+                color: #000 !important;
+                margin: 15px 0 10px 0 !important;
+                padding: 5px 0 !important;
+                border-bottom: 1px solid #000 !important;
             }
 
             /* Hide all non-form elements */
