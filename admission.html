@@ -277,98 +277,424 @@ button:hover {
 
 /* ============================================================================ */
 /* PRINT STYLES - A4 WITH COLORED HEADER */
-/* ============================================================================ */
-@media print {
-    @page {
-        size: A4;
-        margin: 10mm 8mm;
-    }
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 8mm 8mm 8mm 8mm;
+        orphans: 1;
+        widows: 1;
+      }
 
-    body {
-        background: white;
-        padding: 0;
+      * {
+        box-sizing: border-box;
         margin: 0;
-    }
-
-    /* Keep colored header in print */
-    .hema-school-header {
-    background: linear-gradient(135deg, #4A8FCA 0%, #1E3A5F 100%);
-        padding: 15px !important;
-        margin: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        color-adjust: exact !important;
-    }
-
-    .hema-school-header * {
-        color: white !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .affiliation {
-        color: #FFD700;
-        -webkit-print-color-adjust: exact !important;
-    }
-
-    .school-name {
-        font-size: 24pt !important;
-    }
-
-    .school-info, .affiliation {
-        font-size: 10pt !important;
-    }
-
-    .logo-img {
-        width: 70px !important;
-        height: 70px !important;
-    }
-
-    /* Hide buttons and navigation */
-    button, .btn, .btn-group, .button-group, .nav-tabs, .no-print {
-        display: none !important;
-    }
-
-    /* Optimize sections */
-    .section {
-        margin: 8px 0 !important;
-        padding: 10px !important;
+        padding: 0;
         box-shadow: none !important;
-        border: 1px solid #999 !important;
-        page-break-inside: avoid !important;
-    }
+        text-shadow: none !important;
+      }
 
-    .section h2, .section h3 {
-        font-size: 13pt !important;
-        color: #F57C00 !important;
+      html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: white !important;
+        font-size: 12pt;
+        line-height: 1.2;
+        color: #000;
+        font-family: Arial, sans-serif;
+      }
+
+      /* HEADER - Blue gradient matching registration style */
+      .hema-school-header {
+        background: linear-gradient(135deg, #4A8FCA 0%, #1E3A5F 100%) !important;
+        padding: 8px 8px !important;
+        margin: 0 !important;
+        border: 2px solid #1E3A5F !important;
+        box-shadow: none !important;
         -webkit-print-color-adjust: exact !important;
-    }
+        print-color-adjust: exact !important;
+        page-break-after: avoid;
+      }
 
-    .form-row {
-        margin-bottom: 5px !important;
-    }
+      .header-content {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        max-width: 100% !important;
+      }
 
-    input, select, textarea {
-        border: none !important;
-        border-bottom: 1px solid #333 !important;
-        padding: 2px 4px !important;
-        font-size: 11pt !important;
-    }
+      .header-left-logo, .header-right-logo {
+        flex-shrink: 0 !important;
+      }
 
-    label {
-        font-size: 10pt !important;
+      .logo-img {
+        width: 55px !important;
+        height: 55px !important;
+        display: block !important;
+      }
+
+      .header-center {
+        flex: 1 !important;
+        text-align: center !important;
+        color: white !important;
+      }
+
+      .school-name {
+        font-size: 16pt !important;
         font-weight: bold !important;
-    }
+        color: white !important;
+        margin: 0 !important;
+        line-height: 1.1 !important;
+        letter-spacing: 0.5px !important;
+        text-shadow: none !important;
+      }
 
-    table {
-        font-size: 10pt !important;
-    }
+      .affiliation {
+        font-size: 8pt !important;
+        color: #fff !important;
+        margin: 2px 0 0 0 !important;
+        line-height: 1 !important;
+      }
 
-    table th {
-        background: #E3F2FD !important;
+      .school-info {
+        font-size: 7pt !important;
+        color: #ddd !important;
+        margin: 1px 0 0 0 !important;
+        line-height: 1 !important;
+      }
+
+      /* Hide navigation */
+      .nav-tabs, .nav-bar, button, .btn, .btn-group, .button-group, .form-actions, .buttons {
+        display: none !important;
+      }
+
+      /* Container */
+      form, .container, .main-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+      }
+
+      /* Page indicators */
+      .page-indicator {
+        text-align: right;
+        font-size: 10pt;
+        margin: 2px 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Form title */
+      .form-title {
+        text-align: center;
+        font-size: 14pt;
+        font-weight: bold;
+        margin: 2px 0 !important;
+        padding-bottom: 2px !important;
+        border-bottom: 2px solid #000;
+      }
+
+      /* Section headers */
+      .section-header {
+        background: #000 !important;
+        color: white !important;
+        padding: 2px 5px !important;
+        font-weight: bold;
+        font-size: 11pt;
+        margin: 3px 0 2px 0 !important;
         -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Form rows */
+      .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin: 1px 0 !important;
+        padding: 0 !important;
+        width: 100%;
+        page-break-inside: avoid;
+        align-items: flex-end;
+      }
+
+      .form-row.single {
+        display: block;
+      }
+
+      .form-row.triple .form-group {
+        flex: 1;
+        min-width: calc(33.33% - 4px);
+      }
+
+      .form-row.two-col .form-group {
+        flex: 1;
+        min-width: calc(50% - 3px);
+      }
+
+      /* Form groups */
+      .form-group {
+        flex: 1;
+        min-width: 100px;
+        display: flex;
+        align-items: center;
+        page-break-inside: avoid;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .form-group.full-width {
+        flex-basis: 100%;
+        width: 100%;
+      }
+
+      .form-group.half-width {
+        flex-basis: calc(50% - 3px);
+      }
+
+      /* Labels */
+      label {
+        display: inline;
+        font-size: 10pt;
+        font-weight: bold;
+        color: #000 !important;
+        margin: 0 3px 0 0 !important;
+        padding: 0 !important;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
+      /* Inputs - clean underline only */
+      input[type="text"], 
+      input[type="email"], 
+      input[type="tel"], 
+      input[type="date"], 
+      input[type="number"], 
+      select, 
+      textarea {
+        flex: 1;
+        padding: 0 2px !important;
+        font-size: 10pt;
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        background: white !important;
+        color: #000 !important;
+        font-family: Arial, sans-serif;
+        line-height: 1.3;
+        min-height: 14px;
+        box-shadow: none !important;
+      }
+
+      /* Address field - underline only */
+      textarea {
+        min-height: 28px;
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        padding: 0 2px !important;
+        background: white !important;
+      }
+
+      /* Radio and checkbox */
+      input[type="radio"], 
+      input[type="checkbox"] {
+        margin: 0 2px 0 6px !important;
+        padding: 0 !important;
+        width: auto;
+        flex: none;
+        background: white !important;
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+      }
+
+      .gender-group, .radio-group {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .gender-group label, .radio-group label {
+        display: inline-flex;
+        align-items: center;
+        font-weight: normal;
+        font-size: 10pt;
+        gap: 2px;
+        margin: 0 !important;
+        white-space: nowrap;
+        color: #000 !important;
+      }
+
+      /* Tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10pt;
+        margin: 2px 0 !important;
+        box-shadow: none !important;
+      }
+
+      table th, table td {
+        border: 1px solid #000 !important;
+        padding: 2px 3px !important;
+        line-height: 1.1;
+        background: white !important;
+        color: #000 !important;
+        box-shadow: none !important;
+      }
+
+      table th {
+        background: #E3F2FD !important;
+        font-weight: bold;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Rules box */
+      .rules-box {
+        border: 1px solid #000 !important;
+        padding: 3px !important;
+        margin: 2px 0 !important;
+        font-size: 9pt;
+        line-height: 1.3;
+        background: white !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+
+      /* Declaration section - 12pt font */
+      .declaration {
+        font-size: 12pt !important;
+        line-height: 1.3 !important;
+        border: 1px solid #000 !important;
+        padding: 3px !important;
+        margin: 3px 0 !important;
+        background: white !important;
+        box-shadow: none !important;
+        color: #000 !important;
+        page-break-inside: avoid;
+      }
+
+      .declaration strong {
+        font-size: 12pt !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+      }
+
+      .declaration br {
+        display: block;
+        content: "";
+      }
+
+      /* Signature section */
+      .signature-section, .signature-area {
+        display: flex;
+        gap: 20px;
+        margin: 4px 0 !important;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+      }
+
+      .signature-box {
+        flex: 1;
+        text-align: center;
+        border-top: 1px solid #000 !important;
+        padding-top: 10px !important;
+        min-height: 35px;
+        font-size: 10pt;
+        color: #000 !important;
+        box-shadow: none !important;
+      }
+
+      .signature-box label {
+        display: block;
+        font-weight: bold;
+        margin-top: 2px !important;
+        color: #000 !important;
+      }
+
+      /* Sections */
+      .section {
+        width: 100%;
+        margin: 1px 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        border: none !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+
+      .section h2, .section h3 {
+        font-size: 11pt;
+        color: #000 !important;
+        margin: 0 0 1px 0 !important;
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      /* Text alignment */
+      .text-center {
+        text-align: center;
+      }
+
+      .text-right {
+        text-align: right;
+      }
+
+      /* Headings */
+      h1, h2, h3, h4, h5, h6 {
+        margin: 1px 0 !important;
+        page-break-after: avoid;
+        color: #000 !important;
+      }
+
+      p {
+        margin: 0 0 1px 0 !important;
+        line-height: 1.2;
+        color: #000 !important;
+      }
+
+      /* Page break control */
+      .page-break {
+        page-break-after: always;
+      }
+
+      .form-row, .declaration, .signature-section, .signature-area {
+        page-break-inside: avoid;
+      }
+
+      /* Remove padding from containers */
+      .container, .main-container {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      /* Checkbox list */
+      .checkbox-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        font-size: 9pt;
+      }
+
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+      }
+
+      .checkbox-item input {
+        width: 10px;
+        height: 10px;
+        margin-right: 3px;
+      }
     }
-}
 
         .nav-tabs {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1543,11 +1869,9 @@ button:hover {
             </div>
 
             <div class="buttons">
-                <button type="button" onclick="saveAdmission()" class="btn-submit"><span class="icon">✓</span> FINAL SUBMIT</button>
-                <button type="button" onclick="saveAdmission()" class="btn-submit"><span class="icon">✓</span> FINAL SUBMIT</button>
-                <button type="submit" class="btn btn-submit">✓ SUBMIT ADMISSION</button>
-                <button type="reset" class="btn btn-reset">✕ CLEAR</button>
-            </div>
+      <button type="button" onclick="window.print()" class="btn btn-print">📄 PRINT / SAVE AS PDF</button>
+      <button type="button" onclick="saveAdmission()" class="btn btn-submit">💾 SAVE</button>
+    </div>
         </form>
     </div>
 
