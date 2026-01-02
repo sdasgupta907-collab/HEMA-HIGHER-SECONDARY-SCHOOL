@@ -1987,7 +1987,7 @@ function printForm() {
 // SAVE ENQUIRY FUNCTION
 // ============================================================
 function saveEnquiry() {
-    console.log('Saving Page 1 Enquiry...');
+    console.log('Saving Enquiry...');
 
     const form = document.getElementById('enquiryForm');
     if (!form.checkValidity()) {
@@ -1995,9 +1995,67 @@ function saveEnquiry() {
         return false;
     }
 
-    autoSavePage1();
-    alert('✅ Page 1 data saved successfully!\nClick NEXT to proceed to Fee Calculator.');
-    return true;
+    try {
+        // Get all form data
+        const formData = new FormData(form);
+        const data = {};
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+
+        // Save gender radio button
+        const gender = document.querySelector('input[name="gender"]:checked');
+        if (gender) data.gender = gender.value;
+
+        // Save source checkboxes
+        const sources = document.querySelectorAll('input[name="source"]:checked');
+        data.sources = Array.from(sources).map(s => s.value);
+
+        // Save referred type
+        const referredType = document.querySelector('input[name="referredType"]:checked');
+        if (referredType) data.referredType = referredType.value;
+
+        // Add metadata
+        data.recordId = 'ENQ-' + Date.now();
+        data.submittedDate = new Date().toLocaleDateString('en-IN');
+        data.submittedTime = new Date().toLocaleTimeString('en-IN');
+        data.timestamp = new Date().toISOString();
+
+        // Get fee details if available
+        const feeClassEl = document.getElementById('feeClass');
+        const grandTotalEl = document.getElementById('grandTotal');
+        const ageDisplayEl = document.getElementById('ageDisplay');
+
+        data.feeClass = feeClassEl ? feeClassEl.value : '';
+        data.grandTotal = grandTotalEl ? grandTotalEl.textContent : '0';
+        data.currentAge = ageDisplayEl ? ageDisplayEl.textContent : '';
+
+        // Get document checkboxes
+        for (let i = 1; i <= 10; i++) {
+            const doc = document.getElementById('doc' + i);
+            if (doc && doc.checked) {
+                data['doc' + i] = doc.value;
+            }
+        }
+
+        // Save to enquiryRecords (this is what data.html reads!)
+        let enquiries = JSON.parse(localStorage.getItem('enquiryRecords')) || [];
+        enquiries.unshift(data);
+        localStorage.setItem('enquiryRecords', JSON.stringify(enquiries));
+        localStorage.setItem('currentEnquiry', JSON.stringify(data));
+
+        // Also save to page1 for multi-page flow
+        localStorage.setItem('enquiryPage1', JSON.stringify(data));
+
+        alert('✅ SUCCESS! Enquiry saved successfully!\nRecord ID: ' + data.recordId + '\n\nYou can now view it in data.html');
+        console.log('Enquiry saved:', data);
+        return true;
+
+    } catch (error) {
+        console.error('Error saving enquiry:', error);
+        alert('❌ ERROR: Failed to save - ' + error.message);
+        return false;
+    }
 }
 
 // ============================================================
