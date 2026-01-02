@@ -307,10 +307,10 @@ button:hover {
 
     /* HEADER - Blue gradient matching enquiry style */
     .hema-school-header {
-        background: linear-gradient(135deg, #4A8FCA 0%, #1E3A5F 100%) !important;
+        background: white !important;
         padding: 8px 8px !important;
         margin: 0 !important;
-        border: 2px solid #1E3A5F !important;
+        border: 2px solid black !important;
         box-shadow: none !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -339,13 +339,13 @@ button:hover {
     .header-center {
         flex: 1 !important;
         text-align: center !important;
-        color: white !important;
+        color: black !important;
     }
 
     .school-name {
         font-size: 16pt !important;
         font-weight: bold !important;
-        color: white !important;
+        color: black !important;
         margin: 0 !important;
         line-height: 1.1 !important;
         letter-spacing: 0.5px !important;
@@ -354,14 +354,14 @@ button:hover {
 
     .affiliation {
         font-size: 8pt !important;
-        color: #fff !important;
+        color: black !important;
         margin: 2px 0 0 0 !important;
         line-height: 1 !important;
     }
 
     .school-info {
         font-size: 7pt !important;
-        color: #ddd !important;
+        color: black !important;
         margin: 1px 0 0 0 !important;
         line-height: 1 !important;
     }
@@ -538,7 +538,7 @@ button:hover {
         width: auto;
         flex: none;
         background: white !important;
-        border: 1px solid #000 !important;
+        border: 1px solid black !important;
         box-shadow: none !important;
     }
 
@@ -564,7 +564,7 @@ button:hover {
 
     /* Sibling entries */
     .sibling-entry {
-        border: 1px solid #000 !important;
+        border: 1px solid black !important;
         padding: 3px !important;
         margin: 3px 0 !important;
         background: white !important;
@@ -590,7 +590,7 @@ button:hover {
 
     .fee-table th,
     .fee-table td {
-        border: 1px solid #000 !important;
+        border: 1px solid black !important;
         padding: 3px !important;
         text-align: left;
         line-height: 1;
@@ -611,7 +611,7 @@ button:hover {
     /* Documents Container */
     .doc-list {
         font-size: 10pt !important;
-        border: 1px solid #000 !important;
+        border: 1px solid black !important;
         padding: 3px !important;
         background: white !important;
         box-shadow: none !important;
@@ -655,7 +655,7 @@ button:hover {
     .declaration {
         font-size: 12pt !important;
         line-height: 1.4 !important;
-        border: 1px solid #000 !important;
+        border: 1px solid black !important;
         padding: 4px !important;
         margin: 4px 0 !important;
         background: white !important;
@@ -753,7 +753,7 @@ button:hover {
 
     table th,
     table td {
-        border: 1px solid #000 !important;
+        border: 1px solid black !important;
         padding: 2px 3px !important;
         line-height: 1;
         background: white !important;
@@ -808,7 +808,7 @@ button:hover {
 
     .receipt-info-section input,
     .receipt-info-section select {
-        border: 1px solid #000 !important;
+        border: 1px solid black !important;
         padding: 2px 5px !important;
         font-size: 10pt !important;
         background: white !important;
@@ -825,6 +825,225 @@ button:hover {
 
     .receipt-info-section select {
         min-width: 70px !important;
+    }
+
+
+    .registration-form-heading {
+        display: block !important;
+        text-align: center;
+        font-size: 14pt;
+        font-weight: bold;
+        color: black;
+        margin: 5px 0 !important;
+        padding: 2px 0 !important;
+    }
+
+
+    /* A4 Page - One Page Fit */
+    @page {
+        size: A4 portrait !important;
+        margin: 8mm 10mm !important;
+    }
+
+    * {
+        box-sizing: border-box !important;
+    }
+
+    body {
+        font-size: 11pt !important;
+        line-height: 1.1 !important;
+        color: black !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Header elements keep their original size */
+    .hema-school-header,
+    .hema-school-header * {
+        color: black !important;
+    }
+
+    /* Input fields - 11pt font with underline */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    textarea {
+        border: none !important;
+        border-bottom: 1px solid black !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 2px !important;
+        border-radius: 0 !important;
+        outline: none !important;
+        font-size: 11pt !important;
+        display: inline-block !important;
+        vertical-align: bottom !important;
+        width: auto !important;
+        min-width: 80px !important;
+    }
+
+    /* Labels - 11pt, inline */
+    label {
+        display: inline-block !important;
+        margin: 0 4px 0 0 !important;
+        padding: 0 !important;
+        font-size: 11pt !important;
+        font-weight: 600 !important;
+        vertical-align: bottom !important;
+        color: black !important;
+    }
+
+    /* Form groups - minimal spacing */
+    .form-group {
+        display: inline-block !important;
+        margin: 0 10px 0 0 !important;
+        padding: 0 !important;
+        vertical-align: bottom !important;
+    }
+
+    /* Form rows - NO SILVER LINES */
+    .form-row {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        align-items: baseline !important;
+        margin: 0 0 4px 0 !important;
+        padding: 0 0 4px 0 !important;
+        border-bottom: none !important;
+        page-break-inside: avoid !important;
+        font-size: 11pt !important;
+    }
+
+    /* Sections - minimal padding */
+    .form-section {
+        margin: 4px 0 !important;
+        padding: 4px 6px !important;
+        border: 1px solid black !important;
+        page-break-inside: avoid !important;
+        font-size: 11pt !important;
+    }
+
+    .form-section h3,
+    .form-section h2 {
+        margin: 0 0 4px 0 !important;
+        padding: 0 0 2px 0 !important;
+        font-size: 11pt !important;
+        font-weight: bold !important;
+        border-bottom: 1.5px solid black !important;
+        color: black !important;
+    }
+
+    /* Radio buttons inline */
+    input[type="radio"],
+    input[type="checkbox"] {
+        display: inline-block !important;
+        margin: 0 3px 0 8px !important;
+        vertical-align: middle !important;
+        width: auto !important;
+        border: none !important;
+    }
+
+    input[type="radio"] + label,
+    input[type="checkbox"] + label {
+        margin: 0 12px 0 2px !important;
+        font-weight: normal !important;
+        font-size: 11pt !important;
+    }
+
+    /* Small helper text */
+    small, .helper-text {
+        font-size: 9pt !important;
+        color: #666 !important;
+    }
+
+    /* Container - no extra padding */
+    .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 11pt !important;
+    }
+
+    /* Hide unnecessary elements */
+    .nav-tabs,
+    button,
+    .print-button,
+    .no-print,
+    .button-container {
+        display: none !important;
+    }
+
+    /* Minimal heading spacing - 11pt for form headings */
+    h1, h2, h3, h4 {
+        margin: 3px 0 !important;
+        padding: 0 !important;
+        line-height: 1.1 !important;
+        color: black !important;
+        font-size: 11pt !important;
+    }
+
+    h2 {
+        font-size: 12pt !important;
+    }
+
+    p {
+        margin: 2px 0 !important;
+        padding: 0 !important;
+        color: black !important;
+        font-size: 11pt !important;
+    }
+
+    /* Remove extra breaks */
+    br {
+        display: none !important;
+    }
+
+    /* Field widths */
+    input[name*="sno"],
+    input[name*="date"],
+    input[name*="dob"],
+    input[name*="age"] {
+        min-width: 90px !important;
+    }
+
+    input[name*="name"],
+    input[name*="surname"] {
+        min-width: 120px !important;
+    }
+
+    input[name*="address"] {
+        min-width: 200px !important;
+    }
+
+    input[name*="mobile"],
+    input[name*="phone"],
+    input[name*="pin"] {
+        min-width: 100px !important;
+    }
+
+    input[name*="class"] {
+        min-width: 90px !important;
+    }
+
+    /* Compact table styling if present */
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin: 2px 0 !important;
+        font-size: 11pt !important;
+    }
+
+    td, th {
+        padding: 2px 4px !important;
+        font-size: 11pt !important;
+        color: black !important;
+    }
+
+    /* Page break control */
+    .page-break-avoid {
+        page-break-inside: avoid !important;
     }
 
 }
@@ -1584,6 +1803,8 @@ function proceedToAdmission() {
         </div>
     </div>
 </div>
+    <div class="registration-form-heading" style="display: none;">Registration Form 2026-2027</div>
+
 
 
         <div class="container">
