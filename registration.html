@@ -1151,7 +1151,7 @@ function saveRegistration() {
 function proceedToAdmission() {
     saveRegistration();
     setTimeout(() => {
-        window.location.href = 'admission-1.html';
+        window.location.href = 'admission.html';
     }, 500);
 }
 
@@ -2238,7 +2238,7 @@ function proceedToAdmission() {
             localStorage.setItem('currentRegistration', JSON.stringify(data));
 
             if (confirm('Registration saved successfully!\n\nClick OK to proceed to Admission Form\nClick Cancel to stay here')) {
-                window.location.href = 'admission-1.html';
+                window.location.href = 'admission.html';
             }
         });
     </script>
