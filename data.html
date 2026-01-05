@@ -1054,63 +1054,219 @@
         let headers = [];
 
         if (tabType === 'enquiry') {
-            headers = ['S.No.', 'Date', 'Student Name', 'Class', 'Father Name', 'Father Mobile', 
-                       'Mother Name', 'Address', 'Sibling 1', 'Sibling 2', 'Fee Class', 'Grand Total Fee', 'Docs'];
+            // ALL Enquiry form fields
+            headers = ['S.No.', 'Date', 'Student First Name', 'Student Middle Name', 'Student Surname', 
+                       'Student Name (Full)', 'Class', 'Gender', 'Date of Birth', 
+                       'Father First Name', 'Father Middle Name', 'Father Surname', 'Father Name (Full)', 
+                       'Father Mobile', 'Father Email', 'Father Occupation',
+                       'Mother First Name', 'Mother Middle Name', 'Mother Surname', 'Mother Name (Full)', 
+                       'Mother Mobile', 'Mother Email', 'Mother Occupation',
+                       'Address', 'City', 'State', 'Pincode',
+                       'Sibling 1 Name', 'Sibling 1 School', 'Sibling 1 Class', 'Sibling 1 Section',
+                       'Sibling 2 Name', 'Sibling 2 School', 'Sibling 2 Class', 'Sibling 2 Section',
+                       'Fee Class', 'Admission Fee', 'Development Fund', 'Caution Money',
+                       'Tuition Fee', 'Annual Charges', 'Total Annual', 'Monthly Installment',
+                       'Grand Total Fee', 'Docs Count',
+                       'Doc 1', 'Doc 2', 'Doc 3', 'Doc 4', 'Doc 5', 'Doc 6', 'Doc 7', 'Doc 8', 'Doc 9', 'Doc 10'];
 
             data = allEnquiries.map((rec, idx) => [
                 safeGet(rec, 'sno') || (idx + 1),
                 formatDateToDDMMYYYY(safeGet(rec, 'date')),
+                safeGet(rec, 'studentFirstName') || safeGet(rec, 'studentFirst') || safeGet(rec, 'studentfirst'),
+                safeGet(rec, 'studentMiddleName') || safeGet(rec, 'studentMiddle') || safeGet(rec, 'studentmiddle'),
+                safeGet(rec, 'studentSurname') || safeGet(rec, 'studentLastName') || safeGet(rec, 'studentsurname'),
                 studentNameFromAny(rec),
                 classFromAny(rec),
+                safeGet(rec, 'gender'),
+                safeGet(rec, 'dob'),
+                safeGet(rec, 'fatherFirst') || safeGet(rec, 'fatherFirstName') || safeGet(rec, 'fatherfirst'),
+                safeGet(rec, 'fatherMiddle') || safeGet(rec, 'fatherMiddleName') || safeGet(rec, 'fathermiddle'),
+                safeGet(rec, 'fatherSurname') || safeGet(rec, 'fathersurname'),
                 fatherNameFromAny(rec),
                 safeGet(rec, 'fatherMobile') || safeGet(rec, 'fathermobile'),
+                safeGet(rec, 'fatherEmail') || safeGet(rec, 'fatheremail'),
+                safeGet(rec, 'fatherOccupation') || safeGet(rec, 'fatheroccupation'),
+                safeGet(rec, 'motherFirst') || safeGet(rec, 'motherFirstName') || safeGet(rec, 'motherfirst'),
+                safeGet(rec, 'motherMiddle') || safeGet(rec, 'motherMiddleName') || safeGet(rec, 'mothermiddle'),
+                safeGet(rec, 'motherSurname') || safeGet(rec, 'mothersurname'),
                 motherNameFromAny(rec),
+                safeGet(rec, 'motherMobile') || safeGet(rec, 'mothermobile'),
+                safeGet(rec, 'motherEmail') || safeGet(rec, 'motheremail'),
+                safeGet(rec, 'motherOccupation') || safeGet(rec, 'motheroccupation'),
                 safeGet(rec, 'address'),
-                siblingLabel(rec, 1),
-                siblingLabel(rec, 2),
+                safeGet(rec, 'city'),
+                safeGet(rec, 'state'),
+                safeGet(rec, 'pincode'),
+                safeGet(rec, 'sib1Name'),
+                safeGet(rec, 'sib1School'),
+                safeGet(rec, 'sib1Class'),
+                safeGet(rec, 'sib1Section'),
+                safeGet(rec, 'sib2Name'),
+                safeGet(rec, 'sib2School'),
+                safeGet(rec, 'sib2Class'),
+                safeGet(rec, 'sib2Section'),
                 feeClassFromAny(rec),
+                safeGet(rec, 'admissionFee'),
+                safeGet(rec, 'developmentFund'),
+                safeGet(rec, 'cautionMoney'),
+                safeGet(rec, 'tuitionFee'),
+                safeGet(rec, 'annualCharges'),
+                safeGet(rec, 'totalAnnual'),
+                safeGet(rec, 'monthlyInstallment'),
                 grandTotalFromEnquiry(rec),
-                countDocsEnquiry(rec)
+                countDocsEnquiry(rec),
+                safeGet(rec, 'doc1'),
+                safeGet(rec, 'doc2'),
+                safeGet(rec, 'doc3'),
+                safeGet(rec, 'doc4'),
+                safeGet(rec, 'doc5'),
+                safeGet(rec, 'doc6'),
+                safeGet(rec, 'doc7'),
+                safeGet(rec, 'doc8'),
+                safeGet(rec, 'doc9'),
+                safeGet(rec, 'doc10')
             ]);
-            filename = 'HEMA_Enquiry_Records.xlsx';
+            filename = 'HEMA_Enquiry_Records_Complete.xlsx';
 
         } else if (tabType === 'registration') {
-            headers = ['Reg. S.No.', 'Date', 'Student Name', 'Class', 'Father Name', 'Father Mobile', 
-                       'Address', 'Fee Admission', 'Fee Development', 'Fee Caution', 'Fee Total'];
+            // ALL Registration form fields
+            headers = ['Reg. S.No.', 'Date', 'Student First Name', 'Student Middle Name', 'Student Surname',
+                       'Student Name (Full)', 'Class', 'Section', 'Gender', 'Date of Birth',
+                       'Father First Name', 'Father Middle Name', 'Father Surname', 'Father Name (Full)',
+                       'Father Mobile', 'Father Email', 'Father Occupation', 'Father Qualification',
+                       'Mother First Name', 'Mother Middle Name', 'Mother Surname', 'Mother Name (Full)',
+                       'Mother Mobile', 'Mother Email', 'Mother Occupation', 'Mother Qualification',
+                       'Address', 'City', 'State', 'Pincode',
+                       'Fee Admission', 'Fee Development', 'Fee Caution', 'Fee Total',
+                       'Blood Group', 'Aadhar Number', 'Previous School', 'Previous Class',
+                       'Transport Required', 'Hostel Required'];
 
             data = allRegistrations.map((rec, idx) => [
-                safeGet(rec, 'sno') || (idx + 1),
-                formatDateToDDMMYYYY(safeGet(rec, 'date')),
-                studentNameFromAny(rec),
-                classFromAny(rec),
-                fatherNameFromAny(rec),
-                safeGet(rec, 'fatherMobile') || safeGet(rec, 'fathermobile'),
-                safeGet(rec, 'address'),
-                safeGet(rec, 'feeAdmission'),
-                safeGet(rec, 'feeDevelopment'),
-                safeGet(rec, 'feeCaution'),
-                safeGet(rec, 'feeTotal')
-            ]);
-            filename = 'HEMA_Registration_Records.xlsx';
-
-        } else if (tabType === 'admission') {
-            headers = ['Scholar No.', 'Admission Date', 'Student Name', 'Class', 'Section', 
-                       'Father Name', 'Father Mobile', 'Address', 'Category', 'Docs Student', 'Docs Parent'];
-
-            data = allAdmissions.map((rec, idx) => [
-                safeGet(rec, 'scholarNo') || (idx + 1),
-                formatDateToDDMMYYYY(safeGet(rec, 'admissionDate')),
+                safeGet(rec, 'sno') || safeGet(rec, 'regSno') || (idx + 1),
+                formatDateToDDMMYYYY(safeGet(rec, 'date') || safeGet(rec, 'regDate')),
+                safeGet(rec, 'studentFirstName') || safeGet(rec, 'studentFirst') || safeGet(rec, 'studentfirst'),
+                safeGet(rec, 'studentMiddleName') || safeGet(rec, 'studentMiddle') || safeGet(rec, 'studentmiddle'),
+                safeGet(rec, 'studentSurname') || safeGet(rec, 'studentLastName') || safeGet(rec, 'studentsurname'),
                 studentNameFromAny(rec),
                 classFromAny(rec),
                 safeGet(rec, 'section'),
+                safeGet(rec, 'gender'),
+                safeGet(rec, 'dob'),
+                safeGet(rec, 'fatherFirst') || safeGet(rec, 'fatherFirstName') || safeGet(rec, 'fatherfirst'),
+                safeGet(rec, 'fatherMiddle') || safeGet(rec, 'fatherMiddleName') || safeGet(rec, 'fathermiddle'),
+                safeGet(rec, 'fatherSurname') || safeGet(rec, 'fathersurname'),
                 fatherNameFromAny(rec),
                 safeGet(rec, 'fatherMobile') || safeGet(rec, 'fathermobile'),
+                safeGet(rec, 'fatherEmail') || safeGet(rec, 'fatheremail'),
+                safeGet(rec, 'fatherOccupation') || safeGet(rec, 'fatheroccupation'),
+                safeGet(rec, 'fatherQualification') || safeGet(rec, 'fatherqualification'),
+                safeGet(rec, 'motherFirst') || safeGet(rec, 'motherFirstName') || safeGet(rec, 'motherfirst'),
+                safeGet(rec, 'motherMiddle') || safeGet(rec, 'motherMiddleName') || safeGet(rec, 'mothermiddle'),
+                safeGet(rec, 'motherSurname') || safeGet(rec, 'mothersurname'),
+                motherNameFromAny(rec),
+                safeGet(rec, 'motherMobile') || safeGet(rec, 'mothermobile'),
+                safeGet(rec, 'motherEmail') || safeGet(rec, 'motheremail'),
+                safeGet(rec, 'motherOccupation') || safeGet(rec, 'motheroccupation'),
+                safeGet(rec, 'motherQualification') || safeGet(rec, 'motherqualification'),
                 safeGet(rec, 'address'),
-                safeGet(rec, 'category'),
-                studentDocsAdmission(rec),
-                parentDocsAdmission(rec)
+                safeGet(rec, 'city'),
+                safeGet(rec, 'state'),
+                safeGet(rec, 'pincode'),
+                safeGet(rec, 'feeAdmission'),
+                safeGet(rec, 'feeDevelopment'),
+                safeGet(rec, 'feeCaution'),
+                safeGet(rec, 'feeTotal') || safeGet(rec, 'totalFee'),
+                safeGet(rec, 'bloodGroup'),
+                safeGet(rec, 'aadhar') || safeGet(rec, 'aadharNumber'),
+                safeGet(rec, 'previousSchool') || safeGet(rec, 'prevSchool'),
+                safeGet(rec, 'previousClass') || safeGet(rec, 'prevClass'),
+                safeGet(rec, 'transport') || safeGet(rec, 'transportRequired'),
+                safeGet(rec, 'hostel') || safeGet(rec, 'hostelRequired')
             ]);
-            filename = 'HEMA_Admission_Records.xlsx';
+            filename = 'HEMA_Registration_Records_Complete.xlsx';
+
+        } else if (tabType === 'admission') {
+            // ALL Admission form fields
+            headers = ['Scholar No.', 'Admission Date', 'Student First Name', 'Student Middle Name', 'Student Surname',
+                       'Student Name (Full)', 'Class', 'Section', 'Gender', 'Date of Birth',
+                       'Father First Name', 'Father Middle Name', 'Father Surname', 'Father Name (Full)',
+                       'Father Mobile', 'Father Email', 'Father Occupation', 'Father Qualification',
+                       'Mother First Name', 'Mother Middle Name', 'Mother Surname', 'Mother Name (Full)',
+                       'Mother Mobile', 'Mother Email', 'Mother Occupation', 'Mother Qualification',
+                       'Address', 'City', 'State', 'Pincode',
+                       'Category', 'Blood Group', 'Aadhar Number', 'Religion', 'Caste',
+                       'Previous School', 'Previous Class', 'Transport Required', 'Hostel Required',
+                       'Student Doc 1', 'Student Doc 2', 'Student Doc 3', 'Student Doc 4', 'Student Doc 5',
+                       'Student Doc 6', 'Student Doc 7', 'Student Doc 8', 'Student Doc 9',
+                       'Parent Doc 1', 'Parent Doc 2', 'Parent Doc 3', 'Parent Doc 4', 'Parent Doc 5', 'Parent Doc 6',
+                       'Docs Student (Yes)', 'Docs Student (No)', 'Docs Parent (Yes)', 'Docs Parent (No)'];
+
+            data = allAdmissions.map((rec, idx) => {
+                const docsStu = studentDocsAdmission(rec);
+                const docsPar = parentDocsAdmission(rec);
+
+                return [
+                    safeGet(rec, 'scholarNo') || safeGet(rec, 'scholarNumber') || (idx + 1),
+                    formatDateToDDMMYYYY(safeGet(rec, 'admissionDate') || safeGet(rec, 'admDate') || safeGet(rec, 'date')),
+                    safeGet(rec, 'studentFirstName') || safeGet(rec, 'studentFirst') || safeGet(rec, 'studentfirst'),
+                    safeGet(rec, 'studentMiddleName') || safeGet(rec, 'studentMiddle') || safeGet(rec, 'studentmiddle'),
+                    safeGet(rec, 'studentSurname') || safeGet(rec, 'studentLastName') || safeGet(rec, 'studentsurname'),
+                    studentNameFromAny(rec),
+                    classFromAny(rec),
+                    safeGet(rec, 'section'),
+                    safeGet(rec, 'gender'),
+                    safeGet(rec, 'dob'),
+                    safeGet(rec, 'fatherFirst') || safeGet(rec, 'fatherFirstName') || safeGet(rec, 'fatherfirst'),
+                    safeGet(rec, 'fatherMiddle') || safeGet(rec, 'fatherMiddleName') || safeGet(rec, 'fathermiddle'),
+                    safeGet(rec, 'fatherSurname') || safeGet(rec, 'fathersurname'),
+                    fatherNameFromAny(rec),
+                    safeGet(rec, 'fatherMobile') || safeGet(rec, 'fathermobile'),
+                    safeGet(rec, 'fatherEmail') || safeGet(rec, 'fatheremail'),
+                    safeGet(rec, 'fatherOccupation') || safeGet(rec, 'fatheroccupation'),
+                    safeGet(rec, 'fatherQualification') || safeGet(rec, 'fatherqualification'),
+                    safeGet(rec, 'motherFirst') || safeGet(rec, 'motherFirstName') || safeGet(rec, 'motherfirst'),
+                    safeGet(rec, 'motherMiddle') || safeGet(rec, 'motherMiddleName') || safeGet(rec, 'mothermiddle'),
+                    safeGet(rec, 'motherSurname') || safeGet(rec, 'mothersurname'),
+                    motherNameFromAny(rec),
+                    safeGet(rec, 'motherMobile') || safeGet(rec, 'mothermobile'),
+                    safeGet(rec, 'motherEmail') || safeGet(rec, 'motheremail'),
+                    safeGet(rec, 'motherOccupation') || safeGet(rec, 'motheroccupation'),
+                    safeGet(rec, 'motherQualification') || safeGet(rec, 'motherqualification'),
+                    safeGet(rec, 'address'),
+                    safeGet(rec, 'city'),
+                    safeGet(rec, 'state'),
+                    safeGet(rec, 'pincode'),
+                    safeGet(rec, 'category') || safeGet(rec, 'admissionCategory'),
+                    safeGet(rec, 'bloodGroup'),
+                    safeGet(rec, 'aadhar') || safeGet(rec, 'aadharNumber'),
+                    safeGet(rec, 'religion'),
+                    safeGet(rec, 'caste'),
+                    safeGet(rec, 'previousSchool') || safeGet(rec, 'prevSchool'),
+                    safeGet(rec, 'previousClass') || safeGet(rec, 'prevClass'),
+                    safeGet(rec, 'transport') || safeGet(rec, 'transportRequired'),
+                    safeGet(rec, 'hostel') || safeGet(rec, 'hostelRequired'),
+                    safeGet(rec, 'docs1'),
+                    safeGet(rec, 'docs2'),
+                    safeGet(rec, 'docs3'),
+                    safeGet(rec, 'docs4'),
+                    safeGet(rec, 'docs5'),
+                    safeGet(rec, 'docs6'),
+                    safeGet(rec, 'docs7'),
+                    safeGet(rec, 'docs8'),
+                    safeGet(rec, 'docs9'),
+                    safeGet(rec, 'docp1'),
+                    safeGet(rec, 'docp2'),
+                    safeGet(rec, 'docp3'),
+                    safeGet(rec, 'docp4'),
+                    safeGet(rec, 'docp5'),
+                    safeGet(rec, 'docp6'),
+                    docsStu.yes.join(', '),
+                    docsStu.no.join(', '),
+                    docsPar.yes.join(', '),
+                    docsPar.no.join(', ')
+                ];
+            });
+            filename = 'HEMA_Admission_Records_Complete.xlsx';
         }
 
         if (data.length === 0) {
@@ -1135,6 +1291,8 @@
         // Save file
         XLSX.writeFile(wb, filename);
     }
+
+    
 
 
     let allEnquiries = [];
