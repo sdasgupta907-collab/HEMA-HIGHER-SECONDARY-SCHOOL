@@ -776,6 +776,10 @@
 
         /* OPTIMIZED PRINT STYLES - ONE PAGE WITH 12PT FONT */
         @media print {
+        .no-print, .nav-tabs {
+            display: none !important;
+        }
+        
             @page {
                 size: A4 portrait;
                 margin: 8mm 8mm;
@@ -862,18 +866,7 @@
                 line-height: 1 !important;
             }
 
-            /* Add Enquiry Form Heading */
-            .container::before {
-                content: "Enquiry Form 2026-2027";
-                display: block !important;
-                text-align: center !important;
-                font-size: 16pt !important;
-                font-weight: bold !important;
-                color: #000 !important;
-                margin: 15px 0 10px 0 !important;
-                padding: 5px 0 !important;
-                border-bottom: 1px solid #000 !important;
-            }
+            
 
             /* Hide all non-form elements */
             button, .btn, .no-print, .page-separator, .nav-tabs, .nav-bar,
@@ -1217,6 +1210,15 @@
 
 </div>
 
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs no-print" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px 20px; border-radius: 10px; margin: 20px auto; max-width: 1200px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <a href="enquiry.html" class="active" style="color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; background: white; color: #667eea; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">📋 Enquiry</a>
+        <a href="registration.html" style="color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">📝 Registration</a>
+        <a href="admission.html" style="color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">✅ Admission</a>
+        <a href="data.html" style="color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">📊 Records</a>
+    </div>
+
+
 <div class="container">
     
 
@@ -1231,7 +1233,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="sno">S.NO.</label>
-                        <input type="text" id="sno" name="sno" value="2026001" style="background:#f0f0f0;font-weight:bold;color:#1e3c72;">
+                        <input type="text" id="sno" name="sno" value="2026001" style="background:#f0f0f0;font-weight:bold;color:#1e3c72;" readonly>
                     </div>
 
 <script>
@@ -1297,7 +1299,7 @@
                     <div class="form-group required">
                         <label for="classApplied">CLASS APPLYING FOR</label>
                         <select id="classApplied" name="classApplied" required>
-                            <option value="">-- SELECT CLASS --</option>
+                            <option value=""></option>
                             <option value="NURSERY">NURSERY</option>
                             <option value="KG I">KG I</option>
                             <option value="KG II">KG II</option>
@@ -1370,11 +1372,11 @@
                 <div class="row">
                     <div class="form-group required">
                         <label for="fatherMobile">FATHER MOBILE</label>
-                        <input type="tel" id="fatherMobile" name="fatherMobile" pattern="[0-9]{10}" placeholder="10 digit mobile" required>
+                        <input type="tel" id="fatherMobile" name="fatherMobile" pattern="[0-9]{10}"  required>
                     </div>
                     <div class="form-group">
                         <label for="motherMobile">MOTHER MOBILE</label>
-                        <input type="tel" id="motherMobile" name="motherMobile" pattern="[0-9]{10}" placeholder="10 digit mobile">
+                        <input type="tel" id="motherMobile" name="motherMobile" pattern="[0-9]{10}" >
                     </div>
                     <div class="form-group">
                         <label for="landline">LANDLINE (Optional)</label>
@@ -1411,7 +1413,7 @@
                 <div class="row half">
                     <div class="form-group required">
                         <label for="pincode">PIN CODE</label>
-                        <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" placeholder="6 digit PIN" required>
+                        <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}"  required>
                     </div>
                     </div>
             </fieldset>
@@ -1434,7 +1436,7 @@
                         <div class="form-group">
                             <label for="sib1Class">CLASS</label>
                             <select id="sib1Class" name="sib1Class">
-                                <option value="">-- SELECT --</option>
+                                <option value=""></option>
                                 <option value="NURSERY">NURSERY</option>
                                 <option value="KG I">KG I</option>
                                 <option value="KG II">KG II</option>
@@ -1483,7 +1485,7 @@
                         <div class="form-group">
                             <label for="sib2Class">CLASS</label>
                             <select id="sib2Class" name="sib2Class">
-                                <option value="">-- SELECT --</option>
+                                <option value=""></option>
                                 <option value="NURSERY">NURSERY</option>
                                 <option value="KG I">KG I</option>
                                 <option value="KG II">KG II</option>
