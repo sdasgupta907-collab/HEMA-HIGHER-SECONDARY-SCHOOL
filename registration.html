@@ -1140,6 +1140,9 @@ function saveRegistration() {
     registrations.push(data);
     localStorage.setItem('registrations', JSON.stringify(registrations));
 
+    // Also save as currentRegistration for admission form
+    localStorage.setItem('currentRegistration', JSON.stringify(data));
+
     alert('✓ Registration saved successfully!');
     console.log('Saved registration:', data);
 }
@@ -1148,7 +1151,7 @@ function saveRegistration() {
 function proceedToAdmission() {
     saveRegistration();
     setTimeout(() => {
-        window.location.href = 'admission-CONNECTED.html';
+        window.location.href = 'admission-1.html';
     }, 500);
 }
 
@@ -2235,7 +2238,7 @@ function proceedToAdmission() {
             localStorage.setItem('currentRegistration', JSON.stringify(data));
 
             if (confirm('Registration saved successfully!\n\nClick OK to proceed to Admission Form\nClick Cancel to stay here')) {
-                window.location.href = 'admission-CONNECTED.html';
+                window.location.href = 'admission-1.html';
             }
         });
     </script>
