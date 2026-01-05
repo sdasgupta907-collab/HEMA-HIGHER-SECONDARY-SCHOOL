@@ -711,6 +711,9 @@
             }
         }
     </style>
+
+    <!-- SheetJS Library for Excel Export -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -835,6 +838,21 @@
         <!-- Enquiry -->
         <div id="enquiryRecords" class="records-container active">
             <h2>Enquiry Records</h2>
+            <div style="margin: 10px 0; text-align: right;">
+                <button onclick="exportToExcel('enquiry')" 
+                        style="padding: 10px 20px; 
+                               background: linear-gradient(135deg, #ab47bc, #6a1b9a); 
+                               color: white; 
+                               border: none; 
+                               border-radius: 6px; 
+                               cursor: pointer; 
+                               font-size: 14px; 
+                               font-weight: 600;
+                               box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                               transition: all 0.3s;">
+                    <i class="fa-solid fa-file-excel"></i> Export to Excel
+                </button>
+            </div>
             <div class="records-table-wrapper">
                 <table id="enquiryTable">
                     <thead>
@@ -866,6 +884,21 @@
         <!-- Registration -->
         <div id="registrationRecords" class="records-container">
             <h2>Registration Records</h2>
+            <div style="margin: 10px 0; text-align: right;">
+                <button onclick="exportToExcel('registration')" 
+                        style="padding: 10px 20px; 
+                               background: linear-gradient(135deg, #ab47bc, #6a1b9a); 
+                               color: white; 
+                               border: none; 
+                               border-radius: 6px; 
+                               cursor: pointer; 
+                               font-size: 14px; 
+                               font-weight: 600;
+                               box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                               transition: all 0.3s;">
+                    <i class="fa-solid fa-file-excel"></i> Export to Excel
+                </button>
+            </div>
             <div class="records-table-wrapper">
                 <table id="registrationTable">
                     <thead>
@@ -895,6 +928,21 @@
         <!-- Admission -->
         <div id="admissionRecords" class="records-container">
             <h2>Admission Records</h2>
+            <div style="margin: 10px 0; text-align: right;">
+                <button onclick="exportToExcel('admission')" 
+                        style="padding: 10px 20px; 
+                               background: linear-gradient(135deg, #ab47bc, #6a1b9a); 
+                               color: white; 
+                               border: none; 
+                               border-radius: 6px; 
+                               cursor: pointer; 
+                               font-size: 14px; 
+                               font-weight: 600;
+                               box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                               transition: all 0.3s;">
+                    <i class="fa-solid fa-file-excel"></i> Export to Excel
+                </button>
+            </div>
             <div class="records-table-wrapper">
                 <table id="admissionTable">
                     <thead>
@@ -961,6 +1009,144 @@
 </div>
 
 <script>
+
+    // ========================================
+    // DATE FORMATTING UTILITIES (dd/mm/yyyy)
+    // ========================================
+
+    function formatDateToDDMMYYYY(dateStr) {
+        if (!dateStr) return '';
+
+        // Already in dd/mm/yyyy format
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return dateStr;
+
+        // Parse various date formats
+        let date;
+
+        // Check if it's yyyy-mm-dd format
+        if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+            const parts = dateStr.split('-');
+            date = new Date(parts[0], parts[1] - 1, parts[2]);
+        } else {
+            date = new Date(dateStr);
+        }
+
+        if (isNaN(date.getTime())) return dateStr;
+
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+
+        return `${day}/${month}/${year}`;
+    }
+
+    function parseDDMMYYYYToISO(ddmmyyyy) {
+        if (!ddmmyyyy) return '';
+        if (/^\d{4}-\d{2}-\d{2}$/.test(ddmmyyyy)) return ddmmyyyy;
+
+        const parts = ddmmyyyy.split('/');
+        if (parts.length === 3) {
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        return ddmmyyyy;
+    }
+
+    // ========================================
+    // EXCEL EXPORT FUNCTIONALITY
+    // ========================================
+
+    function exportToExcel(tabType) {
+        let data = [];
+        let filename = '';
+        let headers = [];
+
+        if (tabType === 'enquiry') {
+            headers = ['S.No.', 'Date', 'Student Name', 'Class', 'Father Name', 'Father Mobile', 
+                       'Mother Name', 'Address', 'Sibling 1', 'Sibling 2', 'Fee Class', 'Grand Total Fee', 'Docs'];
+
+            data = allEnquiries.map((rec, idx) => [
+                idx + 1,
+                formatDateToDDMMYYYY(safeGet(rec, 'date')),
+                studentNameFromAny(rec),
+                classFromAny(rec),
+                fatherNameFromAny(rec),
+                safeGet(rec, 'fatherMobile'),
+                motherNameFromAny(rec),
+                safeGet(rec, 'address'),
+                safeGet(rec, 'sibling1'),
+                safeGet(rec, 'sibling2'),
+                safeGet(rec, 'feeClass'),
+                safeGet(rec, 'grandTotalFee'),
+                safeGet(rec, 'docsTotal')
+            ]);
+            filename = 'HEMA_Enquiry_Records.xlsx';
+
+        } else if (tabType === 'registration') {
+            headers = ['Reg. S.No.', 'Date', 'Student Name', 'Class', 'Father Name', 'Father Mobile', 
+                       'Address', 'Fee Admission', 'Fee Development', 'Fee Caution', 'Fee Total'];
+
+            data = allRegistrations.map((rec, idx) => [
+                idx + 1,
+                formatDateToDDMMYYYY(safeGet(rec, 'date')),
+                studentNameFromAny(rec),
+                classFromAny(rec),
+                fatherNameFromAny(rec),
+                safeGet(rec, 'fatherMobile'),
+                safeGet(rec, 'address'),
+                safeGet(rec, 'feeAdmission'),
+                safeGet(rec, 'feeDevelopment'),
+                safeGet(rec, 'feeCaution'),
+                safeGet(rec, 'feeTotal')
+            ]);
+            filename = 'HEMA_Registration_Records.xlsx';
+
+        } else if (tabType === 'admission') {
+            headers = ['Scholar No.', 'Admission Date', 'Student Name', 'Class', 'Section', 
+                       'Father Name', 'Father Mobile', 'Address', 'Category', 'Docs Student', 'Docs Parent'];
+
+            data = allAdmissions.map((rec, idx) => [
+                safeGet(rec, 'scholarNo') || (idx + 1),
+                formatDateToDDMMYYYY(safeGet(rec, 'admissionDate')),
+                studentNameFromAny(rec),
+                classFromAny(rec),
+                safeGet(rec, 'section'),
+                fatherNameFromAny(rec),
+                safeGet(rec, 'fatherMobile'),
+                safeGet(rec, 'address'),
+                safeGet(rec, 'category'),
+                safeGet(rec, 'docsStudent'),
+                safeGet(rec, 'docsParent')
+            ]);
+            filename = 'HEMA_Admission_Records.xlsx';
+        }
+
+        if (data.length === 0) {
+            alert('No data available to export!');
+            return;
+        }
+
+        // Create worksheet from array of arrays
+        const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
+
+        // Auto-size columns
+        const colWidths = headers.map((h, i) => {
+            const maxLen = Math.max(
+                h.length,
+                ...data.map(row => String(row[i] || '').length)
+            );
+            return { wch: Math.min(maxLen + 2, 50) };
+        });
+        ws['!cols'] = colWidths;
+
+        // Create workbook and add worksheet
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, tabType.charAt(0).toUpperCase() + tabType.slice(1));
+
+        // Save file
+        XLSX.writeFile(wb, filename);
+    }
+
+
     let allEnquiries = [];
     let allRegistrations = [];
     let allAdmissions = [];
