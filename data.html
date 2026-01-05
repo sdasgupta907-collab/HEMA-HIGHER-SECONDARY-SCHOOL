@@ -849,7 +849,7 @@
                                font-size: 14px; 
                                font-weight: 600;
                                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                               transition: all 0.3s;">
+                               transition: transform 0.2s;">
                     <i class="fa-solid fa-file-excel"></i> Export to Excel
                 </button>
             </div>
@@ -895,7 +895,7 @@
                                font-size: 14px; 
                                font-weight: 600;
                                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                               transition: all 0.3s;">
+                               transition: transform 0.2s;">
                     <i class="fa-solid fa-file-excel"></i> Export to Excel
                 </button>
             </div>
@@ -939,7 +939,7 @@
                                font-size: 14px; 
                                font-weight: 600;
                                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                               transition: all 0.3s;">
+                               transition: transform 0.2s;">
                     <i class="fa-solid fa-file-excel"></i> Export to Excel
                 </button>
             </div>
@@ -1010,28 +1010,32 @@
 
 <script>
 
-    // ========================================
-    // DATE FORMATTING UTILITIES (dd/mm/yyyy)
-    // ========================================
+    // ================================================
+    // DATE FORMATTING FUNCTIONS - dd/mm/yyyy format
+    // ================================================
 
     function formatDateToDDMMYYYY(dateStr) {
         if (!dateStr) return '';
 
         // Already in dd/mm/yyyy format
-        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) return dateStr;
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)) {
+            return dateStr;
+        }
 
-        // Parse various date formats
         let date;
 
-        // Check if it's yyyy-mm-dd format
+        // Parse yyyy-mm-dd format
         if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-            const parts = dateStr.split('-');
-            date = new Date(parts[0], parts[1] - 1, parts[2]);
+            const [year, month, day] = dateStr.split('-');
+            date = new Date(year, month - 1, day);
         } else {
             date = new Date(dateStr);
         }
 
-        if (isNaN(date.getTime())) return dateStr;
+        // Check if valid date
+        if (isNaN(date.getTime())) {
+            return dateStr; // Return original if invalid
+        }
 
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -1040,20 +1044,9 @@
         return `${day}/${month}/${year}`;
     }
 
-    function parseDDMMYYYYToISO(ddmmyyyy) {
-        if (!ddmmyyyy) return '';
-        if (/^\d{4}-\d{2}-\d{2}$/.test(ddmmyyyy)) return ddmmyyyy;
-
-        const parts = ddmmyyyy.split('/');
-        if (parts.length === 3) {
-            return `${parts[2]}-${parts[1]}-${parts[0]}`;
-        }
-        return ddmmyyyy;
-    }
-
-    // ========================================
-    // EXCEL EXPORT FUNCTIONALITY
-    // ========================================
+    // ================================================
+    // EXCEL EXPORT FUNCTIONS
+    // ================================================
 
     function exportToExcel(tabType) {
         let data = [];
@@ -1065,19 +1058,19 @@
                        'Mother Name', 'Address', 'Sibling 1', 'Sibling 2', 'Fee Class', 'Grand Total Fee', 'Docs'];
 
             data = allEnquiries.map((rec, idx) => [
-                idx + 1,
+                safeGet(rec, 'sno') || (idx + 1),
                 formatDateToDDMMYYYY(safeGet(rec, 'date')),
                 studentNameFromAny(rec),
                 classFromAny(rec),
                 fatherNameFromAny(rec),
-                safeGet(rec, 'fatherMobile'),
+                safeGet(rec, 'fatherMobile') || safeGet(rec, 'fathermobile'),
                 motherNameFromAny(rec),
                 safeGet(rec, 'address'),
-                safeGet(rec, 'sibling1'),
-                safeGet(rec, 'sibling2'),
-                safeGet(rec, 'feeClass'),
-                safeGet(rec, 'grandTotalFee'),
-                safeGet(rec, 'docsTotal')
+                siblingLabel(rec, 1),
+                siblingLabel(rec, 2),
+                feeClassFromAny(rec),
+                grandTotalFromEnquiry(rec),
+                countDocsEnquiry(rec)
             ]);
             filename = 'HEMA_Enquiry_Records.xlsx';
 
@@ -1086,12 +1079,12 @@
                        'Address', 'Fee Admission', 'Fee Development', 'Fee Caution', 'Fee Total'];
 
             data = allRegistrations.map((rec, idx) => [
-                idx + 1,
+                safeGet(rec, 'sno') || (idx + 1),
                 formatDateToDDMMYYYY(safeGet(rec, 'date')),
                 studentNameFromAny(rec),
                 classFromAny(rec),
                 fatherNameFromAny(rec),
-                safeGet(rec, 'fatherMobile'),
+                safeGet(rec, 'fatherMobile') || safeGet(rec, 'fathermobile'),
                 safeGet(rec, 'address'),
                 safeGet(rec, 'feeAdmission'),
                 safeGet(rec, 'feeDevelopment'),
@@ -1111,11 +1104,11 @@
                 classFromAny(rec),
                 safeGet(rec, 'section'),
                 fatherNameFromAny(rec),
-                safeGet(rec, 'fatherMobile'),
+                safeGet(rec, 'fatherMobile') || safeGet(rec, 'fathermobile'),
                 safeGet(rec, 'address'),
                 safeGet(rec, 'category'),
-                safeGet(rec, 'docsStudent'),
-                safeGet(rec, 'docsParent')
+                studentDocsAdmission(rec),
+                parentDocsAdmission(rec)
             ]);
             filename = 'HEMA_Admission_Records.xlsx';
         }
@@ -1125,20 +1118,17 @@
             return;
         }
 
-        // Create worksheet from array of arrays
+        // Create worksheet
         const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
 
         // Auto-size columns
         const colWidths = headers.map((h, i) => {
-            const maxLen = Math.max(
-                h.length,
-                ...data.map(row => String(row[i] || '').length)
-            );
+            const maxLen = Math.max(h.length, ...data.map(row => String(row[i] || '').length));
             return { wch: Math.min(maxLen + 2, 50) };
         });
         ws['!cols'] = colWidths;
 
-        // Create workbook and add worksheet
+        // Create workbook
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, tabType.charAt(0).toUpperCase() + tabType.slice(1));
 
@@ -1344,7 +1334,7 @@
 
         allEnquiries.forEach((enq, index) => {
             const sno = safeGet(enq, 'sno');
-            const date = safeGet(enq, 'date');
+            const date = formatDateToDDMMYYYY(safeGet(enq, 'date'));
             const studentName = studentNameFromAny(enq);
             const cls = classFromAny(enq);
             const fatherName = fatherNameFromAny(enq);
