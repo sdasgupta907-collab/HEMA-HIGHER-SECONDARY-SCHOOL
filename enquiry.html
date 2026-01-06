@@ -1185,21 +1185,6 @@
         }
 
     </style>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyARk7u5780z2JlO_ApSnK6ixQb-6FM73mI",
-    authDomain: "hema-school-admission.firebaseapp.com",
-    projectId: "hema-school-admission",
-    storageBucket: "hema-school-admission.firebasestorage.app",
-    messagingSenderId: "166570741504",
-    appId: "1:166570741504:web:9852ea0ee212fc93332de5"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-</script>
-
 </head>
 <body>
 <div class="hema-school-header">
@@ -2004,24 +1989,15 @@ function printForm() {
 // SAVE ENQUIRY FUNCTION
 // ============================================================
 function saveEnquiry() {
-    async function saveEnquiry() {
-  const form = document.getElementById('enquiryForm');
-  if (!form.checkValidity()) { alert('Please fill required fields'); form.reportValidity(); return false; }
-  try {
-    const formData = new FormData(form);
-    const data = {};
-    for (let [key, value] of formData.entries()) { data[key] = value; }
-    data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
-    data.recordId = 'ENQ-' + Date.now();
-    await db.collection('enquiries').add(data);
-    alert('✅ Enquiry saved! ID: ' + data.recordId);
-    localStorage.setItem('currentEnquiry', JSON.stringify(data));
-    return true;
-  } catch (error) {
-    alert('❌ Error: ' + error.message);
-    return false;
-  }
-}
+    console.log('Saving Enquiry...');
+
+    const form = document.getElementById('enquiryForm');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return false;
+    }
+
+    try {
         // Get all form data
         const formData = new FormData(form);
         const data = {};
