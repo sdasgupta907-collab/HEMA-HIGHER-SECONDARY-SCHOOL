@@ -1747,7 +1747,16 @@ function buildEnquiryModal(enq, container) {
     }
 
     function exportModalToExcel() {
-        alert('Export Modal to Excel - feature under development.');
+        if (!currentModalRecord) { alert('No record selected!'); return; }
+        const rec = currentModalRecord;
+        const type = currentModalType;
+        let rows = [];
+        Object.keys(rec).forEach(function(k) {
+            rows.push({ 'Field': k, 'Value': rec[k] });
+        });
+        const label = type === 'enquiry' ? 'Enquiry' : type === 'registration' ? 'Registration' : 'Admission';
+        const name = studentNameFromAny(rec) || safeGet(rec,'studentName') || 'Record';
+        downloadCSV(rows, label + '_' + name.replace(/\s+/g,'_') + '_' + new Date().toISOString().slice(0,10) + '.csv');
     }
 
     /* ====== Edit / Delete ====== */
@@ -1818,8 +1827,134 @@ function buildEnquiryModal(enq, container) {
         alert('Admission deleted successfully!');
     }
 
+    function downloadCSV(rows, filename) {
+        if (!rows.length) return;
+        const headers = Object.keys(rows[0]);
+        const csvLines = [headers.join(',')];
+        rows.forEach(function(row) {
+            const line = headers.map(function(h) {
+                let val = row[h] !== undefined && row[h] !== null ? String(row[h]) : '';
+                val = val.replace(/"/g, '""');
+                if (val.includes(',') || val.includes('"') || val.includes('\n')) val = '"' + val + '"';
+                return val;
+            });
+            csvLines.push(line.join(','));
+        });
+        const csvContent = '\uFEFF' + csvLines.join('\n'); // BOM for Excel UTF-8
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
     function exportCurrentToExcel() {
-        alert('Export to Excel - feature under development.');
+        let records = [];
+        let sheetName = 'Records';
+        if (currentTab === 'enquiry') {
+            sheetName = 'Enquiry_Records';
+            records = allEnquiries.map(function(enq, i) {
+                return {
+                    'S.No': safeGet(enq,'sno') || (i+1),
+                    'Date': safeGet(enq,'date'),
+                    'Student Name': studentNameFromAny(enq),
+                    'Class': classFromAny(enq),
+                    'DOB': safeGet(enq,'dob'),
+                    'Gender': safeGet(enq,'gender'),
+                    'Father Name': fatherNameFromAny(enq),
+                    'Father Mobile': safeGet(enq,'fatherMobile') || safeGet(enq,'fathermobile'),
+                    'Mother Name': motherNameFromAny(enq),
+                    'Mother Mobile': safeGet(enq,'motherMobile') || safeGet(enq,'mothermobile'),
+                    'Address': safeGet(enq,'address'),
+                    'Area': safeGet(enq,'area'),
+                    'District': safeGet(enq,'district'),
+                    'State': safeGet(enq,'state'),
+                    'Pincode': safeGet(enq,'pincode'),
+                    'Sibling 1 Name': safeGet(enq,'sib1Name'),
+                    'Sibling 1 Class': safeGet(enq,'sib1Class'),
+                    'Sibling 1 School': safeGet(enq,'sib1School'),
+                    'Sibling 2 Name': safeGet(enq,'sib2Name'),
+                    'Sibling 2 Class': safeGet(enq,'sib2Class'),
+                    'Sibling 2 School': safeGet(enq,'sib2School'),
+                    'Fee Class': feeClassFromAny(enq),
+                    'Grand Total Fee': grandTotalFromEnquiry(enq),
+                    'Source': safeGet(enq,'source'),
+                    'Referred By': safeGet(enq,'referredName'),
+                    'Record ID': safeGet(enq,'recordId'),
+                    'Submitted Date': safeGet(enq,'submittedDate'),
+                    'Status': safeGet(enq,'status') || 'ENQUIRY'
+                };
+            });
+        } else if (currentTab === 'registration') {
+            sheetName = 'Registration_Records';
+            records = allRegistrations.map(function(reg, i) {
+                return {
+                    'S.No': safeGet(reg,'sno') || safeGet(reg,'regSno') || (i+1),
+                    'Date': safeGet(reg,'date') || safeGet(reg,'regDate'),
+                    'Student Name': studentNameFromAny(reg) || safeGet(reg,'studentName'),
+                    'Class': classFromAny(reg),
+                    'DOB': safeGet(reg,'dob'),
+                    'Gender': safeGet(reg,'gender'),
+                    'Father Name': fatherNameFromAny(reg),
+                    'Father Mobile': safeGet(reg,'fatherMobile') || safeGet(reg,'fathermobile'),
+                    'Mother Name': motherNameFromAny(reg),
+                    'Mother Mobile': safeGet(reg,'motherMobile') || safeGet(reg,'mothermobile'),
+                    'Address': safeGet(reg,'address'),
+                    'Area': safeGet(reg,'area'),
+                    'State': safeGet(reg,'state'),
+                    'Admission Fee': safeGet(reg,'feeAdmission'),
+                    'Development Fund': safeGet(reg,'feeDevelopment'),
+                    'Caution Money': safeGet(reg,'feeCaution'),
+                    'Total Fee': safeGet(reg,'totalFee'),
+                    'Receipt No': safeGet(reg,'receiptNo'),
+                    'Payment Mode': safeGet(reg,'paymentMode'),
+                    'UTR No': safeGet(reg,'utrNo'),
+                    'Signatory Name': safeGet(reg,'signatoryName'),
+                    'Timestamp': safeGet(reg,'timestamp')
+                };
+            });
+        } else {
+            sheetName = 'Admission_Records';
+            records = allAdmissions.map(function(adm, i) {
+                return {
+                    'Scholar No': safeGet(adm,'scholarNo') || safeGet(adm,'scholarNumber'),
+                    'Admission Date': safeGet(adm,'admissionDate') || safeGet(adm,'admDate') || safeGet(adm,'date'),
+                    'Student Name': studentNameFromAny(adm) || safeGet(adm,'studentName'),
+                    'Class': classFromAny(adm),
+                    'Section': safeGet(adm,'section'),
+                    'DOB': safeGet(adm,'dob'),
+                    'Gender': safeGet(adm,'gender'),
+                    'Aadhaar No': safeGet(adm,'aadhaarNo'),
+                    'Category': safeGet(adm,'category') || safeGet(adm,'admissionCategory'),
+                    'Religion': safeGet(adm,'religion'),
+                    'Nationality': safeGet(adm,'nationality'),
+                    'PEN No': safeGet(adm,'penNo'),
+                    'SSSM ID': safeGet(adm,'sssmId'),
+                    'APAAR ID': safeGet(adm,'apaarId'),
+                    'Family ID': safeGet(adm,'familyId'),
+                    'Father Name': fatherNameFromAny(adm),
+                    'Father Mobile': safeGet(adm,'fatherMobile') || safeGet(adm,'fathermobile'),
+                    'Father Aadhaar': safeGet(adm,'fatherAadhaar'),
+                    'Mother Name': motherNameFromAny(adm),
+                    'Mother Mobile': safeGet(adm,'motherMobile') || safeGet(adm,'mothermobile'),
+                    'Mother Aadhaar': safeGet(adm,'motherAadhaar'),
+                    'Address': safeGet(adm,'address'),
+                    'Previous School': safeGet(adm,'prevSchool'),
+                    'Previous Class': safeGet(adm,'prevClass'),
+                    'TC No': safeGet(adm,'tcNo'),
+                    'TC Date': safeGet(adm,'tcDate'),
+                    'Bank Account No': safeGet(adm,'bankAccountNo'),
+                    'Bank Name': safeGet(adm,'bankName'),
+                    'IFSC Code': safeGet(adm,'ifscCode'),
+                    'Timestamp': safeGet(adm,'timestamp')
+                };
+            });
+        }
+        if (!records.length) { alert('No records found to export!'); return; }
+        downloadCSV(records, sheetName + '_HEMA_' + new Date().toISOString().slice(0,10) + '.csv');
     }
 
     /* Init */
